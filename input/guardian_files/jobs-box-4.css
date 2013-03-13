@@ -1,0 +1,193 @@
+/* m-482~public/css/jobs-box-4.css */
+ul#usa-jobs h4
+{
+	border: none !important;
+}
+
+#promo div.jobs-box
+{
+	padding-left: 0; 
+	padding-right: 0;
+	width: 300px !important;
+}
+
+.jobs-box .hd a
+{
+	display: inline !important;
+}
+
+.jobs-box .hd,
+.jobs-box #search-jobs-form,
+.jobs-box .featured-job
+{
+	padding-left: 10px; 
+	padding-right: 10px;
+	margin-bottom: 0 !important;
+}
+
+#promo .jobs-box div
+{
+	margin-bottom: 0;
+}
+
+.jobs-box .browse-all-jobs
+{
+	clear: both;
+	float: left;
+	margin: 10px;
+	padding-bottom: 0;
+	width: 280px;
+}
+
+
+/* Layout 1: Carousel of jobs */
+.jobs-carousel
+{
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	overflow: hidden;
+}	
+
+.jobs-carousel li
+{
+	display: none;
+}
+
+.jobs-carousel li:first-child
+{
+	display: block;
+}
+
+.jobs-carousel li.two-col {
+	background-color: #fdfdfd;
+	border-right: 1px solid #999;
+	width: 114px !important;
+	padding: 5px;
+}
+
+.jobs-carousel li.two-col .job-title {
+	font-weight: bold;
+}
+
+#search-jobs-form
+{
+	clear: both;
+	padding-top: 8px;
+	padding-bottom: 10px;
+}
+
+#search-jobs-form #freetext-searchalljobs 
+{
+	width: 200px;
+	float: left;
+	margin-right: 5px;
+}
+
+div#promo div.jobs-box .featured-job
+{
+	border-top: 1px solid #999;
+	padding-top: 8px;
+}
+
+.jobs-box .featured-job .featured-image
+{
+	float: left;
+	padding-right: 10px;
+}
+
+.jobs-box .featured-job div
+{
+	float: left;
+	width: 120px;
+}
+
+#promo .jobs-box .featured-job div h4 
+{
+	border-top: 0 !important;
+	font-weight: bold;
+	padding-top: 0;
+}
+
+.jobs-box .featured-job div h4
+{
+	font-family: arial, sans-serif !important;
+}
+
+/* Layout 2 : List of categories */
+.jobs-box .column
+{
+	margin-left: 20px;
+	width: 130px;
+	float: left;
+}
+
+.jobs-box ul.first
+{
+	margin-left: 10px;
+}
+.jobs-box .jobs-categories-overview
+{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 4px;
+}
+
+/* Layout 3 : Tools and notifications */
+
+.job-notifications
+{
+	border-bottom: 1px solid #999;
+	overflow: hidden;
+}
+
+.job-notifications li
+{
+	background-color: #fdfdfd;
+	border-right: 1px solid #999;
+	border-top: 1px solid #999;
+	float: left;
+	height: 110px;
+	margin-right: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 129px;
+}
+
+.job-notifications li.edge
+{
+	border-right: 0;
+	width: 130px;
+}
+
+.job-notifications li h3
+{
+	background-repeat: no-repeat;
+	background-position: right 0;
+	font-size: 14px !important;
+	line-height: 17px;
+	font-weight: normal !important;
+	padding: 3px 53px 20px 0;
+	margin-top: 10px !important;
+}
+
+/* override some cruft */
+
+body#education #promo div.jobs-box,
+body#tv-and-radio #promo div.jobs-box
+{
+	margin-right: 20px !important;
+}
+
+body#education #promo div.jobs-box div.carousel-navigation,
+body#tv-and-radio #promo div.jobs-box div.carousel-navigation
+{
+	position: relative;
+	top: -20px;
+}
+
+body#feature-trailblock .promo-horizontal div.jobs-box
+{
+	border-top: none;
+	margin-right: 20px !important;
+	padding-top: 0;
+}

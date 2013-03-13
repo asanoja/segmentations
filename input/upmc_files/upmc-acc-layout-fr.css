@@ -1,0 +1,19 @@
+div.alaune h2{
+	background :transparent url(../img/fr/home-title-alaune.gif) no-repeat 0 0;
+	height:28px;
+}
+
+div.contentcolumn .news{
+	margin:14px 0 0 0; /*Evols 2009 > 30px*/
+	padding:34px 0 0 0;
+	background :transparent url(../img/fr/home-title-news.gif) no-repeat 41px top;/*Evols 2009 > 51px*/
+}
+
+div.contentcolumn .news .allnews a{
+	display:block;
+	border:1px solid #fde6c9;
+	width:105px;
+	height:19px;
+	margin:0 2em 0 auto;
+	background :transparent url(../img/fr/home-go-allnews.gif) no-repeat 0 0;
+}
