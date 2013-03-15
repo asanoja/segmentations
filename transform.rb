@@ -47,8 +47,10 @@ def parse(input,output_folder)
 		1.upto($struc.size-1) do |i|
 			if $struc[i].distance == 0 and !$struc[i].parent.nil? and $struc[i].children==[]
 				puts "T:#{$struc[i].tag} P:#{$struc[i].parent.tag} D:#{$struc[i].distance}"
-				$struc[i].parent.entropy = ($struc[i].parent.entropy+$struc[i].entropy) / 2
-				$struc[i].parent.distance = dist($struc[i])
+				unless $struc[i].entropy==0
+					$struc[i].parent.entropy = ($struc[i].parent.entropy+$struc[i].entropy) / 2
+					$struc[i].parent.distance = dist($struc[i])
+				end
 				$struc[i].node["style"] = ""
 				$struc[i].parent.children.delete($struc[i])
 				puts "processed leave T:#{$struc[i].tag} P:#{$struc[i].parent.tag}"
