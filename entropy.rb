@@ -158,8 +158,12 @@ def parse(cat,input,output_folder,tags)
 	$struc.each do |e|
 		e.distance = e.distance * 10/maxdist
 		#if e.distance > 4
-		e.node["style"] = "border-style:solid;border-width:#{(e.entropy*5).round}px;border-color:red"
-		e.node["title"] = "E:#{e.entropy.to_s}\nD:#{e.distance.to_s}"
+		brd = (e.entropy*5).round
+		brd = 1 if brd==0
+		#e.node["style"] = "border-style:solid;border-width:0px;border-color:red"
+		e.node["onmouseover"] = "if (this.type!='') {this.style.borderColor='blue';this.style.borderWidth='thin'}"
+		e.node["onmouseout"] = "if (this.type!='') {this.style.borderColor='red';this.style.borderWidth='thin'}"
+		e.node["title"] = "E:#{e.entropy.to_s}\nD:#{e.distance.to_s}\nN:#{e.section}"
 		e.node["distance"] = e.distance.to_s
 		e.node["prob"] = e.prob.to_s
 		#end

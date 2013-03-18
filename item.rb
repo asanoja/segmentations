@@ -80,11 +80,22 @@ class Item
 		s
 	end
 	
+	def to_list
+		s = ""
+		s += "#{section}: #{@node.path}\n"
+		unless @children == []
+			@children.each do |child|
+				s += child.to_list unless child.nil?
+			end
+		end	
+		s
+	end
+	
 	def to_dot
 		s = ""
 		if @parent.nil?
 			s+="digraph \"webpage\" {\n"
-			s+="#{uid} [label=\"#{tag}\"]\n"
+			s+="#{uid} [label=\"#{@section}\\n#{tag}\\nE:#{format(@entropy)}\\nP:#{format(@prob)}\\nS,L:[#{format(@nsection)},#{format(@nlevel)}]\"]\n"
 		else
 			s+="#{uid} [label=\"#{@section}\\n#{tag}\\nE:#{format(@entropy)}\\nP:#{format(@prob)}\\nS,L:[#{format(@nsection)},#{format(@nlevel)}]\"]\n"
 			s+="#{@parent.uid} -> #{uid}\n [label=\"#{format(@distance)}\"]"
@@ -95,31 +106,6 @@ class Item
 			end
 		end
 		s+="}\n" if @parent.nil?
-		#~ attr = []
-		#~ attr.push attrfmt("section",@section)
-		#~ attr.push attrfmt("level",@level)
-		#~ attr.push attrfmt("nsection",@nsection)
-		#~ attr.push attrfmt("nlevel",@nlevel)
-		#~ attr.push attrfmt("prob",@prob)
-		#~ attr.push attrfmt("entropy",@entropy)
-					#~ 
-	#~ 
-		#~ if @node.text?
-				#~ attr.push attrfmt("size",@node.content.size)
-				#~ return "<#{tag} #{attr.join(" ")}/>\n"
-		#~ else
-			#~ unless @children == []
-				#~ s += "<#{tag} #{attr.join(" ")}>\n"
-				#~ @children.each do |child|
-					#~ s += child.to_xml unless child.nil?
-				#~ end
-			#~ else
-				#~ return "<#{tag} #{attr.join(" ")}/>\n"
-			#~ end
-		#~ end
-		#~ 
-		#~ s += " "*(@level*2)
-		#~ s += "</#{tag}>\n"
 		return s
 	end
 	
