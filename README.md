@@ -1,4 +1,3 @@
-segmentropy
+segmentations
 ===========
-
-Tools for web page segmentation based on maximum entropy
+ Collections of tools for web page segmentation, evaluation and processing
