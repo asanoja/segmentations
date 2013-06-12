@@ -1,0 +1,42 @@
+#! /usr/bin/ruby1.9.1
+#-*- mode: ruby; encoding: utf-8 -*-
+
+require "nokogiri"
+
+filename = ""
+output_type = "html"
+
+ARGV.each do |op|
+	sop = op.strip.split("=")
+	filename		= sop[1] if sop[0] == "--filename"
+	output_type		= sop[1] if sop[0] == "--output-type"
+end
+
+File.open(filename) do |fxml|
+	fhtml = filename.gsub(".xml",".html")
+	fimage = filename.gsub(".xml",".png")
+	
+	xml = Nokogiri::XML(File.open(fxml))
+	html = Nokogiri::HTML(File.open(fhtml))
+	
+	
+	puts "INFO: #{filename} opened"
+	
+	xml.search("//Block").each do |e|
+		extra = e.at("path")
+		unless extra.nil?
+			path = extra.inner_text.split(",")[0]
+			tag = html.at(path)
+			unless tag.nil?
+				tag['style'] = "border-style:solid;border-width:2px;border-color:red"
+			end
+		end
+	end
+	if output_type=='html'
+		File.open(fhtml+".2",'w') {|o| o.puts html}
+		puts "INFO: #{fhtml+".2"} created"
+	end
+	if output_type=='svg'
+		system "eog #{fimage}"
+	end
+end

@@ -1,0 +1,33 @@
+.crumb-wrapper{background-color:#ededed;border-bottom:10px solid #fff;border-top:10px solid #fff;clear:both;margin-top:-10px;overflow:hidden;width:100%;}
+.crumb-wrapper ul,.crumb-wrapper ul li{float:left;}
+.crumb-wrapper li a,.crumb-wrapper.global #crumb1 span{font-size:16px;border-right:1px solid #bebebe;padding:4px 5px;display:block;}
+.crumb-wrapper li a:hover,.crumb-wrapper li a{text-decoration:none;}
+.crumb-wrapper li.last a,.crumb-wrapper ul.crumb-nav li a,.crumb-wrapper.global #crumb1 span{border:0;}
+.crumb-wrapper ul.crumb-nav #crumb2,.crumb-wrapper ul.crumb-nav #crumb3{margin-left:-20px;}
+.crumb-wrapper ul.crumb-nav #crumb2 a,.crumb-wrapper ul.crumb-nav #crumb3 a{padding-left:25px;}
+.crumb-wrapper ul.crumb-nav li,.crumb-wrapper ul.crumb-nav li a{color:#ffffff;position:relative;z-index:3;}
+.crumb-wrapper ul.crumb-nav #crumb2,.crumb-wrapper ul.crumb-nav #crumb2 a{z-index:2;}
+.crumb-wrapper ul.crumb-nav #crumb3,.crumb-wrapper ul.crumb-nav #crumb3 a{z-index:1;position:relative;}
+.crumb-wrapper #crumb1 a,.crumb-wrapper.global #crumb1 span,.crumb-wrapper #crumb2 a,.crumb-wrapper #crumb3 a{background-color:transparent;background-position:right center;margin-right:0;padding-right:15px;}
+.crumb-wrapper #crumb1 a{background-image:url(images/crumb_1.png);}
+.crumb-wrapper.global #crumb1 span{background-image:url(../../global/styles/images/crumb_1.png);}
+.crumb-wrapper #crumb2 a{background-image:url(images/crumb_2.png);}
+.crumb-wrapper #crumb3 a{background-image:url(images/crumb_3.png);}
+.crumb-wrapper #crumb1 a:hover,.crumb-wrapper #crumb2 a:hover,.crumb-wrapper #crumb3 a:hover{background-image:url(../../common/crumb_over.png);color:#fff;}
+.crumb-wrapper ul.local-nav li a:focus,.crumb-wrapper ul.local-nav li a:hover,.crumb-wrapper ul.local-nav li a:active{background-color:#008000;color:#ffffff;}
+.crumb-wrapper.global ul.local-nav li a:focus,.crumb-wrapper.global ul.local-nav li a:hover,.crumb-wrapper.global ul.local-nav li a:active{background-color:#4f4f4f;}
+.crumb-wrapper ul.related-to-crumb2 li a:focus,.crumb-wrapper ul.related-to-crumb2 li a:hover,.crumb-wrapper ul.related-to-crumb2 li a:active{background-color:#0d3d00;}
+.crumb-wrapper ul.related-to-crumb3 li a:focus,.crumb-wrapper ul.related-to-crumb3 li a:hover,.crumb-wrapper ul.related-to-crumb3 li a:active{background-color:#3a7d00;}
+.crumb-wrapper ul.local-nav li.first{margin-left:-20px;z-index:0;position:relative;}
+.crumb-wrapper ul.local-nav li.first a{padding-left:25px;}
+.crumb-wrapper.global ul.crumb-nav li a,.crumb-wrapper.global ul.local-nav li a:hover{color:#fff;}
+.component,li.major-heading,.hd,.three-five-four-grid .sponsored-features,.component .hd,#footer{border-top-color:#008000;}
+.b1,.b4,.b5{border-top-color:#008000 !important;}
+.network-front-component .hd{border-color:#008000 !important;}
+.article-attributes,.image-badge,.blog-navigation,.series-navigation,#main-article-info .strap,.manual-trailblock,.article-attributes{border-color:#008000 !important;}
+#pluck-container h2,.discussion,.discussion h2,.discussion .comment,#post-area,.discussion .hd{border-color:#008000 !important;}
+.rating-container,.pix-grid li a span{background-color:#008000;}
+.pixies li.pixie.mini .caption,li.pixie.big .caption,.zone-bg,.pixies .zone-bg .caption{background-color:#008000;}
+.byline-toolbox,#relatedInformation,#more-in-series h3{border-color:#008000;}
+.fancy-button,.fancy-button:active,.fancy-button:focus,.fancy-button:hover{background-color:#008000;}
+.poll-result-bg.leader{background-color:#008000;}
