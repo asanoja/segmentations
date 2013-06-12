@@ -87,7 +87,7 @@ def set_output_file(f)
 	@type=:file
 end
 def set_granularity(n) 
-	@granularity = n
+	@granularity = n/10
 end
 
 def mark(node,d)
@@ -209,8 +209,7 @@ def start
 
 	body = doc.at('body')
 	#doc_area = area(body)
-
-	doc.search("*").each do |elem|
+	doc.search("//*[count(child::*) <= 1]").each do |elem|
 		if ["head","meta","link","script"].include? elem.name
 			puts "SKIPPED TAG #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
 			next 
@@ -218,133 +217,83 @@ def start
 		
 		puts "="*80 if @verbose
 		
-		if evalnode(elem,gratio,body,tr,ta,kl,kr)
-			puts "NEW BLOCK #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
+		cur = elem
+		good_partition = false
+		good_element = nil
+		good_weight = 0
+		candidates = []
+		rooted = false
 		
-			good_partition = false
-			good_element = nil
-			good_weight = 0
-			
-			cur = elem
-			as = []
-			begin
-				puts "analyzing partition for #{cur.parent['id']} in #{cur.parent.path}" if @verbose
-				if ['html'].include? cur.name
-					#~ puts "good!"
-					#~ good_partition = true
-					#~ pass = true
-					break
-				end
-				#~ lb = 0
-				#~ un = 0
-				inv = 0
-				#~ avg = 0
-				signodes = 0
-				col = cur.xpath('../*')
-				
-				if col.size>1
-					col.each do |sibling|
-						if evalnode(sibling,gratio,body,tr,ta,kl,kr)
-							puts "SB significant! #{sibling.path}" if @verbose
-							signodes+=1 
-						else
-							puts "SB not significant #{sibling.path}" if @verbose
-						end
-						unless visible?(sibling)
-							inv+=1
-							puts "SB invalid! #{sibling.path}" if @verbose
-						end
-							#~ if sibling.xpath('./*').size==0 or !visible?(sibling)
-								#~ inv+=1 
-							#~ else
-								#~ lb+=1 if line_break?(sibling) 
-								#~ un+=1 if undesirable_node?(sibling) 
-							#~ end
-							#~ if ((elem.parent['elem_left'].to_f - elem['elem_left'].to_f).abs < kl) and 
-							#~ ((elem.parent['elem_width'].to_f - elem['elem_width'].to_f).abs < kr) 
-								#~ if relative_area(sibling,sibling.parent) > tr
-									#~ signodes +=1
-								#~ end
-							#~ end
-							#~ 
-							#~ puts "SIB #{visible?(sibling)} #{sibling["id"]} #{sibling.path} #{line_break?(sibling)} #{col.size} #{relative_area(sibling,sibling.parent)}"
-					end
+		
+		while !rooted and !good_partition
+			siblings = cur.xpath('../*')
+			if siblings.size == 1
+				if evalnode(cur,gratio,body,tr,ta,kl,kr)
+					good_partition = true
+					good_element = cur
+					good_weight = 1
 				else
-					signodes = 1
-				end
-				if (col.size-inv)==0
-					df = 0
-				else
-					df = signodes.to_f / (col.size-inv)
-				end
-				
-				as.push [cur,df]
-				
-				puts as.collect {|x| "#{x[0].path} #{x[1]}"}
-				
-				if as.last[1]>=0.9
-					good_partition=true
-					good_element=as.last[0]
-					good_weight=as.last[1]
-				else
-					
-					puts "NOT GOOD PARTITION : #{(as.last[1]*100).to_i}% with #{signodes} significatives elements of #{col.size}" if @verbose
-					puts "Trying with parent #{cur.parent.name}" if @verbose
 					cur = cur.parent
 				end
-				
-					#~ rr = (lb).to_f/col.size
-					#~ rs = signodes.to_f/(lb)
-					#~ 
-					#~ puts "RES: #{lb} #{col.size} #{rr} #{signodes} #{rs}"
-					#~ 
-					#~ if ((rr<0.5) or (rs < tr)) #and line_break?(cur.parent)
-						#~ puts "get to parent"
-						#~ cur = cur.parent
-					#~ else
-						#~ puts "good"
-						#~ good_partition = true
-					#~ end
-				#~ else
-					#only child
-					#~ if !cur.is_a? Nokogiri::HTML::Document
-						#~ puts "get to parent"
-						#~ cur = cur.parent
-					#~ else
-						#~ puts "good"
-						#~ good_partition=true
-					#~ end
-			end until good_partition 
-			
-			if ['body','html'].include? cur.name
-				if elem.name != cur.name
-					good_weight = 0
-					as.each do |a|
-						if a[1]>good_weight
-							good_element = a[0]
-							good_weight  =a[1]
+			else
+				if evalnode(cur,gratio,body,tr,ta,kl,kr)
+					#puts "NEW BLOCK #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
+					
+					invalids = 0
+					signodes = 0
+					weight = 0
+					siblings.each do |si|
+						if evalnode(si,gratio,body,tr,ta,kl,kr)
+							signodes+=1 
+						end
+						unless visible?(si)
+							invalids+=1
+						end
+						if (siblings.size-invalids)==0
+							weight = 0
+						else
+							weight = signodes.to_f / (siblings.size-invalids)
+						end
+						
+						if weight>=0.9
+							puts "NEW BLOCK #{cur.path}"
+							good_partition=true
+							good_element=cur
+							good_weight=weight
+						else
+							candidates.push [cur,weight]
+							puts candidates.collect {|x| "#{x[0].path} #{x[1]}"}
+							if ['html'].include?(cur.parent.name)
+								rooted = true
+							end
+							cur = cur.parent
 						end
 					end
-					puts "Root reached! selecting #{good_element.path} as block with #{(good_weight.to_f*100).to_i}%!" if @verbose
-					good_partition = true
 				else
-					puts "Root reached skipped!!! (this has no sense but...)" if @verbose
-					puts "#{elem.path} #{cur.path} #{good_element.class} #{good_weight.class}" if @verbose
-				end
-			end
-			
-			puts "PARTITION : #{(good_weight.to_f*100).to_i}% sure that #{good_element.path} is a good partition" if @verbose
-			
-			if good_partition
-				good_element.xpath('./*').each do |sibling|
-					if visible?(sibling) 
-						@blocks.push [sibling,good_weight] 
+					if ['html'].include?(cur.parent.name)
+						rooted = true
 					end
+					cur = cur.parent
 				end
-				
+			end		
+		end
+		
+		next if candidates==[]
+		
+		if !good_partition or !rooted
+			good_weight = 0
+			candidates.each do |c|
+				if c[1]>good_weight
+					good_element = c[0]
+					good_weight  = c[1]
+				end
 			end
-		else
-			puts "SKIPPED #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
+
+			good_element.xpath('../*').each do |si|
+				if visible?(si) 
+					@blocks.push [si,good_weight] 
+				end
+			end
 		end
 	end
 

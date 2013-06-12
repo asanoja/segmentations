@@ -45,10 +45,8 @@ get '/capture' do
 	url = params['url']
 	browser = params['browser']
 	granularity = params['granularity']
-	unless granularity.nil? or granularity.empty?
-		granularity = granularity.to_i / 10.0
-	else
-		granularity = 0.4
+	if granularity.nil? or granularity.empty?
+		granularity = 4
 	end
 	
 	if url.empty?
