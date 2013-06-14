@@ -219,7 +219,7 @@
 <span style="font-size:42px;color:#D7D740;background-color:#7F00FF">B</span><span style="font-size:42px;color:blue;background-color:#FF7F00">o</span><span style="font-size:42px;color:red;background-color:#007FFF">M!</span> <br>
 </td>
 <td>
-<h1>Block-o-Matic!</h1>
+<h1>Block-o-Matic! (Beta)</h1>
 <b>a Web Page Segmentation Algorithm</b>
 </td>
 </tr>
@@ -237,7 +237,7 @@
 				Granularity of 
 				<select name="granularity" id="granularity">
 					<?php for ($i=1;$i<=10;$i++) {?>
-						<?if ($i==4) {$sel="selected";$def="(default)";} else {$sel="";$def="";}?>
+						<?if ($i==6) {$sel="selected";$def="(default)";} else {$sel="";$def="";}?>
 						<option value="<?=$i?>" <?=$sel?>><?=$i?> <?=$def?></option>
 					<?}?>
 				</select>
