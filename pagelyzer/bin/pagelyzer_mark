@@ -2,14 +2,18 @@
 #-*- mode: ruby; encoding: utf-8 -*-
 
 require "nokogiri"
+require "uri"
+require_relative "../lib/pagelyzer_url_utils.rb"
 
 filename = ""
+url=""
 output_type = "html"
 
 ARGV.each do |op|
 	sop = op.strip.split("=")
 	filename		= sop[1] if sop[0] == "--filename"
 	output_type		= sop[1] if sop[0] == "--output-type"
+	url				= sop[1] if sop[0] == "--url"
 end
 
 File.open(filename) do |fxml|
@@ -18,22 +22,142 @@ File.open(filename) do |fxml|
 	
 	xml = Nokogiri::XML(File.open(fxml))
 	html = Nokogiri::HTML(File.open(fhtml))
+	host = URI.parse(url).host
+	unless html.nil?
+						html.css('link').each do |tag|
+							unless tag.nil?
+								if relative?(tag['href'])
+									unless tag['href'].nil?
+										#~ if ['/'].include? tag['href'].to_s[0]
+											#~ href = "http://#{host}#{tag['href']}"
+										#~ elsif ["."].include? tag['href'].to_s[0]
+											#~ href = "http://#{host}#{tag['href'].reverse.chop.reverse}"
+										#~ else
+											#~ href = "http://#{host}/#{tag['href']}"
+										#~ end
+										#~ #puts "#{tag['href']} => #{href}"
+										#~ tag['href'] = href
+										#tag['href'] = URI.parse(url).merge(tag['href'])
+										tag['href'] = URI.join(url,tag['href']).to_s
+									end
+								end
+							end
+						end
+						
+
+						html.css('img').each do |img|
+							unless img.nil?
+								unless img['src'].nil?
+									if relative?(img['src'])
+										#~ if ["/"].include? img['src'].to_s[0]
+											#~ href = "http://#{host}#{img['src']}"
+										#~ elsif ["."].include? img['src'].to_s[0]
+											#~ aux = img['src']
+											#~ aux[0]=''
+											#~ href = "http://#{host}#{aux}"
+										#~ else
+											#~ href = "http://#{host}/#{img['src']}"
+										#~ end
+										#~ #puts "#{img['src']} => #{href}"
+										#~ img['src'] = href
+										#~ img['src'] = URI.parse(url).merge(img['src'])
+										img['src'] = URI.join(url,img['src']).to_s
+									end
+								end
+							end
+						end
+	end
 	
-	
-	puts "INFO: #{filename} opened"
-	
+	n=0
 	xml.search("//Block").each do |e|
 		extra = e.at("path")
 		unless extra.nil?
 			path = extra.inner_text.split(",")[0]
 			tag = html.at(path)
 			unless tag.nil?
-				tag['style'] = "border-style:solid;border-width:2px;border-color:red"
+				tag['block'] = n
+				n+=1
 			end
 		end
 	end
+	
+script = Nokogiri::XML::Node.new "script",html
+script["id"] = "pagelyzer_mark_inject"
+script.inner_html = <<EOF
+\n
+function getOffset(obj) {
+ var obj2 = obj;
+ var curtop = 0;
+ var curleft = 0;
+ if (document.getElementById || document.all) {
+  do  {
+   curleft += obj.offsetLeft-obj.scrollLeft;
+   curtop += obj.offsetTop-obj.scrollTop;
+   obj = obj.offsetParent;
+   obj2 = obj2.parentNode;
+   while (obj2!=obj) {
+    curleft -= obj2.scrollLeft;
+    curtop -= obj2.scrollTop;
+    obj2 = obj2.parentNode;
+   }
+  } while (obj.offsetParent)
+ } else if (document.layers) {
+  curtop += obj.y;
+  curleft += obj.x;
+ }
+ return {top: curtop, left:curleft};
+}   
+
+function markblocks() {
+	var tag;
+	var i=0;
+	$("//[block]").each(function(index) {
+		tag = this;
+		if (tag) {
+			if (tag.getAttribute("block")) {
+				i++;
+				//offset = getOffset(tag);
+				offset = tag.getBoundingClientRect();
+				console.log(offset.left,offset.top);
+				xdiv = document.createElement("div");
+				xdiv.style.left = offset.left + "px";
+				xdiv.style.top = offset.top + "px";
+				xdiv.style.width = tag.offsetWidth + "px";
+				xdiv.style.height = tag.offsetHeight + "px";
+				xdiv.style.position = "absolute";
+				xdiv.style.border = "2px solid red";
+				xdiv.onmouseover = function() {
+					this.style.backgroundColor='rgba(0,0,255,0.5)';
+					this.style.color = "white";
+					this.style.border = "4px solid blue";
+				}
+				xdiv.onmouseout = function() {
+					this.style.backgroundColor='transparent';
+					this.style.color = "black";
+					this.style.border = "2px solid red";
+				}
+				
+				console.log(xdiv);
+				xdiv.appendChild(document.createTextNode("block"+i));		
+				document.body.appendChild(xdiv);
+			}
+		}
+	});
+}
+window.onload = markblocks;
+EOF
+
+	
+	jquery = Nokogiri::XML::Node.new "script",html
+	jquery["id"] = "pagelyzer_mark_jquery"
+	jquery["src"] = "http://www-poleia.lip6.fr/~sanojaa/SCAPE/jquery.min.js"
+
+	html.at("head").add_child(script)
+	html.at("head").add_child(jquery)
+	html.at("//script[@id='pagelyzerinject']").remove
+	
 	if output_type=='html'
-		File.open(fhtml+".2",'w') {|o| o.puts html}
+		File.open(filename.gsub(".xml",".2.html"),'w') {|o| o.puts html}
 		puts "INFO: #{fhtml+".2"} created"
 	end
 	if output_type=='svg'

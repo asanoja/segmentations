@@ -100,7 +100,11 @@ end
 def open(browsers)
 	browsers.uniq.each do |browser|
 		begin
-			@browser_instances[browser] = Selenium::WebDriver.for browser.to_sym
+			if browser=="firefox"
+				@browser_instances[browser] = Selenium::WebDriver.for browser.to_sym, :profile => "general"
+			else
+				@browser_instances[browser] = Selenium::WebDriver.for browser.to_sym
+			end
 		rescue
 			puts "Connection not possible with #{browser.to_sym}"
 			puts "WARNING: Is #{browser} installed in your system?"
@@ -136,7 +140,7 @@ def reset
 end
 
 
-def start(url,browser,output_folder,no_screenshot,thumb,current_folder,command,timeout)
+def start(url,browser,output_folder,no_screenshot,thumb,current_folder,command,timeout,nodom)
 	
 	if URI.parse(url).scheme.nil?
 		url = "http://#{url}"
@@ -167,6 +171,7 @@ var callback = arguments[arguments.length - 1];
 callback(func_dump());
 FIN
 
+		
 		driver = @browser_instances[browser]
 		begin
 			driver.manage.timeouts.implicit_wait = "60"
@@ -180,9 +185,10 @@ FIN
 				driver.navigate.to url
 				puts "Page loaded"
 			end
-		rescue
+		rescue Exception => e
 			puts "ERROR: Page load timeout #{$!}"
 			reset
+			puts e.backtrace
 			raise "ERROR: Page load timeout #{$!}"
 			return nil #unless command
 		end
@@ -224,33 +230,37 @@ FIN
 			#system "convert \"#{output_folder}/#{browser}_#{filename}.png\" -flatten +matte \"#{output_folder}/#{browser}_#{filename}.png\""
 		end
 		
-		begin
-			puts "Getting rendered DOM"
-			driver.execute_async_script(load_dump)
-			#sleep 120000
-			loaded = false
-			k=0
-			while !loaded and k<10
-				begin
-					r = driver.execute_script("return dump_loaded!=undefined;")
-					loaded = (r==true);
-					puts "Waiting page to finish loading..."
-					sleep(0.5)
-				 rescue
-					 puts "Something maybe is wrong, but still waiting page to finish loading... (attempt #{k}/10)"
-					 sleep(2)
-				 end
-				k+=1
+		if nodom
+			begin
+				puts "Getting rendered DOM"
+				driver.execute_async_script(load_dump)
+				#sleep 120000
+				loaded = false
+				k=0
+				while !loaded and k<10
+					begin
+						r = driver.execute_script("return dump_loaded!=undefined;")
+						loaded = (r==true);
+						puts "Waiting page to finish loading..."
+						sleep(0.5)
+					 rescue
+						 puts "Something maybe is wrong, but still waiting page to finish loading... (attempt #{k}/10)"
+						 sleep(2)
+					 end
+					k+=1
+				end
+				src = driver.execute_script("return dump_start();")
+				puts "done"
+			rescue Exception=>e
+				puts "#{browser} failed!"
+				puts "The JavaScript could not be injected into page #{$!}"
+				raise "The JavaScript could not be injected into page"
+				status="FAIL"
+				#puts e.backtrace
+				#driver.close
 			end
-			src = driver.execute_script("return dump_start();")
-			puts "done"
-		rescue Exception=>e
-			puts "#{browser} failed!"
-			puts "The JavaScript could not be injected into page"
-			raise "The JavaScript could not be injected into page"
-			status="FAIL"
-			#puts e.backtrace
-			#driver.close
+		else
+			src = ""
 		end
 		
 		ret = [driver.page_source,src,base64]

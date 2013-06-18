@@ -35,10 +35,14 @@ marr=[]
 xarr=[]
 
 Dir.glob("manual/*").each do |cat|
-	Dir.glob("#{cat}/*").each do |page|
+	Dir.glob("#{cat}/*.txt").each do |page|
 		catname = cat.split("/")[1]
-		xmlname = "xml/#{catname}/"+page.split(",")[1].gsub("repository_#{catname}_","").gsub(".html",".xml")
+		filename = page.split("/")[2].gsub("andres,","").gsub(".txt","").gsub(".","_").strip+".xml"
+		puts xmlname = "xml/"+filename
+		puts File.exists? xmlname
+		exit
 		next unless File.exists?(xmlname)
+		puts "PAGE: #{filename}"
 		doc = Nokogiri::XML(File.open(xmlname))
 		xarr = []
 		doc.search("//Block").each do |block|

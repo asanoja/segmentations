@@ -33,31 +33,31 @@ function walk(pNode,nLevel,pretext) {
 	var src = '';
 	var aux = '';
 	for(var k=0;k<nLevel;k++) {tab+=' ';}
-	var attr = \" uid='\"+cont+\"'\";
+	var attr = " uid='"+cont+"'";
 	if (pNode.id) {
-		attr += \" id='\"+(pNode.id)+\"'\";
+		attr += " id='"+(pNode.id)+"'";
 	} else {
-		attr += \" id='element-\"+(cont)+\"'\";
+		attr += " id='element-"+(cont)+"'";
 	}
-	attr += \" elem_left='\"+(new String(getElemLeft(pNode)))+\"'\";
-	attr += \" elem_top='\"+(new String(getElemTop(pNode)))+\"'\";
-	attr += \" elem_width='\"+(new String(getElemLeft(pNode)+getElemWidth(pNode)))+\"'\";
-	attr += \" elem_height='\"+(new String(getElemTop(pNode)+getElemHeight(pNode)))+\"'\";
-	attr += \" className='\"+(new String(pNode.className))+\"'\";
+	attr += " elem_left='"+(new String(getElemLeft(pNode)))+"'";
+	attr += " elem_top='"+(new String(getElemTop(pNode)))+"'";
+	attr += " elem_width='"+(new String(getElemLeft(pNode)+getElemWidth(pNode)))+"'";
+	attr += " elem_height='"+(new String(getElemTop(pNode)+getElemHeight(pNode)))+"'";
+	attr += " className='"+(new String(pNode.className))+"'";
 	if (pNode.style) {
-		attr += \" margin_left='\"+(new String(css(pNode,'margin-left')))+\"'\";
-		attr += \" background_color='\"+(new String(css(pNode,'background-color')))+\"'\";
-		attr += \" font_size='\"+(new String(css(pNode,'font-size')))+\"'\";
-		attr += \" font_weight='\"+(new String(css(pNode,'font-weight')))+\"'\";
-		attr += \" display='\"+(new String(css(pNode,'display')))+\"'\";
-		attr += \" visibility='\"+(new String(css(pNode,'visibility')))+\"'\";
-		attr += \" style='\"+(pNode.style.cssText)+\"'\";
+		attr += " margin_left='"+(new String(css(pNode,'margin-left')))+"'";
+		attr += " background_color='"+(new String(css(pNode,'background-color')))+"'";
+		attr += " font_size='"+(new String(css(pNode,'font-size')))+"'";
+		attr += " font_weight='"+(new String(css(pNode,'font-weight')))+"'";
+		attr += " display='"+(new String(css(pNode,'display')))+"'";
+		attr += " visibility='"+(new String(css(pNode,'visibility')))+"'";
+		attr += " style='"+(pNode.style.cssText)+"'";
 	}
 	cont+=1;
 	
 		if (pNode.tagName == 'A') {
 			if (pNode.href)
-				attr += \" href='\"+pNode.href+\"'\";
+				attr += " href='"+pNode.href+"'";
 		}
 		
 		if ((pNode.tagName!='TBODY') && (pNode.tagName!='IMG') && (pNode.tagName!='CANVAS') && (pNode.id!='fxdriver-screenshot-canvas')) {
@@ -69,7 +69,7 @@ function walk(pNode,nLevel,pretext) {
 			}
 		}
 		if (pNode.tagName=='IMG') {
-			src += tab + \"<\"+pNode.tagName+\" \"+ attr +\" src='\"+pNode.src+\"' alt='\"+pNode.alt+\"'/>\";
+			src += tab + "<"+pNode.tagName+" "+ attr +" src='"+pNode.src+"' alt='"+pNode.alt+"'/>";
 		}
 				
 		for (var i = 0;i<pNode.childNodes.length;i++) {
@@ -139,7 +139,7 @@ function dump_start() {
 	var then = now.getFullYear()+'-'+now.getMonth()+'-'+now.getDay()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
 	pre = '<!-- window: {width : '+ window.innerWidth + ', height: ' + window.innerHeight+'}, ';
 	pre += 'document: {width: '+ getDocWidth() + ', height: ' + getDocHeight()+'}, ';
-	pre += 'page: {url: \"'+  location.href + '\", date: \"'+ then + '\"} -->';
+	pre += 'page: {url: "'+  location.href + '", date: "'+ then + '"} -->';
 	src += walk(document.getElementsByTagName('html')[0],0,pre);
 	return(src);
 }

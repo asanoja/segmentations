@@ -150,7 +150,7 @@ require 'base64'
 			domain = host.downcase.start_with?("www") ? host[4..-1] : host
 			data = nil
 			begin
-				data = cdriver.start(page,browser,output_folder,no_screenshot,thumb,current_folder,false,time_out)
+				data = cdriver.start(page,browser,output_folder,no_screenshot,thumb,current_folder,false,time_out,true)
 			rescue
 				puts "ERROR: url #{page} could not be captured"
 				File.open("excluded_list.txt","a") {|f| f.puts page}

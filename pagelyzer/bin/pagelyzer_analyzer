@@ -23,8 +23,8 @@ folder = ""
 force = false
 output_folder = ""
 ti = Time.now
-granularity=0.4
-algorithm = "bom2"
+  granularity=0.4
+  algorithm = "bom2"
 #~ granularity=6
 #~ algorithm = "bom1"
 

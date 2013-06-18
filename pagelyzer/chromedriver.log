@@ -1,0 +1,144 @@
+[0.000][INFO]:      ChromeDriver 26.0.1383.0 /usr/bin/chromedriver
+[0.270][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.detach": true,
+   "chromeOptions": {
+      "detach": true
+   },
+   "cssSelectorsEnabled": true,
+   "javascriptEnabled": true,
+   "nativeEvents": false,
+   "platform": "ANY",
+   "rotatable": false,
+   "takesScreenshot": false,
+   "version": ""
+}
+
+[0.273][INFO]:      Using named testing interface
+[1.639][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.160
+[1.692][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9)
+[1.693][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "26.0.1383.0",
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "linux",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "25.0.1364.160",
+      "webStorageEnabled": true
+   }
+}
+
+[1.699][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/url) with params {
+   "url": "http://anti-capitalism.org/"
+}
+
+[1.699][FINER]:     Waiting for all views to stop loading...
+[1.702][FINER]:     Done waiting for all views to stop loading
+[2.856][FINER]:     Waiting for all views to stop loading...
+[2.858][FINER]:     Done waiting for all views to stop loading
+[2.858][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/url) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[2.869][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/window/current/size) with params {
+   "height": 728,
+   "width": 970
+}
+
+[2.869][FINER]:     Waiting for all views to stop loading...
+[2.870][FINER]:     Done waiting for all views to stop loading
+[2.884][FINER]:     Waiting for all views to stop loading...
+[2.885][FINER]:     Done waiting for all views to stop loading
+[2.886][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/window/current/size) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[2.887][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/screenshot)
+[2.887][FINER]:     Waiting for all views to stop loading...
+[2.892][FINER]:     Done waiting for all views to stop loading
+[3.340][FINER]:     Waiting for all views to stop loading...
+[3.341][FINER]:     Done waiting for all views to stop loading
+[3.341][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/screenshot) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": "iVBORw0KGgoAAAANSUhEUgAAA7sAAAP+CAIAAABFbZ9+AAAgAElEQVR4nOyde7QlRXX/vxfODLth7lDF85Qi0ASFOxJxrhFhJ..."
+}
+
+[3.420][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/execute_async) with params {
+   "args": [  ],
+   "script": "function func_dump() {\n\tvar script = document.createElement('script');\n\tscript.type = \"text/javas..."
+}
+
+[3.420][FINER]:     Waiting for all views to stop loading...
+[3.422][FINER]:     Done waiting for all views to stop loading
+[3.477][FINER]:     Waiting for all views to stop loading...
+[3.480][FINER]:     Done waiting for all views to stop loading
+[3.480][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/execute_async) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": null
+}
+
+[3.497][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/execute) with params {
+   "args": [  ],
+   "script": "return dump_loaded!=undefined;"
+}
+
+[3.497][FINER]:     Waiting for all views to stop loading...
+[3.505][FINER]:     Done waiting for all views to stop loading
+[3.537][FINER]:     Waiting for all views to stop loading...
+[3.538][FINER]:     Done waiting for all views to stop loading
+[3.539][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/execute) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": true
+}
+
+[4.049][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/execute) with params {
+   "args": [  ],
+   "script": "return dump_start();"
+}
+
+[4.049][FINER]:     Waiting for all views to stop loading...
+[4.050][FINER]:     Done waiting for all views to stop loading
+[4.067][FINER]:     Waiting for all views to stop loading...
+[4.068][FINER]:     Done waiting for all views to stop loading
+[4.068][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/execute) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": "\u003CHTML  uid='1' id='element-1' elem_left='0' elem_top='0' elem_width='955' elem_height='1022' clas..."
+}
+
+[4.070][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/source)
+[4.070][FINER]:     Waiting for all views to stop loading...
+[4.070][FINER]:     Done waiting for all views to stop loading
+[4.076][FINER]:     Waiting for all views to stop loading...
+[4.077][FINER]:     Done waiting for all views to stop loading
+[4.077][FINE]:      Command finished (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/source) with response {
+   "sessionId": "7d0cf3577853e3ecd4baa2e058e9d2e9",
+   "status": 0,
+   "value": "\u003Chtml\u003E\u003Chead\u003E\n\u003Ctitle\u003EAnti-Capitalism\u003C/title\u003E\n\u003Cmeta http-equiv=\"Window-target\" content=\"_top\"\u003E\n\u003Cmet..."
+}
+
+[4.081][FINE]:      Command received (/session/7d0cf3577853e3ecd4baa2e058e9d2e9/window)
+[4.770][INFO]:      Chrome shutdown

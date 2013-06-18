@@ -71,7 +71,7 @@ class BlockOMatic
 		@type = :file
 		@error = false
 		@segmented_page = nil
-		@verbose = true
+		@verbose = false
 	end
 
 def set_source_content(dhtml) 
@@ -118,6 +118,11 @@ def relative_area(node1,node2)
 end
 
 def evalnode(elem,gratio,body,tr,ta,kl,kr)
+	
+	return false if elem.is_a? Nokogiri::HTML::Document
+	return false if ['html'].include? elem.name.downcase
+	return false unless elem['visited'].nil?
+
 	newblock = true
 
 	rdocarea = relative_area(elem,body)
@@ -215,6 +220,11 @@ def start
 			next 
 		end
 		
+		if !elem['visited'].nil?
+			puts "VISITED TAG #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
+			next 
+		end
+		
 		puts "="*80 if @verbose
 		
 		cur = elem
@@ -227,6 +237,7 @@ def start
 		
 		while !rooted and !good_partition
 			siblings = cur.xpath('../*')
+			
 			if siblings.size == 1
 				if evalnode(cur,gratio,body,tr,ta,kl,kr)
 					good_partition = true
@@ -242,6 +253,7 @@ def start
 					invalids = 0
 					signodes = 0
 					weight = 0
+					
 					siblings.each do |si|
 						if evalnode(si,gratio,body,tr,ta,kl,kr)
 							signodes+=1 
@@ -262,18 +274,29 @@ def start
 							good_weight=weight
 						else
 							candidates.push [cur,weight]
-							puts candidates.collect {|x| "#{x[0].path} #{x[1]}"}
-							if ['html'].include?(cur.parent.name)
+							puts candidates.collect {|x| "#{x[0].path} #{x[1]}"} if @verbose
+							
+							if cur.is_a? Nokogiri::HTML::Document
 								rooted = true
+							else
+								if ['html'].include?(cur.name)
+									rooted = true
+								else
+									cur = cur.parent
+								end
 							end
-							cur = cur.parent
 						end
 					end
 				else
-					if ['html'].include?(cur.parent.name)
+					if cur.is_a? Nokogiri::HTML::Document
 						rooted = true
+					else
+						if ['html'].include?(cur.name)
+							rooted = true
+						else
+							cur = cur.parent
+						end
 					end
-					cur = cur.parent
 				end
 			end		
 		end
@@ -291,6 +314,7 @@ def start
 
 			good_element.xpath('../*').each do |si|
 				if visible?(si) 
+					si["visited"]="1"
 					@blocks.push [si,good_weight] 
 				end
 			end
