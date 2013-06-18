@@ -9,6 +9,9 @@
 	<script src="js/jquery-ui-1.10.3.custom.js"></script>
 	<script src='js/xmltree.js'></script>
 	<script>
+	var process=false;
+	var prog=0;
+	
 	$(function() {
 		
 		$( "#accordion" ).accordion({
@@ -100,7 +103,8 @@
 
 		
 		$( "#progressbar" ).progressbar({
-			value: 20
+			value: 0,
+			max: 4
 		});
 		
 
@@ -115,55 +119,121 @@
 		);
 	});
 	
-
+	function segment() {
+		process = true;
+		$('#progressbartext').html("");
+		$('#mycontent').html("");
+		prog=0;
+		advance("Starting with page capture...")
+		callbom("capture");
+	}
 	
 	function callbom(cmd) {
 		initiate();
 		if (cmd=='capture') {
-			$("#iprog").css("display","block");
-			url=$("#srcurl").val();
+			purl=$("#srcurl").val();
 			if ($('#firefox').is(':checked')) browser="firefox";
 			if ($('#chrome').is(':checked')) browser="chrome";
 			granularity = $("#granularity").val();
-			console.log(url);
-			console.log($('#firefox').is(':checked'))
-			console.log(granularity)
-			$('#tabs-1-img').attr("src","call_bom.php?browser="+browser+"&cmd="+cmd+"&url="+url+"&granularity="+granularity);
-			$('#tabs-1-img').attr("width","500");
-			$("#tabs").css("display","block");
-			
-			//callbom('xml');
-		}
-		if (cmd=='xml') {
-			
-			$(function() { new XMLTree({
-				fpath: "call_bom.php?browser="+browser+"&cmd="+cmd+"&url="+url, 
-				container: '#tabs-3', 
-				startCollapsed: true
-					
-				}); 
+			console.log("calling capture for "+purl);
+			$.ajax({
+					type: "GET",
+					url : "call_bom.php",
+					data: "cmd="+cmd+"&purl="+purl+"&browser="+browser+"&granularity="+granularity,
+					dataType: "text",
+					success : function(data) {
+						console.log("return "+data);
+						code = data.split(":")[0]
+						time = data.split(":")[1]
+						if (process && code=="OK") {
+							advance("Page captured correctly in "+time+"<br>Now segmenting page...");
+							callbom("analyze");
+						}
+					}
 			});
-		
 		}
+		
+		if (cmd=='analyze') {
+			purl=$("#srcurl").val();
+			if ($('#firefox').is(':checked')) browser="firefox";
+			if ($('#chrome').is(':checked')) browser="chrome";
+			granularity = $("#granularity").val();
+			$.ajax({
+					type: "GET",
+					url : "call_bom.php",
+					data: "cmd="+cmd+"&purl="+purl+"&browser="+browser+"&granularity="+granularity,
+					dataType: "text",
+					success : function(data) {
+						console.log("return "+data);
+						code = data.split(":")[0]
+						time = data.split(":")[1]
+						if (process && code=="OK") {
+							advance("Segmented done in "+time+"<br>Now generating output page...");
+							callbom("view");
+						}
+					}
+			});
+		}
+		
+		if (cmd=='view') {
+			purl=$("#srcurl").val();
+			if ($('#firefox').is(':checked')) browser="firefox";
+			if ($('#chrome').is(':checked')) browser="chrome";
+			granularity = $("#granularity").val();
+			$.ajax({
+					type: "GET",
+					url : "call_bom.php",
+					data: "cmd="+cmd+"&purl="+purl+"&browser="+browser+"&granularity="+granularity,
+					dataType: "text",
+					success : function(data) {
+						console.log("return "+data);
+						code = data.split(":")[0]
+						time = data.split(":")[1]
+						if (process && code=="OK") {
+							msg="Output generated in "+time+".\n<br>Done!<br>View results as ";
+							msg+="[<a href='call_bom?cmd=xml&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>ViXML</a>]&nbsp;";
+							msg+="[<a href='call_bom?cmd=html&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>HTML w/blocks</a>]&nbsp;";
+							msg+="[<a href='call_bom?cmd=screenshot&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>PNG (Screenshot)</a>]";
+							advance(msg);
+							//callbom("xml");
+							process=false;
+						}
+					}
+			});
+		}
+		
+		if (cmd=='xml') {	
+			purl=$("#srcurl").val();
+			if ($('#firefox').is(':checked')) browser="firefox";
+			if ($('#chrome').is(':checked')) browser="chrome";
+			granularity = $("#granularity").val();
+			$(function() { new XMLTree({
+				fpath: "call_bom.php?browser="+browser+"&cmd="+cmd+"&purl="+purl+"&granularity="+granularity, 
+				container: '#mycontent', 
+				startCollapsed: false
+				}); 
+			});	
+		}
+		
+		
 		if (cmd=='whtml') {
 			$.ajax({url:"call_bom.php?browser="+browser+"&cmd=whtml&url="+url,success:function(result){
 				$("#tabs-2").html(result);
 			}});
 		}
-		//~ $.ajax({url:"call_bom.php?url="+$("#srcurl").val(),success:function(result){
-			//~ $("#tabs-1-img").html(result);
-			//~ 
-		//~ }});
 	}
 	
 	function initiate() {
-		 $("#iprog").css("display","block");
-	 }
+	}
+	
+	function advance(msg) {
+		prog++;
+		$("#progressbar").progressbar( "option", "value",  prog);
+		$('#progressbartext').html($('#progressbartext').html()+msg+"<br>");
+	}
+	
 	function terminate() {
-		 $("#iprog").css("display","none");
-		 $("#htabs-2").css("display","block");
-		 $("#htabs-3").css("display","block");
-	 }
+	}
 	 
 	</script>
 	<style>
@@ -236,25 +306,30 @@
 				</span><br>
 				Granularity of 
 				<select name="granularity" id="granularity">
-					<?php for ($i=1;$i<=10;$i++) {?>
-						<?if ($i==6) {$sel="selected";$def="(default)";} else {$sel="";$def="";}?>
-						<option value="<?=$i?>" <?=$sel?>><?=$i?> <?=$def?></option>
-					<?}?>
+					<option value="4">Coarse</option>
+					<option value="6" selected>Normal (default)</option>
+					<option value="10">Fine</option>
+					
 				</select>
-				<button id="btngo" onclick="callbom('capture')">do it!</button><br>
+				<button id="btngo" onclick="segment()">do it!</button><br>
 				<span style="color:#C0C0C0">Attention: Be patient, capturing time can be up to 10secs</span>
-				<img src='images/1-0.gif' id="iprog" style='display:none'/>
+				<div id="progressbar" style="display:block"></div>
+				<div id="progressbartext" style="display:block"></div>
 			</h2>
 		<div id="tabs" style="display:none">
 			<ul>
-				<li><a id="htabs-1"href="#tabs-1">Segmentation Result</a></li>
+				<li><a id="htabs-1" href="#tabs-1" style="display:none">Segmentation Result</a></li>
 				<li><a id="htabs-2" href="#tabs-2" style="display:none" onclick="callbom('whtml')">W'HTML</a></li>
-				<li><a id="htabs-3" href="#tabs-3" style="display:none" onclick="callbom('xml')">ViXML</a></li>
+				<li><a id="htabs-3" href="#tabs-3" style="display:block" onclick="callbom('xml')">ViXML</a></li>
 			</ul>
 			<div id="tabs-1"><img src='' id="tabs-1-img" onload='terminate()'></div>
 			<div id="tabs-2"><iframe id="tabs-2-frame" src="" width="100%" height="100%"></iframe></div>
 			<div id="tabs-3">waiting for loading...</div>
 		</div>
+	</div>
+	<h3 id="resh" style="display:none">Results</h3>
+	<div id="mycontent">
+	
 	</div>
 	<h3>API</h3>
 	<div class="ui-widget">
