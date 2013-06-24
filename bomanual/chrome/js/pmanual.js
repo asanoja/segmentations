@@ -10,10 +10,12 @@ var lastContainer = undefined;
 var lastEvent = undefined;
 var editing = false;
 var blocks = new Array();
+var over = new Array();
 var marco = undefined;
 var dialog = undefined;
 var cargado = false;
 var metaData = "";
+var defaultOver = new Array();
 
 function bye() {
     self.port.emit("unload");
@@ -80,33 +82,80 @@ function toggle_marco() {
 		marco.style.display = "block";
 }
 
+function getOffset(obj) {
+	pos = {x: 0, y: 0};
+	e = obj;
+	while (e) {
+		pos.x += (e.offsetLeft - (e.scrollLeft - e.clientLeft));
+		pos.y += (e.offsetTop - (e.scrollTop - e.clientTop));
+		e = e.offsetParent;
+	}
+	return(pos);
+}
+
+function getDim(block) {
+	var dim = {w: 0, h: 0};
+	dim.w = block.offsetWidth - block.scrollWidth + block.clientWidth;
+	dim.h = block.offsetHeight - block.scrollHeight + block.clientHeight;
+	return dim;
+}
+
+function getRect(obj) {
+	dim = {x:0, y:0, w:0, h:0};
+	r = obj.getBoundingClientRect();
+	dim.x = r.left;
+	dim.y = r.top;
+	dim.w = r.width;
+	dim.h = r.height;
+	return dim;
+}
+
 function dimension(block) {
-	s=block.offsetLeft+","+block.offsetTop+","+block.offsetWidth+","+block.offsetHeight;
-	return s;
+	//return getOffset(block).x+","+getOffset(block).y+","+getDim(block).w+","+block.offsetHeight;
+	return getRect(block).x+","+getRect(block).y+","+getRect(block).w+","+getRect(block).h;
 }
 
 function getDocHeight() {
-var d = document;
-return Math.max(
-Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
-Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
-Math.max(d.body.clientHeight, d.documentElement.clientHeight)
-);
+//~ var d = document;
+//~ return Math.max(
+//~ Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
+//~ Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
+//~ Math.max(d.body.clientHeight, d.documentElement.clientHeight)
+//~ );
+return Math.max(document.documentElement["clientHeight"], document.body["scrollHeight"], document.documentElement["scrollHeight"], document.body["offsetHeight"], document.documentElement["offsetHeight"]);
 }
 
 function getDocWidth() {
-var d = document;
-return Math.max(
-Math.max(d.body.scrollWidth, d.documentElement.scrollWidth),
-Math.max(d.body.offsetWidth, d.documentElement.offsetWidth),
-Math.max(d.body.clientWidth, d.documentElement.clientWidth)
-);
+//~ var d = document;
+//~ return Math.max(
+//~ Math.max(d.body.scrollWidth, d.documentElement.scrollWidth),
+//~ Math.max(d.body.offsetWidth, d.documentElement.offsetWidth),
+//~ Math.max(d.body.clientWidth, d.documentElement.clientWidth)
+//~ );
+return Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"]);
+}
+
+function newRect(element,size,style,color) {
+	console.log("OVER IN "+element+ " "  + getRect(element).h);
+	var nover = document.createElement("div");
+	nover.id = "plmanualover_" + Math.floor(Math.random()*1001);
+	nover.style.background = color;
+	nover.style.border = size + "px "+ style +" "+color;
+	nover.style.opacity = '0.8';
+	nover.style.left = getRect(element).x;
+	nover.style.top = getRect(element).y;
+	nover.style.width = getRect(element).w;
+	nover.style.height = getRect(element).h;
+	nover.style.position = "absolute";
+	nover.innerHTML = "HEllo:";
+	document.body.appendChild(nover)
+	return(nover);
 }
 
 function update_marco() {
     marco.innerHTML="<h2>Block-o-Matic</h2><br/>";
 	marco.innerHTML+="Selected Blocks<br>";
-	marco.innerHTML+="<hr>";
+	//~ marco.innerHTML+="<hr>";
 	marco.innerHTML+="<form>";
 	marco.innerHTML+="<ol>";
 	for (var i=0;i<blocks.length;i++) {
@@ -129,25 +178,30 @@ function getURLParameter(name) {
   return document.URL;
 }
 
+function countNodes(node) {
+  var k = 0, c = node.childNodes.length, result = c;
+  for (; k<c; k++) result += countNodes(node.childNodes[k]);
+  return result;
+} 
+
 function update_marco_submit() {
     s="<h2>Block-o-Matic</h2><br>";
     s+="Send Blocks<br>";
-	s+="<hr>";
 	s+="<form action='http://www-poleia.lip6.fr/~sanojaa/SCAPE/submit.php' id='pmanual_form' method='POST'>";
     //s+="<form action='http://localhost/submit.php' id='pmanual_form' method='POST'>";
 	
-	k=0;
+	var tk=0;
 	for (var i=0;i<blocks.length;i++) {
 			if (blocks[i]) {
-				k++;
+				tk+=1;
 			}
 	}
 	
-	s+="Selected "+k+" blocks<br>"
-	s+="<input type='hidden' value='"+k+"' name='total'>";
+	s+="Selected "+tk+" blocks<br>"
+	s+="<input type='hidden' value='"+tk+"' name='total'>";
 	pn=getURLParameter('fn');
-	s+="<input id='pmanual_webpage' type='text' value='"+pn+"' name='page'><br>";
-	s+="<input id='pmanual_meta' type='text' value='"+metaData+"' name='meta'><br>";
+	s+="<input id='pmanual_webpage' type='text' size='80' value='"+pn+"' name='page'><br>";
+	s+="<input id='pmanual_meta' type='text' size='30' value='"+metaData+"' name='meta'><br>";
 	
 	s+="Your name:<input id='pmanual_username' type='text' value='andres' name='name'><br>";
 	s+="Category:<select id='pmanual_category' name='category'>";
@@ -167,13 +221,16 @@ function update_marco_submit() {
     s+="<option value='health'>Health</option>";
     s+="<option value='arts_history'>Arts History</option>";
 	s+="</select><br>";
-
+	//~ console.log(s);
+	//~ var bs="";
 	for (var i=0;i<blocks.length;i++) {
 			if (blocks[i]) {
-				s+="<input type='hidden' value='"+getXPath(blocks[i])+","+dimension(blocks[i])+","+blocks[i].id+","+blocks[i].id+"' name='block"+(i+1)+"'>";
+				console.log(getXPath(blocks[i])+","+dimension(blocks[i])+","+blocks[i].id+","+blocks[i].id+","+countNodes(blocks[i]));
+				s+="<span>"+getXPath(blocks[i])+","+dimension(blocks[i])+","+blocks[i].id+","+blocks[i].id+","+countNodes(blocks[i])+"</span><br/>";
+				s+="<input type='hidden' value='"+getXPath(blocks[i])+","+dimension(blocks[i])+","+blocks[i].id+","+blocks[i].id+","+countNodes(blocks[i])+"' name='block"+(i+1)+"'>";
 			}
 	}
-	
+	//~ s+=bs;
 	s+="<input id='finalsend' type='submit' value='Confirm send'>";
 	s+="</form>";	
 	marco.innerHTML = s;
@@ -270,23 +327,38 @@ function pon(e) {
 			return false;
 		if (elem.id=='marco-plmanual') 
 			return false;
-			
+		//~ console.log(defaultOver);
+		//~ if (defaultOver) {
+			//~ for (var i=0;i<defaultOver.length;i++) {
+				//~ console.log(defaultOver[i].id);
+				//~ console.log(document.getElementById(defaultOver[i].id));
+				//~ document.body.removeChild(document.getElementById(defaultOver[i].id));
+			//~ }
+		//~ } 
+		defaultOver = new Array();
 		elem.webkitBoxSizing = 'border-box';	
 		lastElement = elem;
 		if (!findInTree(lastElement,'marco-plmanual')) {
 			lastContainer = getContainer(lastElement);
 			lastEvent = e;
-			lastElement.style.border = '4px dotted blue';
-			if (lastContainer) lastContainer.style.border = '2px dotted red';
+			//lastElement.style.border = '4px dotted blue';
+			defaultOver.push(newRect(lastElement,4,'dotted','blue'));
+			if (lastContainer) {
+				defaultOver.push(newRect(lastContainer,2,'dotted','red'));
+				//lastContainer.style.border = '2px dotted red';
+			}
 			b=getChildren(lastElement.parentNode.firstChild, lastElement);
 			for (var i=0;i<b.length;i++) {
 				//console.log("CH:"+getXPath(b[i]));
 				if (blocks.indexOf(b[i])>=0) {} else {
-					b[i].style.border = '2px dotted green'
+					defaultOver.push(newRect(b[i],2,"dotted","green"));
+					//b[i].style.border = '2px dotted green'
 				}
 			}
 			lastElement.title =lastElement.tagName;
 			console.log("MARCO OVER:"+elem);
+			//~ console.log("DOVER:");
+			//~ console.log(defaultOver);
 		}
 	}
 }
@@ -300,15 +372,21 @@ function quita(e) {
 	if (lastElement.id=='marco-plmanual') 
 		return;
 		lastElement.title="";
-	lastElement.style.border = "0px solid transparent";
-    if (lastContainer) lastContainer.style.border = "0px solid transparent";
+	//~ if (defaultOver) {
+			//~ for (var i=0;i<defaultOver.length;i++) {
+				//~ document.body.removeChild(document.getElementById(defaultOver[i].id));
+			//~ }
+		//~ } 
+	//defaultOver = new Array();
+	//lastElement.style.border = "0px solid transparent";
+    //if (lastContainer) lastContainer.style.border = "0px solid transparent";
     b=getChildren(lastElement.parentNode.firstChild, lastElement);
     //console.log(b);
-    for (var i=0;i<b.length;i++) {
-        if (blocks.indexOf(b[i])>=0) {} else {
-            b[i].style.border = '0px solid transparent'
-        }
-    }
+    //~ for (var i=0;i<b.length;i++) {
+        //~ if (blocks.indexOf(b[i])>=0) {} else {
+            //~ b[i].style.border = '0px solid transparent'
+        //~ }
+    //~ }
 	//console.log("SALE "+lastElement);
 }
 
@@ -397,6 +475,9 @@ function dale(e) {
 					blocks[parseInt(lastElement.id)].style.background='';
 					blocks[parseInt(lastElement.id)].style.border='';
 					blocks[parseInt(lastElement.id)]=undefined;
+					over[parseInt(lastElement.id)].style.background='';
+					over[parseInt(lastElement.id)].style.border='';
+					over[parseInt(lastElement.id)]=undefined;
 					update_marco();
 				} else if (lastElement.id=="send") {
 					update_marco_submit();
@@ -424,9 +505,8 @@ function goparent() {
 
 function addNewBlock(block) {
 	console.log("dep: NB: "+block);
-	block.style.background = 'blue';
-	block.style.border = '4px dotted red';
-	block.style.opacity = '0.8';
+	var nover = newRect(block,2,"solid","red");
+	over.push(nover);
 	blocks.push(block);
     dblock = [];
     dblock.push(block.id);
