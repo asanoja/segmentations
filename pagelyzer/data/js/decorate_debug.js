@@ -41,8 +41,8 @@ function walk(pNode,nLevel,pretext) {
 	}
 	attr += " elem_left='"+(new String(getElemLeft(pNode)))+"'";
 	attr += " elem_top='"+(new String(getElemTop(pNode)))+"'";
-	attr += " elem_width='"+(new String(getElemLeft(pNode)+getElemWidth(pNode)))+"'";
-	attr += " elem_height='"+(new String(getElemTop(pNode)+getElemHeight(pNode)))+"'";
+	attr += " elem_width='"+(new String(getElemWidth(pNode)))+"'";
+	attr += " elem_height='"+(new String(getElemHeight(pNode)))+"'";
 	attr += " className='"+(new String(pNode.className))+"'";
 	if (pNode.style) {
 		attr += " margin_left='"+(new String(css(pNode,'margin-left')))+"'";
@@ -89,33 +89,16 @@ function walk(pNode,nLevel,pretext) {
 }
 
 function getDocHeight() {
-	var d = document;
-	return Math.max(
-		Math.max(d.body.scrollHeight, d.documentElement.scrollHeight),
-		Math.max(d.body.offsetHeight, d.documentElement.offsetHeight),
-		Math.max(d.body.clientHeight, d.documentElement.clientHeight)
-		);
+	return $(document).height();
 }
 
 function getDocWidth() {
-	var d = document;
-	return Math.max(
-		Math.max(d.body.scrollWidth, d.documentElement.scrollWidth),
-		Math.max(d.body.offsetWidth, d.documentElement.offsetWidth),
-		Math.max(d.body.clientWidth, d.documentElement.clientWidth)
-		);
+	return $(document).width();
 }
 
 function getOffset(obj) {
- pos = {x: 0, y: 0};
- e = obj;
- while (e) {
-	 pos.x += e.offsetLeft;
-	 pos.y += e.offsetTop;
-	 e = e.offsetParent;
- }
- return pos;
-}   
+ return {x: $(obj).offset().left, y: $(obj).offset().top};
+}
 
 function getElemLeft(element) {
 	return getOffset(element).x;
@@ -126,19 +109,19 @@ function getElemTop(element) {
 }
 
 function getElemWidth(element) {
-	return element.offsetWidth;
+	return $(element).width();
 }
 
 function getElemHeight(element) {
-	return element.offsetHeight;
+	return $(element).height();
 }
 
 function dump_start() {
 	var src = '';
 	var now = new Date();
 	var then = now.getFullYear()+'-'+now.getMonth()+'-'+now.getDay()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
-	pre = '<!-- window: {width : '+ window.innerWidth + ', height: ' + window.innerHeight+'}, ';
-	pre += 'document: {width: '+ getDocWidth() + ', height: ' + getDocHeight()+'}, ';
+	pre = '<!-- window: {width : '+ $(window).width() + ', height: ' + $(window).height()+'}, ';
+		pre += 'document: {width: '+ $(document).width() + ', height: ' + $(document).height()+'}, ';
 	pre += 'page: {url: "'+  location.href + '", date: "'+ then + '"} -->';
 	src += walk(document.getElementsByTagName('html')[0],0,pre);
 	return(src);

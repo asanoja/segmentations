@@ -164,12 +164,22 @@ function func_dump() {
 	script.type = "text/javascript"
 	script.setAttribute("id","pagelyzerinject");
 	script.appendChild(document.createTextNode("#{dump}"));
+	
+	var jquery = document.createElement('script');
+	jquery.type = "text/javascript"
+	jquery.setAttribute("id","pagelyzerjquery");
+	jquery.setAttribute("src","http://www-poleia.lip6.fr/~sanojaa/bom/js/jquery-1.9.1.js");
+
+	document.getElementsByTagName('head')[0].appendChild(jquery);
 	document.getElementsByTagName('head')[0].appendChild(script);
+	
 }
 
 var callback = arguments[arguments.length - 1];
 callback(func_dump());
 FIN
+
+
 
 		
 		driver = @browser_instances[browser]
@@ -194,7 +204,7 @@ FIN
 		end
 		src =""
 		status="OK"
-		driver.manage.window.resize_to(970,728)
+		driver.manage.window.resize_to(1024,768)
 		
 		filename = Capture.parse_filename(url)
 		
@@ -254,9 +264,10 @@ FIN
 			rescue Exception=>e
 				puts "#{browser} failed!"
 				puts "The JavaScript could not be injected into page #{$!}"
-				raise "The JavaScript could not be injected into page"
 				status="FAIL"
+				sleep(1100)
 				#puts e.backtrace
+				raise "The JavaScript could not be injected into page"
 				#driver.close
 			end
 		else

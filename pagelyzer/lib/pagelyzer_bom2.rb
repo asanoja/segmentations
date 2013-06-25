@@ -107,12 +107,10 @@ r = Math.sqrt(cx**2 + cy**2)
 angle = Math.asin(cy/r)
 
 return (4*(r**2)*Math.sin(2*Math::PI/4))/2
-
-
 end
 
 def relative_area(node1,node2)
-	a= area(node1)/area(node2)
+	a = area(node1)/area(node2)
 	a = 1 if a>1
 	return a
 end
@@ -122,6 +120,8 @@ def evalnode(elem,gratio,body,tr,ta,kl,kr)
 	return false if elem.is_a? Nokogiri::HTML::Document
 	return false if ['html'].include? elem.name.downcase
 	return false unless elem['visited'].nil?
+	return false if !visible?(elem) and !text?(elem)
+	return false if text?(elem) and elem.inner_text.squeeze(" ").gsub("\n","").strip.size==0
 
 	newblock = true
 
@@ -140,51 +140,57 @@ def evalnode(elem,gratio,body,tr,ta,kl,kr)
 	
 	lelem = elem.path.split("/").size
 	telem = elem.inner_text.squeeze(" ").gsub("\n","").strip.size
-		
-	puts "Element: '#{elem['id']}' at #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]}), E.area: #{elem_area}, P.area: #{area(elem.parent)}, Rel.area: #{parent_area}, RelDoc.area: #{rdocarea}" if @verbose
+	ds = ""
+	ds += "Element: '#{elem['id']}' at #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]}), E.area: #{elem_area}, P.area: #{area(elem.parent)}, Rel.area: #{parent_area}, RelDoc.area: #{rdocarea}\n" if @verbose
 		
 	if ((parent_area>=tr or elem_area>=ta) and lclose) 
 		if lclose
-			puts "      NB1: it is at parent limits" if @verbose
+			ds+="      NB1: it is at parent limits\n" if @verbose
 		else
-			puts "      NB1: it is relevant into parent area or whole length element" if @verbose
+			ds+="      NB1: it is relevant into parent area or whole length element\n" if @verbose
 		end
 	else
-		puts "      NB1: not relevant into parent area or whole length element" if @verbose
+		ds+="      NB1: not relevant into parent area or whole length element\n" if @verbose
 		newblock=false
 	end
 	if (rdocarea>0.1 or lclose) 
 		if lclose
-			puts "      NB2: it is at parent limits" if @verbose
+			ds+="      NB2: it is at parent limits\n" if @verbose
 		else
-			puts "      NB2: it is a significat block respect page: #{rdocarea}" if @verbose
+			ds+="      NB2: it is a significat block respect page: #{rdocarea}\n" if @verbose
 		end
 	else
-		puts "      NB2: not significat block respect page" if @verbose
+		ds+="      NB2: not significat block respect page\n" if @verbose
 		newblock=false
 	end
 	if lelem <= gratio 
-		puts "      NB3: it is inside the granularity" if @verbose
+		ds+="      NB3: it is inside the granularity\n" if @verbose
 	else
-		puts "      NB3: not into the granularity for" if @verbose
+		ds+="      NB3: not into the granularity for\n" if @verbose
 		newblock=false
 	end
 	if telem>0 
-		puts "      NB4: it has siginificant text size" if @verbose
+		ds+="      NB4: it has siginificant text size\n" if @verbose
 	else
-		puts "      NB4: has not siginificant text size" if @verbose
-		newblock=false
+		ds+="      NB4: has not siginificant text size\n" if @verbose
+		newblock=false if text?(elem)
 	end
 	if visible?(elem)
-		puts "      NB5: it is visible" if @verbose
+		ds+="      NB5: it is visible\n" if @verbose
 	else
-		puts "      NB5: not visible" if @verbose
+		ds+="      NB5: not visible\n" if @verbose
 		newblock=false
 	end
+	File.open("debug.txt",'a') {|f| f.puts ds} if @verbose
 	newblock
 end
 
+def visited?(elem)
+	!elem['visited'].nil?
+end
+
 def start
+	File.open("debug.txt",'w') {|f| f.puts ""} if @verbose
 	begin
 		doc = load(self,@source_file,:content)
 	rescue
@@ -199,22 +205,26 @@ def start
 		lpath=elem.path.split("/").size if elem.path.split("/").size > lpath
 	end
 
-	gratio = 2 + lpath * @granularity
+	gratio = lpath * @granularity
 
-	puts "using #{gratio} gr" if @verbose
+	puts "using #{gratio} is the #{@granularity} of #{lpath} " #if @verbose
 
 	seg = Nokogiri::HTML(File.open(@source_file.gsub(".dhtml",".html")))
 
 	blocks = []
 	
-	tr = @granularity
-	ta = 133000
-	kl = 1
-	kr = 1
+	tr = @granularity #relative thrershold for are of elements
+	ta = 133000 #absolute thrershold for are of elements
+	kl = 1 #threshold of left/top horizonal/vertical limits of elements to parent
+	kr = 1 #threshold of right/bottom horizonal/vertical limits of elements to parent
+	tt = 20000 #amount of text words considered significative
+	tw = 0 #gratio / lpath #threshold for weight of partition
 
 	body = doc.at('body')
-	#doc_area = area(body)
-	doc.search("//*[count(child::*) <= 1]").each do |elem|
+
+	#doc.search("//*[count(child::*) <= 1]").each do |elem|
+	
+	doc.search("//*[not(child::*)] | //text()").each do |elem|
 		if ["head","meta","link","script"].include? elem.name
 			puts "SKIPPED TAG #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
 			next 
@@ -226,67 +236,68 @@ def start
 		end
 		
 		puts "="*80 if @verbose
+		File.open("debug.txt",'a') {|f| f.puts "="*80} if @verbose
 		
 		cur = elem
 		good_partition = false
-		good_element = nil
-		good_weight = 0
-		candidates = []
+		gp_obj = nil
 		rooted = false
+		partitions = []
 		
-		
-		while !rooted and !good_partition
+		while !rooted and !good_partition and !visited?(cur)
+			puts "IN #{cur.path} #{cur["id"]} #{cur["class"]}" if @verbose
+			er = evalnode(cur,gratio,body,tr,ta,kl,kr)
+			File.open("debug.txt",'a') {|f| f.puts "IN #{cur.path} #{er}"} if @verbose
 			siblings = cur.xpath('../*')
-			
-			if siblings.size == 1
-				if evalnode(cur,gratio,body,tr,ta,kl,kr)
-					good_partition = true
-					good_element = cur
-					good_weight = 1
-				else
-					cur = cur.parent
-				end
-			else
-				if evalnode(cur,gratio,body,tr,ta,kl,kr)
-					#puts "NEW BLOCK #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
-					
-					invalids = 0
-					signodes = 0
-					weight = 0
-					
-					siblings.each do |si|
+			if er
+				#puts "NEW BLOCK #{elem['id']} #{elem.path} (#{elem["elem_left"]} #{elem["elem_top"]} #{elem["elem_width"]} #{elem["elem_height"]})" if @verbose
+				
+				invalids = 0
+				signodes = 1 #including cur already validated
+				text = 0
+				partition_quality = 0
+				candidates=[]
+				rarea = 0
+				aarea = 0
+				
+				siblings.each do |si|
+					unless si==cur
 						if evalnode(si,gratio,body,tr,ta,kl,kr)
 							signodes+=1 
+							candidates.push si
 						end
 						unless visible?(si)
 							invalids+=1
 						end
-						if (siblings.size-invalids)==0
-							weight = 0
-						else
-							weight = signodes.to_f / (siblings.size-invalids)
-						end
-						
-						if weight>=0.9
-							puts "NEW BLOCK #{cur.path}"
-							good_partition=true
-							good_element=cur
-							good_weight=weight
-						else
-							candidates.push [cur,weight]
-							puts candidates.collect {|x| "#{x[0].path} #{x[1]}"} if @verbose
-							
-							if cur.is_a? Nokogiri::HTML::Document
-								rooted = true
-							else
-								if ['html'].include?(cur.name)
-									rooted = true
-								else
-									cur = cur.parent
-								end
+						if text?(si) 
+							cnt = sanitize_text(si.content)
+							words = cnt.split(" ")
+							words.delete(nil)
+							words.delete("")
+							if words.size > tt
+								text+=1
 							end
 						end
+						if !text?(si) and visible?(si)
+							rarea += relative_area(si,si.parent)
+						end
 					end
+				end
+				
+				if (siblings.size-invalids)==0
+					partition_quality = 0
+				else
+					partition_quality = signodes.to_f / (siblings.size-invalids)
+				end
+				
+				if siblings.size>0 
+					aarea = rarea / siblings.size
+				end
+
+				File.open("debug.txt",'a') {|f| f.puts "DD #{cur.path} RA:#{aarea}"}
+				if partition_quality>=0.9 or aarea>(1-@granularity)
+					good_partition=true
+					partitions.push ([{:elem=>cur,:weight=>partition_quality}] + candidates.collect {|si| {:elem=>si,:weight=>partition_quality}}).flatten
 				else
 					if cur.is_a? Nokogiri::HTML::Document
 						rooted = true
@@ -294,37 +305,59 @@ def start
 						if ['html'].include?(cur.name)
 							rooted = true
 						else
+							partitions.push ([{:elem=>cur,:weight=>partition_quality}] + candidates.collect {|si| {:elem=>si,:weight=>partition_quality}}).flatten
 							cur = cur.parent
 						end
 					end
 				end
-			end		
-		end
-		
-		next if candidates==[]
-		
-		if !good_partition or !rooted
-			good_weight = 0
-			candidates.each do |c|
-				if c[1]>good_weight
-					good_element = c[0]
-					good_weight  = c[1]
+			else
+				if cur.is_a? Nokogiri::HTML::Document
+					rooted = true
+				else
+					if ['html'].include?(cur.name)
+						rooted = true
+					else
+						cur = cur.parent
+					end
 				end
 			end
+		end #while
+		
 
-			good_element.xpath('../*').each do |si|
-				if visible?(si) 
-					si["visited"]="1"
-					@blocks.push [si,good_weight] 
-				end
+		minw = 0
+		gp = []
+		#puts "part"
+		#puts partitions.collect {|x| "#{x[0][:elem].path} #{x[0][:weight]}"}
+		
+		partitions.each do |p|
+			if p[0][:weight].to_f > minw
+				min_w = p[0][:weight].to_f
+				gp = p
 			end
 		end
-	end
-
+		
+		gp.each do |nb|
+			puts "NEW SBLOCK #{nb[:elem].path} W:#{nb[:weight]}" if @verbose
+			File.open("debug.txt",'a') {|f| f.puts "NEW SBLOCK #{nb[:elem].path} W:#{nb[:weight]} #{cur["id"]} #{cur["class"]}"}
+			isin=false
+			@blocks.each do |b|
+				if b[:elem].path  == nb[:elem].path
+					isin=true
+					break
+				end
+			end
+			@blocks.push nb unless isin
+		end
+#~ sleep(1) if partitions.size>0
+		elem['visited']=1
+	end #each
+	
 	puts "====  BLOCKS ====" if @verbose
 	@blocks = @blocks.uniq
 	i=1
-	@blocks.each do |b,w|
+	@blocks.each do |nb|
+		b = nb[:elem]
+		w = nb[:weight]
 		puts "Block#{i} #{b.path} #{b["id"]} #{b["class"]} (#{b["elem_left"]} #{b["elem_top"]} #{b["elem_width"]} #{b["elem_height"]}) W:#{w}" if @verbose
 		mark(b,seg)
 		i+=1
@@ -368,23 +401,23 @@ end
 	def parse_xml(blockpack,sid)
 		src = ""
 		i=1
-		block = blockpack[0]
-		weight = blockpack[1]
+		block = blockpack[:elem]
+		weight = blockpack[:weight]
 		l = block["elem_left"].to_i
 		t = block["elem_top"].to_i
-		w = block["elem_width"].to_i - l
-		h = block["elem_height"].to_i - t
+		w = block["elem_width"].to_i 
+		h = block["elem_height"].to_i
 		
 		src+= "<Block Ref=\"Block#{sid}\" internal_id='#{@id}' ID=\"$BLOCK_ID$\" Pos=\"WindowWidth||PageRectLeft:#{l} WindowHeight||PageRectTop:#{t} ObjectRectWidth:#{w} ObjectRectHeight:#{h}\" Doc=\"#{@granularity}\">\n"
 			src += "<weight>\n"
 			src += "#{weight}\n"
 			src += "</weight>\n"
 			src += "<Paths>\n"
-			#src += @candidates.collect {|c| "<path>#{c.path},#{c["elem_left"]},#{c["elem_top"]},#{c["elem_width"]},#{c["elem_height"]},#{c["id"]},#{c["uid"]}</path>\n"}.join("")
 			
-			src += "<path>#{block.path},#{l},#{t},#{w},#{h},#{block["id"]},#{block["uid"]}</path>\n"
+			am = 0
+			block.traverse {|node| am+=1}
+			src += "<path>#{block.path},#{l},#{t},#{w},#{h},#{block["id"]},#{block["uid"]},#{am}</path>\n"
 			src += "</Paths>\n"
-			
 				src += "<Links ID=\"$LINKS_ID$\" IDList=\"$ID_LIST_LINKS$\">\n"
 				lid = []
 				sl = ""

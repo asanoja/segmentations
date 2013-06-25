@@ -517,8 +517,16 @@ class Block
 			src += "</weight>\n"
 			
 			src += "<Paths>\n"
-			src += @candidates.collect {|c| "<path>#{c.path},#{c["elem_left"]},#{c["elem_top"]},#{c["elem_width"]},#{c["elem_height"]},#{c["id"]},#{c["uid"]}</path>\n"}.join("")
+			
+			am = 0
+			@candidates.each {|c| 
+				c.traverse {|node| am+=1}
+			}
+			src += @candidates.collect {|c| "<path>#{c.path},#{c["elem_left"]},#{c["elem_top"]},#{c["elem_width"]},#{c["elem_height"]},#{c["id"]},#{c["uid"]},#{am}</path>\n"}.join("")
 			src += "</Paths>\n"
+			
+			
+			
 			
 				src += "<Links ID=\"$LINKS_ID$\" IDList=\"$ID_LIST_LINKS$\">\n"
 				lid = []

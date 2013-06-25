@@ -39,8 +39,8 @@ def load(bom,source_file,type=:file)
 	end
 	bom.document.title  = doc.at('//title').inner_text.strip unless doc.at('//title').nil?
 	
-	bom.document.width = doc.at("html")["elem_width"].to_i unless doc.at("html").nil?
-	bom.document.height = doc.at("html")["elem_height"].to_i  unless doc.at("html").nil?
+	#bom.document.width = doc.at("html")["elem_width"].to_i unless doc.at("html").nil?
+	#bom.document.height = doc.at("html")["elem_height"].to_i  unless doc.at("html").nil?
 	bom.document_area = bom.document.width.to_f * bom.document.height.to_f
 		
 	#cleaning up whitespaces and useless tags
@@ -91,7 +91,6 @@ def rgb2hex(color)
 end
 
 def text?(node)
-	#node.is_a? Hpricot::Text or node.is_a? String
 	node.text?
 end
 
@@ -472,6 +471,10 @@ def link_text_len(node)
 		end
 	end
 	tl
+end
+
+def sanitize_text(string)
+	string.gsub(/(?<!\n)\n(?!\n)/,' ').gsub(/^$\n/,'').gsub(/\s+/,' ').strip
 end
 
 def parent_children_cleanup(children,new_parent)

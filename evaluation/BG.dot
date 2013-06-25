@@ -1,0 +1,36 @@
+digraph BCG {
+rankdir=LR;
+splines=false;
+node [shape=rectangle];
+subgraph cluster_G {
+label = "G";
+color=blue;
+rank="same"
+G0;
+G1;
+G2;
+}
+subgraph cluster_P {
+label = "P";
+color=blue;
+rank="same"
+P0;
+P1;
+P2;
+}
+G0 -> P0;
+P0 -> G0;
+G0 -> P1;
+G0 -> P2;
+G1 -> P0;
+P1 -> G0;
+G1 -> P1;
+P1 -> G1;
+G1 -> P2;
+G2 -> P0;
+P2 -> G0;
+G2 -> P1;
+P2 -> G1;
+G2 -> P2;
+P2 -> G2;
+}

@@ -71,11 +71,13 @@ File.open(filename) do |fxml|
 	n=0
 	xml.search("//Block").each do |e|
 		extra = e.at("path")
+		w = e.at("weight").inner_html.to_f
 		unless extra.nil?
 			path = extra.inner_text.split(",")[0]
 			tag = html.at(path)
 			unless tag.nil?
 				tag['block'] = n
+				tag['pq'] = w*100
 				n+=1
 			end
 		end
@@ -116,6 +118,7 @@ function markblocks() {
 		if (tag) {
 			if (tag.getAttribute("block")) {
 				i++;
+				pq = parseFloat(tag.getAttribute("pq"));
 				//offset = getOffset(tag);
 				offset = tag.getBoundingClientRect();
 				console.log(offset.left,offset.top);
@@ -125,20 +128,21 @@ function markblocks() {
 				xdiv.style.width = tag.offsetWidth + "px";
 				xdiv.style.height = tag.offsetHeight + "px";
 				xdiv.style.position = "absolute";
-				xdiv.style.border = "2px solid red";
+				xdiv.style.border = "2px dotted red";
 				xdiv.onmouseover = function() {
 					this.style.backgroundColor='rgba(0,0,255,0.5)';
 					this.style.color = "white";
-					this.style.border = "4px solid blue";
+					this.style.border = "4px solid red";
 				}
 				xdiv.onmouseout = function() {
 					this.style.backgroundColor='transparent';
 					this.style.color = "black";
-					this.style.border = "2px solid red";
+					this.style.border = "2px dotted red";
 				}
 				
 				console.log(xdiv);
 				xdiv.appendChild(document.createTextNode("block"+i));		
+								xdiv.appendChild(document.createTextNode("&nbsp;Partition Quality:"+pq.toFixed(2)+"%"));		
 				document.body.appendChild(xdiv);
 			}
 		}
