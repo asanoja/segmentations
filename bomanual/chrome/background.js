@@ -11,6 +11,6 @@ chrome.runtime.onMessage.addListener(
 });
 
 chrome.browserAction.onClicked.addListener(function() {
-        alert("clicked");
-        alert(chrome.extension.getViews().length);
+        //alert("clicked");
+        //alert(chrome.extension.getViews().length);
 });

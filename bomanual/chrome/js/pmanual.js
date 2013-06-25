@@ -10,12 +10,14 @@ var lastContainer = undefined;
 var lastEvent = undefined;
 var editing = false;
 var blocks = new Array();
-var over = new Array();
+var vblocks = new Array();
 var marco = undefined;
 var dialog = undefined;
 var cargado = false;
 var metaData = "";
-var defaultOver = new Array();
+var lastBlock = undefined;
+var alldisabled = false;
+var over = undefined;
 
 function bye() {
     self.port.emit("unload");
@@ -23,10 +25,10 @@ function bye() {
 
 function fufu(e) {
 	if (!e) e=event;
-	console.log(e.keyCode);
+	//~ console.log(e.keyCode);
 	if (e.keyCode == 113) {
 		console.log("F2");
-		if (editing) addNewBlock(lastElement);
+		if (editing) addNewBlock();
 		return false;
 	}
 	if (e.keyCode == 114) {
@@ -84,25 +86,38 @@ function toggle_marco() {
 
 function getOffset(obj) {
 	pos = {x: 0, y: 0};
-	e = obj;
-	while (e) {
-		pos.x += (e.offsetLeft - (e.scrollLeft - e.clientLeft));
-		pos.y += (e.offsetTop - (e.scrollTop - e.clientTop));
-		e = e.offsetParent;
+	el = obj;
+	while (el) {
+		pos.x += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+		pos.y += (el.offsetTop - el.scrollTop + el.clientTop);
+		console.log("E: "+getXPath(obj)+" CUR:"+el.tagName+" ("+pos.x+","+pos.y+")");
+		el = el.offsetParent;
 	}
 	return(pos);
 }
 
 function getDim(block) {
 	var dim = {w: 0, h: 0};
-	dim.w = block.offsetWidth - block.scrollWidth + block.clientWidth;
-	dim.h = block.offsetHeight - block.scrollHeight + block.clientHeight;
+	dim.w = block.offsetWidth;
+	dim.h = block.offsetHeight;
 	return dim;
+}
+
+function getRect2(obj) {
+	var of = getOffset(obj);
+	var di = getDim(obj);
+	return {left:of.x, top:of.y, width:di.w, height:di.h}
+}
+
+function getRect3(obj) {
+	return {left:$(obj).offset().left, top:$(obj).offset().top, width:$(obj).width(), height:$(obj).height()}
 }
 
 function getRect(obj) {
 	dim = {x:0, y:0, w:0, h:0};
-	r = obj.getBoundingClientRect();
+	//~ r = obj.getBoundingClientRect();
+	//~ r = getRect2(obj);
+	r = getRect3(obj);
 	dim.x = r.left;
 	dim.y = r.top;
 	dim.w = r.width;
@@ -111,8 +126,8 @@ function getRect(obj) {
 }
 
 function dimension(block) {
-	//return getOffset(block).x+","+getOffset(block).y+","+getDim(block).w+","+block.offsetHeight;
-	return getRect(block).x+","+getRect(block).y+","+getRect(block).w+","+getRect(block).h;
+	var rect = getRect(block);
+	return rect.x+","+rect.y+","+rect.w+","+rect.h;
 }
 
 function getDocHeight() {
@@ -134,21 +149,45 @@ function getDocWidth() {
 //~ );
 return Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"]);
 }
+function update_over() {
+	if (lastElement) {
+		over.style.left = getRect(lastElement).x+"px";
+		over.style.top = getRect(lastElement).y+"px";
+		over.style.width = getRect(lastElement).w+"px";
+		over.style.height = getRect(lastElement).h+"px";
+		over.innerHTML = "Element: "+getXPath(lastElement); 
+	} 
+}
 
-function newRect(element,size,style,color) {
-	console.log("OVER IN "+element+ " "  + getRect(element).h);
+function newRect(element,size,style,color,bgcolor,type) {
+	if (element)
+		console.log("OVER IN "+element+ " "  + getRect(element).h);
 	var nover = document.createElement("div");
 	nover.id = "plmanualover_" + Math.floor(Math.random()*1001);
-	nover.style.background = color;
-	nover.style.border = size + "px "+ style +" "+color;
+	nover.style.background = bgcolor;
+	nover.style.border = size + "px "+ style +" black";
 	nover.style.opacity = '0.8';
-	nover.style.left = getRect(element).x;
-	nover.style.top = getRect(element).y;
-	nover.style.width = getRect(element).w;
-	nover.style.height = getRect(element).h;
+	nover.wordWrap = 'break-word';
+	if (element) {
+		rect = getRect(element);
+		nover.style.left = rect.x+"px";
+		nover.style.top = rect.y+"px";
+		nover.style.width = rect.w+"px";
+		nover.style.height = rect.h+"px";
+	} 
 	nover.style.position = "absolute";
-	nover.innerHTML = "HEllo:";
-	document.body.appendChild(nover)
+	nover.style.zIndex = "10000";
+	console.log("Element: "+getXPath(element));
+	nover.innerHTML = "<span style='font-size:12px;line-height:100%;opacity:100%;color:"+color+"'>Element: "+getXPath(element)+" "+nover.style.left+","+nover.style.top+","+nover.style.width+","+nover.style.height+"</span>";
+	if (type=='main') {
+		nover.id = "plmanual_over";
+		nover.style.border = '4px dotted #000000';
+	}
+	if (type=="geometry_error") {
+		nover.style.opacity = '1';
+		nover.innerHTML = "<span style='font-size:104px;line-height:100%;color:white'><center style='color:black'>Window geometry not corret the window width should be at most 1024 to work and zoom set to 100%. We suggest to install <a style='color:white' href='https://chrome.google.com/webstore/detail/window-resizer/kkelicaakdanhinjdeammmilcgefonfh'>Window Resize extension</a></center></span>";
+	}
+	document.body.appendChild(nover);
 	return(nover);
 }
 
@@ -172,6 +211,7 @@ function update_marco() {
 	marco.innerHTML+="<span href id='plparent'>[F6 hide/show panel]</span>&nbsp;";
 	marco.innerHTML+="<span href id='plparent'>[F7/ESC cancel]</span>&nbsp;";
 	marco.innerHTML+="<span href id='plparent'>[F8 go parent]</span>&nbsp;";
+	marco.style.zIndex = "4000000";
 }
 
 function getURLParameter(name) {
@@ -235,6 +275,7 @@ function update_marco_submit() {
 	s+="</form>";	
 	marco.innerHTML = s;
 	marco.style.display="block";
+	marco.style.zIndex = "4000000";
 }
 
 function DisableFrameLinks(iFrame){
@@ -253,13 +294,13 @@ function DisableFrameLinks(iFrame){
 function carga(e) {
 		if (!cargado) {
 			if (navigator.appVersion.indexOf("Chrome")==-1){
-				//document.write('Sorry this ONLY works with Google Chrome or Chromium');
-				//return false;
+				document.write('Sorry this ONLY works with Google Chrome or Chromium');
+				return false;
 			}
 			//metaData = navigator.appName.toLowerCase() +" "+ getDocWidth() +"x" + getDocHeight();
 			metaData = "chrome " + getDocWidth() +"x" + getDocHeight();
 
-			//~ chrome.runtime.sendMessage({code:"sendMetadata", data: metaData}, function(response) {
+			//~ chrome.runtime.sendMessage({code:"checkgeom", data: ""}, function(response) {
 				//~ console.log(response);
 			//~ });
 			
@@ -289,17 +330,31 @@ function carga(e) {
 			marco.style.background = '#F0F0F0'
 			marco.style.overflow = "scroll";
 			marco.style.opacity = "1"
-			marco.style.zIndex = "100000";
+			marco.style.zIndex = "4000000";
 			marco.style.display = "block"
 			
 			update_marco();
 			
 			if (!document.getElementById('marco-plmanual')) {
 				document.body.appendChild(marco);
-				console.log("marco creado");
+				//~ console.log("marco creado");
 			}
+			
+			//adjusting window geometry
+			
+			console.log(window.innerWidth,window.innerHeight);
+			
+			if ( (window.innerWidth>1024)) {
+				newRect(document.body,"2px","dotted","blue","white","geometry_error");
+				window.onmouseover = undefined;
+				window.onmouseout = undefined;
+				window.onmousedown = undefined;
+			}
+			
 			editing = false;
 			cargado = true;
+			//~ if (splash)
+			//~ document.body.removeChild(document.getElementById('plmanual_splash'));
 		}
 }
 
@@ -312,7 +367,13 @@ function getChildren(n, skipMe){
     return r;
 }
 
+function newmouseout(e) {
+	omask = true;
+	pon(e)
+}
+
 function pon(e) {
+	//~ console.log("PON: " + e +", " + omask);
 	if (!e) e=event;
     if (!marco) carga();
 	if (editing) {
@@ -327,36 +388,32 @@ function pon(e) {
 			return false;
 		if (elem.id=='marco-plmanual') 
 			return false;
-		//~ console.log(defaultOver);
-		//~ if (defaultOver) {
-			//~ for (var i=0;i<defaultOver.length;i++) {
-				//~ console.log(defaultOver[i].id);
-				//~ console.log(document.getElementById(defaultOver[i].id));
-				//~ document.body.removeChild(document.getElementById(defaultOver[i].id));
-			//~ }
-		//~ } 
-		defaultOver = new Array();
+		
 		elem.webkitBoxSizing = 'border-box';	
 		lastElement = elem;
 		if (!findInTree(lastElement,'marco-plmanual')) {
 			lastContainer = getContainer(lastElement);
 			lastEvent = e;
 			//lastElement.style.border = '4px dotted blue';
-			defaultOver.push(newRect(lastElement,4,'dotted','blue'));
+			//~ if (elemChanged)
+			//defaultOver.push(newRect(lastElement,4,'dotted','blue','main'));
 			if (lastContainer) {
-				defaultOver.push(newRect(lastContainer,2,'dotted','red'));
-				//lastContainer.style.border = '2px dotted red';
+				//~ if (elemChanged) 
+					//defaultOver.push(newRect(lastContainer,2,'dotted','red'));
+					//lastContainer.style.border = '2px dotted red';
 			}
 			b=getChildren(lastElement.parentNode.firstChild, lastElement);
 			for (var i=0;i<b.length;i++) {
 				//console.log("CH:"+getXPath(b[i]));
 				if (blocks.indexOf(b[i])>=0) {} else {
-					defaultOver.push(newRect(b[i],2,"dotted","green"));
+					//~ if (elemChanged)
+						//defaultOver.push(newRect(b[i],2,"dotted","green"));
 					//b[i].style.border = '2px dotted green'
 				}
 			}
-			lastElement.title =lastElement.tagName;
-			console.log("MARCO OVER:"+elem);
+			lastElement.title = lastElement.tagName;
+			//~ omask = true;
+			//~ console.log("MARCO OVER:"+elem);
 			//~ console.log("DOVER:");
 			//~ console.log(defaultOver);
 		}
@@ -371,7 +428,17 @@ function quita(e) {
     if (!lastElement) return false;
 	if (lastElement.id=='marco-plmanual') 
 		return;
-		lastElement.title="";
+	//~ omask = true;	
+	//~ if (defaultOver) {
+		//~ for (var i=0;i<defaultOver.length;i++) {
+			//~ console.log(defaultOver[i].id);
+			//~ console.log(document.getElementById(defaultOver[i].id));
+			//~ document.body.removeChild(document.getElementById(defaultOver[i].id));
+		//~ }
+	//~ } 
+	//~ defaultOver = undefined;
+	lastElement.title="";
+
 	//~ if (defaultOver) {
 			//~ for (var i=0;i<defaultOver.length;i++) {
 				//~ document.body.removeChild(document.getElementById(defaultOver[i].id));
@@ -407,7 +474,7 @@ function isContainer(tag) {
 }
 
 function getContainer(elem) {
-    console.log("GC: ("+elem.tagName+")");
+    //~ console.log("GC: ("+elem.tagName+")");
 	if (isContainer(elem.tagName)) {
 		return elem;
 	} else {
@@ -420,7 +487,9 @@ function getContainer(elem) {
 
 function dale(e) {
 	if (!e) e=event;
-	console.log("CLICK1 "+editing + " " +lastElement.tagName.toLowerCase()+" "+lastElement.id+" xpath:"+getXPath(lastElement));
+	lastBlock = lastElement;
+	rect = getRect(lastBlock);
+	console.log("CLICK1 "+editing + " " +lastElement.tagName.toLowerCase()+" "+lastElement.id+" xpath:"+getXPath(lastElement)+" DIM:"+rect.x+","+rect.y+","+rect.w+","+rect.h);
 	if ( !editing && 
 		 !findInTree(lastElement,'marco-plmanual') &&
 		 (lastElement.id != 'dialog-window-plmanual') &&
@@ -429,7 +498,11 @@ function dale(e) {
 		 (lastElement.id != 'plyes') ) {
 		editing = true;
 
-		lastElement.style.border = "5px solid red";
+		
+		if (!over) 
+			over = newRect(lastBlock,2,"dotted","blue","white","main")
+		else
+			update_over();
         
 		xpath = getXPath(lastElement);
 		lastContainer = getContainer(lastElement);
@@ -440,7 +513,7 @@ function dale(e) {
 			dialog = document.getElementById('dialog-window-plmanual');
 			
 		dialog.id = "dialog-window-plmanual";
-		dialog.style.zIndex="1000";
+		dialog.style.zIndex="2000001";
 		dialog.style.overflow = "scroll";
 		dialog.style.top = e.pageY+"px";
 		dialog.style.position="absolute";
@@ -467,7 +540,7 @@ function dale(e) {
 		
 		if (!document.getElementById('dialog-window-plmanual')) {
 			document.body.appendChild(dialog);
-			console.log("dialogo creado");
+			//~ console.log("dialogo creado");
 		}
 	} else {
 			if (findInTree(lastElement,"marco-plmanual")) {
@@ -475,9 +548,9 @@ function dale(e) {
 					blocks[parseInt(lastElement.id)].style.background='';
 					blocks[parseInt(lastElement.id)].style.border='';
 					blocks[parseInt(lastElement.id)]=undefined;
-					over[parseInt(lastElement.id)].style.background='';
-					over[parseInt(lastElement.id)].style.border='';
-					over[parseInt(lastElement.id)]=undefined;
+					//~ vblocks[parseInt(lastElement.id)].style.background='';
+					//~ vblocks[parseInt(lastElement.id)].style.border='';
+					//~ vblocks[parseInt(lastElement.id)]=undefined;
 					update_marco();
 				} else if (lastElement.id=="send") {
 					update_marco_submit();
@@ -493,20 +566,23 @@ function dale(e) {
 }
 
 function goparent() {
-    console.log("GDADDY "+lastElement.parentNode)
+    //~ console.log("GDADDY "+lastElement.parentNode)
 	if (lastElement.parentNode) {
         lastElement.style.border = "0px solid transparent";
         lastElement = lastElement.parentNode;
 	    editing=false
 	    dale(lastEvent);
-	} else {console.log("NO MORE PARENTS!!!")}
+	} else {console.log("NO MORE PARENTS!!!");lastElement = document.body}
 	return(false);
 }
 
-function addNewBlock(block) {
+function addNewBlock() {
+	if (!lastBlock)
+		return false;
+	block = lastBlock;
 	console.log("dep: NB: "+block);
-	var nover = newRect(block,2,"solid","red");
-	over.push(nover);
+	var nover = newRect(block,2,"dotted","red","black","");
+	vblocks.push(nover);
 	blocks.push(block);
     dblock = [];
     dblock.push(block.id);
@@ -514,7 +590,10 @@ function addNewBlock(block) {
     dblock.push(getXPath(block));
     dblock.push(dimension(block));
     //~ self.port.emit("addNewBlock",dblock);
-	document.body.removeChild(document.getElementById('dialog-window-plmanual'));
+    if (document.getElementById('dialog-window-plmanual'))
+		document.body.removeChild(document.getElementById('dialog-window-plmanual'));
+	if (document.getElementById(over.id))
+		document.body.removeChild(document.getElementById(over.id));
 	update_marco();
 	editing=false;
 	dialog=undefined;
@@ -522,13 +601,18 @@ function addNewBlock(block) {
 }
 
 function discardBlock() {
-	console.log("DISC: "+lastElement);
-	lastElement.style.border = "0px solid transparent";
+	//~ console.log("DISC: "+lastElement);
+	//lastElement.style.border = "0px solid transparent";
     b = getChildren(lastElement.parentNode.firstChild);
     for (var i=0;i<b.length;i++) {
         b[i].style.border = "0px solid transparent";
     }
-	document.body.removeChild(document.getElementById('dialog-window-plmanual'));
+    if (document.getElementById('dialog-window-plmanual'))
+		document.body.removeChild(document.getElementById('dialog-window-plmanual'));
+	 if (document.getElementById('plmanual_over')) {
+		document.body.removeChild(document.getElementById('plmanual_over'));
+	}
+	over = undefined;
 	editing=false;
 	dialog=undefined;
 	return(false);

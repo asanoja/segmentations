@@ -13,7 +13,7 @@
       "matches": ["*://*/*"],
       "exclude_matches": ["*://*.lip6.fr/*"],
       "css": ["css/pmanual.css"],
-      "js": ["js/pmanual.js"]
+      "js": ["js/pmanual.js","js/jquery-min.js"]
     }
   ],
   "permissions": [
