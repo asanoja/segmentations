@@ -260,16 +260,28 @@ class Block
 		return rcnt
 	end
 	def geo_equals?(element)
-		dleft = ([element.left, @left].max - [element.left, @left].min).abs
-		dtop = ([element.top, @top].max - [element.top, @top].min).abs
-		dright = ([element.right, right].max - [element.right,right].min).abs
-		dbottom = ([element.bottom, bottom].max - [element.bottom,bottom].min).abs
+	
+	d1 = Point.new(@left,@top).distance_to(Point.new(element.left,element.top))
+		d2 = Point.new(@left,bottom).distance_to(Point.new(element.left,element.bottom))
+		d3 = Point.new(right,bottom).distance_to(Point.new(element.right,element.bottom))
+		d4 = Point.new(right,@top).distance_to(Point.new(element.right,element.top))
 		
-		rgeo = dleft < @deltaGeo
-		rgeo = rgeo && (dtop < @deltaGeo)
-		rgeo = rgeo && (dright < @deltaGeo) 
-		rgeo = rgeo && (dbottom < @deltaGeo)
-		p ["eql?",dleft,dtop,dright,dbottom,rgeo]
+		p vd = [d1,d2,d3,d4]
+		
+		p [@left,element.left,@top,element.top,bottom,element.bottom,right,element.right]
+		
+		rgeo = !vd.collect{|d| d<@deltaGeo}.include?(false)
+		
+		#~ dleft = ([element.left, @left].max - [element.left, @left].min).abs
+		#~ dtop = ([element.top, @top].max - [element.top, @top].min).abs
+		#~ dright = ([element.right, right].max - [element.right,right].min).abs
+		#~ dbottom = ([element.bottom, bottom].max - [element.bottom,bottom].min).abs
+		#~ 
+		#~ rgeo = dleft < @deltaGeo
+		#~ rgeo = rgeo && (dtop < @deltaGeo)
+		#~ rgeo = rgeo && (dright < @deltaGeo) 
+		#~ rgeo = rgeo && (dbottom < @deltaGeo)
+		p ["eql?",rgeo]
 		return rgeo
 	end
 	def cnt_equals?(element)
@@ -396,7 +408,7 @@ Dir.glob("manual/*").each do |cat|
 				puts "G#{i} vs P#{j-ng-1}"
 				if g.equals? p
 					bg+="G#{i} -- P#{j-ng-1};\n"
-					bg+="P#{i} -- G#{j-ng-1};\n"
+					bg+="P#{j-ng-1} -- G#{i};\n"
 					puts "G#{i} equals P#{j-ng-1}"
 				elsif g.contains? p
 					bcg[i,j] = h(p)
@@ -406,7 +418,7 @@ Dir.glob("manual/*").each do |cat|
 				elsif p.contains? g
 					bcg[j,i] = h(g)
 					bcg[i,j] = h(g)
-					bg+="P#{i} -- G#{j-ng-1};\n"
+					bg+="P#{j-ng-1} -- G#{i};\n"
 					puts "G#{i} in P#{j-ng-1}"
 				else
 					puts "no match"
