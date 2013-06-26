@@ -407,6 +407,7 @@ end
 		t = block["elem_top"].to_i
 		w = block["elem_width"].to_i 
 		h = block["elem_height"].to_i
+		am = block["childnodes"].to_i
 		
 		src+= "<Block Ref=\"Block#{sid}\" internal_id='#{@id}' ID=\"$BLOCK_ID$\" Pos=\"WindowWidth||PageRectLeft:#{l} WindowHeight||PageRectTop:#{t} ObjectRectWidth:#{w} ObjectRectHeight:#{h}\" Doc=\"#{@granularity}\">\n"
 			src += "<weight>\n"
@@ -414,8 +415,6 @@ end
 			src += "</weight>\n"
 			src += "<Paths>\n"
 			
-			am = 0
-			block.traverse {|node| am+=1}
 			src += "<path>#{block.path},#{l},#{t},#{w},#{h},#{block["id"]},#{block["uid"]},#{am}</path>\n"
 			src += "</Paths>\n"
 				src += "<Links ID=\"$LINKS_ID$\" IDList=\"$ID_LIST_LINKS$\">\n"
@@ -471,7 +470,7 @@ end
 	src = ""
 	src += "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"yes\" ?>\n"
 	src += "<XML>\n"
-		src += "<Document url=\"#{escape_html(@document.url.gsub('"',''))}\" Title=\"#{escape_html(@document.title)}\" Version=\"#{@version}\" Pos=\"WindowWidth||PageRectLeft:#{@document.width} WindowHeight||PageRectTop:#{@document.height} ObjectRectWith:0 ObjectRectHeight:0\">\n"
+		src += "<Document url=\"#{escape_html(@document.url.gsub('"',''))}\" Title=\"#{escape_html(@document.title)}\" Version=\"#{@version}\" Pos=\"WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith:#{@document.width} ObjectRectHeight:#{@document.height}\">\n"
 			i = 1
 			@blocks.each do |b|
 				src += parse_xml(b,i)

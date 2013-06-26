@@ -28,10 +28,17 @@ function css(pNode,prop) {
 	return(document.defaultView.getComputedStyle(pNode,null).getPropertyValue(prop));
 }
 
+function countNodes(node) {
+	var k = 0, c = node.childNodes.length, result = c;
+	for (;k<c;k++) result += countNodes(node.childNodes[k]);
+	return result;
+}
+
 function walk(pNode,nLevel,pretext) {
 	var tab = '';
 	var src = '';
 	var aux = '';
+	
 	for(var k=0;k<nLevel;k++) {tab+=' ';}
 	var attr = " uid='"+cont+"'";
 	if (pNode.id) {
@@ -39,21 +46,27 @@ function walk(pNode,nLevel,pretext) {
 	} else {
 		attr += " id='element-"+(cont)+"'";
 	}
-	attr += " elem_left='"+(new String(getElemLeft(pNode)))+"'";
-	attr += " elem_top='"+(new String(getElemTop(pNode)))+"'";
-	attr += " elem_width='"+(new String(getElemWidth(pNode)))+"'";
-	attr += " elem_height='"+(new String(getElemHeight(pNode)))+"'";
-	attr += " className='"+(new String(pNode.className))+"'";
-	if (pNode.style) {
-		attr += " margin_left='"+(new String(css(pNode,'margin-left')))+"'";
-		attr += " background_color='"+(new String(css(pNode,'background-color')))+"'";
-		attr += " font_size='"+(new String(css(pNode,'font-size')))+"'";
-		attr += " font_weight='"+(new String(css(pNode,'font-weight')))+"'";
-		attr += " display='"+(new String(css(pNode,'display')))+"'";
-		attr += " visibility='"+(new String(css(pNode,'visibility')))+"'";
-		attr += " style='"+(pNode.style.cssText)+"'";
-	}
-	cont+=1;
+	console.log('antes atributos'+$(pNode).prop('tagName'));
+	if ($(pNode).prop('tagName')) {
+		attr += " elem_left='"+$(pNode).offset().left+"'";
+		attr += " elem_top='"+$(pNode).offset().top+"'";
+		attr += " elem_width='"+$(pNode).width()+"'";
+		attr += " elem_height='"+$(pNode).height()+"'";
+		attr += " className='"+(new String(pNode.className))+"'";
+		attr += " childnodes='"+(new String(countNodes(pNode)))+"'";
+	
+		if (pNode.style) {
+			attr += " margin_left='"+(new String(css(pNode,'margin-left')))+"'";
+			attr += " background_color='"+(new String(css(pNode,'background-color')))+"'";
+			attr += " font_size='"+(new String(css(pNode,'font-size')))+"'";
+			attr += " font_weight='"+(new String(css(pNode,'font-weight')))+"'";
+			attr += " display='"+(new String(css(pNode,'display')))+"'";
+			attr += " visibility='"+(new String(css(pNode,'visibility')))+"'";
+			attr += " style='"+(pNode.style.cssText)+"'";
+		}
+	
+		console.log('luego atributos'+$(pNode).prop('tagName'));
+		cont+=1;
 	
 		if (pNode.tagName == 'A') {
 			if (pNode.href)
@@ -85,35 +98,8 @@ function walk(pNode,nLevel,pretext) {
 				src += tab + '</'+pNode.tagName+'>';
 			}
 		}
+	}
 	return(src);
-}
-
-function getDocHeight() {
-	return $(document).height();
-}
-
-function getDocWidth() {
-	return $(document).width();
-}
-
-function getOffset(obj) {
- return {x: $(obj).offset().left, y: $(obj).offset().top};
-}
-
-function getElemLeft(element) {
-	return getOffset(element).x;
-}
-
-function getElemTop(element) {
-	return getOffset(element).y;
-}
-
-function getElemWidth(element) {
-	return $(element).width();
-}
-
-function getElemHeight(element) {
-	return $(element).height();
 }
 
 function dump_start() {
@@ -121,7 +107,7 @@ function dump_start() {
 	var now = new Date();
 	var then = now.getFullYear()+'-'+now.getMonth()+'-'+now.getDay()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
 	pre = '<!-- window: {width : '+ $(window).width() + ', height: ' + $(window).height()+'}, ';
-		pre += 'document: {width: '+ $(document).width() + ', height: ' + $(document).height()+'}, ';
+	pre += 'document: {width: '+ $(document).width() + ', height: ' + $(document).height()+'}, ';
 	pre += 'page: {url: "'+  location.href + '", date: "'+ then + '"} -->';
 	src += walk(document.getElementsByTagName('html')[0],0,pre);
 	return(src);

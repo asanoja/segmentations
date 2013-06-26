@@ -28,6 +28,12 @@ function css(pNode,prop) {
 	return(document.defaultView.getComputedStyle(pNode,null).getPropertyValue(prop));
 }
 
+function countNodes(node) {
+	var k = 0, c = node.childNodes.length, result = c;
+	for (;k<c;k++) result += countNodes(node.childNodes[k]);
+	return result;
+}
+
 function walk(pNode,nLevel,pretext) {
 	var tab = '';
 	var src = '';
@@ -40,13 +46,13 @@ function walk(pNode,nLevel,pretext) {
 	} else {
 		attr += \" id='element-\"+(cont)+\"'\";
 	}
-	console.log('antes atributos'+$(pNode).prop('tagName'));
 	if ($(pNode).prop('tagName')) {
 		attr += \" elem_left='\"+$(pNode).offset().left+\"'\";
 		attr += \" elem_top='\"+$(pNode).offset().top+\"'\";
 		attr += \" elem_width='\"+$(pNode).width()+\"'\";
 		attr += \" elem_height='\"+$(pNode).height()+\"'\";
 		attr += \" className='\"+(new String(pNode.className))+\"'\";
+		attr += \" childnodes='\"+(new String(countNodes(pNode)))+\"'\";
 	
 		if (pNode.style) {
 			attr += \" margin_left='\"+(new String(css(pNode,'margin-left')))+\"'\";
@@ -58,7 +64,6 @@ function walk(pNode,nLevel,pretext) {
 			attr += \" style='\"+(pNode.style.cssText)+\"'\";
 		}
 	
-		console.log('luego atributos'+$(pNode).prop('tagName'));
 		cont+=1;
 	
 		if (pNode.tagName == 'A') {

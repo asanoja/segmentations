@@ -265,7 +265,7 @@ FIN
 				puts "#{browser} failed!"
 				puts "The JavaScript could not be injected into page #{$!}"
 				status="FAIL"
-				sleep(1100)
+				#sleep(1100)
 				#puts e.backtrace
 				raise "The JavaScript could not be injected into page"
 				#driver.close
