@@ -191,9 +191,9 @@
 						time = data.split(":")[1]
 						if (process && code=="OK") {
 							msg="Output generated in "+time+".\n<br>Done!<br>View results as ";
-							msg+="[<a href='call_bom?cmd=xml&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>ViXML</a>]&nbsp;";
-							msg+="[<a href='call_bom?cmd=html&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>HTML w/blocks</a>]&nbsp;";
-							msg+="[<a href='call_bom?cmd=screenshot&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>PNG (Screenshot)</a>]";
+							msg+="[<a href='call_bom.php?cmd=xml&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>ViXML</a>]&nbsp;";
+							msg+="[<a href='call_bom.php?cmd=html&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>HTML w/blocks</a>]&nbsp;";
+							msg+="[<a href='call_bom.php?cmd=screenshot&purl="+purl+"&browser="+browser+"&granularity="+granularity+"' target='_blank'>PNG (Screenshot)</a>]";
 							advance(msg);
 							//callbom("xml");
 							process=false;
@@ -306,7 +306,7 @@
 				</span><br>
 				Granularity of 
 				<select name="granularity" id="granularity">
-					<option value="4">Coarse</option>
+					<option value="3">Coarse</option>
 					<option value="6" selected>Normal (default)</option>
 					<option value="10">Fine</option>
 					

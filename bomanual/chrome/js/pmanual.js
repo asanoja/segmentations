@@ -242,6 +242,8 @@ function update_marco_submit() {
 	pn=getURLParameter('fn');
 	s+="<input id='pmanual_webpage' type='text' size='80' value='"+pn+"' name='page'><br>";
 	s+="<input id='pmanual_meta' type='text' size='30' value='"+metaData+"' name='meta'><br>";
+	s+="<input id='pmanual_meta_window' type='text' size='30' value='"+$(window).width()+"x"+$(window).height()+ "' name='meta2'><br>";
+	s+="<input id='random' type='text' size='30' value='"+(Math.ceil(Math.random()*2000))+ "' name='random'><br>";
 	
 	s+="Your name:<input id='pmanual_username' type='text' value='andres' name='name'><br>";
 	s+="Category:<select id='pmanual_category' name='category'>";
@@ -344,12 +346,12 @@ function carga(e) {
 			
 			console.log(window.innerWidth,window.innerHeight);
 			
-			if ( (window.innerWidth>1024)) {
-				newRect(document.body,"2px","dotted","blue","white","geometry_error");
-				window.onmouseover = undefined;
-				window.onmouseout = undefined;
-				window.onmousedown = undefined;
-			}
+			//~ if ( (window.innerWidth>1024)) {
+				//~ newRect(document.body,"2px","dotted","blue","white","geometry_error");
+				//~ window.onmouseover = undefined;
+				//~ window.onmouseout = undefined;
+				//~ window.onmousedown = undefined;
+			//~ }
 			
 			editing = false;
 			cargado = true;
