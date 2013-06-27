@@ -56,7 +56,7 @@ get '/capture' do
 		return "NO URL GIVEN"
 	else
 		filename = Capture.parse_filename(url)
-		system "#{app_path}/pagelyzer capture --url=#{url} --output-folder=#{data_path}  --browser=#{browser} ";
+		system "#{app_path}/pagelyzer capture --url=#{url} --output-folder=#{data_path}  --browser=#{browser} --headless";
 		return "OK:#{Time.now-ti}ms"
 	end
 end

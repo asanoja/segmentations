@@ -1,5 +1,5 @@
 [0.000][INFO]:      ChromeDriver 26.0.1383.0 /usr/bin/chromedriver
-[0.275][FINE]:      Initializing session with capabilities {
+[0.313][FINE]:      Initializing session with capabilities {
    "browserName": "chrome",
    "chrome.detach": true,
    "chromeOptions": {
@@ -14,11 +14,11 @@
    "version": ""
 }
 
-[0.275][INFO]:      Using named testing interface
-[1.466][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.160
-[1.520][FINE]:      Command received (/session/bab9bb1e93494e1777b3bb1abdbe19f1)
-[1.520][FINE]:      Command finished (/session/bab9bb1e93494e1777b3bb1abdbe19f1) with response {
-   "sessionId": "bab9bb1e93494e1777b3bb1abdbe19f1",
+[0.315][INFO]:      Using named testing interface
+[1.277][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.160
+[1.301][FINE]:      Command received (/session/818818245f97c1efe3d4d974961d187a)
+[1.301][FINE]:      Command finished (/session/818818245f97c1efe3d4d974961d187a) with response {
+   "sessionId": "818818245f97c1efe3d4d974961d187a",
    "status": 0,
    "value": {
       "acceptSslCerts": false,
@@ -40,5 +40,5 @@
    }
 }
 
-[1.522][FINE]:      Command received (/session/bab9bb1e93494e1777b3bb1abdbe19f1/window)
-[2.307][INFO]:      Chrome shutdown
+[1.303][FINE]:      Command received (/session/818818245f97c1efe3d4d974961d187a/window)
+[1.902][INFO]:      Chrome shutdown

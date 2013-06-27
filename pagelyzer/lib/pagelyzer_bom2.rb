@@ -409,6 +409,8 @@ end
 		h = block["elem_height"].to_i
 		am = block["childnodes"].to_i
 		
+		p [h,block["elem_height"],block.path] if block.name.downcase=="div"
+		
 		src+= "<Block Ref=\"Block#{sid}\" internal_id='#{@id}' ID=\"$BLOCK_ID$\" Pos=\"WindowWidth||PageRectLeft:#{l} WindowHeight||PageRectTop:#{t} ObjectRectWidth:#{w} ObjectRectHeight:#{h}\" Doc=\"#{@granularity}\">\n"
 			src += "<weight>\n"
 			src += "#{weight}\n"

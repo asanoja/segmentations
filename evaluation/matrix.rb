@@ -5,6 +5,12 @@ class Matrix
 		@cols = cols
 		@rows = Array.new(filas) {Array.new(cols) {default} }
 	end
+	def n
+		@filas
+	end
+	def m
+		@cols
+	end
 	def [](row,col)
 		@rows[row][col]
 	end
@@ -31,19 +37,8 @@ class Matrix
 			}
 		}
 	end
-	def format(x)
-		if x.nil? 
-			return " "*4 
-		else
-			if x.to_f==0.0
-				return " "*4 
-			else
-				return "%.2f" % x
-			end
-		end
-	end
 	def to_s
-		s = "row/col\t  "+(0..(@cols)).to_a.join("\t\t")+"\n"
+		s = "row/col\t  "+(0..(@cols-1)).to_a.join("\t\t")+"\n"
 		s+= ("-"*65)+"\n"
 		i=0
 		@rows.each {|r| 
@@ -52,5 +47,30 @@ class Matrix
 			i+=1
 		}
 		s
+	end
+	
+	def to_html
+		s = "<table border='1'>"
+		s += "<tr><td>row/col</td>"+(0..(@cols-1)).to_a.collect{|c| "<td>#{c+1}</td>"}.join+"</tr>\n"
+		@rows.each_with_index {|r,i| 
+			ow = r.collect {|x| format(x)}
+			s+= "<tr><td>#{i+1}</td>#{ow.collect{|c| "<td>#{c}</td>"}.join}</tr>\n"
+		}
+		s+="</table>"
+		s
+	end
+	
+	private
+	
+	def format(x)
+		if x.nil? 
+			return " "*4 
+		else
+			if x.to_f==0.0
+				return "&nbsp;"*4 
+			else
+				return "%.2f" % x
+			end
+		end
 	end
 end

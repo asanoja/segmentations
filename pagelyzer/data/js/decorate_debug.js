@@ -46,7 +46,7 @@ function walk(pNode,nLevel,pretext) {
 	} else {
 		attr += " id='element-"+(cont)+"'";
 	}
-	console.log('antes atributos'+$(pNode).prop('tagName'));
+	
 	if ($(pNode).prop('tagName')) {
 		attr += " elem_left='"+$(pNode).offset().left+"'";
 		attr += " elem_top='"+$(pNode).offset().top+"'";
@@ -65,9 +65,11 @@ function walk(pNode,nLevel,pretext) {
 			attr += " style='"+(pNode.style.cssText)+"'";
 		}
 	
-		console.log('luego atributos'+$(pNode).prop('tagName'));
+		if (pNode.tagName == "DIV") {
+			console.log("DIV "+$(pNode).height());
+		}
 		cont+=1;
-	
+		
 		if (pNode.tagName == 'A') {
 			if (pNode.href)
 				attr += " href='"+pNode.href+"'";

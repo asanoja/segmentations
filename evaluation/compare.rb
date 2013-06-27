@@ -203,7 +203,7 @@ class Block
 		@children = @children.to_i
 		@image = nil
 		@sid = ""
-		@deltaGeo = 150
+		@deltaGeo = 20
 		@deltaCnt = 4
 	end
 	def set_image(filename)
@@ -230,21 +230,37 @@ class Block
 		@width * @height
 	end
 	def geo_contains?(element)
-		d1 = Point.new(@left,@top).distance_to(Point.new(element.left,element.top))
-		d2 = Point.new(@left,bottom).distance_to(Point.new(element.left,element.bottom))
-		d3 = Point.new(right,bottom).distance_to(Point.new(element.right,element.bottom))
-		d4 = Point.new(right,@top).distance_to(Point.new(element.right,element.top))
+		#~ d1 = Point.new(@left,@top).distance_to(Point.new(element.left,element.top))
+		#~ d2 = Point.new(@left,bottom).distance_to(Point.new(element.left,element.bottom))
+		#~ d3 = Point.new(right,bottom).distance_to(Point.new(element.right,element.bottom))
+		#~ d4 = Point.new(right,@top).distance_to(Point.new(element.right,element.top))
+		#~ vd = [d1,d2,d3,d4]
 		
-		p vd = [d1,d2,d3,d4]
+		r1 = @left-@deltaGeo < element.left
+		r2 = @top-@deltaGeo < element.top
+		r3 = bottom+@deltaGeo > element.bottom
+		r4 = right+@deltaGeo > element.right
 		
-		r1 = @left < element.left
-		r2 = @top < element.top
-		r3 = bottom > element.bottom
-		r4 = right > element.right
-		p [@left,element.left,@top,element.top,bottom,element.bottom,right,element.right]
 		vp = [r1,r2,r3,r4]
-		#p vd.collect{|d| d>@deltaGeo}.uniq
-		rgeo = vd.collect{|d| d>@deltaGeo}.include?(true) && !(vp.uniq.include?(false))
+		
+		#~ p [@left-@deltaGeo,element.left,r1]
+		#~ p [@top-@deltaGeo,element.top,r2]
+		#~ p [bottom+@deltaGeo,element.bottom,r3]
+		#~ p [right+@deltaGeo,element.right,r4]
+		
+		#~ p ["vd"]+vd
+		#~ p ["vd","cond"]+vd.collect{|d| d>@deltaGeo}
+		#~ p ["vp"]+vp
+		
+		#~ vdc = 0
+		#~ vd.each {|k| vdc+=1 if k>@deltaGeo}
+		
+		vpc = 0
+		vp.each {|k| vpc+=1 if k}
+		
+		#~ p [vdc,vpc]
+		rgeo=vpc>3
+		#~ rgeo = vd.collect{|d| d>@deltaGeo}.uniq.include?(true) && !(vp.uniq.include?(true))
 		
 		#~ rgeo = rgeo && 
 		#~ p rgeo = rgeo && (element.top - @top > @deltaGeo) && (element.top - @left < bottom)
@@ -268,7 +284,7 @@ class Block
 		
 		p vd = [d1,d2,d3,d4]
 		
-		p [@left,element.left,@top,element.top,bottom,element.bottom,right,element.right]
+		#~ p [@left,element.left,@top,element.top,bottom,element.bottom,right,element.right]
 		
 		rgeo = !vd.collect{|d| d<@deltaGeo}.include?(false)
 		
@@ -333,7 +349,7 @@ Dir.glob("manual/*").each do |cat|
 		puts "GFILE: #{ev.g.filename}"
 		puts "PFILE: #{ev.p.filename}"
 
-		ev.fix_dimension_with_resize
+		#~ ev.fix_dimension_with_resize
 		#~ ev.fix_dimension_with_aspect_ratio
 		
 		
@@ -349,96 +365,150 @@ Dir.glob("manual/*").each do |cat|
 		svg.data.push d
 		svgg.data.push d
 		
+		mt = ev.g.blocks.size
+		at = ev.p.blocks.size
+
+		puts "Manual: #{mt}"
+		puts "Auto: #{at}"
+		
 		k=0
-		ev.g.blocks.each_with_index do |b,i|
-			d = {"points" => b.points, "color" => "red", "text" => "G#{i}"}
+		(0..mt-1).each {|i|
+			d = {"points" => ev.g.blocks[i].points, "color" => "red", "text" => "G#{i+1}"}
 			svg.data.push d
 			svgg.data.push d
 			k+=1
 			break if k==100
-		end
+		}
 		k=0
-		ev.p.blocks.each_with_index do |b,i|
-			d = {"points" => b.points, "color" => "blue", "text" => "_____________P#{i}"}
+		(0..at-1).each {|i|
+			d = {"points" => ev.p.blocks[i].points, "color" => "blue", "text" => "_____________P#{i+1}"}
 			svg.data.push d
 			svgp.data.push d
 			k+=1
 			break if k==1000
-		end
+		}
 		File.open("debug.svg","w") {|f| f.puts svg.parse}
 		File.open("debugP.svg","w") {|f| f.puts svgp.parse}
 		File.open("debugG.svg","w") {|f| f.puts svgg.parse}
 		
-		#read manual segmentation into marr
-
-		mt = ev.g.blocks.size
-		at = ev.p.blocks.size
-		
-		
-		puts "Manual: #{mt}"
-		puts "Auto: #{at}"
-		
-		gets
+		#~ gets
 		
 		bcg = Matrix.new(at+mt,at+mt,0)
 		of = Matrix.new(at+mt,at+mt,0)
-		bg = "graph BCG {\n"
+		bg = "strict digraph BCG {\n"
 		bg+= "rankdir=LR;\n"
-		bg+= "splines=false;\n"
+		bg+= "splines=true;\n"
+		bg+= "concentrate = true;\n"
 		bg+= "node [shape=rectangle];\n"
 		
 		puts "T:#{mt+at}"
-		ng = mt-1
-		np = mt+at-1
+		ng = mt
+		np = mt+at
 		
-		bg+="subgraph cluster_G {\nlabel = \"G\";\ncolor=blue;\n"
+		bg+="subgraph cluster_G {\nlabel = \"G\";\ncolor=red;\n"
 		bg+= "rank=\"same\"\n"
-		(0..mt-1).each {|i| bg+="G#{i} [label=\"G#{i}(#{ev.g.blocks[i].children})\"];\n"}
+		(0..mt-1).each {|i| bg+="G#{i+1} [label=\"G#{i+1}(#{ev.g.blocks[i].children})\"];\n"}
 		bg+="}\n"
 		bg+="subgraph cluster_P {\nlabel = \"P\";\ncolor=blue;\n"
 		bg+= "rank=\"same\"\n"
-		(0..at-1).each {|i| bg+="P#{i} [label=\"P#{i}(#{ev.p.blocks[i].children})\"];\n"}
+		(0..at-1).each {|i| bg+="P#{i+1} [label=\"P#{i+1}(#{ev.p.blocks[i].children})\"];\n"}
 		bg+="}\n"
 		
-		for i in (0..ng)
-			for j in ((ng+1)..np)
+		for i in (0..mt-1)
+			for j in (mt..(mt+at-1))
 				g = ev.g.blocks[i]
-				p = ev.p.blocks[j-ng-1]
+				p = ev.p.blocks[j-mt]
 				#puts "#{i},#{j} G:#{ev.g.blocks[i].points} || P:#{ev.p.blocks[j-ng-1].points}"
-				puts "G#{i} vs P#{j-ng-1}"
+				puts "G#{i+1} vs P#{j-mt+1}"
+				
 				if g.equals? p
-					bg+="G#{i} -- P#{j-ng-1};\n"
-					bg+="P#{j-ng-1} -- G#{i};\n"
-					puts "G#{i} equals P#{j-ng-1}"
+					bcg[i,j] = [h(g),h(p)].max
+					bcg[j,i] = [h(g),h(p)].max
+					
+					of[i,j] = bcg[i,j].to_f / [h(g),h(p)].max
+					of[j,i] = bcg[j,i].to_f / [h(g),h(p)].max
+
+					bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
+					bg+="G#{i+1} -> P#{j-mt+1} [label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
+					
+					puts "G#{i+1} equals P#{j-mt+1}"
 				elsif g.contains? p
 					bcg[i,j] = h(p)
 					bcg[j,i] = h(p)
-					bg+="G#{i} -- P#{j-ng-1};\n"
-					puts "P#{j-ng-1} in G#{i}"
+					
+					of[i,j] = bcg[i,j].to_f / h(g)
+					of[j,i] = bcg[j,i].to_f / h(p)
+					
+					bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
+					bg+="G#{i+1} -> P#{j-mt+1}[label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
+					
+					puts "P#{j-mt+1} in G#{i+1}"
 				elsif p.contains? g
 					bcg[j,i] = h(g)
 					bcg[i,j] = h(g)
-					bg+="P#{j-ng-1} -- G#{i};\n"
-					puts "G#{i} in P#{j-ng-1}"
+					
+					of[i,j] = bcg[i,j].to_f / h(g)
+					of[j,i] = bcg[j,i].to_f / h(p)
+					
+					bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
+					bg+="G#{i+1} -> P#{j-mt+1}[label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
+					puts "G#{i+1} in P#{j-mt+1}"
 				else
 					puts "no match"
 				end
 				
-				of[i,j] = bcg[i,j].to_f / h(g)
-				of[j,i] = bcg[j,i].to_f / h(p)
+				
 			end
 			puts "="*80
-			gets
+			#~ gets
 		end
 		bg+="}"
 		File.open("BCG.txt",'w') {|f| f.puts bcg}
 		File.open("OF.txt",'w') {|f| f.puts of}
 		File.open("BG.dot",'w') {|f| f.puts bg}
+		puts bcg.to_html
 		system "dot -Tsvg BG.dot > BG.svg"
 		system "dot -Tpng BG.dot > BG.png"
-		#~ GraphViz.parse("BG.dot") { |g|
-			#~ g.output(:svg=>"BG.svg")
-			#~ g.output(:png=>"BG.png")
-		#~ }
+		
+		fromGtoP = Matrix.new(mt,at,0)
+		fromPtoG = Matrix.new(at,mt,0)
+		
+		for i in (0..(mt-1))
+			for j in (0..(at-1))
+				if bcg[i,mt+j].to_f>0
+					fromGtoP[i,j]+=1
+					puts ["G#{i+1}","P#{j+1}",of[i,mt+j]].inspect
+				end
+				if bcg[mt+j,i].to_f>0
+					fromPtoG[j,i]+=1
+					puts ["P#{(j+1)}","G#{(i+1)}",of[mt+j,i]].inspect
+				end
+				
+			end
+		end
+		puts fromGtoP.to_html
+		puts fromPtoG.to_html
+		
+		#~ tc = 0 
+		#~ 
+		#~ ccG = ccP =0
+		#~ 
+		#~ for i in (0..(mt-1))
+			#~ for j in (0..(at-1))
+				#~ esalidaG = fromGtoP.rows[i].inject{|sum,x| sum+x}
+				#~ esalidaP = fromPtoG.rows[j].inject{|sum,x| sum+x}
+				#~ if esalidaG==esalidaP && esalidaG==1
+					#~ puts "G#{i+1} -> P#{j+1}"
+				#~ end
+			#~ end
+		#~ end
+		
+		
+		#QUEDE AQUI HAY QUE HACE EL CALCULO DE CUALES SON LOS NODOS CONECTADOS
+		#QUE TIENEN UN SOLO VERTICE
+		#Y CUALES SON AQUELLOS QUE TIENEN VARIOS
+		#ESTOY YA MAMAO
+		#SIGUO MANANA
+		
 	end
 end
