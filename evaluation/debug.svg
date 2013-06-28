@@ -10,6 +10,7 @@
      viewBox="0 0 1009.0 1908.0"     
      zoomAndPan="disable"
     -->
+<image x="0" y="0" width="1009.0" height="1908.0" xlink:href="xml/chrome_pandora_nla_gov_au_pan_140646_20130521-0756_www_abc_net_au_news_2013-05-14_obama-speaking-in-washington-dc_4688486_html.png" preserveAspectRatio='none'/>
 <g>
 <polygon points="0,0 0,1908.0 1009.0,1908.0 1009.0,0" style="fill:transparent;stroke:#A020F0;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">pdoc 
@@ -25,17 +26,10 @@
 </text>
 </g>
 <g>
-<polygon points="0.5,30.0 0.5,110.0 317.5,110.0 317.5,30.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="0.5,30.0 0.5,1858.0 1000.5,1858.0 1000.5,30.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="41" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G1
 </text>
 <text x="0" y="40" style="stroke:black;stroke-width:1;stroke-opacity:1">G1
-</text>
-</g>
-<g>
-<polygon points="30.5,855.0 30.5,1009.0 730.5,1009.0 730.5,855.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="31" y="866" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G2
-</text>
-<text x="30" y="865" style="stroke:black;stroke-width:1;stroke-opacity:1">G2
 </text>
 </g>
 <g>

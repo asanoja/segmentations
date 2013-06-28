@@ -1,18 +1,18 @@
-strict digraph BCG {
+strict graph BCG {
 rankdir=LR;
 splines=true;
+ranksep="8 equally";
 concentrate = true;
 node [shape=rectangle];
 subgraph cluster_G {
 label = "G";
-color=red;
+color=black;
 rank="same"
-G1 [label="G1(4)"];
-G2 [label="G2(25)"];
+G1 [label="G1(996)"];
 }
 subgraph cluster_P {
 label = "P";
-color=blue;
+color="black";
 rank="same"
 P1 [label="P1(4)"];
 P2 [label="P2(5)"];
@@ -29,16 +29,16 @@ P12 [label="P12(4)"];
 P13 [label="P13(1)"];
 P14 [label="P14(1)"];
 }
-P1 -> G1  [label="1.00",color="red",fontcolor="red"];
-G1 -> P1 [label="1.00",color="blue",fontcolor="blue"];
-P2 -> G2  [label="0.20",color="red",fontcolor="red"];
-G2 -> P2[label="1.00",color="blue",fontcolor="blue"];
-P3 -> G2  [label="0.04",color="red",fontcolor="red"];
-G2 -> P3[label="1.00",color="blue",fontcolor="blue"];
-P4 -> G2  [label="0.16",color="red",fontcolor="red"];
-G2 -> P4[label="1.00",color="blue",fontcolor="blue"];
-P5 -> G2  [label="0.04",color="red",fontcolor="red"];
-G2 -> P5[label="1.00",color="blue",fontcolor="blue"];
-P6 -> G2  [label="0.04",color="red",fontcolor="red"];
-G2 -> P6[label="1.00",color="blue",fontcolor="blue"];
+G1 -- P1[label="0.004",color="blue",fontcolor="blue"];
+G1 -- P2[label="0.005",color="blue",fontcolor="blue"];
+G1 -- P3[label="0.001",color="blue",fontcolor="blue"];
+G1 -- P4[label="0.004",color="blue",fontcolor="blue"];
+G1 -- P5[label="0.001",color="blue",fontcolor="blue"];
+G1 -- P6[label="0.001",color="blue",fontcolor="blue"];
+G1 -- P7[label="0.003",color="blue",fontcolor="blue"];
+G1 -- P8[label="0.003",color="blue",fontcolor="blue"];
+G1 -- P9[label="0.003",color="blue",fontcolor="blue"];
+G1 -- P10[label="0.001",color="blue",fontcolor="blue"];
+G1 -- P11[label="0.004",color="blue",fontcolor="blue"];
+G1 -- P12[label="0.004",color="blue",fontcolor="blue"];
 }

@@ -53,7 +53,7 @@ class Matrix
 		s = "<table border='1'>"
 		s += "<tr><td>row/col</td>"+(0..(@cols-1)).to_a.collect{|c| "<td>#{c+1}</td>"}.join+"</tr>\n"
 		@rows.each_with_index {|r,i| 
-			ow = r.collect {|x| format(x)}
+			ow = r.clone.collect {|x| format(x,true)}
 			s+= "<tr><td>#{i+1}</td>#{ow.collect{|c| "<td>#{c}</td>"}.join}</tr>\n"
 		}
 		s+="</table>"
@@ -62,14 +62,19 @@ class Matrix
 	
 	private
 	
-	def format(x)
+	def format(x,html=false)
+		dec = 3
 		if x.nil? 
-			return " "*4 
+			return "%.#{dec}f" % 0
 		else
 			if x.to_f==0.0
-				return "&nbsp;"*4 
+				return "%.#{dec}f" % x
 			else
-				return "%.2f" % x
+				if html
+					return "<b>#{("%.#{dec}f" % x)}</b>"
+				else
+					return "%.#{dec}f" % x
+				end
 			end
 		end
 	end

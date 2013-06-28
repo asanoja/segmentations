@@ -15,6 +15,10 @@ class Evaluation
 		@category
 		@filename = ""
 		@url = ""
+		@bcg = nil
+		@of = nil
+		@fromGtoP = nil
+		@fromPtoG = nil
 	end
 	def set_category(cat)
 		@category = cat
@@ -39,6 +43,185 @@ class Evaluation
 	end
 	def fix_dimension_with_resize
 		@p.fix_dimension_with_resize(@g.width,@g.height)
+	end
+	def evaluate
+		result = {:tc => 0,:to => 0,:tu => 0, :co => 0, :cu => 0, :cm => 0, :cf => 0}
+		
+		total_sig_edges_G_has = 0
+		nodes_G_at_least_one_edge = 0
+		
+		total_sig_edges_P_has = 0
+		nodes_P_at_least_one_edge = 0
+		
+		puts "<pre>"
+		for i in (0..(@mt-1))
+
+			fg = @fromGtoP.rows[i]
+			fg.delete(0)
+			fg.delete(nil)
+			
+			total_sig_edges_G_has+=fg.size
+			nodes_G_at_least_one_edge+=1 if fg.size>0
+			result[:co]+=1 if fg.size>1
+			result[:cm]+1 if fg.size==0
+
+			for j in (0..(@at-1))
+							
+				fp = @fromPtoG.rows[j]
+				fp.delete(0)
+				fp.delete(nil)
+							
+				total_sig_edges_P_has+=fp.size
+				nodes_P_at_least_one_edge+=1 if fp.size>0
+				result[:co]+=1 if fp.size>1
+				result[:cf]+=1 if fp.size==0
+				
+				if @bcg[i,j+@mt].to_f>0
+			
+					print "G#{i+1},P#{j+1},#{fg.size},#{fp.size} #{@of[i,j+@mt]}"		
+					
+					if fg.size == 1 && fp.size==1 
+						if @of[i,j+@mt].to_f==1
+							puts " perfect matching"
+							result[:tc] += 1
+						elsif (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
+							if h(@g.blocks[i])>h(@p.blocks[j])
+								puts " oversegmented 1"
+							else
+								puts " undersegmented 1"
+							end
+						else
+							puts " - #{@of[i,j+mt].to_f} no significative 1"
+						end
+					elsif fg.size > fp.size
+						if (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
+							puts " oversegmented 2"
+						else
+							puts " - #{@of[i,j+mt].to_f} no significative 2"
+						end
+					elsif fg.size < fp.size
+						if (@of[i,j+mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
+							puts " undersegmented 3"
+						else
+							puts " - #{@of[i,j+mt].to_f} no significative 3"
+						end
+					end
+				end
+			end
+		end
+		result[:to] = total_sig_edges_G_has - nodes_G_at_least_one_edge
+		result[:tu] = total_sig_edges_P_has - nodes_P_at_least_one_edge
+		
+		result
+	end
+	def prepare(tr,ta)
+		@tr = tr
+		@ta = ta
+		@mt = @g.blocks.size
+		@at = @p.blocks.size
+		
+		puts "Manual: #{@mt}"
+		puts "Auto: #{@at}"
+		
+		@bcg = Matrix.new(@at+@mt,@at+@mt,0)
+		@of = Matrix.new(@at+@mt,@at+@mt,0)
+		@fromGtoP = Matrix.new(@mt,@at,0)
+		@fromPtoG = Matrix.new(@at,@mt,0)
+		
+		bg = "strict graph BCG {\n"
+		bg+= "rankdir=LR;\n"
+		bg+= "splines=true;\n"
+		bg+= "ranksep=\"8 equally\";\n"
+		bg+= "concentrate = true;\n"
+		bg+= "node [shape=rectangle];\n"
+		
+		puts "T:#{@mt+@at}"
+		#~ ng = mt
+		#~ np = mt+at
+		
+		bg+="subgraph cluster_G {\nlabel = \"G\";\ncolor=black;\n"
+		bg+= "rank=\"same\"\n"
+		(0..@mt-1).each {|i| bg+="G#{i+1} [label=\"G#{i+1}(#{h(@g.blocks[i])})\"];\n"}
+		bg+="}\n"
+		bg+="subgraph cluster_P {\nlabel = \"P\";\ncolor=\"black\";\n"
+		bg+= "rank=\"same\"\n"
+		(0..@at-1).each {|i| bg+="P#{i+1} [label=\"P#{i+1}(#{h(@p.blocks[i])})\"];\n"}
+		bg+="}\n"
+		
+		for i in (0..@mt-1)
+			for j in (@mt..(@mt+@at-1))
+				blockG = @g.blocks[i]
+				blockP = @p.blocks[j-@mt]
+				#puts "#{i},#{j} G:#{ev.g.blocks[i].points} || P:#{ev.p.blocks[j-ng-1].points}"
+				puts "G#{i+1} vs P#{j-@mt+1}"
+				
+				if blockG.equals? blockP
+					@bcg[i,j] = [h(blockG),h(blockP)].min
+					@bcg[j,i] = [h(blockG),h(blockP)].min
+					
+					@of[i,j] = @bcg[i,j].to_f / [h(blockG),h(blockP)].max.to_f
+					@of[j,i] = @bcg[j,i].to_f / [h(blockG),h(blockP)].max.to_f
+
+					ww = [h(blockG),h(blockP)].min.to_f / [h(blockG),h(blockP)].max.to_f
+					
+					ncolor = ww>@tr ? "blue" : "red"
+					
+					bg+="P#{j-@mt+1} -- G#{i+1}  [dir=\"none\",label=\"#{"%.3f" % ww}\",color=\"#{ncolor}\",fontcolor=\"#{ncolor}\"];\n"
+					#~ bg+="G#{i+1} -> P#{j-mt+1} [label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
+					
+					puts "G#{i+1} equals P#{j-@mt+1}"
+				elsif blockG.contains? blockP
+					@bcg[i,j] = [h(blockG),h(blockP)].min
+					@bcg[j,i] = [h(blockG),h(blockP)].min
+					
+					@of[i,j] = @bcg[i,j].to_f / [h(blockG),h(blockP)].max
+					@of[j,i] = @bcg[j,i].to_f / [h(blockG),h(blockP)].max
+					
+					ncolor = @of[j,i]>@tr ? "blue" : "red"
+					
+					#~ bg+="P#{j-mt+1} -- G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
+					bg+="G#{i+1} -- P#{j-@mt+1}[label=\"#{"%.3f" % @of[j,i]}\",color=\"#{ncolor}\",fontcolor=\"#{ncolor}\"];\n"
+					
+					puts "P#{j-@mt+1} in G#{i+1}"
+				elsif blockP.contains? blockG
+					@bcg[i,j] = [h(blockG),h(blockP)].min
+					@bcg[j,i] = [h(blockG),h(blockP)].min
+					
+					@of[i,j] = @bcg[i,j].to_f / [h(blockG),h(blockP)].max
+					@of[j,i] = @bcg[j,i].to_f / [h(blockG),h(blockP)].max
+					
+					ncolor = @of[i,j]>@tr ? "blue" : "red"
+					
+					#~ bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
+					bg+="G#{i+1} -- P#{j-@mt+1}[label=\"#{"%.3f" % @of[i,j]}\",color=\"#{ncolor}\",fontcolor=\"#{ncolor}\"];\n"
+					puts "G#{i+1} in P#{j-@mt+1}"
+				else
+					puts "no match"
+				end
+				
+				if @bcg[i,j].to_f>0
+					@fromGtoP[i,j-@mt]+=@bcg[i,j].to_f
+					#puts ["G#{i+1}","P#{j+1}",of[i,mt+j]].inspect
+				end
+				if @bcg[j,i].to_f>0
+					@fromPtoG[j-@mt,i]+=@bcg[j,i].to_f
+					#puts ["P#{(j+1)}","G#{(i+1)}",of[mt+j,i]].inspect
+				end
+			end
+			#~ puts "="*80
+			#~ gets
+		end
+		bg+="}"
+		File.open("BCG.txt",'w') {|f| f.puts @bcg}
+		File.open("OF.txt",'w') {|f| f.puts @of}
+		File.open("BG.dot",'w') {|f| f.puts bg}
+		system "dot -Tsvg BG.dot > BG.svg"
+		system "dot -Tpng BG.dot > BG.png"
+		puts "</pre>"
+		puts @bcg.to_html
+		puts @of.to_html
+		puts @fromGtoP.to_html
+		puts @fromPtoG.to_html
 	end
 end
 
@@ -326,8 +509,12 @@ def h(b)
 	b.children
 end
 
+
+
 marr=[]
 xarr=[]
+
+puts "<pre>"
 
 Dir.glob("manual/*").each do |cat|
 	Dir.glob("#{cat}/*.xml").each do |page|
@@ -352,10 +539,13 @@ Dir.glob("manual/*").each do |cat|
 		#~ ev.fix_dimension_with_resize
 		#~ ev.fix_dimension_with_aspect_ratio
 		
+		#making visual svg outputs
+		
 		
 		svg = SVGPage.new [ev.p.width,ev.g.width].max,[ev.p.height,ev.g.height].max
 		svgg = SVGPage.new ev.g.width,ev.g.height
 		svgp = SVGPage.new ev.p.width,ev.p.height
+		
 		
 		d={"points" => ev.p.points, "color" => "#A020F0", "text" => "pdoc "}
 		svg.data.push d
@@ -365,14 +555,9 @@ Dir.glob("manual/*").each do |cat|
 		svg.data.push d
 		svgg.data.push d
 		
-		mt = ev.g.blocks.size
-		at = ev.p.blocks.size
-
-		puts "Manual: #{mt}"
-		puts "Auto: #{at}"
 		
 		k=0
-		(0..mt-1).each {|i|
+		(0..(ev.g.blocks.size-1)).each {|i|
 			d = {"points" => ev.g.blocks[i].points, "color" => "red", "text" => "G#{i+1}"}
 			svg.data.push d
 			svgg.data.push d
@@ -380,135 +565,30 @@ Dir.glob("manual/*").each do |cat|
 			break if k==100
 		}
 		k=0
-		(0..at-1).each {|i|
+		(0..ev.p.blocks.size-1).each {|i|
 			d = {"points" => ev.p.blocks[i].points, "color" => "blue", "text" => "_____________P#{i+1}"}
 			svg.data.push d
 			svgp.data.push d
 			k+=1
 			break if k==1000
 		}
-		File.open("debug.svg","w") {|f| f.puts svg.parse}
-		File.open("debugP.svg","w") {|f| f.puts svgp.parse}
-		File.open("debugG.svg","w") {|f| f.puts svgg.parse}
+		File.open("debug.svg","w") {|f| f.puts svg.parse("xml/#{ev.p.filename}.png")}
+		File.open("debugP.svg","w") {|f| f.puts svgp.parse("xml/#{ev.p.filename}.png")}
+		File.open("debugG.svg","w") {|f| f.puts svgg.parse("xml/#{ev.p.filename}.png")}
 		
-		#~ gets
-		
-		bcg = Matrix.new(at+mt,at+mt,0)
-		of = Matrix.new(at+mt,at+mt,0)
-		bg = "strict digraph BCG {\n"
-		bg+= "rankdir=LR;\n"
-		bg+= "splines=true;\n"
-		bg+= "concentrate = true;\n"
-		bg+= "node [shape=rectangle];\n"
-		
-		puts "T:#{mt+at}"
-		ng = mt
-		np = mt+at
-		
-		bg+="subgraph cluster_G {\nlabel = \"G\";\ncolor=red;\n"
-		bg+= "rank=\"same\"\n"
-		(0..mt-1).each {|i| bg+="G#{i+1} [label=\"G#{i+1}(#{ev.g.blocks[i].children})\"];\n"}
-		bg+="}\n"
-		bg+="subgraph cluster_P {\nlabel = \"P\";\ncolor=blue;\n"
-		bg+= "rank=\"same\"\n"
-		(0..at-1).each {|i| bg+="P#{i+1} [label=\"P#{i+1}(#{ev.p.blocks[i].children})\"];\n"}
-		bg+="}\n"
-		
-		for i in (0..mt-1)
-			for j in (mt..(mt+at-1))
-				g = ev.g.blocks[i]
-				p = ev.p.blocks[j-mt]
-				#puts "#{i},#{j} G:#{ev.g.blocks[i].points} || P:#{ev.p.blocks[j-ng-1].points}"
-				puts "G#{i+1} vs P#{j-mt+1}"
-				
-				if g.equals? p
-					bcg[i,j] = [h(g),h(p)].max
-					bcg[j,i] = [h(g),h(p)].max
-					
-					of[i,j] = bcg[i,j].to_f / [h(g),h(p)].max
-					of[j,i] = bcg[j,i].to_f / [h(g),h(p)].max
+		#starting evaluation
 
-					bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
-					bg+="G#{i+1} -> P#{j-mt+1} [label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
-					
-					puts "G#{i+1} equals P#{j-mt+1}"
-				elsif g.contains? p
-					bcg[i,j] = h(p)
-					bcg[j,i] = h(p)
-					
-					of[i,j] = bcg[i,j].to_f / h(g)
-					of[j,i] = bcg[j,i].to_f / h(p)
-					
-					bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
-					bg+="G#{i+1} -> P#{j-mt+1}[label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
-					
-					puts "P#{j-mt+1} in G#{i+1}"
-				elsif p.contains? g
-					bcg[j,i] = h(g)
-					bcg[i,j] = h(g)
-					
-					of[i,j] = bcg[i,j].to_f / h(g)
-					of[j,i] = bcg[j,i].to_f / h(p)
-					
-					bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
-					bg+="G#{i+1} -> P#{j-mt+1}[label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
-					puts "G#{i+1} in P#{j-mt+1}"
-				else
-					puts "no match"
-				end
-				
-				
-			end
-			puts "="*80
-			#~ gets
-		end
-		bg+="}"
-		File.open("BCG.txt",'w') {|f| f.puts bcg}
-		File.open("OF.txt",'w') {|f| f.puts of}
-		File.open("BG.dot",'w') {|f| f.puts bg}
-		puts bcg.to_html
-		system "dot -Tsvg BG.dot > BG.svg"
-		system "dot -Tpng BG.dot > BG.png"
-		
-		fromGtoP = Matrix.new(mt,at,0)
-		fromPtoG = Matrix.new(at,mt,0)
-		
-		for i in (0..(mt-1))
-			for j in (0..(at-1))
-				if bcg[i,mt+j].to_f>0
-					fromGtoP[i,j]+=1
-					puts ["G#{i+1}","P#{j+1}",of[i,mt+j]].inspect
-				end
-				if bcg[mt+j,i].to_f>0
-					fromPtoG[j,i]+=1
-					puts ["P#{(j+1)}","G#{(i+1)}",of[mt+j,i]].inspect
-				end
-				
-			end
-		end
-		puts fromGtoP.to_html
-		puts fromPtoG.to_html
-		
-		#~ tc = 0 
-		#~ 
-		#~ ccG = ccP =0
-		#~ 
-		#~ for i in (0..(mt-1))
-			#~ for j in (0..(at-1))
-				#~ esalidaG = fromGtoP.rows[i].inject{|sum,x| sum+x}
-				#~ esalidaP = fromPtoG.rows[j].inject{|sum,x| sum+x}
-				#~ if esalidaG==esalidaP && esalidaG==1
-					#~ puts "G#{i+1} -> P#{j+1}"
-				#~ end
-			#~ end
-		#~ end
+		ev.prepare(0,0)
+		result = ev.evaluate
 		
 		
-		#QUEDE AQUI HAY QUE HACE EL CALCULO DE CUALES SON LOS NODOS CONECTADOS
-		#QUE TIENEN UN SOLO VERTICE
-		#Y CUALES SON AQUELLOS QUE TIENEN VARIOS
-		#ESTOY YA MAMAO
-		#SIGUO MANANA
+		puts "To #{result[:to]}"
+		puts "Tu #{result[:tu]}"
+		puts "Co #{result[:co]}"
+		puts "Cu #{result[:cu]}"
+		puts "Cm #{result[:cm]}"
+		puts "Cf #{result[:cf]}"
 		
+		puts "</pre>"
 	end
 end
