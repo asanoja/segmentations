@@ -547,8 +547,10 @@ function dale(e) {
 	} else {
 			if (findInTree(lastElement,"marco-plmanual")) {
 				if (lastElement.tagName=="A") {
-					blocks[parseInt(lastElement.id)].style.background='';
-					blocks[parseInt(lastElement.id)].style.border='';
+					//~ blocks[parseInt(lastElement.id)].style.background='';
+					//~ blocks[parseInt(lastElement.id)].style.border='';
+					
+					document.body.removeChild(vblocks[parseInt(lastElement.id)]);
 					blocks[parseInt(lastElement.id)]=undefined;
 					//~ vblocks[parseInt(lastElement.id)].style.background='';
 					//~ vblocks[parseInt(lastElement.id)].style.border='';
@@ -582,6 +584,7 @@ function addNewBlock() {
 	if (!lastBlock)
 		return false;
 	block = lastBlock;
+	block["index"] = blocks.length+1;
 	console.log("dep: NB: "+block);
 	var nover = newRect(block,2,"dotted","red","black","");
 	vblocks.push(nover);
