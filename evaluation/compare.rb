@@ -25,6 +25,7 @@ class Evaluation
 	end
 	def init(filename)
 		#~ begin
+			@filename = filename
 			@g = Manual.new(@category,filename)
 			@p = Automatic.new(@category,filename)
 			@g.parse
@@ -44,74 +45,104 @@ class Evaluation
 	def fix_dimension_with_resize
 		@p.fix_dimension_with_resize(@g.width,@g.height)
 	end
+	def significative(i,j)
+	return ( (@of[i,j].to_f > @tr) && (@of[i,j].to_f < 1) ) || (@bcg[i,j].to_f > @ta)
+	end
 	def evaluate
 		result = {:tc => 0,:to => 0,:tu => 0, :co => 0, :cu => 0, :cm => 0, :cf => 0}
 		
-		total_sig_edges_G_has = 0
-		nodes_G_at_least_one_edge = 0
-		
-		total_sig_edges_P_has = 0
-		nodes_P_at_least_one_edge = 0
-		
-		puts "<pre>"
+		auxG = Array.new(@mt) {nil}
 		for i in (0..(@mt-1))
-
-			fg = @fromGtoP.rows[i]
-			fg.delete(0)
-			fg.delete(nil)
-			
-			total_sig_edges_G_has+=fg.size
-			nodes_G_at_least_one_edge+=1 if fg.size>0
-			result[:co]+=1 if fg.size>1
-			result[:cm]+1 if fg.size==0
-
 			for j in (0..(@at-1))
-							
-				fp = @fromPtoG.rows[j]
-				fp.delete(0)
-				fp.delete(nil)
-							
-				total_sig_edges_P_has+=fp.size
-				nodes_P_at_least_one_edge+=1 if fp.size>0
-				result[:co]+=1 if fp.size>1
-				result[:cf]+=1 if fp.size==0
-				
-				if @bcg[i,j+@mt].to_f>0
-			
-					print "G#{i+1},P#{j+1},#{fg.size},#{fp.size} #{@of[i,j+@mt]}"		
-					
-					if fg.size == 1 && fp.size==1 
-						if @of[i,j+@mt].to_f==1
-							puts " perfect matching"
-							result[:tc] += 1
-						elsif (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
-							if h(@g.blocks[i])>h(@p.blocks[j])
-								puts " oversegmented 1"
-							else
-								puts " undersegmented 1"
-							end
-						else
-							puts " - #{@of[i,j+mt].to_f} no significative 1"
-						end
-					elsif fg.size > fp.size
-						if (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
-							puts " oversegmented 2"
-						else
-							puts " - #{@of[i,j+mt].to_f} no significative 2"
-						end
-					elsif fg.size < fp.size
-						if (@of[i,j+mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
-							puts " undersegmented 3"
-						else
-							puts " - #{@of[i,j+mt].to_f} no significative 3"
-						end
-					end
+				if significative(i,j)
+					auxG[i]=@fromGtoP[i,j]
 				end
 			end
 		end
-		result[:to] = total_sig_edges_G_has - nodes_G_at_least_one_edge
-		result[:tu] = total_sig_edges_P_has - nodes_P_at_least_one_edge
 		
+		puts auxG.inspect
+		gets
+		
+		for i in (0..(@mt-1))
+			
+			for j in (0..(@at-1))
+							
+				if @bcg[i,j+@mt].to_f>0 
+				
+					#~ fg = @fromGtoP.rows[i]
+					#~ fg.delete(0)
+					#~ fg.delete(nil)
+					#~ 
+					#~ fp = @fromPtoG.rows[j]
+					#~ fp.delete(0)
+					#~ fp.delete(nil)
+									
+						
+					#count only if significative
+					if significative(i,j+@mt)
+						#~ sigG[i] += 1 
+						#~ sigP[j] += 1 
+							
+						#~ total_sig_edges_G_has += 1 es la suma del arrego sigG
+						#~ total_sig_edges_P_has += 1
+						
+						#~ result[:co]+=1 if fg.size>1
+						#~ result[:cm]+1 if fg.size==0
+			
+
+						
+						
+						#~ result[:co]+=1 if fp.size>1
+						#~ result[:cf]+=1 if fp.size==0
+					else
+						result[:cm]+=1 
+						result[:cf]+=1 
+					end
+					#~ puts sigG.inspect
+					#~ puts sigP.inspect
+					#~ print "G#{i+1},P#{j+1},#{fg.size},#{fp.size} #{@of[i,j+@mt]}"		
+					
+					
+					
+					#~ if fg.size == 1 && fp.size==1 
+						#~ if @of[i,j+@mt].to_f==1
+							#~ puts " perfect matching"
+							#~ result[:tc] += 1
+						#~ elsif (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
+							#~ if h(@g.blocks[i])>h(@p.blocks[j])
+								#~ puts " oversegmented 1"
+							#~ else
+								#~ puts " undersegmented 1"
+							#~ end
+						#~ else
+							#~ puts " - #{@of[i,j+@mt].to_f} no significative 1"
+						#~ end
+					#~ elsif fg.size > fp.size
+						#~ if (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
+							#~ puts " oversegmented 2"
+						#~ else
+							#~ puts " - #{@of[i,j+@mt].to_f} no significative 2"
+						#~ end
+					#~ elsif fg.size < fp.size
+						#~ if (@of[i,j+mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
+							#~ puts " undersegmented 3"
+						#~ else
+							#~ puts " - #{@of[i,j+@mt].to_f} no significative 3"
+						#~ end
+					#~ end
+				end
+			end
+		end
+		
+		#~ total_sig_edges_G_has = sigG.inject{|sum,x| sum + x }
+		#~ nodes_G_at_least_one_edge = sigG.inject{|sum,x| x>0 ? sum + 1 : 0 }
+		#~ 
+		#~ total_sig_edges_P_has = sigP.inject{|sum,x| sum + x }
+		#~ nodes_P_at_least_one_edge = sigP.inject{|sum,x| x>0 ? sum + 1 : 0 }
+		#~ 
+		#~ result[:to] = total_sig_edges_G_has - nodes_G_at_least_one_edge
+		#~ result[:tu] = total_sig_edges_P_has - nodes_P_at_least_one_edge
+		#~ 
 		result
 	end
 	def prepare(tr,ta)
@@ -120,8 +151,7 @@ class Evaluation
 		@mt = @g.blocks.size
 		@at = @p.blocks.size
 		
-		puts "Manual: #{@mt}"
-		puts "Auto: #{@at}"
+		#~ puts "Manual: #{@mt} Auto: #{@at}"
 		
 		@bcg = Matrix.new(@at+@mt,@at+@mt,0)
 		@of = Matrix.new(@at+@mt,@at+@mt,0)
@@ -135,7 +165,7 @@ class Evaluation
 		bg+= "concentrate = true;\n"
 		bg+= "node [shape=rectangle];\n"
 		
-		puts "T:#{@mt+@at}"
+		#~ puts "T:#{@mt+@at}"
 		#~ ng = mt
 		#~ np = mt+at
 		
@@ -153,7 +183,7 @@ class Evaluation
 				blockG = @g.blocks[i]
 				blockP = @p.blocks[j-@mt]
 				#puts "#{i},#{j} G:#{ev.g.blocks[i].points} || P:#{ev.p.blocks[j-ng-1].points}"
-				puts "G#{i+1} vs P#{j-@mt+1}"
+				#~ puts "G#{i+1} vs P#{j-@mt+1}"
 				
 				if blockG.equals? blockP
 					@bcg[i,j] = [h(blockG),h(blockP)].min
@@ -169,7 +199,7 @@ class Evaluation
 					bg+="P#{j-@mt+1} -- G#{i+1}  [dir=\"none\",label=\"#{"%.3f" % ww}\",color=\"#{ncolor}\",fontcolor=\"#{ncolor}\"];\n"
 					#~ bg+="G#{i+1} -> P#{j-mt+1} [label=\"#{"%.2f" % of[j,i]}\",color=\"blue\",fontcolor=\"blue\"];\n"
 					
-					puts "G#{i+1} equals P#{j-@mt+1}"
+					#~ puts "G#{i+1} equals P#{j-@mt+1}"
 				elsif blockG.contains? blockP
 					@bcg[i,j] = [h(blockG),h(blockP)].min
 					@bcg[j,i] = [h(blockG),h(blockP)].min
@@ -182,7 +212,7 @@ class Evaluation
 					#~ bg+="P#{j-mt+1} -- G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
 					bg+="G#{i+1} -- P#{j-@mt+1}[label=\"#{"%.3f" % @of[j,i]}\",color=\"#{ncolor}\",fontcolor=\"#{ncolor}\"];\n"
 					
-					puts "P#{j-@mt+1} in G#{i+1}"
+					#~ puts "P#{j-@mt+1} in G#{i+1}"
 				elsif blockP.contains? blockG
 					@bcg[i,j] = [h(blockG),h(blockP)].min
 					@bcg[j,i] = [h(blockG),h(blockP)].min
@@ -194,17 +224,17 @@ class Evaluation
 					
 					#~ bg+="P#{j-mt+1} -> G#{i+1}  [label=\"#{"%.2f" % of[i,j]}\",color=\"red\",fontcolor=\"red\"];\n"
 					bg+="G#{i+1} -- P#{j-@mt+1}[label=\"#{"%.3f" % @of[i,j]}\",color=\"#{ncolor}\",fontcolor=\"#{ncolor}\"];\n"
-					puts "G#{i+1} in P#{j-@mt+1}"
+					#~ puts "G#{i+1} in P#{j-@mt+1}"
 				else
-					puts "no match"
+					#~ puts "no match"
 				end
 				
 				if @bcg[i,j].to_f>0
-					@fromGtoP[i,j-@mt]+=@bcg[i,j].to_f
+					@fromGtoP[i,j-@mt]+=@of[i,j].to_f
 					#puts ["G#{i+1}","P#{j+1}",of[i,mt+j]].inspect
 				end
 				if @bcg[j,i].to_f>0
-					@fromPtoG[j-@mt,i]+=@bcg[j,i].to_f
+					@fromPtoG[j-@mt,i]+=@of[j,i].to_f
 					#puts ["P#{(j+1)}","G#{(i+1)}",of[mt+j,i]].inspect
 				end
 			end
@@ -212,16 +242,18 @@ class Evaluation
 			#~ gets
 		end
 		bg+="}"
-		File.open("BCG.txt",'w') {|f| f.puts @bcg}
-		File.open("OF.txt",'w') {|f| f.puts @of}
-		File.open("BG.dot",'w') {|f| f.puts bg}
-		system "dot -Tsvg BG.dot > BG.svg"
-		system "dot -Tpng BG.dot > BG.png"
-		puts "</pre>"
-		puts @bcg.to_html
-		puts @of.to_html
-		puts @fromGtoP.to_html
-		puts @fromPtoG.to_html
+		File.open("table/BCG_#{@filename}.html",'w') {|f| f.puts @bcg.to_html}
+		File.open("table/OF_#{@filename}.html",'w') {|f| f.puts @of.to_html}
+		File.open("table/FG2P_#{@filename}.html",'w') {|f| f.puts @fromGtoP.to_html}
+		File.open("table/FP2G_#{@filename}.html",'w') {|f| f.puts @fromPtoG.to_html}
+		File.open("dot/BG_#{@filename}.dot",'w') {|f| f.puts bg}
+		system "dot -Tsvg dot/BG_#{@filename}.dot > images/BG_#{@filename}.svg"
+		system "dot -Tpng dot/BG_#{@filename}.dot > images/BG_#{@filename}.png"
+		#~ puts "</pre>"
+		#~ puts @bcg.to_html
+		#~ puts @of.to_html
+		#~ puts @fromGtoP.to_html
+		#~ puts @fromPtoG.to_html
 	end
 end
 
@@ -240,7 +272,7 @@ class Segmentation
 		@imagefilename = imgfile
 	end
 	def parse
-		puts self.class
+		#~ puts self.class
 		@url = @xml.at("Document")["url"]
 		pos = @xml.at("Document")["Pos"].split(" ").collect{|x| x.split(":")}.flatten
 		@width = pos[5].to_f
@@ -261,7 +293,7 @@ class Segmentation
 		end
 	end
 	def fix_dimension_with_resize(target_width,target_height)
-		p [@width,target_width]
+		#~ p [@width,target_width]
 		wratio =  target_width / @width
 		hratio = target_height / @height 
 		@width = target_width
@@ -277,27 +309,27 @@ class Segmentation
 		end
 	end
 	def fix_dimension_with_aspect_ratio(other_width,other_height)
-		puts "GDIM: #{@width} #{height}"
-		puts "PDIM: #{other_width} #{other_height}"
+		#~ puts "GDIM: #{@width} #{height}"
+		#~ puts "PDIM: #{other_width} #{other_height}"
 		
 		original = @width / @height
 		scaled = other_width / other_height
 		
 		if scaled < original
-			puts "width ratio"
+			#~ puts "width ratio"
 			ratio = other_width / @width #resizing by width
 		else
-			puts "height ratio"
+			#~ puts "height ratio"
 			ratio = other_height / @height #resizing by height
 		end
 		
-		puts "RATIO: #{ratio}"
+		#~ puts "RATIO: #{ratio}"
 		
 		@width = @width * ratio
 		@height = @height * ratio
 		
-		puts "GDIM': #{@width} #{height}"
-		puts "PDIM': #{other_width} #{other_height}"
+		#~ puts "GDIM': #{@width} #{height}"
+		#~ puts "PDIM': #{other_width} #{other_height}"
 		
 		@blocks.each do |b|
 			b.left,
@@ -327,7 +359,7 @@ class Automatic < Segmentation
 	end
 	private
 	def load_doc
-		puts  "#{self.class} loading xml/#{@filename}.xml"
+		#~ puts  "#{self.class} loading xml/#{@filename}.xml"
 		unless File.exists?("xml/"+@filename+".xml")
 			unless system("../pagelyzer/pagelyzer analyzer --decorated-file=xml/#{@filename}.dhtml --output-file=xml/#{@filename}.xml --granularity=6 --force")
 				raise "No XML found for #{@filename}.xml"
@@ -349,7 +381,7 @@ class Manual < Segmentation
 	end
 	private
 	def load_doc
-		puts  "#{self.class} loading manual/#{@category}/#{@filename}.xml"
+		#~ puts  "#{self.class} loading manual/#{@category}/#{@filename}.xml"
 		if File.exist?("manual/#{@category}/#{@filename}.xml")
 			return Nokogiri::XML(File.open("manual/#{@category}/#{@filename}.xml"))
 			#~ @filename = "manual/#{@category}/#{@filename}.xml"
@@ -450,12 +482,12 @@ class Block
 		#~ p rgeo = rgeo && (element.bottom - bottom > @deltaGeo) && (element.bottom - bottom > @top)
 		#~ p rgeo = rgeo && (element.right - right > @deltaGeo) && (element.right - right > @width)
 		ageo = (element.area / area)
-		p ["geo_in?",rgeo,ageo]
+		#~ p ["geo_in?",rgeo,ageo]
 		return rgeo
 	end
 	def cnt_contains?(element)
 		rcnt = (@children >= element.children + @deltaCnt)
-		p ["cnt_in?",rcnt]
+		#~ p ["cnt_in?",rcnt]
 		return rcnt
 	end
 	def geo_equals?(element)
@@ -465,7 +497,7 @@ class Block
 		d3 = Point.new(right,bottom).distance_to(Point.new(element.right,element.bottom))
 		d4 = Point.new(right,@top).distance_to(Point.new(element.right,element.top))
 		
-		p vd = [d1,d2,d3,d4]
+		vd = [d1,d2,d3,d4]
 		
 		#~ p [@left,element.left,@top,element.top,bottom,element.bottom,right,element.right]
 		
@@ -480,12 +512,12 @@ class Block
 		#~ rgeo = rgeo && (dtop < @deltaGeo)
 		#~ rgeo = rgeo && (dright < @deltaGeo) 
 		#~ rgeo = rgeo && (dbottom < @deltaGeo)
-		p ["eql?",rgeo]
+		#~ p ["eql?",rgeo]
 		return rgeo
 	end
 	def cnt_equals?(element)
 		rcnt = ([@children,element.children].max-[@children,element.children].min).abs < @deltaCnt
-		p ["chl",@children,element.children,rcnt]
+		#~ p ["chl",@children,element.children,rcnt]
 		return rcnt
 	end
 	def contains?(element)
@@ -511,84 +543,96 @@ end
 
 
 
-marr=[]
-xarr=[]
+#main
+system "rm images/*"
+system "rm dot/*"
+system "rm data/*"
+system "rm table/*"
 
-puts "<pre>"
+files = {}
 
 Dir.glob("manual/*").each do |cat|
-	Dir.glob("#{cat}/*.xml").each do |page|
-		ev = Evaluation.new
-		
-		ev.set_category cat.split("/")[1]
-		
-		filename = page.split("/")[2]
-		filename = filename.gsub(".xml","")
-		filename = filename.gsub(".","_").strip
-	
-		#~ ev.set_filename()
-		#~ ev.g.set_imagefile "xml/#{filename}.png"
-		#~ ev.p.set_imagefile "xml/#{filename}.png"
-		
-		ev.init(filename)
+	catfile = cat.gsub("manual/","")
+	files[catfile] = File.open("data/data_#{catfile}.csv","w")
+end
 
-		puts "PAGE: #{ev.url}"
-		puts "GFILE: #{ev.g.filename}"
-		puts "PFILE: #{ev.p.filename}"
+ta = 1	
+tr = 0
+while tr <= 1
+	Dir.glob("manual/*").each do |cat|
+		catfile = cat.gsub("manual/","")
+		Dir.glob("#{cat}/*.xml").each do |page|
+			ev = Evaluation.new
+			
+			ev.set_category cat.split("/")[1]
+			
+			filename = page.split("/")[2]
+			filename = filename.gsub(".xml","")
+			filename = filename.gsub(".","_").strip
+		
+			#~ ev.set_filename()
+			#~ ev.g.set_imagefile "xml/#{filename}.png"
+			#~ ev.p.set_imagefile "xml/#{filename}.png"
+			
+			ev.init(filename)
 
-		#~ ev.fix_dimension_with_resize
-		#~ ev.fix_dimension_with_aspect_ratio
-		
-		#making visual svg outputs
-		
-		
-		svg = SVGPage.new [ev.p.width,ev.g.width].max,[ev.p.height,ev.g.height].max
-		svgg = SVGPage.new ev.g.width,ev.g.height
-		svgp = SVGPage.new ev.p.width,ev.p.height
-		
-		
-		d={"points" => ev.p.points, "color" => "#A020F0", "text" => "pdoc "}
-		svg.data.push d
-		svgp.data.push d
-		
-		d={"points" => ev.g.points, "color" => "green", "text" => "gdoc "}
-		svg.data.push d
-		svgg.data.push d
-		
-		
-		k=0
-		(0..(ev.g.blocks.size-1)).each {|i|
-			d = {"points" => ev.g.blocks[i].points, "color" => "red", "text" => "G#{i+1}"}
-			svg.data.push d
-			svgg.data.push d
-			k+=1
-			break if k==100
-		}
-		k=0
-		(0..ev.p.blocks.size-1).each {|i|
-			d = {"points" => ev.p.blocks[i].points, "color" => "blue", "text" => "_____________P#{i+1}"}
+			puts "PAGE: #{ev.url}"
+			puts "GFILE: #{ev.g.filename}"
+			puts "PFILE: #{ev.p.filename}"
+
+			#~ ev.fix_dimension_with_resize
+			#~ ev.fix_dimension_with_aspect_ratio
+			
+			#making visual svg outputs
+			
+			
+			svg = SVGPage.new [ev.p.width,ev.g.width].max,[ev.p.height,ev.g.height].max
+			svgg = SVGPage.new ev.g.width,ev.g.height
+			svgp = SVGPage.new ev.p.width,ev.p.height
+			
+			
+			d={"points" => ev.p.points, "color" => "#A020F0", "text" => "pdoc "}
 			svg.data.push d
 			svgp.data.push d
-			k+=1
-			break if k==1000
-		}
-		File.open("debug.svg","w") {|f| f.puts svg.parse("xml/#{ev.p.filename}.png")}
-		File.open("debugP.svg","w") {|f| f.puts svgp.parse("xml/#{ev.p.filename}.png")}
-		File.open("debugG.svg","w") {|f| f.puts svgg.parse("xml/#{ev.p.filename}.png")}
-		
-		#starting evaluation
-
-		ev.prepare(0,0)
-		result = ev.evaluate
-		
-		
-		puts "To #{result[:to]}"
-		puts "Tu #{result[:tu]}"
-		puts "Co #{result[:co]}"
-		puts "Cu #{result[:cu]}"
-		puts "Cm #{result[:cm]}"
-		puts "Cf #{result[:cf]}"
-		
-		puts "</pre>"
+			
+			d={"points" => ev.g.points, "color" => "green", "text" => "gdoc "}
+			svg.data.push d
+			svgg.data.push d
+			
+			
+			k=0
+			(0..(ev.g.blocks.size-1)).each {|i|
+				d = {"points" => ev.g.blocks[i].points, "color" => "red", "text" => "G#{i+1}"}
+				svg.data.push d
+				svgg.data.push d
+				k+=1
+				break if k==100
+			}
+			k=0
+			(0..ev.p.blocks.size-1).each {|i|
+				d = {"points" => ev.p.blocks[i].points, "color" => "blue", "text" => "_____________P#{i+1}"}
+				svg.data.push d
+				svgp.data.push d
+				k+=1
+				break if k==1000
+			}
+			File.open("images/debug_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../xml/#{ev.p.filename}.png")}
+			File.open("images/debugP_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../xml/#{ev.p.filename}.png")}
+			File.open("images/debugG_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../xml/#{ev.p.filename}.png")}
+			
+			#starting evaluation
+			
+			
+			ev.prepare(tr,ta)
+			result = ev.evaluate
+			puts "Tr: #{"%.2f" % tr} Ta #{ta} To: #{result[:to]} Tu: #{result[:tu]} Co: #{result[:co]} Cu: #{result[:cu]} Cm: #{result[:cm]} Cf: #{result[:cf]}"		
+			files[catfile].puts "#{tr};#{ta};#{result[:tc]};#{result[:to]};#{result[:tu]};#{result[:co]};#{result[:cu]};#{result[:cm]};#{result[:cf]}"
+			ev = nil
+		end
 	end
+	tr+=0.1
+end
+
+files.each do |k,v|
+	files[k].close
 end
