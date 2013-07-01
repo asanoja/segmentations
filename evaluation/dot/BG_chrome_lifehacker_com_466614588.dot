@@ -54,11 +54,11 @@ P19 [label="P19(119)"];
 P20 [label="P20(1)"];
 }
 G1 -- P4[label="0.000",color="red",fontcolor="red"];
-G1 -- P5[label="0.009",color="red",fontcolor="red"];
-G7 -- P3[label="0.300",color="red",fontcolor="red"];
-G11 -- P19[label="0.915",color="red",fontcolor="red"];
-G13 -- P15[label="0.928",color="red",fontcolor="red"];
-G15 -- P11[label="0.951",color="red",fontcolor="red"];
-G19 -- P1[label="0.021",color="red",fontcolor="red"];
-G19 -- P2[label="0.007",color="red",fontcolor="red"];
+G1 -- P5[label="0.009",color="blue",fontcolor="blue"];
+G7 -- P3[label="0.300",color="blue",fontcolor="blue"];
+G11 -- P19[label="0.915",color="blue",fontcolor="blue"];
+G13 -- P15[label="0.928",color="blue",fontcolor="blue"];
+G15 -- P11[label="0.951",color="blue",fontcolor="blue"];
+G19 -- P1[label="0.021",color="blue",fontcolor="blue"];
+G19 -- P2[label="0.007",color="blue",fontcolor="blue"];
 }

@@ -1,0 +1,59 @@
+strict graph BCG {
+rankdir=LR;
+splines=true;
+ranksep="8 equally";
+concentrate = true;
+node [shape=rectangle];
+subgraph cluster_G {
+label = "G";
+color=black;
+rank="same"
+G1 [label="G1(1)"];
+G2 [label="G2(61)"];
+G3 [label="G3(2)"];
+G4 [label="G4(2)"];
+G5 [label="G5(2)"];
+G6 [label="G6(50)"];
+G7 [label="G7(31)"];
+G8 [label="G8(6)"];
+G9 [label="G9(156)"];
+G10 [label="G10(50)"];
+}
+subgraph cluster_P {
+label = "P";
+color="black";
+rank="same"
+P1 [label="P1(1)"];
+P2 [label="P2(1)"];
+P3 [label="P3(1)"];
+P4 [label="P4(1)"];
+P5 [label="P5(7)"];
+P6 [label="P6(3)"];
+P7 [label="P7(36)"];
+P8 [label="P8(10)"];
+P9 [label="P9(3)"];
+P10 [label="P10(128)"];
+P11 [label="P11(1)"];
+P12 [label="P12(1)"];
+P13 [label="P13(93)"];
+P14 [label="P14(30)"];
+P15 [label="P15(1)"];
+P16 [label="P16(1)"];
+}
+P12 -- G1  [dir="none",label="1.000",color="blue",fontcolor="blue"];
+G2 -- P1[label="0.016",color="blue",fontcolor="blue"];
+G2 -- P2[label="0.016",color="blue",fontcolor="blue"];
+G2 -- P3[label="0.016",color="blue",fontcolor="blue"];
+G2 -- P4[label="0.016",color="blue",fontcolor="blue"];
+G2 -- P5[label="0.115",color="blue",fontcolor="blue"];
+G2 -- P6[label="0.049",color="blue",fontcolor="blue"];
+G2 -- P7[label="0.590",color="blue",fontcolor="blue"];
+G2 -- P8[label="0.164",color="blue",fontcolor="blue"];
+G2 -- P11[label="0.016",color="blue",fontcolor="blue"];
+P9 -- G8  [dir="none",label="0.500",color="blue",fontcolor="blue"];
+G9 -- P13[label="0.596",color="blue",fontcolor="blue"];
+G9 -- P15[label="0.006",color="blue",fontcolor="blue"];
+G10 -- P10[label="0.391",color="blue",fontcolor="blue"];
+G10 -- P14[label="0.600",color="blue",fontcolor="blue"];
+G10 -- P16[label="0.020",color="blue",fontcolor="blue"];
+}

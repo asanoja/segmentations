@@ -1,3 +1,5 @@
+require 'csv'
+require 'rubygems'
 require 'nokogiri'
 require_relative './matrix.rb'
 require_relative './svglib.rb'
@@ -46,103 +48,68 @@ class Evaluation
 		@p.fix_dimension_with_resize(@g.width,@g.height)
 	end
 	def significative(i,j)
-	return ( (@of[i,j].to_f > @tr) && (@of[i,j].to_f < 1) ) || (@bcg[i,j].to_f > @ta)
+	return (@of[i,j].to_f > @tr) || (@bcg[i,j].to_f > @ta)
 	end
 	def evaluate
 		result = {:tc => 0,:to => 0,:tu => 0, :co => 0, :cu => 0, :cm => 0, :cf => 0}
 		
-		auxG = Array.new(@mt) {nil}
-		for i in (0..(@mt-1))
-			for j in (0..(@at-1))
-				if significative(i,j)
-					auxG[i]=@fromGtoP[i,j]
-				end
-			end
-		end
+		puts "#{@mt} #{@at}"
 		
-		puts auxG.inspect
-		gets
+		subV = Array.new(@mt) {0}
+		subH = Array.new(@at) {0}
 		
 		for i in (0..(@mt-1))
-			
 			for j in (0..(@at-1))
-							
 				if @bcg[i,j+@mt].to_f>0 
-				
-					#~ fg = @fromGtoP.rows[i]
-					#~ fg.delete(0)
-					#~ fg.delete(nil)
-					#~ 
-					#~ fp = @fromPtoG.rows[j]
-					#~ fp.delete(0)
-					#~ fp.delete(nil)
-									
-						
 					#count only if significative
 					if significative(i,j+@mt)
-						#~ sigG[i] += 1 
-						#~ sigP[j] += 1 
-							
-						#~ total_sig_edges_G_has += 1 es la suma del arrego sigG
-						#~ total_sig_edges_P_has += 1
-						
-						#~ result[:co]+=1 if fg.size>1
-						#~ result[:cm]+1 if fg.size==0
-			
-
-						
-						
-						#~ result[:co]+=1 if fp.size>1
-						#~ result[:cf]+=1 if fp.size==0
-					else
-						result[:cm]+=1 
-						result[:cf]+=1 
+						subV[i]+=1
+						subH[j]+=1
 					end
-					#~ puts sigG.inspect
-					#~ puts sigP.inspect
-					#~ print "G#{i+1},P#{j+1},#{fg.size},#{fp.size} #{@of[i,j+@mt]}"		
-					
-					
-					
-					#~ if fg.size == 1 && fp.size==1 
-						#~ if @of[i,j+@mt].to_f==1
-							#~ puts " perfect matching"
-							#~ result[:tc] += 1
-						#~ elsif (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
-							#~ if h(@g.blocks[i])>h(@p.blocks[j])
-								#~ puts " oversegmented 1"
-							#~ else
-								#~ puts " undersegmented 1"
-							#~ end
-						#~ else
-							#~ puts " - #{@of[i,j+@mt].to_f} no significative 1"
-						#~ end
-					#~ elsif fg.size > fp.size
-						#~ if (@of[i,j+@mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
-							#~ puts " oversegmented 2"
-						#~ else
-							#~ puts " - #{@of[i,j+@mt].to_f} no significative 2"
-						#~ end
-					#~ elsif fg.size < fp.size
-						#~ if (@of[i,j+mt].to_f>@tr && @of[i,j+@mt].to_f<1) || (@bcg[i,j+@mt].to_f > @ta)
-							#~ puts " undersegmented 3"
-						#~ else
-							#~ puts " - #{@of[i,j+@mt].to_f} no significative 3"
-						#~ end
-					#~ end
 				end
 			end
 		end
 		
-		#~ total_sig_edges_G_has = sigG.inject{|sum,x| sum + x }
-		#~ nodes_G_at_least_one_edge = sigG.inject{|sum,x| x>0 ? sum + 1 : 0 }
-		#~ 
-		#~ total_sig_edges_P_has = sigP.inject{|sum,x| sum + x }
-		#~ nodes_P_at_least_one_edge = sigP.inject{|sum,x| x>0 ? sum + 1 : 0 }
-		#~ 
-		#~ result[:to] = total_sig_edges_G_has - nodes_G_at_least_one_edge
-		#~ result[:tu] = total_sig_edges_P_has - nodes_P_at_least_one_edge
-		#~ 
+		puts subV.inspect
+		puts subH.inspect
+		
+		for i in (0..(@mt-1))
+			for j in (0..(@at-1))
+				if @bcg[i,j+@mt].to_f>0 
+					if subH[j] == 1 && subV[i]==1
+						#~ puts "(#{i}-#{j}) V:#{subV[i]} H:#{subH[j]}" 
+						result[:tc]+=1
+					elsif false 
+						
+					end
+				end
+			end
+		end
+		vvs = 0
+		vvc = 0
+		vvm = 0
+
+		hhs = 0
+		hhc = 0
+		hhm = 0
+		
+		subH.each {|x| 
+			hhs+=x
+			hhc+=1 			 if x>0
+			result[:cu] += 1 if x>1
+			result[:cf] += 1 if x==0
+			}
+		subV.each {|x| 
+			vvs += x
+			vvc +=1 		 if x>0
+			result[:co] += 1 if x>1
+			result[:cm] += 1 if x==0
+		}
+		
+		result[:to] = vvs - vvc
+		result[:tu] = hhs - hhc
+		
+
 		result
 	end
 	def prepare(tr,ta)
@@ -185,14 +152,18 @@ class Evaluation
 				#puts "#{i},#{j} G:#{ev.g.blocks[i].points} || P:#{ev.p.blocks[j-ng-1].points}"
 				#~ puts "G#{i+1} vs P#{j-@mt+1}"
 				
+				divd = [h(blockG),h(blockP)].max.to_f
+				
 				if blockG.equals? blockP
 					@bcg[i,j] = [h(blockG),h(blockP)].min
 					@bcg[j,i] = [h(blockG),h(blockP)].min
 					
-					@of[i,j] = @bcg[i,j].to_f / [h(blockG),h(blockP)].max.to_f
-					@of[j,i] = @bcg[j,i].to_f / [h(blockG),h(blockP)].max.to_f
-
-					ww = [h(blockG),h(blockP)].min.to_f / [h(blockG),h(blockP)].max.to_f
+					@of[i,j] = @bcg[i,j].to_f / divd unless divd==0
+					@of[j,i] = @bcg[j,i].to_f / divd unless divd==0
+					
+					ww = 0
+					
+					ww = [h(blockG),h(blockP)].min.to_f / divd unless divd==0
 					
 					ncolor = ww>@tr ? "blue" : "red"
 					
@@ -204,8 +175,8 @@ class Evaluation
 					@bcg[i,j] = [h(blockG),h(blockP)].min
 					@bcg[j,i] = [h(blockG),h(blockP)].min
 					
-					@of[i,j] = @bcg[i,j].to_f / [h(blockG),h(blockP)].max
-					@of[j,i] = @bcg[j,i].to_f / [h(blockG),h(blockP)].max
+					@of[i,j] = @bcg[i,j].to_f / divd unless divd==0
+					@of[j,i] = @bcg[j,i].to_f / divd unless divd==0
 					
 					ncolor = @of[j,i]>@tr ? "blue" : "red"
 					
@@ -217,8 +188,8 @@ class Evaluation
 					@bcg[i,j] = [h(blockG),h(blockP)].min
 					@bcg[j,i] = [h(blockG),h(blockP)].min
 					
-					@of[i,j] = @bcg[i,j].to_f / [h(blockG),h(blockP)].max
-					@of[j,i] = @bcg[j,i].to_f / [h(blockG),h(blockP)].max
+					@of[i,j] = @bcg[i,j].to_f / divd unless divd==0
+					@of[j,i] = @bcg[j,i].to_f / divd unless divd==0
 					
 					ncolor = @of[i,j]>@tr ? "blue" : "red"
 					
@@ -553,7 +524,8 @@ files = {}
 
 Dir.glob("manual/*").each do |cat|
 	catfile = cat.gsub("manual/","")
-	files[catfile] = File.open("data/data_#{catfile}.csv","w")
+	files[catfile] = File.open("data/raw_#{catfile}.csv","w")
+	files[catfile].puts "tr,ta,tc,to,tu,co,cu,cm,cf"
 end
 
 ta = 1	
@@ -625,14 +597,27 @@ while tr <= 1
 			
 			ev.prepare(tr,ta)
 			result = ev.evaluate
-			puts "Tr: #{"%.2f" % tr} Ta #{ta} To: #{result[:to]} Tu: #{result[:tu]} Co: #{result[:co]} Cu: #{result[:cu]} Cm: #{result[:cm]} Cf: #{result[:cf]}"		
-			files[catfile].puts "#{tr};#{ta};#{result[:tc]};#{result[:to]};#{result[:tu]};#{result[:co]};#{result[:cu]};#{result[:cm]};#{result[:cf]}"
+			
+			puts "Tr: #{"%.2f" % tr} Ta #{ta} Tc: #{result[:tc]} To: #{result[:to]} Tu: #{result[:tu]} Co: #{result[:co]} Cu: #{result[:cu]} Cm: #{result[:cm]} Cf: #{result[:cf]}"		
+			
+			files[catfile].puts "#{tr},#{ta},#{result[:tc]},#{result[:to]},#{result[:tu]},#{result[:co]},#{result[:cu]},#{result[:cm]},#{result[:cf]}"
 			ev = nil
 		end
 	end
 	tr+=0.1
+	break
 end
 
 files.each do |k,v|
 	files[k].close
 end
+
+Dir.glob("data/raw_*").each do |raw|
+puts raw
+	datafilename = raw.gsub("data/","").gsub("raw_","data_")
+	o = File.open("data/#{datafilename}.csv","w")
+	CSV.foreach(raw, :headers=>true) do |row|
+		puts row["tc"]
+	end
+end
+	
