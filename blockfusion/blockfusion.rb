@@ -286,3 +286,6 @@ end
 
 p to_xml("url","title",1024,768,nodes)
 
+
+#OJO DEBO PARSEAR EL DHTML CON LOS VISUAL CUES PARA HACER EL XML!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
