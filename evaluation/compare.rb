@@ -519,6 +519,7 @@ system "rm images/*"
 system "rm dot/*"
 system "rm data/*"
 system "rm table/*"
+system "rm plot/*"
 
 files = {}
 
@@ -605,19 +606,50 @@ while tr <= 1
 		end
 	end
 	tr+=0.1
-	break
+	#~ break
 end
 
 files.each do |k,v|
 	files[k].close
 end
 
+avg = {}
+
 Dir.glob("data/raw_*").each do |raw|
 puts raw
 	datafilename = raw.gsub("data/","").gsub("raw_","data_")
-	o = File.open("data/#{datafilename}.csv","w")
+	o = File.open("data/#{datafilename}","w")
+	
 	CSV.foreach(raw, :headers=>true) do |row|
-		puts row["tc"]
+
+		if avg[row["tr"].to_f.to_s].nil?
+			avg[row["tr"].to_f.to_s] = {:tc => 0,:to => 0,:tu => 0, :co => 0, :cu => 0, :cm => 0, :cf => 0, :n=>0}
+		end
+		 avg[row["tr"].to_f.to_s][:tc] += row["tc"].to_f
+		 avg[row["tr"].to_f.to_s][:to] += row["to"].to_f
+		 avg[row["tr"].to_f.to_s][:tu] += row["tu"].to_f
+		 avg[row["tr"].to_f.to_s][:co] += row["co"].to_f
+		 avg[row["tr"].to_f.to_s][:cu] += row["cu"].to_f
+		 avg[row["tr"].to_f.to_s][:cm] += row["cm"].to_f
+		 avg[row["tr"].to_f.to_s][:cf] += row["cf"].to_f
+		 avg[row["tr"].to_f.to_s][:n] += 1
+		 
 	end
+	
+	o.puts "tr,ta,tc,to,tu,co,cu,cm,cf"
+	
+	avg.each_pair do |k,v|
+		avg[k][:tc] /= v[:n]
+		avg[k][:to] /= v[:n]
+		avg[k][:tu] /= v[:n]
+		avg[k][:co] /= v[:n]
+		avg[k][:cu] /= v[:n]
+		avg[k][:cm] /= v[:n]
+		avg[k][:cf] /= v[:n]
+		
+		o.puts "#{k},1,#{avg[k][:tc]},#{avg[k][:to]},#{avg[k][:tu]},#{avg[k][:co]},#{avg[k][:cu]},#{avg[k][:cm]},#{avg[k][:cf]}"
+	end
+	
+	
 end
 	

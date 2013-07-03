@@ -1,0 +1,36 @@
+/* @override http://127.0.0.1/~jlm/Site2008/Site2008/css/lip6-print.css */
+
+body {
+	color: black;
+	margin: auto;
+	box-shadow: 0px 0px 0px white;
+}
+
+#bas {
+/*	display: none;*/
+}
+div.noprint {
+	display: none;
+}
+div.onlyprint {
+	display: block;
+}
+
+html, #centre {
+	background-color: white;
+	background-image: none;
+}
+
+body {
+	box-shadow: none;
+	border-style: none;
+}
+
+
+div.organigramme {
+	display: block;	
+}
+
+#menu1, #menu2, #nav {
+	display: none;
+}

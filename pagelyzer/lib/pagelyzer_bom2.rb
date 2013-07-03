@@ -408,6 +408,7 @@ end
 		w = block["elem_width"].to_i 
 		h = block["elem_height"].to_i
 		am = block["childnodes"].to_i
+		am=1 if am==0
 		
 		p [h,block["elem_height"],block.path] if block.name.downcase=="div"
 		

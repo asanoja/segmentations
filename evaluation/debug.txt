@@ -11955,3 +11955,1341 @@ NEW SBLOCK /html/body/footer W:1.0 element-657
 NEW SBLOCK /html/body/div[1] W:1.0 element-657 
 NEW SBLOCK /html/body/div[2] W:1.0 element-657 
 NEW SBLOCK /html/body/div[3] W:1.0 element-657 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1]/div/a RA:0
+NEW SBLOCK /html/body/div/div[1]/div/a W:1.0 element-74 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[1] RA:0.333025525161728
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2]/div[4] RA:0.6319060574626508
+NEW SBLOCK /html/body/div/div[2]/div[4] W:0.25 navigation_principale 
+DD /html/body/div/div[2] RA:0.2932174181668403
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body/div/div[3]/ul RA:0
+NEW SBLOCK /html/body/div/div[3]/ul W:1.0 element-267 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[1]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[1]/a W:1.0 element-300 
+DD /html/body/div/ul[2]/li[1]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[1]/a W:1.0 element-300 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[2]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[2]/a W:1.0 element-303 
+DD /html/body/div/ul[2]/li[2]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[2]/a W:1.0 element-303 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[3]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[3]/a W:1.0 element-306 
+DD /html/body/div/ul[2]/li[3]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[3]/a W:1.0 element-306 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[4]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[4]/a W:1.0 element-309 
+DD /html/body/div/ul[2]/li[4]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[4]/a W:1.0 element-309 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[7]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[7]/a W:1.0 element-317 
+DD /html/body/div/ul[2]/li[7]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[7]/a W:1.0 element-317 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[8]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[8]/a W:1.0 element-320 
+DD /html/body/div/ul[2]/li[8]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[8]/a W:1.0 element-320 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2]/li[10]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[10]/a W:1.0 element-325 
+DD /html/body/div/ul[2]/li[10]/a RA:0
+NEW SBLOCK /html/body/div/ul[2]/li[10]/a W:1.0 element-325 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body/div/ul[2] RA:0.33418134535087507
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 
+DD /html/body RA:0
+NEW SBLOCK /html/body W:1.0 element-23 

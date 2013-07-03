@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" 
+     xml:space="preserve"     
+     width="1009.0px" 
+     height="838.0px" 
+     ><!--    
+     viewBox="0 0 1009.0 838.0"     
+     zoomAndPan="disable"
+    -->
+<image x="0" y="0" width="1009.0" height="838.0" xlink:href="../xml/chrome_www_bnf_fr_fr_acc_x_accueil_html.png" preserveAspectRatio='none'/>
+<g>
+<polygon points="0,0 0,838.0 1009.0,838.0 1009.0,0" style="fill:transparent;stroke:#A020F0;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">pdoc 
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">pdoc 
+</text>
+</g>
+<g>
+<polygon points="0,0 0,820.0 1001.0,820.0 1001.0,0" style="fill:transparent;stroke:green;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">gdoc 
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">gdoc 
+</text>
+</g>
+<g>
+<polygon points="13.5,0.0 13.5,107.0 987.5,107.0 987.5,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="14" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G1
+</text>
+<text x="13" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G1
+</text>
+</g>
+<g>
+<polygon points="33.5,123.0 33.5,266.0 373.5,266.0 373.5,123.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="34" y="134" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G2
+</text>
+<text x="33" y="133" style="stroke:black;stroke-width:1;stroke-opacity:1">G2
+</text>
+</g>
+<g>
+<polygon points="33.5,281.0 33.5,398.0 373.5,398.0 373.5,281.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="34" y="292" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G3
+</text>
+<text x="33" y="291" style="stroke:black;stroke-width:1;stroke-opacity:1">G3
+</text>
+</g>
+<g>
+<polygon points="33.5,413.0 33.5,504.0 373.5,504.0 373.5,413.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="34" y="424" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G4
+</text>
+<text x="33" y="423" style="stroke:black;stroke-width:1;stroke-opacity:1">G4
+</text>
+</g>
+<g>
+<polygon points="817.5,448.0 817.5,493.0 957.5,493.0 957.5,448.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="818" y="459" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G5
+</text>
+<text x="817" y="458" style="stroke:black;stroke-width:1;stroke-opacity:1">G5
+</text>
+</g>
+<g>
+<polygon points="28.5,518.0 28.5,718.0 202.5,718.0 202.5,518.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="29" y="529" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G6
+</text>
+<text x="28" y="528" style="stroke:black;stroke-width:1;stroke-opacity:1">G6
+</text>
+</g>
+<g>
+<polygon points="218.5,518.0 218.5,718.0 392.5,718.0 392.5,518.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="219" y="529" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G7
+</text>
+<text x="218" y="528" style="stroke:black;stroke-width:1;stroke-opacity:1">G7
+</text>
+</g>
+<g>
+<polygon points="408.5,518.0 408.5,718.0 582.5,718.0 582.5,518.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="409" y="529" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G8
+</text>
+<text x="408" y="528" style="stroke:black;stroke-width:1;stroke-opacity:1">G8
+</text>
+</g>
+<g>
+<polygon points="598.5,518.0 598.5,723.0 772.5,723.0 772.5,518.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="599" y="529" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G9
+</text>
+<text x="598" y="528" style="stroke:black;stroke-width:1;stroke-opacity:1">G9
+</text>
+</g>
+<g>
+<polygon points="788.5,518.0 788.5,718.0 962.5,718.0 962.5,518.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="789" y="529" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G10
+</text>
+<text x="788" y="528" style="stroke:black;stroke-width:1;stroke-opacity:1">G10
+</text>
+</g>
+<g>
+<polygon points="13.5,753.0 13.5,753.0 987.5,753.0 987.5,753.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="14" y="764" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G11
+</text>
+<text x="13" y="763" style="stroke:black;stroke-width:1;stroke-opacity:1">G11
+</text>
+</g>
+<g>
+<polygon points="38.5,808.0 38.5,820.0 987.5,820.0 987.5,808.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="39" y="819" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G12
+</text>
+<text x="38" y="818" style="stroke:black;stroke-width:1;stroke-opacity:1">G12
+</text>
+</g>
+<g>
+<polygon points="581.0,79.0 581.0,94.0 692.0,94.0 692.0,79.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="582" y="90" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P1
+</text>
+<text x="581" y="89" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P1
+</text>
+</g>
+<g>
+<polygon points="18.0,524.0 18.0,744.0 992.0,744.0 992.0,524.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="19" y="535" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P2
+</text>
+<text x="18" y="534" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P2
+</text>
+</g>
+<g>
+<polygon points="685.0,786.0 685.0,812.0 992.0,812.0 992.0,786.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="686" y="797" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P3
+</text>
+<text x="685" y="796" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P3
+</text>
+</g>
+<g>
+<polygon points="18.0,787.0 18.0,801.0 112.0,801.0 112.0,787.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="19" y="798" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P4
+</text>
+<text x="18" y="797" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P4
+</text>
+</g>
+<g>
+<polygon points="117.0,780.0 117.0,794.0 156.0,794.0 156.0,780.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="118" y="791" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P5
+</text>
+<text x="117" y="790" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P5
+</text>
+</g>
+<g>
+<polygon points="161.0,782.0 161.0,796.0 221.0,796.0 221.0,782.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="162" y="793" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P6
+</text>
+<text x="161" y="792" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P6
+</text>
+</g>
+<g>
+<polygon points="226.0,779.0 226.0,793.0 316.0,793.0 316.0,779.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="227" y="790" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P7
+</text>
+<text x="226" y="789" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P7
+</text>
+</g>
+<g>
+<polygon points="382.0,786.0 382.0,800.0 445.0,800.0 445.0,786.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="383" y="797" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P8
+</text>
+<text x="382" y="796" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P8
+</text>
+</g>
+<g>
+<polygon points="450.0,782.0 450.0,796.0 531.0,796.0 531.0,782.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="451" y="793" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P9
+</text>
+<text x="450" y="792" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P9
+</text>
+</g>
+<g>
+<polygon points="548.0,788.0 548.0,802.0 640.0,802.0 640.0,788.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="549" y="799" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P10
+</text>
+<text x="548" y="798" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P10
+</text>
+</g>
+</svg>
