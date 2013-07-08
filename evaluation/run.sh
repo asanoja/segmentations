@@ -1,14 +1,14 @@
 #!/bin/bash
 
-ruby genplot.rb data/data_unfiled_tagged.csv 
-ruby genplot.rb data/data_Sports.csv
-ruby genplot.rb data/data_society.csv
-ruby genplot.rb data/data_sci_tech.csv
-ruby genplot.rb data/data_outdoors.csv
-ruby genplot.rb data/data_music_movies.csv
-ruby genplot.rb data/data_media.csv
-ruby genplot.rb data/data_home_living.csv
-ruby genplot.rb data/data_health.csv
-ruby genplot.rb data/data_computers.csv
-ruby genplot.rb data/data_commerce.csv
-ruby genplot.rb data/data_arts_history.csv
+ruby genplot.rb unfiled_tagged
+ruby genplot.rb Sports
+ruby genplot.rb society
+ruby genplot.rb sci_tech
+ruby genplot.rb outdoors
+ruby genplot.rb music_movies
+ruby genplot.rb media
+ruby genplot.rb home_living
+ruby genplot.rb health
+ruby genplot.rb computers
+ruby genplot.rb commerce
+ruby genplot.rb arts_history

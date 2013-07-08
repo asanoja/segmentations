@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<XML>
+<Document url="" algorithm="bom2.1" Title="" Version="" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith: ObjectRectHeight:">
+<Block Ref="Block1" internal_id='' ID="4d9e5f306c5c95e9a67981fd828b8d03" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:1009 ObjectRectHeight:706" Doc="0.4">
+<weight>
+0.7809650336923359
+</weight>
+<Paths>
+<path>/html/head,0,0,0,0,element-2,2,23</path>
+<path>/html,0,0,1009,706,element-1,1,317</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block2" internal_id='' ID="ccb82825c813ebe6f93f4cb5867fb6cb" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:0 ObjectRectHeight:0" Doc="0.4">
+<weight>
+1.0
+</weight>
+<Paths>
+<path>/html/head/title,0,0,0,0,element-11,11,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block3" internal_id='' ID="710c68a8cbb64b5e78a22cd2037be87b" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:900 ObjectRectHeight:877" Doc="0.4">
+<weight>
+0.0728949605855777
+</weight>
+<Paths>
+<path>/html/body/div[1]/div/dl/dd[1],180,122,79,25,element-23,23,2</path>
+<path>/html/body/div[1]/div/dl,180,122,765,20,element-22,22,37</path>
+<path>/html/body/div[1]/div,180,122,765,25,menu1,21,40</path>
+<path>/html/body/div[1]/img,55,0,900,146,element-20,20,0</path>
+<path>/html/body/div[1]/map/area[3],0,0,0,0,element-19,19,0</path>
+<path>/html/body/div[1]/map/area[2],0,0,0,0,element-18,18,0</path>
+<path>/html/body/div[1]/map/area[1],0,0,0,0,element-17,17,0</path>
+<path>/html/body/div[1]/map,55,0,0,0,Tutelles,16,3</path>
+<path>/html/body/div[1],55,0,900,146,haut,15,51</path>
+<path>/html/body,54,0,900,877,element-14,14,291</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block4" internal_id='' ID="91e01cd3993e474f05d17281aae1e288" Pos="WindowWidth||PageRectLeft:180 WindowHeight||PageRectTop:122 ObjectRectWidth:131 ObjectRectHeight:25" Doc="0.4">
+<weight>
+0.8333587646484375
+</weight>
+<Paths>
+<path>/html/body/div[1]/div/dl/dd[9]/a,750,122,69,21.328125,element-40,40,1</path>
+<path>/html/body/div[1]/div/dl/dd[9],750,122,79,25,element-39,39,2</path>
+<path>/html/body/div[1]/div/dl/dd[8]/a,710,122,30,21.328125,element-38,38,1</path>
+<path>/html/body/div[1]/div/dl/dd[8],710,122,40,25,element-37,37,2</path>
+<path>/html/body/div[1]/div/dl/dd[7]/a,656,122,44,21.328125,element-36,36,1</path>
+<path>/html/body/div[1]/div/dl/dd[7],656,122,54,25,element-35,35,2</path>
+<path>/html/body/div[1]/div/dl/dd[6]/a,599,122,47,21.328125,element-34,34,1</path>
+<path>/html/body/div[1]/div/dl/dd[6],599,122,57,25,element-33,33,2</path>
+<path>/html/body/div[1]/div/dl/dd[5]/a,529,122,60,21.328125,element-32,32,1</path>
+<path>/html/body/div[1]/div/dl/dd[5],529,122,70,25,element-31,31,2</path>
+<path>/html/body/div[1]/div/dl/dd[4]/a,460,122,59,21.328125,element-30,30,1</path>
+<path>/html/body/div[1]/div/dl/dd[4],460,122,69,25,element-29,29,2</path>
+<path>/html/body/div[1]/div/dl/dd[3]/a,390,122,60,21.328125,element-28,28,1</path>
+<path>/html/body/div[1]/div/dl/dd[3],390,122,70,25,element-27,27,2</path>
+<path>/html/body/div[1]/div/dl/dd[2]/a,259,122,121,21.328125,element-26,26,1</path>
+<path>/html/body/div[1]/div/dl/dd[2],259,122,131,25,element-25,25,2</path>
+<path>/html/body/div[1]/div/dl/dd[1]/a,180,122,69,21.328125,element-24,24,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block5" internal_id='' ID="9c4dc378efacc5e70ba853f34226cff1" Pos="WindowWidth||PageRectLeft:55 WindowHeight||PageRectTop:146 ObjectRectWidth:900 ObjectRectHeight:686" Doc="0.4">
+<weight>
+0.03571428583139758
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[1]/dl/dd[1],181,146,61,21,element-76,76,2</path>
+<path>/html/body/div[2]/div[1]/dl,55,146,900,21,element-75,75,25</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[10]/a/img,89,157,16,11,element-74,74,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[10]/a,89,157,16,11,element-73,73,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[10],89,157,16,11,element-72,72,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[9]/a/img,73,157,16,11,element-71,71,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[9]/a,73,157,16,11,element-70,70,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[9],73,157,16,11,element-69,69,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[8]/a/img,57,157,16,11,element-68,68,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[8]/a,57,157,16,11,element-67,67,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[8],57,157,16,11,element-66,66,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[7]/a/img,153,146,16,11,element-65,65,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[7]/a,153,146,16,11,element-64,64,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[7],153,146,16,11,element-63,63,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[6]/a/img,137,146,16,11,element-62,62,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[6]/a,137,146,16,11,element-61,61,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[6],137,146,16,11,element-60,60,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[5]/a/img,121,146,16,11,element-59,59,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[5]/a,121,146,16,11,element-58,58,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[5],121,146,16,11,element-57,57,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[4]/a/img,105,146,16,11,element-56,56,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[4]/a,105,146,16,11,element-55,55,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[4],105,146,16,11,element-54,54,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[3]/a/img,89,146,16,11,element-53,53,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[3]/a,89,146,16,11,element-52,52,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[3],89,146,16,11,element-51,51,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[2]/a/img,73,146,16,11,element-50,50,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[2]/a,73,146,16,11,element-49,49,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[2],73,146,16,11,element-48,48,2</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[1]/a/img,57,146,16,11,element-47,47,0</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[1]/a,57,146,16,11,element-46,46,1</path>
+<path>/html/body/div[2]/div[1]/div/ul/li[1],57,146,16,11,element-45,45,2</path>
+<path>/html/body/div[2]/div[1]/div/ul,57,146,122,22,element-44,44,41</path>
+<path>/html/body/div[2]/div[1]/div,55,146,124,22,element-43,43,42</path>
+<path>/html/body/div[2]/div[1],55,146,900,22,menu2,42,72</path>
+<path>/html/body/div[2],55,146,900,686,milieu,41,221</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block6" internal_id='' ID="51cf14c503b0545811b9ea7625449fd9" Pos="WindowWidth||PageRectLeft:181 WindowHeight||PageRectTop:146 ObjectRectWidth:124 ObjectRectHeight:21" Doc="0.4">
+<weight>
+0.33642578125
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[1]/dl/dd[6]/a,600,146,49,18.5625,element-87,87,1</path>
+<path>/html/body/div[2]/div[1]/dl/dd[6],600,146,69,21,element-86,86,2</path>
+<path>/html/body/div[2]/div[1]/dl/dd[5]/a,527,146,51,18.5625,element-85,85,1</path>
+<path>/html/body/div[2]/div[1]/dl/dd[5],527,146,71,21,element-84,84,2</path>
+<path>/html/body/div[2]/div[1]/dl/dd[4]/a,442,146,63,18.5625,element-83,83,1</path>
+<path>/html/body/div[2]/div[1]/dl/dd[4],442,146,83,21,element-82,82,2</path>
+<path>/html/body/div[2]/div[1]/dl/dd[3]/a,370,146,50,18.5625,element-81,81,1</path>
+<path>/html/body/div[2]/div[1]/dl/dd[3],370,146,70,21,element-80,80,2</path>
+<path>/html/body/div[2]/div[1]/dl/dd[2]/a,244,146,104,18.5625,element-79,79,1</path>
+<path>/html/body/div[2]/div[1]/dl/dd[2],244,146,124,21,element-78,78,2</path>
+<path>/html/body/div[2]/div[1]/dl/dd[1]/a,181,146,41,18.5625,element-77,77,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block7" internal_id='' ID="3b8159f12cbe3fdaabff0497b8d6a521" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:900 ObjectRectHeight:21" Doc="0.4">
+<weight>
+0.06290234924691177
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[2]/span,186,170,33,14,chemindefer,98,3</path>
+<path>/html/body/div[2]/div[2]/div/img,55,170,125,17,element-97,97,0</path>
+<path>/html/body/div[2]/div[2]/div,55,168,124,21,glyphes,96,3</path>
+<path>/html/body/div[2]/div[2]/map/area[6],0,0,0,0,element-95,95,0</path>
+<path>/html/body/div[2]/div[2]/map/area[5],0,0,0,0,element-94,94,0</path>
+<path>/html/body/div[2]/div[2]/map/area[4],0,0,0,0,element-93,93,0</path>
+<path>/html/body/div[2]/div[2]/map/area[3],0,0,0,0,element-92,92,0</path>
+<path>/html/body/div[2]/div[2]/map/area[2],0,0,0,0,element-91,91,0</path>
+<path>/html/body/div[2]/div[2]/map/area[1],0,0,0,0,element-90,90,0</path>
+<path>/html/body/div[2]/div[2]/map,55,168,0,0,Navigation,89,13</path>
+<path>/html/body/div[2]/div[2],55,168,900,21,nav,88,26</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block8" internal_id='' ID="6b31a2a97d51ea1e17794600a094e7be" Pos="WindowWidth||PageRectLeft:186 WindowHeight||PageRectTop:170 ObjectRectWidth:33 ObjectRectHeight:14" Doc="0.4">
+<weight>
+0.5
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[2]/span/a,186,170,33,14,element-99,99,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block9" internal_id='' ID="ee2726f8855bc236dc86ae74259cfd45" Pos="WindowWidth||PageRectLeft:55 WindowHeight||PageRectTop:190 ObjectRectWidth:840 ObjectRectHeight:622" Doc="0.4">
+<weight>
+0.23227399176565602
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[3]/div[1]/ul/li/a/p[1]/img,730,215,180,105,element-106,106,0</path>
+<path>/html/body/div[2]/div[3]/div[1]/ul/li/a/p[1],725,215,190,105,element-105,105,1</path>
+<path>/html/body/div[2]/div[3]/div[1]/ul/li/a,725,215,0,0,element-104,104,8</path>
+<path>/html/body/div[2]/div[3]/div[1]/ul/li,725,215,190,298,element-103,103,9</path>
+<path>/html/body/div[2]/div[3]/div[1]/ul,715,205,210,298,element-102,102,12</path>
+<path>/html/body/div[2]/div[3]/div[1],715,200,210,316,ALaUne,101,15</path>
+<path>/html/body/div[2]/div[3],55,190,840,622,centre,100,114</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block10" internal_id='' ID="9dd8520529eb18828a272fa0c840bffb" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:840 ObjectRectHeight:308" Doc="0.4">
+<weight>
+1.9848348829481337
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[3]/a,85,595,86,14,element-122,122,1</path>
+<path>/html/body/div[2]/div[3]/ul/li[5]/a,183,553,177,15,element-121,121,1</path>
+<path>/html/body/div[2]/div[3]/ul/li[5],85,552,840,36,element-120,120,4</path>
+<path>/html/body/div[2]/div[3]/ul/li[4]/a,184,476,175,15,element-119,119,1</path>
+<path>/html/body/div[2]/div[3]/ul/li[4],85,475,840,72,element-118,118,4</path>
+<path>/html/body/div[2]/div[3]/ul/li[3]/a,182,417,202,15,element-117,117,1</path>
+<path>/html/body/div[2]/div[3]/ul/li[3],85,416,840,54,element-116,116,4</path>
+<path>/html/body/div[2]/div[3]/ul/li[2]/a,183,340,330,15,element-115,115,1</path>
+<path>/html/body/div[2]/div[3]/ul/li[2],85,339,840,72,element-114,114,4</path>
+<path>/html/body/div[2]/div[3]/ul/li[1]/a,183,281,108,15,element-113,113,1</path>
+<path>/html/body/div[2]/div[3]/ul/li[1],85,280,840,54,element-112,112,4</path>
+<path>/html/body/div[2]/div[3]/ul,85,280,840,308,element-111,111,31</path>
+<path>/html/body/div[2]/div[3]/p[1]/br,0,0,0,0,element-110,110,0</path>
+<path>/html/body/div[2]/div[3]/p[1],85,200,840,72,element-109,109,3</path>
+<path>/html/body/div[2]/div[3]/div[1]/ul/li/a/p[2],725,363,190,150,element-108,108,1</path>
+<path>/html/body/div[2]/div[3]/div[1]/ul/li/a/h1,725,328,190,30,element-107,107,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block11" internal_id='' ID="bb316d5766437c77be6535bd4f6b45f3" Pos="WindowWidth||PageRectLeft:85 WindowHeight||PageRectTop:619 ObjectRectWidth:828 ObjectRectHeight:162" Doc="0.4">
+<weight>
+0.46346203015335175
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[3]/div[2]/a[1]/img,900,620,19,19,element-125,125,0</path>
+<path>/html/body/div[2]/div[3]/div[2]/a[1],91,620,0,0,element-124,124,1</path>
+<path>/html/body/div[2]/div[3]/div[2],85,619,828,162,element-123,123,42</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block12" internal_id='' ID="d9a57a1ca41d0c00624f4d0d4e237dee" Pos="WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:840 ObjectRectHeight:113" Doc="0.4">
+<weight>
+0.5129674013717707
+</weight>
+<Paths>
+<path>/html/body/div[2]/div[3]/p[2]/a/span,0,0,20,18,element-147,147,1</path>
+<path>/html/body/div[2]/div[3]/p[2]/a,838,798,87,14,element-146,146,4</path>
+<path>/html/body/div[2]/div[3]/p[2],85,796,840,18,element-144,144,8</path>
+<path>/html/body/div[2]/div[3]/div[2]/a[2],91,766,120,14,element-143,143,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2]/span[3],181,743,21,14,element-142,142,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2]/br[2],0,0,0,0,element-141,141,0</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2]/span[2],215,725,275,14,element-140,140,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2]/br[1],0,0,0,0,element-139,139,0</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2]/a,203,707,351,14,element-138,138,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2]/span[1],131,707,62,14,element-137,137,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[2],131,705,788,54,element-136,136,13</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/span[3],181,684,35,14,element-135,135,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/br[2],0,0,0,0,element-134,134,0</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/span[2],215,666,272,14,element-133,133,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/br[1],0,0,0,0,element-132,132,0</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/a/span,203,648,621,14,element-131,131,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/a,203,648,621,14,element-130,130,2</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1]/span[1],131,648,62,14,element-129,129,1</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul/li[1],131,646,788,54,element-128,128,14</path>
+<path>/html/body/div[2]/div[3]/div[2]/ul,91,646,788,113,element-127,127,32</path>
+<path>/html/body/div[2]/div[3]/div[2]/h1,91,623,828,18,element-126,126,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block13" internal_id='' ID="7d4e1282ea249b987ee61c6d750f2308" Pos="WindowWidth||PageRectLeft:55 WindowHeight||PageRectTop:832 ObjectRectWidth:900 ObjectRectHeight:45" Doc="0.4">
+<weight>
+0.12468827930174566
+</weight>
+<Paths>
+<path>/html/body/div[3]/dl/dd,55,832,900,0,element-150,150,2</path>
+<path>/html/body/div[3]/dl,55,832,900,0,element-149,149,5</path>
+<path>/html/body/div[3],55,832,900,45,bas,148,8</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+<Block Ref="Block14" internal_id='' ID="3d8e3ab8639cd7f731c483c0573962ea" Pos="WindowWidth||PageRectLeft:853 WindowHeight||PageRectTop:857 ObjectRectWidth:93 ObjectRectHeight:18" Doc="0.4">
+<weight>
+1.5
+</weight>
+<Paths>
+<path>/html/body/div[3]/dl/dd/a,853,857,93,18,element-151,151,1</path>
+</Paths>
+<Links ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Links>
+<Imgs ID="d41d8cd98f00b204e9800998ecf8427e" IDList="">
+</Imgs>
+<Txts ID="d41d8cd98f00b204e9800998ecf8427e" Txt=""/>
+</Block>
+</Document>
+</XML>

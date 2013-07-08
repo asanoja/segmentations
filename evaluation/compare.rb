@@ -25,18 +25,19 @@ class Evaluation
 	def set_category(cat)
 		@category = cat
 	end
-	def init(filename)
+	def init(filename,algo)
 		#~ begin
+			puts "using #{algo} algorithm"
 			@filename = filename
 			@g = Manual.new(@category,filename)
-			@p = Automatic.new(@category,filename)
+			@p = Automatic.new(algo,@category,filename)
 			@g.parse
 			@p.parse
 			if @g.url != @p.url
-				raise "Not the same page #{@g.url} != #{@p.url}"
-			else
-				@url = @g.url
+				puts "WARNING: Not the same page #{@g.url} != #{@p.url}"
 			end
+			@url = @g.url
+			
 		#~ rescue => e
 			#~ raise "Evaluation can not be initialized because:\n#{e.backtrace.join("\n")}"
 		#~ end
@@ -213,13 +214,13 @@ class Evaluation
 			#~ gets
 		end
 		bg+="}"
-		File.open("table/BCG_#{@filename}.html",'w') {|f| f.puts @bcg.to_html}
-		File.open("table/OF_#{@filename}.html",'w') {|f| f.puts @of.to_html}
-		File.open("table/FG2P_#{@filename}.html",'w') {|f| f.puts @fromGtoP.to_html}
-		File.open("table/FP2G_#{@filename}.html",'w') {|f| f.puts @fromPtoG.to_html}
-		File.open("dot/BG_#{@filename}.dot",'w') {|f| f.puts bg}
-		system "dot -Tsvg dot/BG_#{@filename}.dot > images/BG_#{@filename}.svg"
-		system "dot -Tpng dot/BG_#{@filename}.dot > images/BG_#{@filename}.png"
+		File.open("table/BCG_#{@p.algorithm}_#{@filename}.html",'w') {|f| f.puts @bcg.to_html}
+		File.open("table/OF_#{@p.algorithm}_#{@filename}.html",'w') {|f| f.puts @of.to_html}
+		File.open("table/FG2P_#{@p.algorithm}_#{@filename}.html",'w') {|f| f.puts @fromGtoP.to_html}
+		File.open("table/FP2G_#{@p.algorithm}_#{@filename}.html",'w') {|f| f.puts @fromPtoG.to_html}
+		File.open("dot/BG_#{@p.algorithm}_#{@filename}.dot",'w') {|f| f.puts bg}
+		system "dot -Tsvg dot/BG_#{@p.algorithm}_#{@filename}.dot > images/BG_#{@p.algorithm}_#{@filename}.svg"
+		#~ system "dot -Tpng dot/BG_#{@filename}.dot > images/BG_#{@filename}.png"
 		#~ puts "</pre>"
 		#~ puts @bcg.to_html
 		#~ puts @of.to_html
@@ -249,18 +250,22 @@ class Segmentation
 		@width = pos[5].to_f
 		@height = pos[7].to_f
 		@xml.search("//Block").each do |block|
-			epath = block.at("path")
-			pb = epath.inner_text.split(",")
-			unless pb[0].nil?
-				if pb[0]!="/html/body"
-					nb = Block.new(pb)
-					#~ nb.set_image @imagefilename
-					nb.set_sid (@blocks.size+1)
-					@blocks.push nb
-				end
-			else
-				puts "block skipped!!!! in #{self.class} #{epath}"
-			end
+			#~ epath = block.at("path")
+			#~ pb = epath.inner_text.split(",")
+			pb = ["path",pos[1].to_f,pos[3].to_f,pos[5].to_f,pos[7].to_f,"","",block["childnodes"]]
+			#~ unless pb[0].nil?
+				#~ if pb[0]=="/html/body"
+					#~ pb[1] = 0
+					#~ pb[2] = 0
+					#~ pb[3] = @width
+					#~ pb[4] = @height
+				#~ end
+				nb = Block.new(pb)
+				nb.set_sid (@blocks.size+1)
+				@blocks.push nb
+			#~ else
+				#~ puts "block skipped!!!! in #{self.class} #{epath}"
+			#~ end
 		end
 	end
 	def fix_dimension_with_resize(target_width,target_height)
@@ -319,24 +324,41 @@ class Segmentation
 end
 
 class Automatic < Segmentation
-	def initialize(category,filename)
+	attr_accessor :algorithm
+	def initialize(algorithm,category,filename)
 		super(filename)
 		@category = category
-		begin
+		@algorithm = algorithm
+		#~ begin
 			@xml = load_doc
-		rescue
-			raise "Automatic segmentation can be loaded #{$!}"
-		end
+		#~ rescue
+			#~ raise "Automatic segmentation can not be loaded #{$!}"
+		#~ end
 	end
 	private
 	def load_doc
 		#~ puts  "#{self.class} loading xml/#{@filename}.xml"
-		unless File.exists?("xml/"+@filename+".xml")
-			unless system("../pagelyzer/pagelyzer analyzer --decorated-file=xml/#{@filename}.dhtml --output-file=xml/#{@filename}.xml --granularity=6 --force")
+		
+		unless File.exists?("#{@algorithm}/"+@filename+".xml")
+			if @algorithm=="bom1"
+				cmd="../pagelyzer/pagelyzer analyzer --decorated-file=source/#{@filename}.dhtml --output-file=bom1/#{@filename}.xml --granularity=6 --force --algorithm=bom1"
+			elsif @algorithm=="bom2"
+				cmd="../pagelyzer/pagelyzer analyzer --decorated-file=source/#{@filename}.dhtml --output-file=bom2/#{@filename}.xml --granularity=6 --force --algorithm=bom2"
+			elsif @algorithm=="bom3"
+				cmd="../pagelyzer/pagelyzer analyzer --decorated-file=source/#{@filename}.dhtml --output-file=bom3/#{@filename}.xml --granularity=6 --force --algorithm=bom3"
+			elsif @algorithm=="blockfusion"
+				cmd="../blockfusion/blockfusion.rb source/#{@filename}.dhtml blockfusion/#{@filename}.xml 6"
+			elsif @algorithm=="dummy"
+				cmd="../dummy/dummy.rb source/#{@filename}.dhtml dummy/#{@filename}.xml"
+			else
+				raise "algorithm #{@algorithm} not found"
+			end
+			p cmd
+			unless system(cmd)
 				raise "No XML found for #{@filename}.xml"
 			end
 		end
-		return Nokogiri::XML(File.open("xml/#{@filename}.xml"))
+		return Nokogiri::XML(File.open("#{@algorithm}/#{@filename}.xml"))
 	end
 end
 
@@ -521,19 +543,30 @@ system "rm data/*"
 system "rm table/*"
 system "rm plot/*"
 
+total={}
+
+#~ ["bom1","bom2","blockfusion","dummy"].each do |algo|
+["bom3"].each do |algo|
+
 files = {}
 
 Dir.glob("manual/*").each do |cat|
 	catfile = cat.gsub("manual/","")
-	files[catfile] = File.open("data/raw_#{catfile}.csv","w")
+	files[catfile] = File.open("data/raw_#{algo}_#{catfile}.csv","w")
 	files[catfile].puts "tr,ta,tc,to,tu,co,cu,cm,cf"
+	
 end
+
+
 
 ta = 1	
 tr = 0
 while tr <= 1
 	Dir.glob("manual/*").each do |cat|
 		catfile = cat.gsub("manual/","")
+		
+		next if catfile=="regional"
+		
 		Dir.glob("#{cat}/*.xml").each do |page|
 			ev = Evaluation.new
 			
@@ -547,7 +580,7 @@ while tr <= 1
 			#~ ev.g.set_imagefile "xml/#{filename}.png"
 			#~ ev.p.set_imagefile "xml/#{filename}.png"
 			
-			ev.init(filename)
+			ev.init(filename,algo)
 
 			puts "PAGE: #{ev.url}"
 			puts "GFILE: #{ev.g.filename}"
@@ -557,7 +590,14 @@ while tr <= 1
 			#~ ev.fix_dimension_with_aspect_ratio
 			
 			#making visual svg outputs
-			
+
+			if total[catfile].nil?
+				total[catfile] = ev.g.blocks.size
+			else
+				if total[catfile] < ev.g.blocks.size
+					total[catfile] = ev.g.blocks.size
+				end
+			end
 			
 			svg = SVGPage.new [ev.p.width,ev.g.width].max,[ev.p.height,ev.g.height].max
 			svgg = SVGPage.new ev.g.width,ev.g.height
@@ -589,9 +629,9 @@ while tr <= 1
 				k+=1
 				break if k==1000
 			}
-			File.open("images/debug_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../xml/#{ev.p.filename}.png")}
-			File.open("images/debugP_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../xml/#{ev.p.filename}.png")}
-			File.open("images/debugG_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../xml/#{ev.p.filename}.png")}
+			File.open("images/debug_#{algo}_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../xml/#{ev.p.filename}.png")}
+			File.open("images/debugP_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../xml/#{ev.p.filename}.png")}
+			File.open("images/debugG_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../xml/#{ev.p.filename}.png")}
 			
 			#starting evaluation
 			
@@ -615,8 +655,8 @@ end
 
 avg = {}
 
-Dir.glob("data/raw_*").each do |raw|
-puts raw
+Dir.glob("data/raw_#{algo}_*").each do |raw|
+#~ puts raw
 	datafilename = raw.gsub("data/","").gsub("raw_","data_")
 	o = File.open("data/#{datafilename}","w")
 	
@@ -639,17 +679,22 @@ puts raw
 	o.puts "tr,ta,tc,to,tu,co,cu,cm,cf"
 	
 	avg.each_pair do |k,v|
-		avg[k][:tc] /= v[:n]
-		avg[k][:to] /= v[:n]
-		avg[k][:tu] /= v[:n]
-		avg[k][:co] /= v[:n]
-		avg[k][:cu] /= v[:n]
-		avg[k][:cm] /= v[:n]
-		avg[k][:cf] /= v[:n]
+		#~ avg[k][:tc] /= v[:n]
+		#~ avg[k][:to] /= v[:n]
+		#~ avg[k][:tu] /= v[:n]
+		#~ avg[k][:co] /= v[:n]
+		#~ avg[k][:cu] /= v[:n]
+		#~ avg[k][:cm] /= v[:n]
+		#~ avg[k][:cf] /= v[:n]
 		
 		o.puts "#{k},1,#{avg[k][:tc]},#{avg[k][:to]},#{avg[k][:tu]},#{avg[k][:co]},#{avg[k][:cu]},#{avg[k][:cm]},#{avg[k][:cf]}"
 	end
-	
+
+	#~ File.open("data/total_#{cat.split("/")[1]}.txt","w") {|f| f.puts ev.g.blocks.size}	
 	
 end
-	
+end #algo
+
+total.each_pair do |k,v|
+	File.open("data/total_#{k}.txt",'w') {|f| f.puts v}
+end

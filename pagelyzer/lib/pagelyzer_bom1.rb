@@ -221,7 +221,7 @@ class BlockOMatic
 	src += "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"yes\" ?>\n"
 	src += "<XML>\n"
 		src += "<Document url=\"#{escape_html(@document.url.gsub('"',''))}\" Title=\"#{escape_html(@document.title)}\" Version=\"#{@version}\" Pos=\"WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith:#{@document.width} ObjectRectHeight:#{@document.height}\">\n"
-			src += @root.to_xml
+			src += @root.to_xml unless @root.nil?
 		src += "</Document>\n"
 	src += "</XML>\n"
 	src 

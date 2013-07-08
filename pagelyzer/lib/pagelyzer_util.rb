@@ -7,7 +7,7 @@ class String
 	end
 end
 
-def load(bom,source_file,type=:file)
+def load(bom,source_file="",type=:file)
 	if bom.type==:file
 		if !File.exists? "#{bom.source_file}"
 			puts "File '#{bom.source_file}' not found"
@@ -196,7 +196,7 @@ def image?(node)
 end
 
 def inline?(node)
-	['SUP','LI','B','I','BIG','EM','FONT','STRONG','U','IMG','A','INPUT','CODE','EM','CODE','SPAN','BUTTON','DD'].include? node.name.upcase
+	['SUP','LI','B','I','BIG','EM','FONT','STRONG','U','A','INPUT','CODE','EM','CODE','SPAN','BUTTON','DD'].include? node.name.upcase
 end
 
 def line_break?(node)

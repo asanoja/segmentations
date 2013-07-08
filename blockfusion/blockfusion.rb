@@ -1,6 +1,11 @@
+#! /usr/bin/ruby1.9.1
+#-*- mode: ruby; encoding: utf-8 -*-
 require 'cgi'
-
-require 	'nokogiri'
+require 'sanitize'
+require	'nokogiri'
+require_relative '../pagelyzer/lib/pagelyzer_url_utils.rb'
+require_relative '../pagelyzer/lib/pagelyzer_util.rb'
+require_relative '../pagelyzer/lib/pagelyzer_dimension.rb'
 
 class Element
 	attr_accessor :blocks,:density,:node
@@ -35,10 +40,19 @@ class Element
 end
 
 class Document
-	attr_accessor :elements
-	def initialize(input_file)
-		@html = Nokogiri::HTML(File.open(input_file))
+	attr_accessor :elements,:type,:window,:document,:source_file,:document_area
+	def initialize
 		@elements = []
+		@window = Dimension.new
+		@document = Dimension.new
+		@screenshot = Dimension.new
+		@type = :file
+		@html = nil
+		@document_area = 0
+	end
+	def loadfile(input_file)
+		@source_file = input_file
+		@html = load(self)
 	end
 	def parse
 		#~ @html.search("*").each do |e|
@@ -85,7 +99,8 @@ class TextBlock
 		if @words==0
 			@density = 0
 		else
-			@density =  @data.size.to_f * @words
+			#~ @density =  @data.size.to_f * @words
+			@density =  @words / @data.size.to_f
 		end
 	end
 	def merge(other_block)
@@ -158,7 +173,7 @@ def parse_xml(block,sid)
 		src = ""
 		i=1
 		#~ block = blockpack[:elem]
-		#~ weight = blockpack[:weight]
+		weight = 0
 		l = block["elem_left"].to_i
 		t = block["elem_top"].to_i
 		w = block["elem_width"].to_i 
@@ -166,7 +181,7 @@ def parse_xml(block,sid)
 		am = block["childnodes"].to_i
 		am=1 if am==0
 		
-		p [h,block["elem_height"],block.path] if block.name.downcase=="div"
+		#p [h,block["elem_height"],block.path] if block.name.downcase=="div"
 		
 		src+= "<Block Ref=\"Block#{sid}\" internal_id='#{@id}' ID=\"$BLOCK_ID$\" Pos=\"WindowWidth||PageRectLeft:#{l} WindowHeight||PageRectTop:#{t} ObjectRectWidth:#{w} ObjectRectHeight:#{h}\" Doc=\"#{@granularity}\">\n"
 			src += "<weight>\n"
@@ -229,7 +244,7 @@ def parse_xml(block,sid)
 	src = ""
 	src += "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"yes\" ?>\n"
 	src += "<XML>\n"
-		src += "<Document url=\"#{escape_html(url.gsub('"',''))}\" Title=\"#{escape_html(title)}\" Version=\"1\" Pos=\"WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith:#{width} ObjectRectHeight:#{height}\">\n"
+		src += "<Document url=\"#{escape_html(url.gsub('"',''))}\" algorithm=\"blockfusion\" Title=\"#{escape_html(title)}\" Version=\"1\" Pos=\"WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith:#{width} ObjectRectHeight:#{height}\">\n"
 			i = 1
 			blocks.each do |b|
 				src += parse_xml(b,i)
@@ -241,11 +256,12 @@ def parse_xml(block,sid)
 	end
 
 
-#input_file = "firefox_www_nngroup_com_topic_eyetracking.html"
-input_file = "lip6.fr.html"
-#~ input_file = "venezuela.html"
+input_file = ARGV[0] #"chrome_en_wikipedia_org_wiki_Venezuela.dhtml"
+output_file = ARGV[1]
+K = ARGV[2].to_f / 10
 
-doc = Document.new(input_file)
+doc = Document.new
+doc.loadfile input_file
 doc.parse
 
 blocks = []
@@ -256,10 +272,10 @@ end
 
 
 paso = 1
-K = 0.4
+#~ K = 0.4
 
 begin
-	puts "PASS #{paso} #{blocks.size}"
+	#~ puts "PASS #{paso} #{blocks.size}"
 	#~ gets
 	loop = false
 	1.upto(blocks.size-1) do |i|
@@ -284,8 +300,10 @@ blocks.each do |b|
 	end
 end
 
-p to_xml("url","title",1024,768,nodes)
+File.open(output_file,"w") {|f| 
+	f.puts to_xml(doc.document.url,doc.document.title,doc.document.width,doc.document.height,nodes)
+}
 
 
-#OJO DEBO PARSEAR EL DHTML CON LOS VISUAL CUES PARA HACER EL XML!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+

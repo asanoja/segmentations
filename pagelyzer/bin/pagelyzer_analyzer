@@ -23,7 +23,7 @@ folder = ""
 force = false
 output_folder = ""
 ti = Time.now
-  granularity=0.6
+  granularity=4
   algorithm = "bom2"
 #~ granularity=6
 #~ algorithm = "bom1"
@@ -90,8 +90,8 @@ collection.each do |dhtml|
 	bom.start
 	k+=1
 	if bom.error
-		puts "ERROR: There was a problem segmenting the page: #{dhtml}\n #{$!}"
-	else
+		puts "xERROR: There was a problem segmenting the page: #{dhtml}\n #{$!}"
+	end
 		
 		if folder.empty?
 			if output_file.empty?
@@ -104,5 +104,5 @@ collection.each do |dhtml|
 			puts "INFO: (#{k}/#{collection.size}) page #{ofile.split("/").last} created (#{Time.now-ti}ms)"
 			File.open("#{ofile}",'w') {|x| x.puts bom.to_xml }
 		end
-	end
+	#~ end
 end

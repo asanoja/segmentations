@@ -473,7 +473,7 @@ end
 	src = ""
 	src += "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"yes\" ?>\n"
 	src += "<XML>\n"
-		src += "<Document url=\"#{escape_html(@document.url.gsub('"',''))}\" Title=\"#{escape_html(@document.title)}\" Version=\"#{@version}\" Pos=\"WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith:#{@document.width} ObjectRectHeight:#{@document.height}\">\n"
+		src += "<Document url=\"#{escape_html(@document.url.gsub('"',''))}\" algorithm=\"bom2\" Title=\"#{escape_html(@document.title)}\" Version=\"#{@version}\" Pos=\"WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWith:#{@document.width} ObjectRectHeight:#{@document.height}\">\n"
 			i = 1
 			@blocks.each do |b|
 				src += parse_xml(b,i)
