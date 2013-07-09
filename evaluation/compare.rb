@@ -250,9 +250,16 @@ class Segmentation
 		@width = pos[5].to_f
 		@height = pos[7].to_f
 		@xml.search("//Block").each do |block|
-			#~ epath = block.at("path")
+			childnodes = 0
+			block.search("./Paths/path").each do |path|
+				p path
+				p path.inner_text.split(",")[5]
+				p path.inner_text.split(",")[7]
+				p childnodes+=path.inner_text.split(",")[7].to_i
+			end
 			#~ pb = epath.inner_text.split(",")
-			pb = ["path",pos[1].to_f,pos[3].to_f,pos[5].to_f,pos[7].to_f,"","",block["childnodes"]]
+			bpos = block["Pos"].split(" ").collect{|x| x.split(":")}.flatten
+			pb = ["path",bpos[1].to_f,bpos[3].to_f,bpos[5].to_f,bpos[7].to_f,"","",childnodes]
 			#~ unless pb[0].nil?
 				#~ if pb[0]=="/html/body"
 					#~ pb[1] = 0
@@ -403,12 +410,12 @@ class Block
 	
 	def initialize(arr)
 		@path,@left,@top,@width,@height,@id,@uid,@children = arr
-		@left=@left.to_f
+		p @left=@left.to_f
 		@top=@top.to_f
 		@width=@width.to_f
 		@height=@height.to_f
 		@path = @path.gsub("/tbody","")
-		@children = @children.to_i
+		p @children = @children.to_i
 		@image = nil
 		@sid = ""
 		@deltaGeo = 20
@@ -560,7 +567,7 @@ end
 
 
 ta = 1	
-tr = 0
+tr = 1 #ojo
 while tr <= 1
 	Dir.glob("manual/*").each do |cat|
 		catfile = cat.gsub("manual/","")
@@ -629,9 +636,9 @@ while tr <= 1
 				k+=1
 				break if k==1000
 			}
-			File.open("images/debug_#{algo}_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../xml/#{ev.p.filename}.png")}
-			File.open("images/debugP_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../xml/#{ev.p.filename}.png")}
-			File.open("images/debugG_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../xml/#{ev.p.filename}.png")}
+			File.open("images/debug_#{algo}_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../source/#{ev.p.filename}.png")}
+			File.open("images/debugP_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../source/#{ev.p.filename}.png")}
+			File.open("images/debugG_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../source/#{ev.p.filename}.png")}
 			
 			#starting evaluation
 			
@@ -642,6 +649,8 @@ while tr <= 1
 			puts "Tr: #{"%.2f" % tr} Ta #{ta} Tc: #{result[:tc]} To: #{result[:to]} Tu: #{result[:tu]} Co: #{result[:co]} Cu: #{result[:cu]} Cm: #{result[:cm]} Cf: #{result[:cf]}"		
 			
 			files[catfile].puts "#{tr},#{ta},#{result[:tc]},#{result[:to]},#{result[:tu]},#{result[:co]},#{result[:cu]},#{result[:cm]},#{result[:cf]}"
+			ev.p = nil
+			ev.g = nil
 			ev = nil
 		end
 	end

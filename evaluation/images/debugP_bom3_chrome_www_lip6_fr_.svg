@@ -4,116 +4,193 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink" 
      xml:space="preserve"     
-     width="1009.0px" 
-     height="877.0px" 
+     width="1001.0px" 
+     height="980.0px" 
      ><!--    
-     viewBox="0 0 1009.0 877.0"     
+     viewBox="0 0 1001.0 980.0"     
      zoomAndPan="disable"
     -->
-<image x="0" y="0" width="1009.0" height="877.0" xlink:href="../xml/chrome_www_lip6_fr_.png" preserveAspectRatio='none'/>
+<image x="0" y="0" width="1001.0" height="980.0" xlink:href="../source/chrome_www_lip6_fr_.png" preserveAspectRatio='none'/>
 <g>
-<polygon points="0,0 0,877.0 1009.0,877.0 1009.0,0" style="fill:transparent;stroke:#A020F0;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="0,0 0,980.0 1001.0,980.0 1001.0,0" style="fill:transparent;stroke:#A020F0;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">pdoc 
 </text>
 <text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">pdoc 
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P1
 </text>
 <text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P1
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="0.0,0.0 0.0,789.0 900.0,789.0 900.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P2
 </text>
 <text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P2
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P3
+<polygon points="51.0,0.0 51.0,146.0 951.0,146.0 951.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P3
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P3
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P4
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P4
+<text x="51" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P3
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P5
+<polygon points="51.0,0.0 51.0,146.0 951.0,146.0 951.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P4
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P5
+<text x="51" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P4
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="176.0,122.0 176.0,142.0 941.0,142.0 941.0,122.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="177" y="133" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P5
+</text>
+<text x="176" y="132" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P5
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,789.0 900.0,789.0 900.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P6
 </text>
 <text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P6
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P7
+<polygon points="51.0,146.0 51.0,871.0 951.0,871.0 951.0,146.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="157" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P7
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P7
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P8
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P8
+<text x="51" y="156" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P7
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P9
+<polygon points="53.0,146.0 53.0,168.0 175.0,168.0 175.0,146.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="54" y="157" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P8
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P9
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P10
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P10
+<text x="53" y="156" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P8
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P11
+<polygon points="51.0,146.0 51.0,168.0 951.0,168.0 951.0,146.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="157" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P9
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P11
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P12
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P12
+<text x="51" y="156" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P9
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P13
+<polygon points="51.0,146.0 51.0,871.0 951.0,871.0 951.0,146.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="157" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P10
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P13
+<text x="51" y="156" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P10
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,877.0 1009.0,877.0 1009.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P14
+<polygon points="51.0,168.0 51.0,189.0 175.0,189.0 175.0,168.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="179" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P11
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P14
+<text x="51" y="178" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P11
+</text>
+</g>
+<g>
+<polygon points="51.0,168.0 51.0,189.0 175.0,189.0 175.0,168.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="179" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P12
+</text>
+<text x="51" y="178" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P12
+</text>
+</g>
+<g>
+<polygon points="51.0,168.0 51.0,189.0 175.0,189.0 175.0,168.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="179" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P13
+</text>
+<text x="51" y="178" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P13
+</text>
+</g>
+<g>
+<polygon points="51.0,146.0 51.0,871.0 951.0,871.0 951.0,146.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="157" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P14
+</text>
+<text x="51" y="156" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P14
+</text>
+</g>
+<g>
+<polygon points="81.0,200.0 81.0,516.0 921.0,516.0 921.0,200.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="82" y="211" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P15
+</text>
+<text x="81" y="210" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P15
+</text>
+</g>
+<g>
+<polygon points="711.0,205.0 711.0,503.0 921.0,503.0 921.0,205.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="712" y="216" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P16
+</text>
+<text x="711" y="215" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P16
+</text>
+</g>
+<g>
+<polygon points="81.0,200.0 81.0,516.0 921.0,516.0 921.0,200.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="82" y="211" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P17
+</text>
+<text x="81" y="210" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P17
+</text>
+</g>
+<g>
+<polygon points="81.0,200.0 81.0,516.0 921.0,516.0 921.0,200.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="82" y="211" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P18
+</text>
+<text x="81" y="210" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P18
+</text>
+</g>
+<g>
+<polygon points="81.0,200.0 81.0,516.0 921.0,516.0 921.0,200.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="82" y="211" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P19
+</text>
+<text x="81" y="210" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P19
+</text>
+</g>
+<g>
+<polygon points="87.0,620.0 87.0,733.0 915.0,733.0 915.0,620.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="88" y="631" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P20
+</text>
+<text x="87" y="630" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P20
+</text>
+</g>
+<g>
+<polygon points="92.0,628.0 92.0,682.0 910.0,682.0 910.0,628.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="93" y="639" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P21
+</text>
+<text x="92" y="638" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P21
+</text>
+</g>
+<g>
+<polygon points="87.0,620.0 87.0,733.0 915.0,733.0 915.0,620.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="88" y="631" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P22
+</text>
+<text x="87" y="630" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P22
+</text>
+</g>
+<g>
+<polygon points="81.0,200.0 81.0,516.0 921.0,516.0 921.0,200.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="82" y="211" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P23
+</text>
+<text x="81" y="210" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P23
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,789.0 900.0,789.0 900.0,0.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P24
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P24
+</text>
+</g>
+<g>
+<polygon points="51.0,935.0 51.0,935.0 951.0,935.0 951.0,935.0" style="fill:transparent;stroke:blue;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="52" y="946" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P25
+</text>
+<text x="51" y="945" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P25
 </text>
 </g>
 </svg>

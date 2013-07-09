@@ -1,5 +1,5 @@
 [0.000][INFO]:      ChromeDriver 26.0.1383.0 /usr/bin/chromedriver
-[0.280][FINE]:      Initializing session with capabilities {
+[0.246][FINE]:      Initializing session with capabilities {
    "browserName": "chrome",
    "chrome.detach": true,
    "chromeOptions": {
@@ -14,11 +14,11 @@
    "version": ""
 }
 
-[0.280][INFO]:      Using named testing interface
-[1.298][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.160
-[1.346][FINE]:      Command received (/session/fde88649844370fb16932b0d3ba4f006)
-[1.351][FINE]:      Command finished (/session/fde88649844370fb16932b0d3ba4f006) with response {
-   "sessionId": "fde88649844370fb16932b0d3ba4f006",
+[0.247][INFO]:      Using named testing interface
+[1.123][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.160
+[1.205][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb)
+[1.206][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
    "status": 0,
    "value": {
       "acceptSslCerts": false,
@@ -40,5 +40,305 @@
    }
 }
 
-[1.355][FINE]:      Command received (/session/fde88649844370fb16932b0d3ba4f006/window)
-[1.938][INFO]:      Chrome shutdown
+[1.215][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/url) with params {
+   "url": "http://www.biolitestove.com/homestove/overview/"
+}
+
+[1.215][FINER]:     Waiting for all views to stop loading...
+[1.216][FINER]:     Done waiting for all views to stop loading
+[4.418][FINER]:     Waiting for all views to stop loading...
+[4.432][FINER]:     Done waiting for all views to stop loading
+[4.432][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/url) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[4.441][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window/current/size) with params {
+   "height": 768,
+   "width": 1024
+}
+
+[4.442][FINER]:     Waiting for all views to stop loading...
+[4.446][FINER]:     Done waiting for all views to stop loading
+[4.489][FINER]:     Waiting for all views to stop loading...
+[4.490][FINER]:     Done waiting for all views to stop loading
+[4.490][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window/current/size) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[4.493][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/screenshot)
+[4.493][FINER]:     Waiting for all views to stop loading...
+[4.508][FINER]:     Done waiting for all views to stop loading
+[5.222][FINER]:     Waiting for all views to stop loading...
+[5.223][FINER]:     Done waiting for all views to stop loading
+[5.223][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/screenshot) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "iVBORw0KGgoAAAANSUhEUgAABAMAAAnoCAIAAACAiP/4AAAgAElEQVR4nOy9Xch1XXceNH7mnGvtve/ned8veTH5evD1IIEmS..."
+}
+
+[5.306][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute_async) with params {
+   "args": [  ],
+   "script": "function func_dump() {\n\tvar script = document.createElement('script');\n\tscript.type = \"text/javas..."
+}
+
+[5.306][FINER]:     Waiting for all views to stop loading...
+[5.307][FINER]:     Done waiting for all views to stop loading
+[5.322][FINER]:     Waiting for all views to stop loading...
+[5.323][FINER]:     Done waiting for all views to stop loading
+[5.323][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute_async) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": null
+}
+
+[5.329][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with params {
+   "args": [  ],
+   "script": "return dump_loaded!=undefined;"
+}
+
+[5.329][FINER]:     Waiting for all views to stop loading...
+[5.332][FINER]:     Done waiting for all views to stop loading
+[5.378][FINER]:     Waiting for all views to stop loading...
+[5.380][FINER]:     Done waiting for all views to stop loading
+[5.380][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": true
+}
+
+[5.884][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with params {
+   "args": [  ],
+   "script": "return dump_start();"
+}
+
+[5.884][FINER]:     Waiting for all views to stop loading...
+[5.887][FINER]:     Done waiting for all views to stop loading
+[6.230][FINER]:     Waiting for all views to stop loading...
+[6.232][FINER]:     Done waiting for all views to stop loading
+[6.232][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "\u003CHTML  uid='1' id='element-1' elem_left='0' elem_top='0' elem_width='1001' elem_height='2536' cla..."
+}
+
+[6.237][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/source)
+[6.238][FINER]:     Waiting for all views to stop loading...
+[6.239][FINER]:     Done waiting for all views to stop loading
+[6.269][FINER]:     Waiting for all views to stop loading...
+[6.271][FINER]:     Done waiting for all views to stop loading
+[6.271][FINE]:      Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/source) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "\u003C!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/x..."
+}
+
+[6.296][FINE]:      Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/url) with params {
+   "url": "http://www.yunotakemymoney.com/?ccm_paging_p_b473=1"
+}
+
+[6.296][FINER]:     Waiting for all views to stop loading...
+[6.308][FINER]:     Done waiting for all views to stop loading
+[11.867][FINER]:    Waiting for all views to stop loading...
+[11.875][FINER]:    Done waiting for all views to stop loading
+[11.875][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/url) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[11.880][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window/current/size) with params {
+   "height": 768,
+   "width": 1024
+}
+
+[11.880][FINER]:    Waiting for all views to stop loading...
+[11.881][FINER]:    Done waiting for all views to stop loading
+[11.924][FINER]:    Waiting for all views to stop loading...
+[11.940][FINER]:    Done waiting for all views to stop loading
+[11.941][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window/current/size) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[11.945][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/screenshot)
+[11.945][FINER]:    Waiting for all views to stop loading...
+[11.946][FINER]:    Done waiting for all views to stop loading
+[12.641][FINER]:    Waiting for all views to stop loading...
+[12.643][FINER]:    Done waiting for all views to stop loading
+[12.643][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/screenshot) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "iVBORw0KGgoAAAANSUhEUgAAA+kAAAsvCAIAAAASAUjmAAAgAElEQVR4nOy9aZBlx3Xnd05m3vXtS+1bV29o9AqggUaDAAgQJ..."
+}
+
+[12.717][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute_async) with params {
+   "args": [  ],
+   "script": "function func_dump() {\n\tvar script = document.createElement('script');\n\tscript.type = \"text/javas..."
+}
+
+[12.717][FINER]:    Waiting for all views to stop loading...
+[12.719][FINER]:    Done waiting for all views to stop loading
+[12.740][FINER]:    Waiting for all views to stop loading...
+[12.745][FINER]:    Done waiting for all views to stop loading
+[12.745][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute_async) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": null
+}
+
+[12.747][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with params {
+   "args": [  ],
+   "script": "return dump_loaded!=undefined;"
+}
+
+[12.747][FINER]:    Waiting for all views to stop loading...
+[12.748][FINER]:    Done waiting for all views to stop loading
+[12.807][FINER]:    Waiting for all views to stop loading...
+[12.813][FINER]:    Done waiting for all views to stop loading
+[12.813][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": true
+}
+
+[13.320][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with params {
+   "args": [  ],
+   "script": "return dump_start();"
+}
+
+[13.320][FINER]:    Waiting for all views to stop loading...
+[13.324][FINER]:    Done waiting for all views to stop loading
+[14.676][FINER]:    Waiting for all views to stop loading...
+[14.677][FINER]:    Done waiting for all views to stop loading
+[14.677][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "\u003CHTML  uid='1' id='element-1' elem_left='0' elem_top='0' elem_width='1001' elem_height='2863' cla..."
+}
+
+[14.696][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/source)
+[14.696][FINER]:    Waiting for all views to stop loading...
+[14.698][FINER]:    Done waiting for all views to stop loading
+[14.755][FINER]:    Waiting for all views to stop loading...
+[14.757][FINER]:    Done waiting for all views to stop loading
+[14.758][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/source) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "\u003C!DOCTYPE html\u003E\u003Chtml lang=\"en\"\u003E\u003Chead style=\"\"\u003E\u003Cspan id=\"wrap-element-3\"\u003E\n \n\u003C/span\u003E\u003Cspan id=\"wrap-..."
+}
+
+[14.787][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/url) with params {
+   "url": "http://www.lip6.fr/"
+}
+
+[14.787][FINER]:    Waiting for all views to stop loading...
+[14.788][FINER]:    Done waiting for all views to stop loading
+[15.435][FINER]:    Waiting for all views to stop loading...
+[15.437][FINER]:    Done waiting for all views to stop loading
+[15.437][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/url) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[15.440][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window/current/size) with params {
+   "height": 768,
+   "width": 1024
+}
+
+[15.440][FINER]:    Waiting for all views to stop loading...
+[15.456][FINER]:    Done waiting for all views to stop loading
+[15.493][FINER]:    Waiting for all views to stop loading...
+[15.506][FINER]:    Done waiting for all views to stop loading
+[15.506][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window/current/size) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[15.508][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/screenshot)
+[15.508][FINER]:    Waiting for all views to stop loading...
+[15.510][FINER]:    Done waiting for all views to stop loading
+[15.664][FINER]:    Waiting for all views to stop loading...
+[15.665][FINER]:    Done waiting for all views to stop loading
+[15.665][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/screenshot) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "iVBORw0KGgoAAAANSUhEUgAAA+kAAAPUCAIAAABeu+9bAAAgAElEQVR4nOy9abAtyXEe9mVmVXefc7e3zL692QcYDGYADAb7Y..."
+}
+
+[15.691][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute_async) with params {
+   "args": [  ],
+   "script": "function func_dump() {\n\tvar script = document.createElement('script');\n\tscript.type = \"text/javas..."
+}
+
+[15.691][FINER]:    Waiting for all views to stop loading...
+[15.693][FINER]:    Done waiting for all views to stop loading
+[15.729][FINER]:    Waiting for all views to stop loading...
+[15.730][FINER]:    Done waiting for all views to stop loading
+[15.730][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute_async) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": null
+}
+
+[15.731][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with params {
+   "args": [  ],
+   "script": "return dump_loaded!=undefined;"
+}
+
+[15.731][FINER]:    Waiting for all views to stop loading...
+[15.739][FINER]:    Done waiting for all views to stop loading
+[15.759][FINER]:    Waiting for all views to stop loading...
+[15.760][FINER]:    Done waiting for all views to stop loading
+[15.760][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": true
+}
+
+[16.264][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with params {
+   "args": [  ],
+   "script": "return dump_start();"
+}
+
+[16.264][FINER]:    Waiting for all views to stop loading...
+[16.269][FINER]:    Done waiting for all views to stop loading
+[16.588][FINER]:    Waiting for all views to stop loading...
+[16.590][FINER]:    Done waiting for all views to stop loading
+[16.590][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/execute) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "\u003CHTML  uid='1' id='element-1' elem_left='0' elem_top='0' elem_width='1001' elem_height='687' clas..."
+}
+
+[16.596][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/source)
+[16.596][FINER]:    Waiting for all views to stop loading...
+[16.605][FINER]:    Done waiting for all views to stop loading
+[16.617][FINER]:    Waiting for all views to stop loading...
+[16.619][FINER]:    Done waiting for all views to stop loading
+[16.619][FINE]:     Command finished (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/source) with response {
+   "sessionId": "d78a81f64bb4cbfcfda406fb71ba8aeb",
+   "status": 0,
+   "value": "\u003C!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/x..."
+}
+
+[16.625][FINE]:     Command received (/session/d78a81f64bb4cbfcfda406fb71ba8aeb/window)
+[17.112][INFO]:     Chrome shutdown

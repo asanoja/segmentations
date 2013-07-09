@@ -136,13 +136,13 @@ def visible?(node)
 	ret = false
 	unless malformed?(node)
 		if !text?(node) and !node.is_a? Nokogiri::XML::DTD
-			if node['display']=="none" or (node['visibility']!="visible" and !node['visibility'].nil?)
+			if node['display']=="none" && (node['visibility']!="visible" && !node['visibility'].nil?)
 				ret = false
 			else
-				if  node['elem_width'].nil? or node['elem_height'].nil?
+				if  node['elem_width'].nil? || node['elem_height'].nil?
 					ret = false
 				else
-					ret = (node['elem_width'].to_i > 0) or (node['elem_height'].to_i > 0)
+					ret = (node['elem_width'].to_i > 0) || (node['elem_height'].to_i > 0)
 				end
 			end
 		else

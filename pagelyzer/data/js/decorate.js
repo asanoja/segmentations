@@ -77,18 +77,17 @@ function walk(pNode,nLevel,pretext) {
 				if (nLevel==0) {
 					src += pretext;
 				}
-			}
+			} 
 		}
 		if (pNode.tagName=='IMG') {
 			src += tab + \"<\"+pNode.tagName+\" \"+ attr +\" src='\"+pNode.src+\"' alt='\"+pNode.alt+\"'/>\";
 		}
 				
 		for (var i = 0;i<pNode.childNodes.length;i++) {
-			if (textNode(pNode.childNodes[i])) {
-				src += pNode.childNodes[i].data.trim();
-			} else {
+			
+			
 				src += walk(pNode.childNodes[i],nLevel+1,'');
-			}
+			
 		}
 		
 		if ((pNode.tagName!='TBODY') && (pNode.tagName!='IMG') && (pNode.tagName!='CANVAS') && (pNode.id!='fxdriver-screenshot-canvas')) {
@@ -96,6 +95,20 @@ function walk(pNode,nLevel,pretext) {
 				src += tab + '</'+pNode.tagName+'>';
 			}
 		}
+	} else { 
+		var wrap = document.createElement('span');
+		wrap.id = 'wrap-element-'+(cont);
+		pNode.parentNode.insertBefore(wrap,pNode);
+		wrap.appendChild(pNode);
+		
+		attr += \" id='wrap-element-\"+(cont)+\"'\";
+		attr += \" elem_left='\"+$(wrap).offset().left+\"'\";
+		attr += \" elem_top='\"+$(wrap).offset().top+\"'\";
+		attr += \" elem_width='\"+$(wrap).width()+\"'\";
+		attr += \" elem_height='\"+$(wrap).height()+\"'\";
+		
+		src += tab + '<'+wrap.tagName+' '+ attr+'>'+pNode.data.trim()+'</'+wrap.tagName+'>';
+		cont+=1;
 	}
 	return(src);
 }

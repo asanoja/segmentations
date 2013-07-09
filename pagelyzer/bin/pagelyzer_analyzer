@@ -82,6 +82,7 @@ collection.each do |dhtml|
 		#~ next
 	#~ end
 	puts "Using #{algorithm} algorithm"
+	puts "Page: #{dhtml}"
 	require_relative "../lib/pagelyzer_#{algorithm}.rb"
 	
 	bom = BlockOMatic.new

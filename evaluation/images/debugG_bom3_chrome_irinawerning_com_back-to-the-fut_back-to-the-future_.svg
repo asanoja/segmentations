@@ -10,7 +10,7 @@
      viewBox="0 0 1420.0 4162.0"     
      zoomAndPan="disable"
     -->
-<image x="0" y="0" width="1420.0" height="4162.0" xlink:href="../xml/chrome_irinawerning_com_back-to-the-fut_back-to-the-future_.png" preserveAspectRatio='none'/>
+<image x="0" y="0" width="1420.0" height="4162.0" xlink:href="../source/chrome_irinawerning_com_back-to-the-fut_back-to-the-future_.png" preserveAspectRatio='none'/>
 <g>
 <polygon points="0,0 0,4162.0 1420.0,4162.0 1420.0,0" style="fill:transparent;stroke:green;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">gdoc 
@@ -19,192 +19,192 @@
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G1
+<polygon points="419.0,6621.0 419.0,6946.0 624.0,6946.0 624.0,6621.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="420" y="6632" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G1
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G1
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G2
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G2
+<text x="419" y="6631" style="stroke:black;stroke-width:1;stroke-opacity:1">G1
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G3
+<polygon points="220.0,5.0 220.0,77.0 620.0,77.0 620.0,5.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="16" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G2
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G3
+<text x="220" y="15" style="stroke:black;stroke-width:1;stroke-opacity:1">G2
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="220.0,86.0 220.0,122.0 620.0,122.0 620.0,86.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="97" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G3
+</text>
+<text x="220" y="96" style="stroke:black;stroke-width:1;stroke-opacity:1">G3
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G4
 </text>
 <text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G4
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<polygon points="0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
 <text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G5
 </text>
 <text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G5
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G6
+<polygon points="220.0,131.0 220.0,693.0 620.0,693.0 620.0,131.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="142" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G6
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G6
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G7
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G7
+<text x="220" y="141" style="stroke:black;stroke-width:1;stroke-opacity:1">G6
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G8
+<polygon points="220.0,723.0 220.0,1285.0 620.0,1285.0 620.0,723.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="734" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G7
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G8
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G9
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G9
+<text x="220" y="733" style="stroke:black;stroke-width:1;stroke-opacity:1">G7
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G10
+<polygon points="220.0,1315.0 220.0,1732.0 620.0,1732.0 620.0,1315.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="1326" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G8
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G10
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G11
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G11
+<text x="220" y="1325" style="stroke:black;stroke-width:1;stroke-opacity:1">G8
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G12
+<polygon points="220.0,1762.0 220.0,2176.0 620.0,2176.0 620.0,1762.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="1773" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G9
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G12
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G13
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G13
+<text x="220" y="1772" style="stroke:black;stroke-width:1;stroke-opacity:1">G9
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G14
+<polygon points="220.0,2206.0 220.0,2663.0 620.0,2663.0 620.0,2206.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="2217" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G10
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G14
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G15
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G15
+<text x="220" y="2216" style="stroke:black;stroke-width:1;stroke-opacity:1">G10
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G16
+<polygon points="220.0,2693.0 220.0,3243.0 620.0,3243.0 620.0,2693.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="2704" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G11
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G16
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G17
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G17
+<text x="220" y="2703" style="stroke:black;stroke-width:1;stroke-opacity:1">G11
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G18
+<polygon points="220.0,3273.0 220.0,3812.0 620.0,3812.0 620.0,3273.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="3284" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G12
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G18
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G19
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G19
+<text x="220" y="3283" style="stroke:black;stroke-width:1;stroke-opacity:1">G12
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G20
+<polygon points="220.0,3842.0 220.0,4320.0 620.0,4320.0 620.0,3842.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="3853" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G13
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G20
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G21
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G21
+<text x="220" y="3852" style="stroke:black;stroke-width:1;stroke-opacity:1">G13
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G22
+<polygon points="220.0,4350.0 220.0,4822.0 620.0,4822.0 620.0,4350.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="4361" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G14
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G22
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G23
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G23
+<text x="220" y="4360" style="stroke:black;stroke-width:1;stroke-opacity:1">G14
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G24
+<polygon points="220.0,4852.0 220.0,5222.0 620.0,5222.0 620.0,4852.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="4863" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G15
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G24
-</text>
-</g>
-<g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G25
-</text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G25
+<text x="220" y="4862" style="stroke:black;stroke-width:1;stroke-opacity:1">G15
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G26
+<polygon points="220.0,5252.0 220.0,5789.0 620.0,5789.0 620.0,5252.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="5263" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G16
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G26
+<text x="220" y="5262" style="stroke:black;stroke-width:1;stroke-opacity:1">G16
 </text>
 </g>
 <g>
-<polygon points="0.0,0.0 0.0,4162.0 1420.0,4162.0 1420.0,0.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
-<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G27
+<polygon points="220.0,5819.0 220.0,6265.0 620.0,6265.0 620.0,5819.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="5830" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G17
 </text>
-<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">G27
+<text x="220" y="5829" style="stroke:black;stroke-width:1;stroke-opacity:1">G17
+</text>
+</g>
+<g>
+<polygon points="220.0,6295.0 220.0,7241.0 620.0,7241.0 620.0,6295.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="6306" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G18
+</text>
+<text x="220" y="6305" style="stroke:black;stroke-width:1;stroke-opacity:1">G18
+</text>
+</g>
+<g>
+<polygon points="220.0,7271.0 220.0,7780.0 620.0,7780.0 620.0,7271.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="7282" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G19
+</text>
+<text x="220" y="7281" style="stroke:black;stroke-width:1;stroke-opacity:1">G19
+</text>
+</g>
+<g>
+<polygon points="220.0,7810.0 220.0,8133.0 620.0,8133.0 620.0,7810.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="7821" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G20
+</text>
+<text x="220" y="7820" style="stroke:black;stroke-width:1;stroke-opacity:1">G20
+</text>
+</g>
+<g>
+<polygon points="220.0,8163.0 220.0,8720.0 620.0,8720.0 620.0,8163.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="8174" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G21
+</text>
+<text x="220" y="8173" style="stroke:black;stroke-width:1;stroke-opacity:1">G21
+</text>
+</g>
+<g>
+<polygon points="220.0,8750.0 220.0,9296.0 620.0,9296.0 620.0,8750.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="8761" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G22
+</text>
+<text x="220" y="8760" style="stroke:black;stroke-width:1;stroke-opacity:1">G22
+</text>
+</g>
+<g>
+<polygon points="220.0,9326.0 220.0,9853.0 620.0,9853.0 620.0,9326.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="9337" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G23
+</text>
+<text x="220" y="9336" style="stroke:black;stroke-width:1;stroke-opacity:1">G23
+</text>
+</g>
+<g>
+<polygon points="220.0,9883.0 220.0,10479.0 620.0,10479.0 620.0,9883.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="9894" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G24
+</text>
+<text x="220" y="9893" style="stroke:black;stroke-width:1;stroke-opacity:1">G24
+</text>
+</g>
+<g>
+<polygon points="220.0,10509.0 220.0,11039.0 620.0,11039.0 620.0,10509.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="10520" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G25
+</text>
+<text x="220" y="10519" style="stroke:black;stroke-width:1;stroke-opacity:1">G25
+</text>
+</g>
+<g>
+<polygon points="220.0,11069.0 220.0,11471.0 620.0,11471.0 620.0,11069.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="11080" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G26
+</text>
+<text x="220" y="11079" style="stroke:black;stroke-width:1;stroke-opacity:1">G26
+</text>
+</g>
+<g>
+<polygon points="220.0,11501.0 220.0,11857.0 620.0,11857.0 620.0,11501.0" style="fill:transparent;stroke:red;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="221" y="11512" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">G27
+</text>
+<text x="220" y="11511" style="stroke:black;stroke-width:1;stroke-opacity:1">G27
 </text>
 </g>
 </svg>
