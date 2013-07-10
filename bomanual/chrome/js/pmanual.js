@@ -193,6 +193,8 @@ function newRect(element,size,style,color,bgcolor,type) {
 
 function update_marco() {
     marco.innerHTML="<h2>Block-o-Matic</h2><br/>";
+	marco.innerHTML+="Window:"+$(window).width()+"x"+$(window).height()+"<br>";
+	marco.innerHTML+="Document:"+$(document).width()+"x"+$(document).height()+"<br>";
 	marco.innerHTML+="Selected Blocks<br>";
 	//~ marco.innerHTML+="<hr>";
 	marco.innerHTML+="<form>";
@@ -221,6 +223,8 @@ function getURLParameter(name) {
 function countNodes(node) {
   var k = 0, c = node.childNodes.length, result = c;
   for (; k<c; k++) result += countNodes(node.childNodes[k]);
+  if (result==0)
+	result=1;
   return result;
 } 
 
@@ -602,6 +606,7 @@ function addNewBlock() {
 	update_marco();
 	editing=false;
 	dialog=undefined;
+	over = undefined;
 	return(false);
 }
 
