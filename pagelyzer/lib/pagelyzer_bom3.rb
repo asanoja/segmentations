@@ -133,7 +133,8 @@ def process(node,target_block)
 	#~ end
 	
 	children = node.search("./*")
-	#p [node.path,children.size]
+	p [node.path,children.size]
+	divide=false
 	if children.size == 0
 		if text?(node)
 			target_block.add_element(node) #????
@@ -151,7 +152,6 @@ def process(node,target_block)
 		vtchild=nil
 		areachild=nil
 		area=0
-		divide = false
 		tarea = 0.8
 		children.each do |child|
 			return unless child["visited"].nil?
@@ -167,9 +167,12 @@ def process(node,target_block)
 					vtchild = child
 					vt+=1 
 				end
-				#~ p [child["background_color"],node["background_color"]]
+				 #~ p [child["background_color"],node["background_color"]]
 				#~ $stdin.read
-				if bgchild.nil? && (child["background_color"] != node["background_color"]) && (!node["background_color"].nil?)
+				if bgchild.nil? && 
+				   (child["background_color"] != node["background_color"]) && 
+				   (!child["background_color"].nil? && child["background_color"]!='rgba(0, 0, 0, 0)') && 
+				   (!node["background_color"].nil? && node["background_color"]!='rgba(0, 0, 0, 0)')
 					bg=true 
 					bgchild = child
 				end
@@ -188,40 +191,41 @@ def process(node,target_block)
 			nb.granularity = 10 #9 si hay alguno con letra diferente
 			target_block.add_children(nb)
 		elsif bg
-			puts "rule 7 #{bgchild.path} #{bgchild["id"]}"
+			puts "rule 7 #{bgchild.path} #{bgchild["id"]} #{bgchild["background_color"]} #{node["background_color"]}"
 			#add node as block and divide
 			nb = Block.new
 			nb.add_element(node)
 			nb.rule = 7
 			nb.granularity = 6
 			target_block.add_children(nb)
-			divide=true
-		elsif (txt>0 || vt>0) && !vtchild.nil?
-			puts "rule 8 #{vtchild.path} #{vtchild["id"]} #{area(vtchild)} / #{area(node)} = #{relative_area(vtchild,node)}"
-			if area(node)/area(node.parent) > tarea
+		elsif (txt>0 || vt>0) && !vtchild.nil? and (relative_area(vtchild,node) > tarea)
+				puts "rule 8 #{vtchild.path} #{vtchild["id"]} #{area(vtchild)} / #{area(node)} = #{relative_area(vtchild,node)}"
 				nb = Block.new
 				nb.rule = 8
 				nb.granularity = 8
 				nb.add_element(node)
 				target_block.add_children(nb)
-			else
-				divide = true
-			end
 		elsif area < tarea 
 			nb = Block.new
 			nb.add_element(node)
 			nb.rule = 9
 			nb.granularity = (area*10).to_i
 			target_block.add_children(nb)
+		else
+			divide = true
 		end
-		
-		if divide
-			puts "rule 11 #{node.path} #{node["id"]}"
-			children.each do |child|
-				process(child,target_block) if child["visited"].nil?
-			end
+	end	
+	if divide
+		puts "rule 11 divide #{node.path} #{node["id"]}"
+		#~ $stdin.read
+		children.each do |child|
+			process(child,target_block) if child["visited"].nil?
 		end
+	else
+		puts "rule 12 do not divide (skip?) #{node.path} #{node["id"]}"
+		#~ $stdin.read
 	end
+	
 end
 
 def to_xml

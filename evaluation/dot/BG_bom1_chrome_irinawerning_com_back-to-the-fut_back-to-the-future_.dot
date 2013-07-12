@@ -1,0 +1,44 @@
+strict graph BCG {
+rankdir=LR;
+splines=true;
+ranksep="8 equally";
+concentrate = true;
+node [shape=rectangle];
+subgraph cluster_G {
+label = "G";
+color=black;
+rank="same"
+G1 [label="G1(152)"];
+G2 [label="G2(2)"];
+G3 [label="G3(2)"];
+G4 [label="G4(0)"];
+G5 [label="G5(0)"];
+G6 [label="G6(11)"];
+G7 [label="G7(11)"];
+G8 [label="G8(11)"];
+G9 [label="G9(11)"];
+G10 [label="G10(11)"];
+G11 [label="G11(11)"];
+G12 [label="G12(11)"];
+G13 [label="G13(11)"];
+G14 [label="G14(11)"];
+G15 [label="G15(11)"];
+G16 [label="G16(11)"];
+G17 [label="G17(11)"];
+G18 [label="G18(11)"];
+G19 [label="G19(11)"];
+G20 [label="G20(11)"];
+G21 [label="G21(11)"];
+G22 [label="G22(11)"];
+G23 [label="G23(11)"];
+G24 [label="G24(11)"];
+G25 [label="G25(11)"];
+G26 [label="G26(11)"];
+G27 [label="G27(11)"];
+}
+subgraph cluster_P {
+label = "P";
+color="black";
+rank="same"
+}
+}

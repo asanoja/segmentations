@@ -15,6 +15,7 @@ end
 
 ndata = {}
 ntitle = {}
+limits = {}
 
 ntitle["to"] = "Oversegmented blocks"
 ntitle["tu"] = "Undersegmented blocks"
@@ -29,21 +30,25 @@ fields = ["tc"]
 
 catname = ""
 
-	category = ARGV[0]
+	Dir.glob("manual/*").each do |catfile|
+	category = catfile.gsub("manual/","")
+
 	
 	#~ filename = file.gsub("data/","")
 	#~ catname = filename.gsub("data_","")
 	#~ catname = catname.gsub("_"," ")
 	#~ catname = catname.gsub(".csv","")
 	
-	algorithms = ["bom3"]
-	#~ algorithms = ["bom1","bom2","blockfusion","dummy"]
+	#~ algorithms = ["bom3"]
+	algorithms = ["bom1","bom2","bom3","blockfusion","dummy"]
 	
 	algorithms.each {|algo| fields.each {|f| ndata["#{algo}_#{f}"] = Elem.new}}
 	
 	algorithms.each do |algo|
 	
 		filename = "data/data_#{algo}_#{category}.csv"
+		
+		if File.exist? filename
 	
 		CSV.foreach(filename, :headers=>true) do |row|
 			fields.each do |field|
@@ -68,12 +73,12 @@ catname = ""
 			#~ ndata["cf"].y.push row["cf"].to_f
 			#~ ndata["cf"].z.push 1
 		end
+		end
 	end
 
 #~ p ndata["tc"].y
 
-limit_i = 0
-limit_u = File.open("data/total_#{category}.txt").read.to_s.to_i
+limits[category] = {:li=>0,:ls=>File.open("data/total_#{category}.txt").read.to_s.to_i}
 
 Gnuplot.open do |gp|
 	Gnuplot::Plot.new( gp ) do |plot|
@@ -81,18 +86,24 @@ Gnuplot.open do |gp|
 		plot.ylabel "blocks"
 		plot.xlabel "tr"
 		plot.zlabel "none"
-		plot.yrange "[#{limit_i}:#{limit_u}]"
+		plot.yrange "[#{limits[category][:li]}:#{limits[category][:ls]}]"
 		plot.key "outside"
 		plot.terminal "png"
 		plot.output  "plot/#{category}.png"
 		plot.data = []
 		algorithms.each do |algo|
 			fields.each do |tag|
-				plot.data << Gnuplot::DataSet.new( [ndata["#{algo}_#{tag}"].x, ndata["#{algo}_#{tag}"].y, ndata["#{algo}_#{tag}"].z] ) { |ds|
-					ds.with = "linespoints"
-					ds.title = "#{algo}_#{tag}"
-				}
+				if ndata["#{algo}_#{tag}"].x!=[] && ndata["#{algo}_#{tag}"].y!=[]
+					puts "add data for #{algo} #{tag}"
+					plot.data << Gnuplot::DataSet.new( [ndata["#{algo}_#{tag}"].x, ndata["#{algo}_#{tag}"].y, ndata["#{algo}_#{tag}"].z] ) { |ds|
+						ds.with = "linespoints"
+						ds.title = "#{algo}_#{tag}"
+					}
+				else
+					puts "no data #{algo} #{tag}"
+				end
 			end
 		end
   end
+end
 end

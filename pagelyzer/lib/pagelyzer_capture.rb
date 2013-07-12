@@ -280,6 +280,7 @@ FIN
 			File.open("#{output_folder}/#{browser}_#{filename}.dhtml",'w') {|f| f.write src}
 		end
 		puts "capture done."
+		
 		return ret #unless command
 	end
 end

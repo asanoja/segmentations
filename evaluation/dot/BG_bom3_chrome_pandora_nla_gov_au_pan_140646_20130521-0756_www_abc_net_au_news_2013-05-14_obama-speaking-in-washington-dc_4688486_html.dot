@@ -27,6 +27,35 @@ subgraph cluster_P {
 label = "P";
 color="black";
 rank="same"
-P1 [label="P1(1)"];
+P1 [label="P1(2)"];
+P2 [label="P2(63)"];
+P3 [label="P3(63)"];
+P4 [label="P4(1113)"];
+P5 [label="P5(35)"];
+P6 [label="P6(35)"];
 }
+G1 -- P2[label="0.926",color="red",fontcolor="red"];
+G1 -- P3[label="0.926",color="red",fontcolor="red"];
+G3 -- P2[label="0.122",color="red",fontcolor="red"];
+G3 -- P3[label="0.122",color="red",fontcolor="red"];
+G3 -- P5[label="0.068",color="red",fontcolor="red"];
+G3 -- P6[label="0.068",color="red",fontcolor="red"];
+G7 -- P2[label="0.700",color="red",fontcolor="red"];
+G7 -- P3[label="0.700",color="red",fontcolor="red"];
+G8 -- P2[label="0.079",color="red",fontcolor="red"];
+G8 -- P3[label="0.079",color="red",fontcolor="red"];
+G8 -- P5[label="0.143",color="red",fontcolor="red"];
+G8 -- P6[label="0.143",color="red",fontcolor="red"];
+G9 -- P2[label="0.079",color="red",fontcolor="red"];
+G9 -- P3[label="0.079",color="red",fontcolor="red"];
+G9 -- P5[label="0.143",color="red",fontcolor="red"];
+G9 -- P6[label="0.143",color="red",fontcolor="red"];
+G10 -- P2[label="0.079",color="red",fontcolor="red"];
+G10 -- P3[label="0.079",color="red",fontcolor="red"];
+G10 -- P5[label="0.143",color="red",fontcolor="red"];
+G10 -- P6[label="0.143",color="red",fontcolor="red"];
+G12 -- P2[label="0.281",color="red",fontcolor="red"];
+G12 -- P3[label="0.281",color="red",fontcolor="red"];
+G14 -- P5[label="0.833",color="red",fontcolor="red"];
+G14 -- P6[label="0.833",color="red",fontcolor="red"];
 }

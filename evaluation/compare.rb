@@ -4,8 +4,10 @@ require 'nokogiri'
 require_relative './matrix.rb'
 require_relative './svglib.rb'
 require 'graphviz'
-#require 'RMagick'
-#include Magick
+require 'selenium-webdriver'
+require 'base64'
+require 'uri'
+require 'fileutils'
 
 class Evaluation
 	attr_accessor :g,:p, :url, :filename
@@ -25,19 +27,25 @@ class Evaluation
 	def set_category(cat)
 		@category = cat
 	end
-	def init(filename,algo)
+	def load(algo)
+		puts "using #{algo} algorithm"
+		
+		@p = Automatic.new(algo,@category,filename)
+		@p.parse
+		
+		if @g.url != @p.url
+			puts "WARNING: Not the same page #{@g.url} != #{@p.url}"
+		end
+	end
+	def init(filename)
 		#~ begin
-			puts "using #{algo} algorithm"
 			@filename = filename
 			@g = Manual.new(@category,filename)
-			@p = Automatic.new(algo,@category,filename)
-			@g.parse
-			@p.parse
-			if @g.url != @p.url
-				puts "WARNING: Not the same page #{@g.url} != #{@p.url}"
-			end
+			
 			@url = @g.url
 			
+			$driver.navigate.to @url unless $driver.current_url == @url
+			@g.parse
 		#~ rescue => e
 			#~ raise "Evaluation can not be initialized because:\n#{e.backtrace.join("\n")}"
 		#~ end
@@ -239,27 +247,57 @@ class Segmentation
 		@url = "" 
 		@width = 0
 		@height = 0
+		@divcolor = ""
 	end
 	def set_imagefile(imgfile)
 		@imagefilename = imgfile
 	end
 	def parse
-		#~ puts self.class
 		@url = @xml.at("Document")["url"]
-		pos = @xml.at("Document")["Pos"].split(" ").collect{|x| x.split(":")}.flatten
-		@width = pos[5].to_f
-		@height = pos[7].to_f
+		
+		@width = $driver.execute_script("return document.body.clientWidth")
+		@height = $driver.execute_script("return document.body.clientHeight")
+		
+		#~ pos = @xml.at("Document")["Pos"].split(" ").collect{|x| x.split(":")}.flatten
+		#~ @width = pos[5].to_f
+		#~ @height = pos[7].to_f
+		$driver.execute_script("var col=document.getElementsByClassName('autooverblock');for(var i=0;i<col.length;i++) {col[i].style.display='none';}")
 		@xml.search("//Block").each do |block|
 			childnodes = 0
+			block_geometry = {:left=>0,:top=>0,:width=>0,:height=>0}
 			block.search("./Paths/path").each do |path|
-				p path
-				p path.inner_text.split(",")[5]
-				p path.inner_text.split(",")[7]
-				p childnodes+=path.inner_text.split(",")[7].to_i
+				epath = path.inner_text.split(",")
+				unless epath[0].nil? || epath[0].empty?
+					begin
+						element_geometry = $driver.execute_script("return document.evaluate('#{epath[0]}',document,null,XPathResult.ANY_TYPE,null).iterateNext().getBoundingClientRect();")
+						if self.is_a? Automatic
+							classname = "autooverblock"
+							label = @algorithm
+							sep="<br>"
+						else
+							classname = "manualoverblock"
+							label = "manual"
+							sep=""
+						end
+						
+						$driver.execute_script("var div=document.createElement('div');div.className='#{classname}';div.style.zIndex=100000;div.style.opacity=0.5;div.style.border='2px dotted black';div.style.color='black';div.style.backgroundColor='#{@divcolor}';div.innerHTML='#{sep}<span>#{label}</span>';div.style.position='absolute';div.style.left='#{element_geometry['left']}px';div.style.top='#{element_geometry['top']}px';div.style.width='#{element_geometry['width']}px';div.style.height='#{element_geometry['height']}px';document.body.appendChild(div);")
+						#~ gets
+						block_geometry[:left] = [block_geometry[:left],element_geometry['left'].to_f].min
+						block_geometry[:top] = [block_geometry[:top],element_geometry['top'].to_f].min
+						block_geometry[:width] = [block_geometry[:width],element_geometry['width'].to_f].max
+						block_geometry[:height] = [block_geometry[:height],element_geometry['height'].to_f].max
+						p [self.class,element_geometry]
+						childnodes+=epath[7].to_i
+					rescue
+						puts "#{self.class} bad xpath #{epath[0]}"
+						puts "#{$!}"
+						#~ gets
+					end
+				end
 			end
-			#~ pb = epath.inner_text.split(",")
-			bpos = block["Pos"].split(" ").collect{|x| x.split(":")}.flatten
-			pb = ["path",bpos[1].to_f,bpos[3].to_f,bpos[5].to_f,bpos[7].to_f,"","",childnodes]
+			
+			#~ bpos = block["Pos"].split(" ").collect{|x| x.split(":")}.flatten
+			pb = ["path",block_geometry[:left],block_geometry[:top],block_geometry[:width],block_geometry[:height],"","",childnodes]
 			#~ unless pb[0].nil?
 				#~ if pb[0]=="/html/body"
 					#~ pb[1] = 0
@@ -269,11 +307,14 @@ class Segmentation
 				#~ end
 				nb = Block.new(pb)
 				nb.set_sid (@blocks.size+1)
+				#$stdin.read
 				@blocks.push nb
 			#~ else
 				#~ puts "block skipped!!!! in #{self.class} #{epath}"
 			#~ end
 		end
+		#~ puts "press any key"
+		#~ gets
 	end
 	def fix_dimension_with_resize(target_width,target_height)
 		#~ p [@width,target_width]
@@ -336,8 +377,10 @@ class Automatic < Segmentation
 		super(filename)
 		@category = category
 		@algorithm = algorithm
+		@divcolor = "rgb(0,#{rand(255)},255)"
 		#~ begin
 			@xml = load_doc
+			@url = @xml.at("Document")["url"]
 		#~ rescue
 			#~ raise "Automatic segmentation can not be loaded #{$!}"
 		#~ end
@@ -373,11 +416,13 @@ class Manual < Segmentation
 	def initialize(category,filename)
 		super(filename)
 		@category = category
+		@divcolor = "red"
 		begin
 			@xml = load_doc
 		rescue
 			raise "Manual segmentation can be loaded"
 		end
+		@url = @xml.at("Document")["url"]
 	end
 	private
 	def load_doc
@@ -410,23 +455,19 @@ class Block
 	
 	def initialize(arr)
 		@path,@left,@top,@width,@height,@id,@uid,@children = arr
-		p @left=@left.to_f
+		@left=@left.to_f
 		@top=@top.to_f
 		@width=@width.to_f
 		@height=@height.to_f
 		@path = @path.gsub("/tbody","")
-		p @children = @children.to_i
+		@children = @children.to_i
 		@image = nil
 		@sid = ""
 		@deltaGeo = 20
 		@deltaCnt = 4
 	end
-	def set_image(filename)
-		#~ img = Magick::ImageList.new(filename)
-		#~ filename = "#{self.object_id}"+filename.gsub("/","_")
-		#~ @image = img.crop(@left,@top,right,bottom)
-		#~ @image.write("fragments/#{filename}_block_#{"%03d" % @sid.to_i}.png")
-		#~ puts @image = "fragments/#{filename}_block_#{"%03d" % @sid.to_i}.png"
+	def geometry
+		{:left=>@left,:top=>@top,:width=>@width,:height=>@height}
 	end
 	def area(node)
 		cx = @width.to_f / 2
@@ -541,7 +582,9 @@ def h(b)
 	b.children
 end
 
-
+$driver = Selenium::WebDriver.for :chrome
+$driver.navigate.to "about:blank"
+$driver.manage.window.resize_to(1024,768)
 
 #main
 system "rm images/*"
@@ -551,24 +594,22 @@ system "rm table/*"
 system "rm plot/*"
 
 total={}
+algorithms = ["bom1","bom2","bom3","blockfusion","dummy"]
+#~ algorithms = ["bom2","bom3"]
 
-#~ ["bom1","bom2","blockfusion","dummy"].each do |algo|
-["bom3"].each do |algo|
+algorithms.each do |algo|
 
-files = {}
+$files = {}
 
 Dir.glob("manual/*").each do |cat|
 	catfile = cat.gsub("manual/","")
-	files[catfile] = File.open("data/raw_#{algo}_#{catfile}.csv","w")
-	files[catfile].puts "tr,ta,tc,to,tu,co,cu,cm,cf"
-	
+	$files[catfile] = File.open("data/raw_#{algo}_#{catfile}.csv","w")
+	$files[catfile].puts "tr,ta,tc,to,tu,co,cu,cm,cf"
+	$files[catfile].close
 end
 
+end
 
-
-ta = 1	
-tr = 1 #ojo
-while tr <= 1
 	Dir.glob("manual/*").each do |cat|
 		catfile = cat.gsub("manual/","")
 		
@@ -586,84 +627,90 @@ while tr <= 1
 			#~ ev.set_filename()
 			#~ ev.g.set_imagefile "xml/#{filename}.png"
 			#~ ev.p.set_imagefile "xml/#{filename}.png"
-			
-			ev.init(filename,algo)
+			ev.init(filename)
+			algorithms.each do |algo|
+				ev.load(algo)
 
-			puts "PAGE: #{ev.url}"
-			puts "GFILE: #{ev.g.filename}"
-			puts "PFILE: #{ev.p.filename}"
+				puts "PAGE: #{ev.url}"
+				puts "GFILE: #{ev.g.filename}"
+				puts "PFILE: #{ev.p.filename}"
 
-			#~ ev.fix_dimension_with_resize
-			#~ ev.fix_dimension_with_aspect_ratio
-			
-			#making visual svg outputs
+				#ev.fix_dimension_with_resize
+				#~ ev.fix_dimension_with_aspect_ratio
+				
+				#making visual svg outputs
 
-			if total[catfile].nil?
-				total[catfile] = ev.g.blocks.size
-			else
-				if total[catfile] < ev.g.blocks.size
+				if total[catfile].nil?
 					total[catfile] = ev.g.blocks.size
+				else
+					if total[catfile] < ev.g.blocks.size
+						total[catfile] = ev.g.blocks.size
+					end
 				end
-			end
-			
-			svg = SVGPage.new [ev.p.width,ev.g.width].max,[ev.p.height,ev.g.height].max
-			svgg = SVGPage.new ev.g.width,ev.g.height
-			svgp = SVGPage.new ev.p.width,ev.p.height
-			
-			
-			d={"points" => ev.p.points, "color" => "#A020F0", "text" => "pdoc "}
-			svg.data.push d
-			svgp.data.push d
-			
-			d={"points" => ev.g.points, "color" => "green", "text" => "gdoc "}
-			svg.data.push d
-			svgg.data.push d
-			
-			
-			k=0
-			(0..(ev.g.blocks.size-1)).each {|i|
-				d = {"points" => ev.g.blocks[i].points, "color" => "red", "text" => "G#{i+1}"}
-				svg.data.push d
-				svgg.data.push d
-				k+=1
-				break if k==100
-			}
-			k=0
-			(0..ev.p.blocks.size-1).each {|i|
-				d = {"points" => ev.p.blocks[i].points, "color" => "blue", "text" => "_____________P#{i+1}"}
+				
+				svg = SVGPage.new [ev.p.width,ev.g.width].max,[ev.p.height,ev.g.height].max
+				svgg = SVGPage.new ev.g.width,ev.g.height
+				svgp = SVGPage.new ev.p.width,ev.p.height
+				
+				
+				d={"points" => ev.p.points, "color" => "#A020F0", "text" => "pdoc "}
 				svg.data.push d
 				svgp.data.push d
-				k+=1
-				break if k==1000
-			}
-			File.open("images/debug_#{algo}_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../source/#{ev.p.filename}.png")}
-			File.open("images/debugP_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../source/#{ev.p.filename}.png")}
-			File.open("images/debugG_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../source/#{ev.p.filename}.png")}
-			
-			#starting evaluation
-			
-			
-			ev.prepare(tr,ta)
-			result = ev.evaluate
-			
-			puts "Tr: #{"%.2f" % tr} Ta #{ta} Tc: #{result[:tc]} To: #{result[:to]} Tu: #{result[:tu]} Co: #{result[:co]} Cu: #{result[:cu]} Cm: #{result[:cm]} Cf: #{result[:cf]}"		
-			
-			files[catfile].puts "#{tr},#{ta},#{result[:tc]},#{result[:to]},#{result[:tu]},#{result[:co]},#{result[:cu]},#{result[:cm]},#{result[:cf]}"
+				
+				d={"points" => ev.g.points, "color" => "green", "text" => "gdoc "}
+				svg.data.push d
+				svgg.data.push d
+				
+				
+				k=0
+				(0..(ev.g.blocks.size-1)).each {|i|
+					d = {"points" => ev.g.blocks[i].points, "color" => "red", "text" => "G#{i+1}"}
+					svg.data.push d
+					svgg.data.push d
+					k+=1
+					break if k==100
+				}
+				k=0
+				(0..ev.p.blocks.size-1).each {|i|
+					d = {"points" => ev.p.blocks[i].points, "color" => "rgb(#{rand(255)},#{rand(255)},#{rand(255)})", "text" => "_____________P#{i+1}"}
+					svg.data.push d
+					svgp.data.push d
+					k+=1
+					break if k==1000
+				}
+				File.open("images/debug_#{algo}_#{ev.filename}.svg","w") {|f| f.puts svg.parse("../source/#{ev.p.filename}.png")}
+				File.open("images/debugP_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgp.parse("../source/#{ev.p.filename}.png")}
+				File.open("images/debugG_#{algo}_#{ev.p.filename}.svg","w") {|f| f.puts svgg.parse("../source/#{ev.p.filename}.png")}
+				
+				#starting evaluation
+				
+				ta = 1	
+				tr = 0 #ojo
+				while tr <= 1
+					ev.prepare(tr,ta)
+					result = ev.evaluate
+				
+					puts "#{algo} Tr: #{"%.2f" % tr} Ta #{ta} Tc: #{result[:tc]} To: #{result[:to]} Tu: #{result[:tu]} Co: #{result[:co]} Cu: #{result[:cu]} Cm: #{result[:cm]} Cf: #{result[:cf]}"		
+				
+					#~ $files[catfile].puts "#{tr},#{ta},#{result[:tc]},#{result[:to]},#{result[:tu]},#{result[:co]},#{result[:cu]},#{result[:cm]},#{result[:cf]}"
+					File.open("data/raw_#{algo}_#{catfile}.csv","a") {|f| f.puts "#{tr},#{ta},#{result[:tc]},#{result[:to]},#{result[:tu]},#{result[:co]},#{result[:cu]},#{result[:cm]},#{result[:cf]}"}
+					tr+=0.1
+				end
+			end
 			ev.p = nil
 			ev.g = nil
 			ev = nil
 		end
 	end
-	tr+=0.1
-	#~ break
-end
+	
 
-files.each do |k,v|
-	files[k].close
-end
+#~ $files.each_pair do |k,v|
+	#~ puts "Closing #{$files[k]}"
+	#~ $files[k].close
+#~ end
 
 avg = {}
-
+algorithms.each do |algo|
 Dir.glob("data/raw_#{algo}_*").each do |raw|
 #~ puts raw
 	datafilename = raw.gsub("data/","").gsub("raw_","data_")
@@ -702,8 +749,11 @@ Dir.glob("data/raw_#{algo}_*").each do |raw|
 	#~ File.open("data/total_#{cat.split("/")[1]}.txt","w") {|f| f.puts ev.g.blocks.size}	
 	
 end
-end #algo
-
-total.each_pair do |k,v|
-	File.open("data/total_#{k}.txt",'w') {|f| f.puts v}
 end
+
+Dir.glob("manual/*").each do |cat|
+	catfile = cat.gsub("manual/","")
+	File.open("data/total_#{catfile}.txt",'w') {|f| f.puts total[catfile]}
+end
+puts "Closing browser"
+$driver.quit

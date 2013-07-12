@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" 
+     xml:space="preserve"     
+     width="900px" 
+     height="921px" 
+     ><!--    
+     viewBox="0 0 900 921"     
+     zoomAndPan="disable"
+    -->
+<image x="0" y="0" width="900" height="921" xlink:href="../source/chrome_www_lip6_fr_.png" preserveAspectRatio='none'/>
+<g>
+<polygon points="0,0 0,921 900,921 900,0" style="fill:transparent;stroke:#A020F0;stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">pdoc 
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">pdoc 
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,146.0 900.0,146.0 900.0,0.0" style="fill:transparent;stroke:rgb(117,77,30);stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P1
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P1
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,20.0 765.0,20.0 765.0,0.0" style="fill:transparent;stroke:rgb(1,206,149);stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P2
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P2
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,22.0 900.0,22.0 900.0,0.0" style="fill:transparent;stroke:rgb(16,155,226);stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P3
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P3
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,22.0 900.0,22.0 900.0,0.0" style="fill:transparent;stroke:rgb(36,115,199);stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P4
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P4
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,0.0 900.0,0.0 900.0,0.0" style="fill:transparent;stroke:rgb(139,150,58);stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P5
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P5
+</text>
+</g>
+<g>
+<polygon points="0.0,0.0 0.0,0.0 900.0,0.0 900.0,0.0" style="fill:transparent;stroke:rgb(143,5,112);stroke-width:4;fill-opacity:0.3;stroke-opacity:0.9"/>
+<text x="1" y="11" style="fill:white;fill-opacity:1;stroke:white;stroke-width:2;stroke-opacity:1">_____________P6
+</text>
+<text x="0" y="10" style="stroke:black;stroke-width:1;stroke-opacity:1">_____________P6
+</text>
+</g>
+</svg>

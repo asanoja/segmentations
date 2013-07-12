@@ -65,6 +65,7 @@ class Document
 				if el["visited"].nil?
 					unless ['script','style'].include? el.name.downcase 
 						if clean(e.content)!=""
+							
 							@elements.push current = Element.new(el)
 							current.parse
 							el["visited"]="true"
@@ -275,7 +276,7 @@ paso = 1
 #~ K = 0.4
 
 begin
-	#~ puts "PASS #{paso} #{blocks.size}"
+	 puts "PASS #{paso} #{blocks.size}"
 	#~ gets
 	loop = false
 	1.upto(blocks.size-1) do |i|
@@ -285,7 +286,7 @@ begin
 			blocks[i].merge(blocks[i-1])
 			blocks[i-1]=nil
 			loop = true
-			#~ p [blocks[i].density]
+			p [blocks[i].density]
 		end
 	end
 	blocks.delete(nil)
@@ -303,6 +304,7 @@ end
 File.open(output_file,"w") {|f| 
 	f.puts to_xml(doc.document.url,doc.document.title,doc.document.width,doc.document.height,nodes)
 }
+puts "Blockfusion done to #{output_file}"
 
 
 

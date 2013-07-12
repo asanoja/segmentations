@@ -1,0 +1,63 @@
+strict graph BCG {
+rankdir=LR;
+splines=true;
+ranksep="8 equally";
+concentrate = true;
+node [shape=rectangle];
+subgraph cluster_G {
+label = "G";
+color=black;
+rank="same"
+G1 [label="G1(61)"];
+G2 [label="G2(1)"];
+G3 [label="G3(109)"];
+G4 [label="G4(48)"];
+G5 [label="G5(6)"];
+G6 [label="G6(52)"];
+G7 [label="G7(19)"];
+G8 [label="G8(2)"];
+G9 [label="G9(44)"];
+G10 [label="G10(13)"];
+G11 [label="G11(13)"];
+}
+subgraph cluster_P {
+label = "P";
+color="black";
+rank="same"
+P1 [label="P1(356)"];
+P2 [label="P2(1)"];
+P3 [label="P3(55)"];
+P4 [label="P4(277)"];
+P5 [label="P5(7)"];
+}
+G1 -- P1[label="0.171",color="red",fontcolor="red"];
+G1 -- P3[label="0.902",color="red",fontcolor="red"];
+G1 -- P4[label="0.220",color="red",fontcolor="red"];
+G2 -- P1[label="0.003",color="red",fontcolor="red"];
+P2 -- G2  [dir="none",label="1.000",color="blue",fontcolor="blue"];
+G2 -- P4[label="0.004",color="red",fontcolor="red"];
+G3 -- P1[label="0.306",color="red",fontcolor="red"];
+G3 -- P3[label="0.505",color="red",fontcolor="red"];
+G3 -- P4[label="0.394",color="red",fontcolor="red"];
+G3 -- P5[label="0.064",color="red",fontcolor="red"];
+G4 -- P1[label="0.135",color="red",fontcolor="red"];
+G4 -- P4[label="0.173",color="red",fontcolor="red"];
+G4 -- P5[label="0.146",color="red",fontcolor="red"];
+G5 -- P1[label="0.017",color="red",fontcolor="red"];
+G5 -- P4[label="0.022",color="red",fontcolor="red"];
+G6 -- P1[label="0.146",color="red",fontcolor="red"];
+G6 -- P4[label="0.188",color="red",fontcolor="red"];
+G7 -- P1[label="0.053",color="red",fontcolor="red"];
+G7 -- P4[label="0.069",color="red",fontcolor="red"];
+G8 -- P1[label="0.006",color="red",fontcolor="red"];
+G8 -- P3[label="0.036",color="red",fontcolor="red"];
+G8 -- P4[label="0.007",color="red",fontcolor="red"];
+G8 -- P5[label="0.286",color="red",fontcolor="red"];
+G9 -- P1[label="0.124",color="red",fontcolor="red"];
+G9 -- P4[label="0.159",color="red",fontcolor="red"];
+G10 -- P1[label="0.037",color="red",fontcolor="red"];
+G10 -- P4[label="0.047",color="red",fontcolor="red"];
+G11 -- P1[label="0.037",color="red",fontcolor="red"];
+G11 -- P4[label="0.047",color="red",fontcolor="red"];
+G11 -- P5[label="0.538",color="red",fontcolor="red"];
+}
