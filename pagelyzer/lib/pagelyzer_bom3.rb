@@ -118,6 +118,7 @@ end
 def process(node,target_block)
 	return if node.comment?
 	return unless node["visited"].nil?
+	return unless valid?(node)
 	node["visited"] = true
 	#~ siblings = node.search("../*")
 	#~ return siblings.collect {|x| !x["mark"].nil?}.uniq.include? true

@@ -11,8 +11,8 @@ rank="same"
 G1 [label="G1(152)"];
 G2 [label="G2(2)"];
 G3 [label="G3(2)"];
-G4 [label="G4(0)"];
-G5 [label="G5(0)"];
+G4 [label="G4(11)"];
+G5 [label="G5(11)"];
 G6 [label="G6(11)"];
 G7 [label="G7(11)"];
 G8 [label="G8(11)"];
@@ -33,8 +33,6 @@ G22 [label="G22(11)"];
 G23 [label="G23(11)"];
 G24 [label="G24(11)"];
 G25 [label="G25(11)"];
-G26 [label="G26(11)"];
-G27 [label="G27(11)"];
 }
 subgraph cluster_P {
 label = "P";

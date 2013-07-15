@@ -264,7 +264,9 @@ class Segmentation
 		$driver.execute_script("var col=document.getElementsByClassName('autooverblock');for(var i=0;i<col.length;i++) {col[i].style.display='none';}")
 		@xml.search("//Block").each do |block|
 			childnodes = 0
-			block_geometry = {:left=>0,:top=>0,:width=>0,:height=>0}
+			#~ block_geometry = {:left=>0,:top=>0,:width=>0,:height=>0}
+			pos = block["Pos"].split(" ").collect{|x| x.split(":")}.flatten
+			block_geometry = {:left=>pos[1].to_f,:top=>pos[3].to_f,:width=>pos[5].to_f,:height=>pos[7].to_f}
 			block.search("./Paths/path").each do |path|
 				epath = path.inner_text.split(",")
 				unless epath[0].nil? || epath[0].empty?
@@ -286,18 +288,21 @@ class Segmentation
 						block_geometry[:top] = [block_geometry[:top],element_geometry['top'].to_f].min
 						block_geometry[:width] = [block_geometry[:width],element_geometry['width'].to_f].max
 						block_geometry[:height] = [block_geometry[:height],element_geometry['height'].to_f].max
+						p epath[0]
 						p [self.class,element_geometry]
+						p [self.class,block_geometry]
+						
 						childnodes+=epath[7].to_i
 					rescue
 						puts "#{self.class} bad xpath #{epath[0]}"
 						puts "#{$!}"
 						#~ gets
 					end
-				end
-			end
+			
 			
 			#~ bpos = block["Pos"].split(" ").collect{|x| x.split(":")}.flatten
-			pb = ["path",block_geometry[:left],block_geometry[:top],block_geometry[:width],block_geometry[:height],"","",childnodes]
+				p pb = ["path",block_geometry[:left],block_geometry[:top],block_geometry[:width],block_geometry[:height],"","",childnodes]
+				gets
 			#~ unless pb[0].nil?
 				#~ if pb[0]=="/html/body"
 					#~ pb[1] = 0
@@ -311,7 +316,8 @@ class Segmentation
 				@blocks.push nb
 			#~ else
 				#~ puts "block skipped!!!! in #{self.class} #{epath}"
-			#~ end
+				end
+			end
 		end
 		#~ puts "press any key"
 		#~ gets

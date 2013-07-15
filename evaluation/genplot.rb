@@ -40,7 +40,7 @@ catname = ""
 	#~ catname = catname.gsub(".csv","")
 	
 	#~ algorithms = ["bom3"]
-	algorithms = ["bom1","bom2","bom3","blockfusion","dummy"]
+	algorithms = ["bom1","bom2","bom3","blockfusion"]#,"dummy"]
 	
 	algorithms.each {|algo| fields.each {|f| ndata["#{algo}_#{f}"] = Elem.new}}
 	
