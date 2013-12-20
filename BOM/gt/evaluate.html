@@ -1,0 +1,729 @@
+<html>
+	<head>
+	<script src="raphael-min.js"></script>
+	<script src="rectlib.js"></script>
+	<script src="polyk.js"></script>
+	<script>
+		
+var e = undefined;
+var tt = 20;
+
+function GTObj() {
+	this.nodes = [];
+	this.eout = 0;
+	this.ein = 0;
+}
+
+
+function centroid(p1,p2,p3)  {
+	return({x:(p1.x+p2.x+p3.x)/3,y:(p1.y+p2.y+p3.y)/3})
+}
+
+function Block() {
+	this.id = "";
+	this.originalRect = {x:0,y:0,w:0,h:0}
+	this.computedRect = {x:0,y:0,w:0,h:0}
+	
+	this.fixProportions = function(nw,nh,ow,oh) {
+		this.computedRect.x = nw*this.originalRect.x / ow;
+		this.computedRect.y = nh*this.originalRect.y / oh;
+		this.computedRect.w = nw*this.originalRect.w / ow;
+		this.computedRect.h = nh*this.originalRect.h / oh;
+		this.computedRect.right = 0 +this.computedRect.w
+		this.computedRect.bottom = 0 + this.computedRect.h
+		//~ this.computedRect.right = this.computedRect.x + this.computedRect.w
+		//~ this.computedRect.bottom = this.computedRect.y + this.computedRect.h
+	}
+	
+	this.contains = function(block) {
+		var my = this.computedRect;
+		var his = block.computedRect;
+		var left,right,left_p,right_p;
+		var hp,vp;
+		var ret = false;
+		
+		// resolving horizontal projection
+		hp = (my.x < his.x) && (his.w < my.w) && (his.x < his.w)
+		vp = (my.y < his.y) && (his.h < my.h) && (his.y < his.h)
+		
+		ret = hp && vp
+		return(ret)
+	}
+	
+	this.contains_discontinued = function(block) {
+		var p1 = this.getPolygonPoints(tt);
+		var p2 = block.getPolygonPoints();
+		var d,a,b,c;
+		var x1,y1,x2,y2,xp,yp;
+		
+		for (var i=0;p2.length;i+=2) {
+			xp = p2[i]; yp = p2[i+1];
+			for (var k=0;p1.length;k+=2) {
+				x1 = p1[k];		y1 = p1[k+1]
+				x2 = p1[k+2];	y2 = p1[k+3]
+				a = -1*(y2 - y1);
+				b = x2 - x1;
+				c = -1*(a * x1 + b * y1);
+				d = a * xp + b * yp + c
+				if (d < 0) return(false);
+			}
+		}
+		return(true)
+	}
+	
+	this.containsxxx = function(block) {
+		//~ return(PolyK.Contained(this.getPolygonPoints(),block.getPolygonPoints()));
+		var f1,f2,f3,f4;
+		var in1,in2,in3,in4;
+		var d;
+		f1 = PolyK.ContainsPoint(this.getPolygonPoints(),block.computedRect.x,block.computedRect.y)
+		f2 = PolyK.ContainsPoint(this.getPolygonPoints(),block.computedRect.x,block.computedRect.bottom)
+		f3 = PolyK.ContainsPoint(this.getPolygonPoints(),block.computedRect.right,block.computedRect.bottom)
+		f4 = PolyK.ContainsPoint(this.getPolygonPoints(),block.computedRect.right,block.computedRect.y)
+		
+		if (f1 && f2 && f3 && f4) return(true);
+		if (!f1 && !f2 && !f3 && !f4) return(false);
+		
+		if (f1) {
+			in1 = ( Math.abs(block.computedRect.x - (this.computedRect.right/2)) < tt)
+		} else {
+			d = PolyK._P.dist(new PolyK._P(this.computedRect.x,this.computedRect.y),new PolyK._P(block.computedRect.x,block.computedRect.y));
+			in1 = (d <= tt)
+		}
+		
+		if (f2) {
+			in2 = ( Math.abs(block.computedRect.x - (this.computedRect.right/2)) < tt)
+		} else {
+			d = PolyK._P.dist(new PolyK._P(this.computedRect.x,this.computedRect.bottom),new PolyK._P(block.computedRect.x,block.computedRect.bottom));
+			in2 = (d <= tt)
+		}
+		
+		if (f3) {
+			in3 = ( Math.abs(block.computedRect.x - (this.computedRect.right/2)) < tt)
+		} else {
+			d = PolyK._P.dist(new PolyK._P(this.computedRect.right,this.computedRect.bottom),new PolyK._P(block.computedRect.right,block.computedRect.bottom));
+			in3 = (d <= tt)
+		}
+		
+		if (f4) {
+			in4 = ( Math.abs(block.computedRect.x - (this.computedRect.right/2)) < tt)
+		} else {
+			d = PolyK._P.dist(new PolyK._P(this.computedRect.right,this.computedRect.y),new PolyK._P(block.computedRect.right,block.computedRect.y));
+			in4 = (d <= tt)
+		}
+		var cant=0;
+		if (in1) cant++
+		if (in2) cant++
+		if (in3) cant++
+		if (in4) cant++
+	return(cant>1) //at least two points inside the polygon
+	}
+	
+	this.equals = function(block) {
+		var equal = false;
+		var dxy,dxh,dwh,dwy;
+		dxy = PolyK._P.dist(new PolyK._P(this.computedRect.x,this.computedRect.y),new PolyK._P(block.computedRect.x,block.computedRect.y));
+		dxh = PolyK._P.dist(new PolyK._P(this.computedRect.x,this.computedRect.h),new PolyK._P(block.computedRect.x,block.computedRect.h));
+		dwh = PolyK._P.dist(new PolyK._P(this.computedRect.w,this.computedRect.h),new PolyK._P(block.computedRect.w,block.computedRect.h));
+		dwy = PolyK._P.dist(new PolyK._P(this.computedRect.w,this.computedRect.y),new PolyK._P(block.computedRect.w,block.computedRect.y));
+		
+		equal = (dxy<tt) && (dxh<tt) &&  (dwh<tt) && (dwy<tt);
+		return(equal);
+	}
+	
+	this.getPolygonPoints = function(tolerance) {
+		//~ var res = [];
+		//~ res = res.concat([this.computedRect.x,this.computedRect.y]);
+		//~ res = res.concat([this.computedRect.x,this.computedRect.h]);
+		//~ res = res.concat([this.computedRect.w,this.computedRect.h]);
+		//~ res = res.concat([this.computedRect.w,this.computedRect.y]);
+		
+		var res = [];
+		var t = tolerance || 0;
+		var dim = this.computedRect;
+		res = res.concat([dim.x-t,dim.y-t]);
+		res = res.concat([dim.x-t,dim.y+dim.h+t]);
+		res = res.concat([dim.x+dim.w+t,dim.y+dim.h+t]);
+		res = res.concat([dim.x+dim.w+t,dim.y-t]);
+		return(res);
+	}
+}
+	
+function Segmentation() {
+	this.url = "";
+	this.originalWidth = 0;
+	this.originalHeight = 0;
+	this.computedWidth = 0;
+	this.computedHeight = 0;
+	this.browser = "";
+	this.category = "";
+	this.blocks = [];
+	
+	this.fixProportions = function(nw,nh) {
+		if (this.originalWidth < this.originalHeight) {
+			this.computedHeight = nh; //solve(undefined, nh, this.originalWidth, this.originalHeight);
+			this.computedWidth = solve(undefined, nh, this.originalWidth, this.originalHeight);
+		} else {
+			this.computedWidth = nw; //solve(undefined, nh, this.originalWidth, this.originalHeight);
+			this.computedHeight = solve(nw, undefined, this.originalWidth, this.originalHeight);
+		}
+		for (var i=0;i<this.blocks.length;i++) {
+			this.blocks[i].fixProportions(this.computedWidth,this.computedHeight,this.originalWidth,this.originalHeight);
+		}
+	}
+}
+	
+function Evaluation() {
+	var gt = undefined;
+	var seg = undefined;
+	var page = "";
+	var rows;
+	var graphG;
+	var graphS;
+	
+	this.loadSegmentation = function(xseg,win) {
+		var block={};
+		doc = win.document;
+		rows = doc.getElementsByTagName("tr");
+		
+		for(var i=0;i<rows.length;i++) {
+		
+			if (xseg=="gt") {
+				if (!this.gt) this.gt = new Segmentation();
+				if (!this.gt.browser) 			this.gt.browser 		= rows[i].children[0].innerText;
+				if (!this.gt.category)			this.gt.category 		= rows[i].children[1].innerText;
+				if (!this.gt.url)				this.gt.url 			= rows[i].children[2].innerText;
+				if (!this.gt.originalWidth) 	this.gt.originalWidth 	= parseInt(rows[i].children[3].innerText);
+				if (!this.gt.originalHeight)	this.gt.originalHeight	= parseInt(rows[i].children[4].innerText);
+			} else {
+				if (!this.seg) this.seg = new Segmentation();
+				if (!this.seg.browser) 			this.seg.browser 		= rows[i].children[0].innerText;
+				if (!this.seg.category)			this.seg.category 		= rows[i].children[1].innerText;
+				if (!this.seg.url)				this.seg.url 			= rows[i].children[2].innerText;
+				if (!this.seg.originalWidth) 	this.seg.originalWidth 	= parseInt(rows[i].children[3].innerText);
+				if (!this.seg.originalHeight)	this.seg.originalHeight	= parseInt(rows[i].children[4].innerText);
+			}
+		
+		
+			
+			block = new Block();
+			block.id = rows[i].children[5].innerText;
+			block.originalRect.x = parseInt(rows[i].children[6].innerText);
+			block.originalRect.y = parseInt(rows[i].children[7].innerText);
+			block.originalRect.w = parseInt(rows[i].children[8].innerText);
+			block.originalRect.h = parseInt(rows[i].children[9].innerText);
+			
+			if (xseg=="gt") {
+				if (block.originalRect.w > this.gt.originalWidth)
+					this.gt.originalWidth = block.originalRect.w;
+				if (block.originalRect.h > this.gt.originalHeight)
+					this.gt.originalHeight = block.originalRect.h;
+				this.gt.blocks.push(block);
+			} else {
+				if (block.originalRect.w > this.seg.originalWidth)
+					this.seg.originalWidth = block.originalRect.w;
+				if (block.originalRect.h > this.seg.originalHeight)
+					this.seg.originalHeight = block.originalRect.h;
+				this.seg.blocks.push(block);
+			}
+		}
+	}
+	
+	this.loaded = function() {
+		return( ('undefined' !== typeof this.gt) && ('undefined' !== typeof this.seg) );
+	}
+	
+	this.fixProportions = function() {
+		var nw = 300;
+		var nh = 300;
+		this.gt.fixProportions(nw,nh);
+		this.seg.fixProportions(nw,nh);
+	}
+	
+	this.evaluate = function() {
+		var gb,sb;
+		this.graphG = {};
+		this.graphS = {};
+		for (var g=0;g<this.gt.blocks.length;g++) {
+			gb = this.gt.blocks[g];
+			for (var s=0;s<this.seg.blocks.length;s++) {
+				sb = this.seg.blocks[s];
+				drawCurrentRects(gb,sb);
+				if (sb.equals(gb)) {
+					addUniqueTo(this.graphG,this.graphS,gb,sb)
+				} else {
+					if (gb.contains(sb)) {
+						addUniqueTo(this.graphG,this.graphS,gb,sb)
+					}
+					if (sb.contains(gb)) {
+						addUniqueTo(this.graphS,this.graphG,sb,gb)
+					}
+				}
+			}
+		}
+	}
+	
+	this.generateMatrix = function() {
+		console.log(this.graphG);
+		for (var i=0;i< this.graphG.length;i++) {
+			console.log(this.graphG[i])
+		}
+	}
+}
+
+function addUniqueTo(gfrom,gto,from,to) {
+	if (!gfrom[from.id]) gfrom[from.id] = new GTObj();
+	if (!gto[to.id]) gto[to.id] = new GTObj();
+	
+	var flag=false;
+	
+	for (var k=0;k<gfrom[from.id].nodes.length;k++) {
+		if (gfrom[from.id].nodes[k] == to) {
+			flag = true;
+			break;
+		}
+	}
+	if (!flag)  {
+		gfrom[from.id].eout++;
+		gto[to.id].ein++;
+		gfrom[from.id].nodes.push(to);
+	}
+	
+	flag=false;
+	
+	for (var k=0;k<gto[to.id].nodes.length;k++) {
+		if (gto[to.id].nodes[k] == from) {
+			flag = true;
+			break;
+		}
+	}
+	
+	if (!flag)  {
+		gto[to.id].eout++;
+		gfrom[from.id].ein++;
+		gto[to.id].nodes.push(from);
+	}
+}
+
+
+function prepareEvaluation(page) {
+	e = new Evaluation();
+	e.gt=undefined
+	e.seg=undefined
+	e.page = page;
+	e.loadSegmentation("gt",parent.frames[1]);
+	e.loadSegmentation("seg",parent.frames[3]);
+	if (e.gt && e.seg) console.log(e.gt,e.seg)
+	if (e.loaded()) {
+		e.fixProportions();
+		document.getElementById("evaloutput").innerHTML = "Segmentations Loaded"
+		clearDivsIn(parent.frames[6].document);
+		return(true);
+	} else document.getElementById("evaloutput").innerHTML = "Segmentation not found"
+	return(false)
+}
+
+function included(obj,arr) {
+	for (var i=0;i<arr.length;i++) {
+		if (arr[i]==obj) {
+			return(true);
+		}
+	}
+	return(false);
+}
+
+function startEvaluation() {
+	var tt = parseInt(parent.frames[0].document.getElementById('tt').value);
+	var algo1 = parent.frames[0].document.getElementById('left_algorithm').value;
+	var algo2 = parent.frames[0].document.getElementById('right_algorithm').value;
+	var browser1 = parent.frames[0].document.getElementById('left_browser').value;
+	var browser2 = parent.frames[0].document.getElementById('right_browser').value;
+	
+	e.evaluate();
+	
+	clearDivsIn(parent.frames[6].document);
+	
+	var ss="";
+	var tc;
+	var gnode,snode,gnodeins,gn,gs;
+	
+	//auxiliar metrics
+	var sigedgesG = 0;
+	var sigedgesS = 0;
+	var incidentG = 0;
+	var incidentS = 0;
+	
+	//metrics
+	var tc = 0;
+	var to = 0;
+	var tu = 0;
+	var co = 0;
+	var cu = 0;
+	var cm = 0;
+	var cf = 0;
+	
+	var ss="";
+	var zz="";
+	ss+="<table border=1 width='100%'>"
+	ss+="<tr><td>"+algo1+" Nodes</td><td>"+algo2+" Nodes</td></tr>"
+	ss+="<tr valign='top'><td>"
+	ss+="<table border=1>"
+	for (var k=0;k<e.gt.blocks.length;k++) {
+		gnode = e.gt.blocks[k];
+		glist = e.graphG[gnode.id] || undefined;
+		if (glist) {
+			gn=glist.nodes.length;
+			sigedgesG+=gn;
+			incidentG++;
+			if (gn>1) {co++;status="oversegmented by";}
+			if (gn==0) {cm++;status="missed";}
+			var aa=""
+			for (var n=0;n<glist.nodes.length;n++) {
+				snode = glist.nodes[n] ;
+				slist = e.graphS[snode.id] || undefined;
+				if (slist) {
+					sn = slist.nodes.length;
+					gnodeins = included(gnode,slist.nodes);
+					aa+="<tr><td>" +snode.id+" ("+sn+")</td></tr>";
+					//~ ss+="<td>" +snode.id+" ("+sn+"),("+gnodeins+")</td>";
+					if ((gn == sn) && (gn == 1) && gnodeins) {tc++;status="correct";}
+					if ((sn>1) && (gn == 1) && gnodeins) {status="undersegmented by";}
+					
+				}
+			}
+			ss+="<tr><td>"+gnode.id+" ("+gn+") is "+status+"</td><td><table border=0>";
+			ss+=aa;
+			ss+="</table></td></tr>";
+		} else {
+			cm++;
+			ss+="<tr><td>"+gnode.id+" (0) (missed)</td><td></td></tr>";
+		}
+	}
+	ss+="</table></td><td><table border=1>"
+	for (var k=0;k<e.seg.blocks.length;k++) {
+		snode = e.seg.blocks[k];
+		slist = e.graphS[snode.id] || undefined;
+		if (slist) {
+			sn=slist.nodes.length;
+			incidentS++;
+			sigedgesS+=sn;
+			//~ if (sn>1) cu++;
+			//~ if (sn==0) cf++;
+			if (sn>1) {cu++;status="undersegmented by";}
+			if (sn==0) {cf++;status="missed";}
+			//~ ss+=snode.id+" ("+sn+")<br>";
+			
+			var aa="";
+			for (var n=0;n<slist.nodes.length;n++) {
+				gnode = slist.nodes[n] ;
+				glist = e.graphG[gnode.id] || undefined;
+				if (glist) {
+					gn = glist.nodes.length;
+					snodeins = included(snode,glist.nodes);
+					//~ ss+="---" +gnode.id+" ("+gn+"),("+snodeins+")<br>";
+					aa+="<tr><td>" +gnode.id+" ("+gn+")</td></tr>";
+					//if ((sn == gn) && (sn == 1) && gnodeins) tc++; we do this only once
+					if ((gn>1) && (sn == 1) && snodeins) {status="oversegmented by";}
+				}
+			}
+			ss+="<tr><td>"+snode.id+" ("+sn+")  ("+status+")</td><td><table border=0>";
+			ss+=aa;
+			ss+="</table></td></tr>";
+		} else {
+			cf++;
+			ss+="<tr><td>"+snode.id+" (0) is a false alarm</td><td></td></tr>";
+		}
+	}
+	
+	ss+="</td></tr></table></td></tr></table>"
+	
+	to = sigedgesG-incidentG;
+	tu = sigedgesS-incidentS; 
+
+	gtb = e.gt.blocks.length;
+	stb = e.seg.blocks.length;
+	
+	var a,b,score;
+	if (gtb!=0) {
+		a=tc/gtb;
+	} else {
+		a=0
+	}
+	if ((cm+cf)!=0) {
+		b = (cm+cf);
+	} else {
+		b=0
+	}
+	if (b==0) {
+		score = 1;
+	} else {
+		score = a/b;
+	}
+	
+zz+='<table border="1" width="100%">';
+zz+='	<tr align="center"><td><b>Page</b></td><td>'+e.page+'</td></tr>';
+zz+='	<tr align="center"><td><b>Algorithm1</b></td><td>'+algo1+'@'+browser1+'</td></tr>';
+zz+='	<tr align="center"><td><b>Algorithm2</b></td><td>'+algo2+'@'+browser2+'</td></tr>';
+zz+='	<tr align="center"><td><b>TB1</b></td><td>'+gtb+'</td></tr>';
+zz+='	<tr align="center"><td><b>TB2</b></td><td>'+stb+'</td></tr>';
+zz+='	<tr align="center"><td><b>TT</b></td><td>'+tt+'</td></tr>';
+zz+='	<tr align="center"><td><b>Tc</b></td><td>'+tc+'</td></tr>';
+zz+='	<tr align="center"><td><b>To</b></td><td>'+to+'</td></tr>';
+zz+='	<tr align="center"><td><b>Tu</b></td><td>'+tu+'</td></tr>';
+zz+='	<tr align="center"><td><b>Cm</b></td><td>'+cm+'</td></tr>';
+zz+='	<tr align="center"><td><b>Cf</b></td><td>'+cf+'</td></tr>';
+zz+='	<tr align="center"><td><b>Score</b></td><td>'+score+'</td></tr>';
+zz+='</table>';
+
+	
+	
+	//~ graph = generateGraphOutput();
+	var rnn = Math.floor(Math.random()*10000)
+	var getref = "http://www-poleia.lip6.fr/~sanojaa/BOM/results.php?category="+e.gt.category+"&url="+escape(e.page)+"&tc="+tc+"&to="+to+"&tu="+tu+"&co="+co+"&cu="+cu+"&cm="+cm+"&cf="+cf+"&tt="+tt+"&algorithm1="+algo1+"&algorithm2="+algo2+"&gtb="+gtb+"&stb="+stb+"&browser1="+browser1+"&browser2="+browser2+"&rnd="+rnn;
+	
+	if (parent.batchmode) {
+		var request = new XMLHttpRequest();
+		request.open('GET',getref,false);
+		request.send(null);
+		
+		if (request.status == 200) {
+			document.getElementById("evaloutput").innerHTML = request.responseText;
+		} else {
+			console.log("Data not saved. Status="+request.status);
+		}
+	} else {
+		var ff="<input type='button' onclick=\"location.href='"+getref+"'\" value='Send Results'/><br>";
+		document.getElementById("evaloutput").innerHTML = ff+zz+ss;
+		
+	}
+	//~ var matrix = e.generateMatrix();
+	//generateGraphOutput();
+}
+
+function generateGraphOutput() {
+	var gnodes=[],snodes=[],text;
+	for (var g=0;g<e.gt.blocks.length;g++) {
+		gcir[g] = paper.circle(100,40+desp,20);
+		gcir[g].attr('fill','#FFFFFF');
+		gcir[g].attr('stroke','black');
+		text = paper.text(100,40+desp,e.gt.blocks[g].id);
+	}
+	desp=0;
+	for (var s=0;s<e.seg.blocks.length;s++) {
+		desp=desp+60
+		scir[s] = paper.circle(600,40+desp,20);
+		scir[s].attr('fill','#FFFFFF');
+		scir[s].attr('stroke','black');
+		text = paper.text(600,40+desp,e.seg.blocks[s].id);
+	}
+}
+
+function draw(seg,win,border,fill) {
+	var canvas = new rectLib();
+	canvas.init(win);
+	canvas.build(0,0,300,300,"","","2px dotted red","transparent");
+	var rect;
+	for (var i=0;i<seg.blocks.length;i++) {
+		var dim = seg.blocks[i].computedRect;
+		//cont = dim.x+" "+dim.y+" "+dim.w+" "+dim.h;
+		cont="";
+		if (!border) border = "2px solid red";
+		if (!fill) fill = "blue";
+		rect = canvas.build(dim.x,dim.y,dim.w-dim.x,dim.h-dim.y,cont,seg.blocks[i].id,border,fill);
+		parent.drawings.push(rect);
+		console.log(seg.blocks[i])
+	}
+}
+
+function clearDivsIn(doc) {
+	var divs = doc.getElementsByTagName("div");
+	for (var k=divs.length-1;k>=0;k--) doc.body.removeChild(divs[k]);
+}
+
+function dummy() {
+	console.log("I'm waiting...");
+}
+
+function drawCurrentRects(r1,r2) {
+	clearDivsIn(parent.frames[6].document);
+	var canvas = new rectLib();
+	var rect1,rect2;
+	canvas.init(parent.frames[6]);
+	border = "2px solid red";
+	fill = "blue";
+	var dim1 = r1.computedRect;
+	var dim2 = r2.computedRect;
+	
+	rect1 = canvas.build(dim1.x,dim1.y,dim1.w-dim1.x,dim1.h-dim1.y,"",r1.id,border,fill);
+	fill = "green";
+	rect2 = canvas.build(dim2.x,dim2.y,dim2.w-dim2.x,dim2.h-dim2.y,"",r2.id,border,fill);
+}
+
+</script>
+<script type="text/javascript">
+        
+            var selectors, lastTarget;
+            
+            selectors = {
+                crops : 'input[name=crop]',
+                crop  : 'input[name=crop]:checked'
+            };
+            
+            function round() {
+                return false; //$('input[name=round]:checked').length === 1;
+            }
+            
+            function reset() {
+                lastTarget = undefined;
+                $('#arc input[name=x1]').val(1024);
+                $('#arc input[name=y1]').val(768);
+                $('#arc input[name=x2]').val('');
+                $('#arc input[name=y2]').val('');
+                onKeyup({});
+            }
+            
+            /**
+             * Reduce a numerator and denominator to it's smallest, integer ratio using Euclid's Algorithm
+             */
+            function reduceRatio(numerator, denominator) {
+                var gcd, temp, divisor;
+                
+                // from: http://pages.pacificcoast.net/~cazelais/euclid.html
+                gcd = function (a, b) { 
+                    if (b === 0) return a;
+                    return gcd(b, a % b);
+                }
+                
+                // take care of some simple cases
+                if (!isInteger(numerator) || !isInteger(denominator)) return '? : ?';
+                if (numerator === denominator) return '1 : 1';
+                
+                // make sure numerator is always the larger number
+                if (+numerator < +denominator) {
+                    temp        = numerator;
+                    numerator   = denominator;
+                    denominator = temp;
+                }
+                
+                divisor = gcd(+numerator, +denominator);
+                
+                return 'undefined' === typeof temp ? (numerator / divisor) + ' : ' + (denominator / divisor) : (denominator / divisor) + ' : ' + (numerator / divisor);
+            };
+            
+            function ratio2css(numerator, denominator) {
+                var width, height;
+                
+                if (+numerator > +denominator) {
+                    width  = 200;
+                    height = solve(width, undefined, numerator, denominator);
+                }
+                else {
+                    height = 200;
+                    width  = solve(undefined, height, numerator, denominator);
+                }
+                
+                return {
+                    width      : width + 'px',
+                    height     : height + 'px',
+                    lineHeight : height + 'px'
+                };
+            }
+            
+            /**
+             * Determine whether a value is an integer (ie. only numbers)
+             */
+            function isInteger(value) {
+                return /^[0-9]+$/.test(value);
+            };
+            
+            /**
+             * Solve for the 4th value
+             * @param int num2 Numerator from the right side of the equation
+             * @param int den2 Denominator from the right side of the equation
+             * @param int num1 Numerator from the left side of the equation
+             * @param int den1 Denominator from the left side of the equation
+             * @return int
+             */
+            function solve(width, height, numerator, denominator) {
+                var value;
+                
+                // solve for width
+                if ('undefined' !== typeof width) {
+                    value = round() ? Math.round(width / (numerator / denominator)) : width / (numerator / denominator);
+                }
+                // solve for height
+                else if ('undefined' !== typeof height) {
+                    value = round() ? Math.round(height * (numerator / denominator)) : height * (numerator / denominator);
+                }
+                
+                return value;
+            }
+            
+            /**
+             * Handle a keyup event
+             */
+            //~ function onKeyup(evt) {
+                //~ var x1, y1, x2, y2, x1v, y1v, x2v, y2v, ratio;
+                //~ 
+                //~ lastTarget = evt.target;
+                //~ 
+                //~ x1 = $('#arc input[name=x1]');
+                //~ y1 = $('#arc input[name=y1]');
+                //~ x2 = $('#arc input[name=x2]');
+                //~ y2 = $('#arc input[name=y2]');
+                //~ 
+                //~ x1v = x1.val();
+                //~ y1v = y1.val();
+                //~ x2v = x2.val();
+                //~ y2v = y2.val();
+                //~ 
+                //~ // display new ratio
+                //~ ratio = reduceRatio(x1v, y1v);
+                //~ $('#ratio').html(ratio);
+                //~ $('#visual-ratio').css(ratio2css(x1v, y1v));
+                //~ resizeSample();
+                //~ 
+                //~ switch (evt.target) {
+                    //~ case x1[0]:
+                        //~ if (!isInteger(x1v) || !isInteger(y1v) || !isInteger(y2v)) return;
+                        //~ x2.val(solve(undefined, y2v, x1v, y1v));
+                        //~ fadeIt(x2);
+                        //~ break;
+                    //~ case y1[0]:
+                        //~ if (!isInteger(y1v) || !isInteger(x1v) || !isInteger(x2v)) return;
+                        //~ y2.val(solve(x2v, undefined, x1v, y1v));
+                        //~ fadeIt(y2);
+                        //~ break;
+                    //~ case x2[0]:
+                        //~ if (!isInteger(x2v) || !isInteger(x1v) || !isInteger(y1v)) return;
+                        //~ y2.val(solve(x2v, undefined, x1v, y1v));
+                        //~ fadeIt(y2);
+                        //~ break;
+                    //~ case y2[0]:
+                        //~ if (!isInteger(y2v) || !isInteger(x1v) || !isInteger(y1v)) return;
+                        //~ x2.val(solve(undefined, y2v, x1v, y1v));
+                        //~ fadeIt(x2);
+                        //~ break;
+                //~ }
+            //~ };
+            // END: onKeyup
+            
+           
+            
+         
+          
+            
+           
+            
+            
+        
+        </script>
+
+</head>
+<body>
+<!--
+<input type='button' onclick="draw(e.gt,parent.frames[2]);draw(e.seg,parent.frames[4])" value="draw">
+-->
+<div id="evaloutput"></div>
+</body>
+</html>

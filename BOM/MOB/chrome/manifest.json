@@ -1,0 +1,29 @@
+{
+  "name": "MoB: Manual design of Blocks",
+  "version": "1.0.0",
+  "browser_action": {
+    "default_icon": "images/logo_small.png",
+    "default_title": "Manual design of blocks"
+  },
+  "background": {
+	"scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "exclude_matches": ["*://www-poleia.lip6.fr//*"], 
+      "css": ["css/pmanual.css"],
+      "js": ["js/pmanual2.js","js/jquery-min.js","js/rectlib.js","js/gtbuild.js","js/bomlib.js","js/polyk.js"]
+    }
+  ],
+  "permissions": [
+    "tabs", 
+    "*://*/*", "background"
+  ],
+  "web_accessible_resources": [
+    "images/logo_small.png",
+    "images/logo.png"
+  ],
+  "manifest_version": 2
+
+}

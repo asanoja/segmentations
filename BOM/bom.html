@@ -1,0 +1,66 @@
+<head>
+<title>
+	BOM Algorithm
+</title>
+
+<!-- global script -->
+<script src="bom.js"></script>
+<script src="polyk.js"></script>
+<script src="jquery-min.js"></script>
+<script>
+
+var contentDocument;
+var topDocument;
+var contentWindow;
+var topWindow;
+var outputWindow;
+var outputDocument;
+var batchmode = false;
+
+function debug(data) {topWindow.add2log(data)}
+
+function add2(struc,level,data,events) {
+	topWindow.add2struc(struc,level,data,events)
+}
+
+window.onload = function() {
+        topWindow 		= window.frames[0];
+        topDocument 	= topWindow.document;
+        
+        
+        outputWindow 	= window.frames[1];
+        outputDocument	= outputWindow.document;
+};
+
+window.onunload = function() {
+		contentDocument = undefined;
+		contentWindow.close();
+}
+
+function doSegmentation() {
+	outputWindow 	= window.frames[1];
+    outputDocument	= outputWindow.document;
+	startSegmentation(contentWindow,topDocument.getElementById("gran").value,topDocument.getElementById("sdc").value);
+}
+
+function next() {
+	var url = topDocument.getElementById("url");
+	if (url.selectedIndex) {
+		if (url.selectedIndex < url.options.length) {
+			if (url.options[url.selectedIndex].value.indexOf("-") == 0) url.selectedIndex++; //skip titles
+			url.selectedIndex++;
+			topWindow.loadPage();
+		}
+	}
+}
+</script>
+</head>
+
+<frameset rows="80%,*">
+	<frame src='top.html' id='top' name='top'>
+	<frame id='output' name='output' src='blank.html'/>
+<!--
+	<frame id='content' name='content' src='pages/test2.html'/>
+	<frame id='content' name='content' src='pages/webpage1.html'/>
+-->
+</frameset>

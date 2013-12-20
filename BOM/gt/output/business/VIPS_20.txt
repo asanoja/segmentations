@@ -1,0 +1,6 @@
+http://www.colortonegrafx.com/,business,2,0,0,0,0,1,1,20,3,3,
+http://www.happyentertainment.com/,business,3,2,0,2,0,0,0,20,5,7,
+http://www.nierenberggroup.com/,business,2,1,0,1,0,6,4,20,7,10,
+http://www.amazingawards.com/,business,0,0,0,0,0,5,6,20,6,5,
+http://www.happyentertainment.com/,business,2,0,0,0,0,9,3,20,5,11,
+http://www.nierenberggroup.com/,business,3,0,0,0,0,7,4,20,7,10,

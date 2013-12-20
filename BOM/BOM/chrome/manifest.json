@@ -1,0 +1,29 @@
+{
+  "name": "Block-O-Matic Segmentation",
+  "version": "1.0.0",
+  "browser_action": {
+    "default_icon": "images/logo_small.png",
+    "default_title": "Segment this page"
+  },
+  "background": {
+	"scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "exclude_matches": ["*://www-poleia.lip6.fr//*","*://localhost//*"],
+      "css": ["css/pmanual.css"],
+      "js": ["js/pmanual2.js","js/jquery-min.js","js/rectlib.js","js/gtbuild.js","js/bomlib.js","js/polyk.js","js/wprima.js"]
+    }
+  ],
+  "permissions": [
+    "tabs", 
+    "*://*/*", "background"
+  ],
+  "web_accessible_resources": [
+    "images/logo_small.png",
+    "images/logo.png"
+  ],
+  "manifest_version": 2
+
+}

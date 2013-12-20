@@ -11,9 +11,9 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "exclude_matches": ["*://www-poleia.lip6.fr//*"],
+      "exclude_matches": ["*://www-poleia.lip6.fr//*","*://localhost//*"],
       "css": ["css/pmanual.css"],
-      "js": ["js/pmanual.js","js/jquery-min.js"]
+      "js": ["js/pmanual2.js","js/jquery-min.js","js/rectlib.js","js/gtbuild.js","js/bomlib.js","js/polyk.js"]
     }
   ],
   "permissions": [

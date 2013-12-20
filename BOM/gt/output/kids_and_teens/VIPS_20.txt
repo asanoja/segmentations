@@ -1,0 +1,8 @@
+http://www.awesomelibrary.org/cgi-bin/search-aw1-e.cgi?terms=social_studies,kids_and_teens,2,2,0,2,0,0,0,20,4,6,
+http://www.kidsonthenet.org.uk/,kids_and_teens,4,7,0,1,0,2,0,20,5,14,
+http://www.mywonderfulworld.org/kidsteens_welcome.html,kids_and_teens,2,0,0,0,0,5,3,20,5,7,
+http://weather.cod.edu/sirvatka/ts.html,kids_and_teens,3,0,0,0,0,1,1,20,4,4,
+http://www.awesomelibrary.org/cgi-bin/search-aw1-e.cgi?terms=social_studies,kids_and_teens,1,0,0,0,0,3,3,20,4,4,
+http://www.kidsonthenet.org.uk/,kids_and_teens,1,1,1,1,1,2,2,20,5,5,
+http://www.mywonderfulworld.org/kidsteens_welcome.html,kids_and_teens,1,0,1,0,1,2,2,20,5,4,
+http://weather.cod.edu/sirvatka/ts.html,kids_and_teens,0,0,0,0,0,4,4,20,4,4,

@@ -1,0 +1,27 @@
+Observaciones presentacion demo:
+
+Por que segmentar las paginas
+Dar un ejemplo en nuestra aplicacion
+Usar una segunda pagina de ejemplo
+explicar el modelo de segmentacion
+poner una slide que muestre como funciona la segmentacion luego de los ejemplos: mostrando las estructuras
+no usar abreviaciones como por ejemplo BR y SR
+No usar anotacion usar mas bien Ground Truth
+Mejorar el menu de la aplicacion
+decir que se consiguen los bloques candidatos cuando salen todos los bloques en la GT Editor
+Justificar que seleccionamos una categoria por que hay paginas que no estan en la lista, es decir, que puede ser paginas que no estan en nuestra lista de evaluacion
+De manera tal que se vea que no estamos categorizando solo haciendo la GT
+antes de pasar a la evaluacion mostrar la segmentacion de BOM y la GT juntas.
+
+Mientras se hace la evaluacion explicar las diferences aplicaciones en el poster
+
+explicar todos los botones
+
+explicar mejor la evaluacion, como se hace y porque se hace:
+
+este proceso nos permite compara diferentes enfoques, diferentes algoritmos y variar la tolerancia en la evaluacion
+
+Aplicaciones discutidas:
+evaluacion en la conversion de formatos
+deteccion de templates
+deteccion de contenido principal
