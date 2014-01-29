@@ -1,2 +1,0 @@
-http://www.komenncalabama.org/,health,4,0,0,0,0,3,1,15,5,7,
-http://www.komenncalabama.org/,health,0,0,0,0,0,4,5,15,5,4,

@@ -1,4 +1,0 @@
-http://www.awesomelibrary.org/cgi-bin/search-aw1-e.cgi?terms=social_studies,kids_and_teens,3,1,0,1,0,1,0,10,4,6,
-http://www.kidsonthenet.org.uk/,kids_and_teens,2,7,0,1,0,4,2,10,5,14,
-http://www.mywonderfulworld.org/kidsteens_welcome.html,kids_and_teens,1,0,0,0,0,6,4,10,5,7,
-http://weather.cod.edu/sirvatka/ts.html,kids_and_teens,3,0,0,0,0,1,1,10,4,4,
