@@ -1,0 +1,2 @@
+var bfurl = "http://www-poleia.lip6.fr/~sanojaa/dummy.html";
+var blocks = [["B1",["HTML/BODY/DIV[@id='header']/A"]],["B2",["HTML/BODY/H1"]],["B3",["HTML/BODY/DIV[@id='main_content']/P"]],["B4",["HTML/BODY/DIV[@id='main_content']/P[2]"]],["B5",["HTML/BODY/DIV[@id='main_content']/P[3]"]],["B6",["HTML/BODY/DIV[@id='main_content']/TABLE/TBODY/TR/TD"]],["B7",["HTML/BODY/DIV[@id='main_content']/TABLE/TBODY/TR/TD[2]"]],["B8",["HTML/BODY/DIV[@id='main_content']/TABLE/TBODY/TR[2]/TD"]],["B9",["HTML/BODY/DIV[@id='main_content']/TABLE/TBODY/TR[2]/TD[2]"]],undefined];

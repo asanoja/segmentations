@@ -48,6 +48,8 @@ function rectObj() {
 		else {
 			this.setOpacity("0.5");
 			this.data.style.background = sty;
+			this.data.children[0].style.color = "white";
+			this.data.children[0].style.backgroundColor = "black";
 		}
 	}
 	this.setOpacity = function(value) {

@@ -75,6 +75,8 @@ function fufu(e) {
 	if (e.keyCode == 27 || e.keyCode == 118)
 		console.log("ESCAPE OR F7");
 		discardBlock();
+		insert = false;
+		detailed = false;
 		update_marco();
 		hideLayout();
 		return false;
@@ -253,6 +255,7 @@ function updateSegmentation() {
 function getGranOptions() {
 	var s="";
 	s = "<input typeinput type='text' name='bomgranoptions' id='bomgranoptions' value='0.5' size='3'>";
+	s += "<br><input typeinput type='text' name='bomcurrentarea' id='bomcurrentarea' value='' size='8'>";
 	//~ s="<select name='bomgranoptions' id='bomgranoptions'>";
 	//~ s+="<option value='0.0'>0.0</value>";
 	//~ s+="<option value='0.1'>0.1</value>";
@@ -340,13 +343,13 @@ function update_marco_submit() {
 	s+=tk+" blocks<br>"
 	s+="<input type='hidden' value='"+tk+"' name='total'>";
 	pn=getURLParameter('fn');
-	s+="<input id='pmanual_webpage' type='hidden' size='80' value='"+pn+"' name='page'><br>";
-	s+="<input id='pmanual_source' type='hidden' size='80' value='GTdata' name='source'><br>";
-	s+="<input id='pmanual_meta' type='hidden' size='30' value='"+metaData+"' name='meta'><br>";
-	s+="<input id='pmanual_meta_window' type='hidden' size='30' value='"+$(window).width()+"x"+$(window).height()+ "' name='meta2' style='display:none'><br>";
-	s+="<input id='random' type='hidden' size='30' value='"+(Math.ceil(Math.random()*2000))+ "' name='random' style='display:none'><br>";
-	
-	s+="<input id='pmanual_username' type='text' value='andres' name='name' style='display:none'><br>";
+	s+="<input id='pmanual_webpage' type='hidden' size='80' value='"+pn+"' name='page'>";
+	s+="<input id='pmanual_source' type='hidden' size='80' value='GTdata' name='source'>";
+	s+="<input id='pmanual_meta' type='hidden' size='30' value='"+metaData+"' name='meta'>";
+	s+="<input id='pmanual_meta_window' type='hidden' size='30' value='"+$(window).width()+"x"+$(window).height()+ "' name='meta2' style='display:none'>";
+	s+="<input id='random' type='hidden' size='30' value='"+(Math.ceil(Math.random()*2000))+ "' name='random' style='display:none'>";
+	s+="<input id='bom_gran' type='text' value='"+ac+"' name='granularity' style='display:none'>";
+	s+="<input id='pmanual_username' type='text' value='andres' name='name' style='display:none'>";
 	s+="<select id='pmanual_category' name='category' style='display:block'>";
     s+="<option value='none'>none</option>";
     s+="<option value='arts'>Arts</option>";
@@ -371,7 +374,7 @@ function update_marco_submit() {
 	var k=1;
 	for (var i=0;i<blocks.length;i++) {
 			if (blocks[i]) {
-				s+="<input type='hidden' value='G" + k + "," + dimension(blocks[i]) + "," + blocks[i].id +"' name='block"+(k)+"'>";
+				s+="<input type='hidden' value='G" + k + "," + dimension(blocks[i]) + "," + blocks[i].id +","+blocks[i].countCover()+"' name='block"+(k)+"'>";
 				k++;
 			}
 	}
@@ -405,7 +408,7 @@ function carga(e) {
 			}
 			console.log("1");
 			if (!marco) {
-				console.log(rectObj)
+				//~ console.log(rectObj)
 				marco = new rectObj();
 				marco.init(window,document)
 				marco.build(0,0,200,400,"4px dotted black","#F0F0F0","Loading...","dialog-window-plmanual");
@@ -472,9 +475,10 @@ function carga(e) {
 			cargado = true;
 			editing = false;
 			console.log("4");
-			var ac=0.5;
+			var ac = 0.3;
+			ac = parseFloat(prompt("Segment with which granularity: 0.0 - 1.0 \nGive a number\n small blocks 0.0 <--> 1.0 bigger blocks",ac));
 			//ac = parseFloat(prompt("Segment with which granularity: 0.0 - 1.0 \nGive a number\n",ac));
-			startSegmentation(window,ac,50);
+			startSegmentation(window,ac,50,true);
 			console.log("5");
 			
 			update_marco();
@@ -757,6 +761,7 @@ function dale(e) {
 			console.log(lastBlock.getAttribute("id"));
 			if (lastBlock.getAttribute("id") == "bomsend") {update_marco_submit();return}
 			if (lastBlock.getAttribute("id") == "bomgranoptions") {e.stopPropagation();return}
+			if (lastBlock.getAttribute("id") == "bomcurrentarea") {e.stopPropagation();return}
 			if (lastBlock.getAttribute("id") == "bomgranoptionscmd") {updateSegmentation();return}
 			if (detailed)  {
 				var list = getBlocksUnderClick(e);
@@ -790,6 +795,7 @@ function dale(e) {
 		console.log("Working with ",lastBlock,lastLog)
 		if (lastLog) {
 			lastLog.setOn();
+			document.getElementById("bomcurrentarea").value = lastLog.relativeArea();
         
 			var cont="<h1 class='bomdialog'>Block actions for block "+lastLog.id+"</h1>";
 				cont+="<center>";
@@ -856,6 +862,7 @@ function acceptBlock() {
 		lastLog = searchLog(page,lastBlock);
 	if (lastLog.type == "PAGE") return;
 	lastLog.clearChildrenBlocks();
+	lastLog.updateBlock();
 	lastLog.setOff();
 	lastBlock = undefined;
 	lastBlock2 = undefined;

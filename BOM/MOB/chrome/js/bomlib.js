@@ -1,6 +1,6 @@
-var containerList 	= ["BODY","DIV","UL","DL","P","TABLE","TD","SECTION","HEADER","FOOTER","ASIDE","NAV","ARTICLE","OBJECT"];
+var containerList 	= ["BODY","DIV","UL","DL","P","TABLE","TD","SECTION","HEADER","FOOTER","ASIDE","NAV","ARTICLE","OBJECT","IFRAME","INS"];
 var contentList 	= ["SPAN","A","LI","DT","DD","H1","H2","H3","H4","H5","IMG","INS"];
-var excludeList 	= ["SCRIPT","STYLE","AREA","HEAD","META","FRAME","FRAMESET","BR","HR","NOSCRIPT","IFRAME"];
+var excludeList 	= ["SCRIPT","STYLE","AREA","HEAD","META","FRAME","FRAMESET","BR","HR","NOSCRIPT"];
 var ignoreList 	 	= ["HTML","TBODY","TR","PARAM","LINK"];
 
 var ac = 0.5; //in pixel-square
@@ -101,14 +101,14 @@ function rawTreeDump(obj,id,level) {
 	return(spc+mnt+acum);
 }
 
-function countChildren(obj) {
-	var count=0;
-	for (var i=0;i<obj.children.length;i++) {
-		if (obj.children[i]) 
-			count++;
-	}
-	return(count);
-}
+//~ function countChildren(obj) {
+	//~ var count=0;
+	//~ for (var i=0;i<obj.children.length;i++) {
+		//~ if (obj.children[i]) 
+			//~ count++;
+	//~ }
+	//~ return(count);
+//~ }
 
 function elementCount(element) {
 	if (!element) return;
@@ -192,7 +192,7 @@ function exportInfo(obj,dest) {
 
 function debug(s) {console.log(s);} 
 
-function startSegmentation(win,pac,pdc) {	
+function startSegmentation(win,pac,pdc,proclog) {	
 		contentWindow = win;
 		contentDocument = contentWindow.document;
 		ac = pac;
@@ -207,7 +207,7 @@ function startSegmentation(win,pac,pdc) {
 		page = prepareLogicStructure(georoot);
 		debug("Processing Logic Structure");
 		console.log(root,page)
-		processLogicStructure(page,0,1,undefined);
+		if (proclog) processLogicStructure(page,0,1,undefined);
 }
 
 function post_to_url(path, params, method) {
@@ -521,7 +521,7 @@ function refName(element) {
 	if (isComment(element)) return("");
 	if (isText(element)) return("");
 	if (isExcluded(element)) return("");
-	var name = "";
+	var name = "(nodef)";
 	if (element.tagName) name = element.tagName;
 	if (element.getAttribute("id")) name = name + "." + element.getAttribute("id");
 	if (element.className) name = name + " " + element.className
@@ -787,7 +787,6 @@ function processLogicalObject(log) {
 	if (log.block) log.block.scrollIntoView(true);
 	var dep = true;
 	var i,j;
-	ac = parseFloat(document.getElementById('bomgranoptions').value);
 	//~ if (dep && log.block) log.block.style.backgroundColor="#FFFF00";
 	for (i=0;i<log.children.length;i++) {
 		if (log.children[i]) {
@@ -842,6 +841,16 @@ function processLogicalObject(log) {
 			} 
 		}
 	}
+	for (var i=0;i<log.children.length;i++) {
+		if (log.children[i]) {
+			if (log.children[i].relativeArea()<ac) {
+				//log.clearChildrenBlocks();
+				console.log("borrado");
+				break;
+			}
+		}
+	}
+	log.updateBlock();
 }
 
 
@@ -1040,22 +1049,32 @@ function logicalObject(obj) {
 		this.clearChildrenBlocks();
 		blocks.splice(blocks.indexOf(log),1);
 		log = undefined
+		this.updateBlock();
 	}
 	
 	this.area = function() {
 		return( (this.dim.w) * (this.dim.h));
+	}
+	this.perimeter = function() {
+		return( 2*(this.dim.w+this.dim.h));
 	}
 	this.hypo = function() {
 		return(Math.sqrt(Math.pow(this.dim.w,2)+Math.pow(this.dim.h,2)));
 	}
 	
 	this.relativeArea = function() {
-		if (this.parent) {
-			return(this.area() / this.parent.area() );
-			console.log("area",this.area(),this.parent.area());
+		//~ if (this.parent) {
+			//~ console.log("area",this.area(),this.parent.area());
+			//~ return(this.area() / this.parent.area() );
 			//~ return(this.hypo()/this.parent.hypo());
+			//~ return(this.perimeter()/this.parent.perimeter());
+		//~ } else {
+			//~ return(1.0);
+		//~ }
+		if (page) {
+			return(this.hypo()/page.hypo());
 		} else {
-			return(1.0);
+			return(0);
 		}
 	}
 	
@@ -1120,7 +1139,7 @@ function logicalObject(obj) {
 		this.dim.w = Math.max.apply(null, xs)-this.dim.x;
 		this.dim.h = Math.max.apply(null, ys)-this.dim.y;
 		
-		//console.log("DIM",r,this.dim)
+		console.log("DIM",geo,r,this.dim)
 		
 		if (!this.block) {
 			this.block = this.insertBlock();
@@ -1156,12 +1175,14 @@ function logicalObject(obj) {
 			if (t>0) 
 				this.visualCuesPresent = true;
 		}
-		
+		this.updateBlock();
 	}
 	
 	this.insertBlock = function() {
+		var vc="";
 		var block = document.createElement('div');
-		block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+" - "+this.relativeArea().toFixed(4) +"</span>";
+		if (this.visualCuesPresent) vc="VC";
+		block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+" - "+this.relativeArea().toFixed(4) +"<br>"+vc+"</span>";
 		block.setAttribute("class","block");
 		block.setAttribute("visited","true");
 		block.setAttribute("id",this.makeid());
@@ -1169,27 +1190,58 @@ function logicalObject(obj) {
 		return(block);
 	}
 	
+	this.updateBlock = function() {
+		//~ var aaa=this.relativeArea().toFixed(4)+"<br>";
+		var aaa=this.relativeArea().toFixed(4);
+		//~ if (page) aaa+=(this.hypo()/page.hypo()).toFixed(4)+"<br>";
+		//~ if (page) aaa+=(this.perimeter()/page.perimeter()).toFixed(4)+"<br>";
+		
+		this.block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+" - "+aaa +"</span>";
+	}
+	
 	this.setOn = function() {
 		if (!this.block) return;
 		var c = colors[this.type]
 		if (!c) c="black";
 		this.block.style.backgroundColor = c;
-		this.block.style.opacity = "0.5";
+		this.block.style.opacity = "1";
 		this.block.style.border = "2px dotted black";
+		this.block.style.color = "white";
 	}
 	
 	this.setOff = function() {
 		if (!this.block) return;
 		this.block.style.backgroundColor = "transparent";
+		this.block.style.color = "black";
 		this.block.style.opacity = "1";
 		this.block.style.border = "2px solid "+colors[this.type];
 	}
-	
+	this.hide = function() {
+		if (!this.block) return;
+		this.block.style.backgroundColor = "transparent";
+		this.block.style.opacity = "1";
+		this.block.style.border = "0px solid transparent";
+	}
 	this.deleteBlock = function() {
 		if (this.block) contentDocument.body.removeChild(this.block);
 		this.block=undefined;
 	}
-	
+	this.countCover = function() {
+		var cont=0;
+		for (var i=0;i<this.geometricObjects.length;i++) {
+			cont+=this.geometricObjects[i].countCover();
+		}
+		return(cont);
+	}
+	this.countChildren = function() {
+		var cont=0;
+		for (var i=0;i<this.children.length;i++) {
+			if (this.children[i]) {
+				cont++;
+			}
+		}
+		return(cont);
+	}
 }
 
 function relativeArea(element) {
@@ -1234,5 +1286,13 @@ function geometricObject() {
 	this.getGeometry = function() {
 		return(this.dim.x+" "+this.dim.y+" "+this.dim.w+" "+this.dim.h);
 	}
-	
+	this.countCover = function() {
+		//~ var count=0;
+		//~ for (var i=0;i<this.element.children.length;i++) {
+			//~ if (this.element.children[i]) 
+				//~ count++;
+		//~ }
+		//~ return(count);
+		return($(this.element).find('*').length)
+	}
 }

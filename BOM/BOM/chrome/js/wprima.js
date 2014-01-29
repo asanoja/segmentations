@@ -43,7 +43,7 @@ function getWPrima(block,first) {
 		}
 		wprima += closeTag("PAGE");
 	} else {
-		if (countChildren(block)==0) {
+		if (block.countChildren()==0) {
 			wprima += openTag("BLOCK",'type="'+block.type+'" geometry="'+getPolygonPoints(block.dim)+'" style="'+getCSSdec(block)+'"');
 			record += "BOM,"+browserSniff()+",none,"+document.URL +","+documentDim().w+","+documentDim().h + "," + block.id + ",none,0,"+ block.dim.x + "," + block.dim.y + "," + block.dim.w + "," + block.dim.h +"\n";
 		

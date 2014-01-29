@@ -1,6 +1,6 @@
-var containerList 	= ["PAGE","BLOCK","BODY","DIV","UL","DL","P","TABLE","TD","SECTION","HEADER","FOOTER","ASIDE","NAV","ARTICLE","OBJECT"];
+var containerList 	= ["BODY","DIV","UL","DL","P","TABLE","TD","SECTION","HEADER","FOOTER","ASIDE","NAV","ARTICLE","OBJECT","IFRAME","INS"];
 var contentList 	= ["SPAN","A","LI","DT","DD","H1","H2","H3","H4","H5","IMG","INS"];
-var excludeList 	= ["SCRIPT","STYLE","AREA","HEAD","META","FRAME","FRAMESET","BR","HR","NOSCRIPT","IFRAME"];
+var excludeList 	= ["SCRIPT","STYLE","AREA","HEAD","META","FRAME","FRAMESET","BR","HR","NOSCRIPT"];
 var ignoreList 	 	= ["HTML","TBODY","TR","PARAM","LINK"];
 
 var ac = 0.5; //in pixel-square
@@ -12,6 +12,7 @@ var dx = dc;
 var dy = dc;
 
 var blocks = [];
+var geoList = [];
 
 var bind=0;
 
@@ -100,14 +101,14 @@ function rawTreeDump(obj,id,level) {
 	return(spc+mnt+acum);
 }
 
-function countChildren(obj) {
-	var count=0;
-	for (var i=0;i<obj.children.length;i++) {
-		if (obj.children[i]) 
-			count++;
-	}
-	return(count);
-}
+//~ function countChildren(obj) {
+	//~ var count=0;
+	//~ for (var i=0;i<obj.children.length;i++) {
+		//~ if (obj.children[i]) 
+			//~ count++;
+	//~ }
+	//~ return(count);
+//~ }
 
 function elementCount(element) {
 	if (!element) return;
@@ -116,8 +117,8 @@ function elementCount(element) {
 	if (isText(element)) return;
 	
 	var count=0;
-	for (var i=0;i<obj.childNodes.length;i++) {
-		var child = obj.childNodes[i];
+	for (var i=0;i<element.childNodes.length;i++) {
+		var child = element.childNodes[i];
 		if (child && !isWS(child) && !isComment(child) && !isText(child))
 			count++;
 	}
@@ -146,13 +147,13 @@ function blockCount(obj,onlyLeaves) {
 
 function prepareLogicStructure(go,parent) {
 	if (!go) return;
-	if (go.getAttribute("class")=="block") return;
+	//~ if (go.getAttribute("class")=="block") return;
 	var log,gchild,lchild;
 	log=parent;
 	if (go.children.length == 1) {
 		log = prepareLogicStructure(go.children[0],parent);
 	} else {
-		if ( (included(getType(go),["CONTAINER","CONTENT_CONTAINER","CONTENT","DEFAULT"])) && (go.getAttribute('bomgeometry')) )
+		if ( (included(go.type,["CONTAINER","CONTENT_CONTAINER","CONTENT","DEFAULT"])) && (go.geometry) )
 		{
 			log = createNewLogicalObject(go,parent);
 		}
@@ -190,7 +191,8 @@ function exportInfo(obj,dest) {
 }
 
 function debug(s) {console.log(s);} 
-function startSegmentation(win,pac,pdc) {	
+
+function startSegmentation(win,pac,pdc,proclog) {	
 		contentWindow = win;
 		contentDocument = contentWindow.document;
 		ac = pac;
@@ -200,11 +202,12 @@ function startSegmentation(win,pac,pdc) {
 		debug("Processing Content Structure");
 		processContentStructure(root,0);
 		debug("Processing Geometric Structure");
-		processGeometricStructure(root,0,1);
+		var georoot = processGeometricStructure(root,undefined);
 		debug("Pre-processing Logic Structure");
-		page = prepareLogicStructure(root);
+		page = prepareLogicStructure(georoot);
 		debug("Processing Logic Structure");
-		processLogicStructure(page,0,1,undefined);
+		console.log(root,page)
+		if (proclog) processLogicStructure(page,0,1,undefined);
 }
 
 function post_to_url(path, params, method) {
@@ -446,21 +449,6 @@ function isIgnored(element) {
 	return(itis);
 }
 
-function relativeArea(element) {
-	var r,p;
-	if (element.parentNode) {
-		r = getPolygonPoints(getRect(element));
-		p = getPolygonPoints(getRect(element.parentNode))
-		ra = Math.abs(PolyK.GetArea(r));
-		rp = Math.abs(PolyK.GetArea(p));
-		res = ra / rp;
-		if (res>1) res=1;
-		return(res);
-	} else {
-		return(0);
-	}
-}
-
 function BOMType(element) {
 	if (isWS(element)) return(null);
 	if (isComment(element)) return(null);
@@ -533,7 +521,7 @@ function refName(element) {
 	if (isComment(element)) return("");
 	if (isText(element)) return("");
 	if (isExcluded(element)) return("");
-	var name = "";
+	var name = "(nodef)";
 	if (element.tagName) name = element.tagName;
 	if (element.getAttribute("id")) name = name + "." + element.getAttribute("id");
 	if (element.className) name = name + " " + element.className
@@ -542,6 +530,7 @@ function refName(element) {
 
 function processGeometricObject(element) {
 	var bt = BOMType(element);
+	var geo;
 	if (bt) {
 		element.setAttribute("bomtype",bt);
 		var dim = getRect(element);
@@ -550,38 +539,34 @@ function processGeometricObject(element) {
 		element.setAttribute("bomgeometry",r);
 		element.setAttribute("bomarea",a);
 		element.setAttribute("bomid","C"+(1000+Math.random(1000)));
+		geo = createNewGeometricObject(element,element.parent);
 	}
-	return(bt);
+	return(geo);
 }
 
-function processGeometricStructure(element,level,pid) {
+function processGeometricStructure(element,parent) {
 	if (!element) return;
 	if (isWS(element)) return(false);
 	if (isComment(element)) return(false);
 	if (isText(element)) return(false);
 	if (isExcluded(element)) return(false);
-	if (!element.getAttribute) return(false);
-	var bt = element.getAttribute("bomtype");
-	var tn = element.tagName;
+	
 	var dim = getRect(element);
 	if ((dim.w<10) || (dim.h<10)) {
-		element.setAttribute("bomtype",null);
+		//~ element.setAttribute("bomtype",null); SKIP IT DO NOT CREATE GEOMETRIC OBJECT
 		return;
 	}
-	var r = dim.x+" "+dim.y+" "+dim.w+" "+dim.h;
-	var a =  relativeArea(element);
-	element.setAttribute("bomgeometry",r);
-	element.setAttribute("bomarea",a);
-	element.setAttribute("bomid",pid);
-	//~ add2('geometric',level,"[B"+pid+","+bt+","+tn+","+r+"] A:["+a+"]");
+	var geo = createNewGeometricObject(element,parent);
+	
 	var k = 0;
 	for (var i=0; i<element.childNodes.length; i++) {
 		child = element.childNodes[i];
 		if (!isWS(child) && !isComment(child) && !isText(child) && !isExcluded(child)) {
 			k++;
-			processGeometricStructure(element.childNodes[i],level+1,pid+"."+k);
+			processGeometricStructure(element.childNodes[i],geo);
 		} 
 	}
+	return geo;
 }
 
 function visuallyDifferent(element) {
@@ -746,12 +731,21 @@ function distance(log1,log2) {
 
 function createNewLogicalObject(geo,parent) {
 	var log = new logicalObject();
-	log.addGeometricObject(geo);
 	log.parent = parent;
+	log.addGeometricObject(geo);
 	log.setLabel();
 	if (parent)	parent.children.push(log);
 	blocks.push(log);
 	return(log);
+}
+
+function createNewGeometricObject(element,parent) {
+	var geo = new geometricObject();
+	geo.addContentElement(element);
+	geo.parent = parent;
+	if (parent) parent.children.push(geo);
+	geoList.push(geo);
+	return(geo);
 }
 
 function getAligment(log1,log2) {
@@ -767,6 +761,8 @@ function getAligment(log1,log2) {
 }
 
 function removeLogicObject(log) {
+	if (!log) return;
+	console.log("delete "+log.id+" "+log.label)
 	if (log.parent) {
 		for(var i=0;i<log.children.length;i++) {
 			var child = log.children[i];
@@ -794,7 +790,6 @@ function processLogicalObject(log) {
 	//~ if (dep && log.block) log.block.style.backgroundColor="#FFFF00";
 	for (i=0;i<log.children.length;i++) {
 		if (log.children[i]) {
-			console.log(log.children[i].relativeArea(),ac);
 			if (log.children[i].relativeArea()>=ac) {
 				processLogicStructure(log.children[i])
 			} else {
@@ -846,6 +841,16 @@ function processLogicalObject(log) {
 			} 
 		}
 	}
+	for (var i=0;i<log.children.length;i++) {
+		if (log.children[i]) {
+			if (log.children[i].relativeArea()<ac) {
+				//log.clearChildrenBlocks();
+				console.log("borrado");
+				break;
+			}
+		}
+	}
+	log.updateBlock();
 }
 
 
@@ -853,7 +858,7 @@ function processLogicalObject(log) {
 function processLogicStructure(log,level,pid,parent) {
 	if (!log) return;
 	if (log.visited) return;
-	//~ console.log("Current Element",log);
+	console.log("Current Element",log);
 	
 	if (log.type=="PAGE") {
 		processLogicalObject(log);
@@ -937,6 +942,10 @@ function included(obj,arr) {
 	}
 	return(false);
 }
+
+/* ==============================================================*/
+/*  LOGIC OBJECT */
+/* ==============================================================*/
 
 function logicalObject(obj) {
 	this.block = undefined;
@@ -1040,25 +1049,35 @@ function logicalObject(obj) {
 		this.clearChildrenBlocks();
 		blocks.splice(blocks.indexOf(log),1);
 		log = undefined
-	}
-	
-	this.hypo = function() {
-		return(Math.sqrt(Math.pow(this.dim.w,2)+Math.pow(this.dim.h,2)));
+		this.updateBlock();
 	}
 	
 	this.area = function() {
-		return(this.dim.w*this.dim.h);
+		return( (this.dim.w) * (this.dim.h));
+	}
+	this.perimeter = function() {
+		return( 2*(this.dim.w+this.dim.h));
+	}
+	this.hypo = function() {
+		return(Math.sqrt(Math.pow(this.dim.w,2)+Math.pow(this.dim.h,2)));
+	}
+	this.proportion = function() {
+		//return((this.area() + this.perimeter() + this.hypo())/3);
+		return(this.hypo());
 	}
 	
 	this.relativeArea = function() {
-		if (this.parent) {
-			return(this.area() / this.parent.area() );
+			//~ console.log("area",this.area(),this.parent.area());
+			//~ return(this.area() / this.parent.area() );
 			//~ return(this.hypo()/this.parent.hypo());
+			//~ return(this.perimeter()/this.parent.perimeter());
+
+		if (page) {
+			return(this.proportion()/page.proportion());
 		} else {
 			return(0);
 		}
 	}
-	
 	
 	this.bomgeometry = function() {
 		return [this.dim.x,this.dim.y,this.dim.w,this.dim.h];
@@ -1081,24 +1100,26 @@ function logicalObject(obj) {
 	}
 	
 	this.addGeometricObject = function(geo) {
+		if (!geo) return;
+		if (!geo.element) return;
 		this.geometricObjects.push(geo);
 		var nr;
 		var r;
 		if (!this.dim) {
-			if (geo.tagName.toUpperCase()=="BODY") {
+			if (geo.element.tagName.toUpperCase()=="BODY") {
 				this.type='PAGE';this.id="PAGE";
 				this.dim = {x:0,y:0,w:documentDim(parent.contentWindow,parent.contentDocument).w,h:documentDim(parent.contentWindow,parent.contentDocument).h}
 			} else  {
 				this.dim = {x:0,y:0,w:0,h:0}
-				gr = getRect(geo);
-				this.dim = gr;
-				this.type = getType(geo);
+				//~ gr = getRect(geo);
+				this.dim = geo.geometry;
+				this.type = geo.type; //getType(geo);
 			}
 			r = getPolygonPoints(this.dim);
 		} else {
-			r = getPolygonPoints(this.dim).concat(getPolygonPoints(getRect(geo)));
-			if (included(getType(geo),["CONTAINER","CONTENT_CONTAINER"])) {
-				this.type = getType(geo);
+			r = getPolygonPoints(this.dim).concat(getPolygonPoints(geo.geometry));
+			if (included(geo.type,["CONTAINER","CONTENT_CONTAINER"])) {
+				this.type = geo.type;
 			}
 		}
 		
@@ -1119,7 +1140,7 @@ function logicalObject(obj) {
 		this.dim.w = Math.max.apply(null, xs)-this.dim.x;
 		this.dim.h = Math.max.apply(null, ys)-this.dim.y;
 		
-		//console.log("DIM",r,this.dim)
+		console.log("DIM",geo,r,this.dim)
 		
 		if (!this.block) {
 			this.block = this.insertBlock();
@@ -1127,29 +1148,27 @@ function logicalObject(obj) {
 		var g = this.dim.x+" "+this.dim.y+" "+this.dim.w+" "+this.dim.h;
 		this.block.setAttribute("bomgeometry",g);
 		this.block.setAttribute("bomtype",this.type);
-		//~ this.block.setAttribute("id",this.id);
 		color=colors[this.type]; 
 		
 		this.block.setAttribute("style","border : 2px solid black;z-index: 10000;position:absolute;background-color:transparent;border-color:"+color+";color:black;font-weight:bold;opacity:1"); 
-		//left:"+this.dim.x+";top:"+this.dim.y+";width:"+(this.dim.w-this.dim.x)+";height:"+(this.dim.h-this.dim.y)+"
 		this.block.style.left = this.dim.x+"px";
 		this.block.style.top = this.dim.y+"px";
 		this.block.style.width = this.dim.w+"px";
 		this.block.style.height = this.dim.h+"px";
-		geo.setAttribute("visited","true");
+		geo.visited = true;
 		var sfc;
 		var bgc;
-		bgc = contentWindow.getComputedStyle(geo,null).getPropertyValue("background-color");
-		fc = parseInt(contentWindow.getComputedStyle(geo,null).getPropertyValue("font-size"));
+		bgc = contentWindow.getComputedStyle(geo.element,null).getPropertyValue("background-color");
+		fc = parseInt(contentWindow.getComputedStyle(geo.element,null).getPropertyValue("font-size"));
 		if (bgc!="rgba(0, 0, 0, 0)") {
 			this.visualCuesPresent = true;
 		}
 
-		if (geo.parentNode) {
+		if (geo.element.parentNode) {
 			t=0
-			for (var k=0;k<geo.parentNode.children.length;k++) {
-				if ( (geo.parentNode.children[k]!=geo) ) {
-					var sfc = parseInt(contentWindow.getComputedStyle(geo.parentNode.children[k],null).getPropertyValue("font-size")); 
+			for (var k=0;k<geo.element.parentNode.children.length;k++) {
+				if ( (geo.element.parentNode.children[k]!=geo) ) {
+					var sfc = parseInt(contentWindow.getComputedStyle(geo.element.parentNode.children[k],null).getPropertyValue("font-size")); 
 					if (2*sfc < fc) 
 						t++;
 				}
@@ -1157,18 +1176,28 @@ function logicalObject(obj) {
 			if (t>0) 
 				this.visualCuesPresent = true;
 		}
-		
+		this.updateBlock();
 	}
 	
 	this.insertBlock = function() {
+		var vc="";
 		var block = document.createElement('div');
-		var cont = this.relativeArea();
-		block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+"<br>"+cont+"</span>";
+		if (this.visualCuesPresent) vc="VC";
+		block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+" - "+this.relativeArea().toFixed(4) +"<br>"+vc+"</span>";
 		block.setAttribute("class","block");
 		block.setAttribute("visited","true");
 		block.setAttribute("id",this.makeid());
 		contentDocument.body.appendChild(block);
 		return(block);
+	}
+	
+	this.updateBlock = function() {
+		//~ var aaa=this.relativeArea().toFixed(4)+"<br>";
+		var aaa=this.relativeArea().toFixed(4);
+		//~ if (page) aaa+=(this.hypo()/page.hypo()).toFixed(4)+"<br>";
+		//~ if (page) aaa+=(this.perimeter()/page.perimeter()).toFixed(4)+"<br>";
+		
+		this.block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+" - "+aaa +"</span>";
 	}
 	
 	this.setOn = function() {
@@ -1178,24 +1207,117 @@ function logicalObject(obj) {
 		this.block.style.backgroundColor = c;
 		this.block.style.opacity = "0.5";
 		this.block.style.border = "2px dotted black";
+		this.block.style.color = "white";
 	}
 	
 	this.setOff = function() {
 		if (!this.block) return;
 		this.block.style.backgroundColor = "transparent";
+		this.block.style.color = "black";
 		this.block.style.opacity = "1";
 		this.block.style.border = "2px solid "+colors[this.type];
 	}
-	
-	this.deleteBlock = function() {
-		if (this.block) contentDocument.body.removeChild(this.block);
-		this.block=undefined;
-	}
-	
 	this.hide = function() {
 		if (!this.block) return;
 		this.block.style.backgroundColor = "transparent";
 		this.block.style.opacity = "1";
 		this.block.style.border = "0px solid transparent";
 	}
+	this.deleteBlock = function() {
+		if (this.block) contentDocument.body.removeChild(this.block);
+		this.block=undefined;
+	}
+	this.countCover = function() {
+		var cont=0;
+		for (var i=0;i<this.geometricObjects.length;i++) {
+			cont+=this.geometricObjects[i].countCover();
+		}
+		return(cont);
+	}
+	this.countChildren = function() {
+		var cont=0;
+		for (var i=0;i<this.children.length;i++) {
+			if (this.children[i]) {
+				cont++;
+			}
+		}
+		return(cont);
+	}
 }
+
+function relativeArea(element) {
+		var r,p;
+		if (element.parentNode) {
+			r = getPolygonPoints(getRect(element));
+			p = getPolygonPoints(getRect(element.parentNode))
+			ra = Math.abs(PolyK.GetArea(r));
+			rp = Math.abs(PolyK.GetArea(p));
+			res = ra / rp;
+			if (res>1) res=1;
+			return(res);
+		} else {
+			return(1);
+		}
+	}
+
+/* ==============================================================*/
+/*  GEOMETRIC OBJECT */
+/* ==============================================================*/
+
+function geometricObject() {
+	this.children = [];
+	this.parent = undefined;
+	this.element = undefined;
+	this.type = undefined;
+	this.geometry = undefined;
+	this.area = undefined;
+	this.id = undefined;
+	this.visited = false;
+	
+	this.addContentElement = function(element) {
+		this.element = element;
+		this.bt = BOMType(this.element);
+		if (this.bt) {
+			this.type = this.bt;
+			this.geometry=getRect(this.element);
+			this.area = relativeArea(this.element);
+			this.id = "C"+(1000+Math.random(1000));
+		}
+	}
+	this.getGeometry = function() {
+		return(this.dim.x+" "+this.dim.y+" "+this.dim.w+" "+this.dim.h);
+	}
+	this.countCover = function() {
+		//~ var count=0;
+		//~ for (var i=0;i<this.element.children.length;i++) {
+			//~ if (this.element.children[i]) 
+				//~ count++;
+		//~ }
+		//~ return(count);
+		console.log("contando ",this.element,elementCountRecursive(this.element));
+		return(elementCountRecursive(this.element))
+	}
+}
+
+
+function elementCountRecursiveDDDD(element) {
+	if (!element) return(0);
+	if (isWS(element)) return(0);
+	if (isComment(element)) return(0);
+	if (isText(element)) return(1);
+	
+	var count=1; //itself
+	for (var i=0;i<element.childNodes.length;i++) {
+		var child = element.childNodes[i];
+		if (child)
+			count += elementCountRecursive(child);
+	}
+	return(count)
+}
+function elementCountRecursive(node) {
+  var k = 0, c = node.childNodes.length, result = c;
+  for (; k<c; k++) result += elementCountRecursive(node.childNodes[k]);
+  if (result==0)
+	result=1;
+  return result;
+} 

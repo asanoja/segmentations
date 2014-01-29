@@ -1,20 +1,15 @@
 <?php
-//~ $link = mysql_connect('localhost', 'bom', 'dtwjshLHJwUERR7Q');
-//~ if (!$link) {
-    //~ die('Could not connect: ' . mysql_error());
-//~ }
-//~ mysql_select_db("bom", $link);
-?>
-<?php
+//~ print_r($_REQUEST);
+
 $db = new mysqli('localhost', 'bom', 'dtwjshLHJwUERR7Q', 'bom');
-?>
-<?php
+
 $blocks = Array();
 $name = trim($_REQUEST['name']);
 $page = urldecode(trim($_REQUEST['page']));
 $category = trim($_REQUEST['category']);
 $total = intval(trim($_REQUEST['total']));
 $meta = trim($_REQUEST['meta']);
+$granularity = trim($_REQUEST['granularity']);
 $source = trim($_REQUEST['source']);
 $title = $page;
 $pp = explode(" ",$meta);
@@ -23,17 +18,16 @@ $dim = $pp[1];
 $xdim = explode("x",$pp[1]);
 $dw = $xdim[0];
 $dh = $xdim[1];
-//~ $wprima = $_REQUEST['wprima'];
 
 $stmt = $db->stmt_init();
 
-if($stmt->prepare("insert into segmentation(url,source1,source2,kind,wprima) values('".$page."','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_X_FORWARDED_FOR']."','".$source."',?)")) {
+if($stmt->prepare("insert into segmentation(url,source1,source2,kind,granularity,wprima) values('".$page."','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_X_FORWARDED_FOR']."','".$source."','".$granularity."',?)")) {
 	 $stmt->bind_param('s', $wprima);
-	 $wprima = $_REQUEST['wprima'];
+	 $wprima = $_REQUEST['wprimaobj'];
 	 $stmt->execute();
+	 //~ print_r($stmt);
 	 $stmt->close();
 }
-print_r($stmt);
 echo $mysqli->connect_errno;
 
 //~ mysql_query("insert into segmentation(url,source1,source2,kind) values('".$page."','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_X_FORWARDED_FOR']."','".$source."')",$link);
@@ -54,6 +48,17 @@ if ($source=="VIPSdata") {
 	$logo="logo_vips.png";
 	$color="purple";
 }
+if ($source=="BFdata") {
+	$table = "bf_blocks";
+	$logo="logo_bf.png";
+	$color="#C0C0C0";
+}
+if ($source=="JVIPSdata") {
+	$table = "jvips_blocks";
+	$logo="logo_jvips.png";
+	$color="yellow";
+}
+
 ?>
 <html>
 	<head>
@@ -69,7 +74,7 @@ if ($source=="VIPSdata") {
 			$dim = explode(",",$b);
 			if (trim($b[0])!="") {
 				array_push($blocks,trim($b));
-				echo "[".$dim[1].",".$dim[2].",".$dim[3].",".$dim[4].",'".$dim[0]."',".$dw.",".$dh."]";
+				echo "[".$dim[1].",".$dim[2].",".$dim[3].",".$dim[4].",'".$dim[0]."',".$dw.",".$dh.",".$dim[6]."]";
 				if ($i<$total) echo ",";
 			}
 		}
@@ -139,14 +144,16 @@ if ($source=="VIPSdata") {
 
 Here the submission data:<br>
 <ul>
-<li>Page <a href='<?=$page?>' target='new'><?=$page?></a></li>
-<li>Data stored in <?=$source?>.db</li>
-<li>Blocks submited: <?php echo count($blocks)?></li>
+<li><b>Page</b>: <a href='<?=$page?>' target='new'><?=$page?></a></li>
+<li><b>Source</b>:  <?=$source?></li>
+<li><b>Blocks submited</b>: <?php echo count($blocks)?></li>
+<li><b>Browser</b>: <?php echo $browser?></li>
+<li><b>Document geometry</b>: <?php echo $dw?>x<?php echo $dh?></li>
+<li><b>Granularity</b>: <?php echo $granularity?></li>
 <table width="100%"><tr valign="top"><td>
 <table border=1>
-	<tr align="center"><td><b>Browser</b></td><td><b>Document geometry</b></td><td><b>Block ID</b></td><td><b>Block geometry</b></td></tr>
+	<tr align="center"><td></td><td><b>Block ID</b></td><td><b>Block geometry</b></td><td><b>Inner Elem.</b></td></tr>
 <?php
-//~ print_r($_POST);
 	
 
 //$filename = "/web/sanojaa/public_html/BOM/data/".$source.".db";
@@ -156,14 +163,16 @@ Here the submission data:<br>
 for ($i=0;$i<count($blocks);$i++) {
 	//~ echo $i."-".$blocks[$i]."<br>";
 	$dim = explode(",",$blocks[$i]);
+	//~ print_r($dim);
 	$id = $dim[0];
 	if (trim($id)!="")  {
 		$left = $dim[1];
 		$top = $dim[2];
 		$width = $left+$dim[3];
 		$height = $top+$dim[4];
-		$sql = "insert into ".$table."(browser,category,url,doc_w,doc_h,bid,block_x,block_y,block_w,block_h,segmentation_id) values('".$browser."','".$category."','".$page."','".$dw."','".$dh."','".$id."','".$left."','".$top."','".$width."','".$height."',".$segmentation_id.")";
-		echo  "<tr><td>".$browser . "</td><td>" . $dw . "x" . $dh . "</td><td>" . $id . "</td><td>" . $left . " " . $top . " " . $width . " " . $height . "</td></tr>";
+		$cover = $dim[6];
+		$sql = "insert into ".$table."(browser,category,url,doc_w,doc_h,bid,block_x,block_y,block_w,block_h,segmentation_id,ecount) values('".$browser."','".$category."','".$page."','".$dw."','".$dh."','".$id."','".$left."','".$top."','".$width."','".$height."',".$segmentation_id.",".$cover.")";
+		echo  "<tr align='center'><td>".($i+1)."</td><td>" . $id . "</td><td>" . number_format((float)$left, 2, '.', '') . ", " . number_format((float)$top, 2, '.', '') . ", " . number_format((float)$width, 2, '.', '') . ", " . number_format((float)$height, 2, '.', '') . "</td><td>".$cover."</td></tr>";
 		//~ $result = mysql_query($sql);
 		$db->query($sql);
 	}
@@ -188,4 +197,3 @@ for ($i=0;$i<count($blocks);$i++) {
 <?php 
 //~ mysql_close($link);
 $db->close();
-?>

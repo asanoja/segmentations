@@ -124,7 +124,7 @@ function processURL() {
 	var eurl = document.getElementById("gturl");
 	if (urlind >= eurl.options.length) {
 		console.log("Process finished");
-		//parent.evalDocument.getElementById("evaloutput").innerHTML = "Batch process finished"
+		parent.evalDocument.getElementById("evaloutput").innerHTML = "Batch process finished<br><a href='report.php' target='_blank'>Open report</a>"
 		parent.batchmode = false;
 		return;
 	}
@@ -171,6 +171,7 @@ function processURL() {
 	<option value="GTdata">GT</option>
 	<option value="BOMdata">BOM</option>
 	<option value="VIPSdata">VIPS</option> 
+	<option value="BFdata">BF</option> 
 </select>
 on <select name="left_browser" id="left_browser" onclick="parent.startFilter()">
 	<option value="chrome">Chrome</option> 
@@ -183,6 +184,7 @@ Right: <select name="right_algorithm" id="right_algorithm" onclick="parent.start
 	<option value="GTdata">GT</option>
 	<option value="BOMdata">BOM</option>
 	<option value="VIPSdata">VIPS</option> 
+	<option value="BFdata">BF</option> 
 </select>
 on <select name="right_browser" id="right_browser" onclick="parent.startFilter()">
 	<option value="chrome">Chrome</option> 

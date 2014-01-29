@@ -5,6 +5,7 @@ function rectObj() {
 	this.init = function(win,doc)  {
 		this.document = doc;
 		this.window = win;
+		return(this);
 	}
 	this.draw = function() {
 		this.document.body.appendChild(this.data);
@@ -46,7 +47,6 @@ function rectObj() {
 		if (selector=='border')
 			this.data.style.border = sty;
 		else {
-			this.setOpacity("0.5");
 			this.data.style.background = sty;
 		}
 	}
@@ -62,7 +62,7 @@ function rectObj() {
 	this.rectInit = function() {
 		this.data.style.zIndex = 100000;
 		this.data.style.position = "absolute";
-		this.data.style.overflow = "scroll";
+		//this.data.style.overflow = "scroll";
 	}
 	this.setContent = function(cont) {
 		this.data.innerHTML = cont;

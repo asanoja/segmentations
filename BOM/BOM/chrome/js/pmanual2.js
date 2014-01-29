@@ -44,40 +44,22 @@ function update_marco_submit() {
 	
 	s+="<input type='hidden' value='"+blocks.length+"' name='total'>";
 	pn=getURLParameter('fn');
-	s+="<input id='pmanual_webpage' type='hidden' size='80' value='"+pn+"' name='page'><br>";
-	s+="<input id='pmanual_source' type='hidden' size='80' value='BOMdata' name='source'><br>";
-	s+="<input id='pmanual_meta' type='hidden' size='30' value='"+metaData+"' name='meta'><br>";
-	s+="<input id='pmanual_meta_window' type='hidden' size='30' value='"+$(window).width()+"x"+$(window).height()+ "' name='meta2' style='display:none'><br>";
-	s+="<input id='random' type='hidden' size='30' value='"+(Math.ceil(Math.random()*2000))+ "' name='random' style='display:none'><br>";
-	
-	s+="<input id='pmanual_username' type='text' value='andres' name='name' style='display:none'><br>";
-	s+="<select id='pmanual_category' name='category' style='display:none'>";
-    s+="<option value='arts'>Arts</option>";
-    s+="<option value='business'>Business</option>";
-    s+="<option value='computers'>Computers</option>";
-    s+="<option value='games'>Games</option>";
-    s+="<option value='health'>Health</option>";
-    s+="<option value='home'>Home</option>";
-    s+="<option value='kids_and_teens'>Kids and Teens</option>";
-    s+="<option value='news'>News</option>";
-    s+="<option value='recreation'>Recreation</option>";
-    s+="<option value='reference'>Reference</option>";
-    s+="<option value='regional'>Regional</option>";
-    s+="<option value='science'>Science</option>";
-    s+="<option value='society'>Society</option>";
-    s+="<option value='shopping'>Shopping</option>";
-    s+="<option value='sports'>Sports</option>";
-    s+="<option value='world'>World</option>";
-	s+="</select><br>";
-	//~ console.log(s);
-	//~ var bs="";
+	s+="<input id='pmanual_webpage' type='hidden' size='80' value='"+pn+"' name='page'>";
+	s+="<input id='pmanual_source' type='hidden' size='80' value='BOMdata' name='source'>";
+	s+="<input id='pmanual_meta' type='hidden' size='30' value='"+metaData+"' name='meta'>";
+	s+="<input id='pmanual_meta_window' type='hidden' size='30' value='"+$(window).width()+"x"+$(window).height()+ "' name='meta2' style='display:none'>";
+	s+="<input id='random' type='hidden' size='30' value='"+(Math.ceil(Math.random()*2000))+ "' name='random' style='display:none'>";
+	s+="<input id='bom_gran' type='text' value='"+ac+"' name='granularity' style='display:none'>";
+	s+="<input id='pmanual_username' type='text' value='andres' name='name' style='display:none'>";
+	s+="<input id='category' type='text' value='none' name='category' style='display:none'>";
 	var k=1;
 	for (var i=0;i<blocks.length;i++) {
 		if (blocks[i]) {
-			var c = countChildren(blocks[i]);
+			var c = blocks[i].countChildren();
 			console.log(blocks[i],c);
 			if (c==0) {
-				s+="<input type='hidden' value='G" + k + "," + dimension(blocks[i]) + "," + blocks[i].id +"' name='block"+(k)+"'>";
+				//~ s+="<input type='hidden' value='B" + k + "," + dimension(blocks[i]) + "," + blocks[i].id +"' name='block"+(k)+"'>";
+				s+="<input type='hidden' value='B" + k + "," + dimension(blocks[i]) + "," + blocks[i].id +","+blocks[i].countCover()+"' name='block"+(k)+"'>";
 				k++;
 			}
 			console.log("out");
@@ -85,6 +67,7 @@ function update_marco_submit() {
 	}
 	//~ s+=bs;
 	s+="<input id='finalsend' type='submit' value='Contribute to project' onclick='return confirm(\"Do you want to send data to our server?\")'>";
+	s+="<br>W':<br>"
 	s+="<textarea id='wprimaobj' name='wprimaobj'cols='20' rows='10'>"+wprima+"</textarea>";
 	s+="</form>";	
 	marco.setContent(s);
@@ -102,7 +85,7 @@ function getURLParameter(name) {
 function showLayout() {
 	for (var i=0;i<blocks.length;i++) {
 		if (blocks[i]) {
-			var c = countChildren(blocks[i]);
+			var c = blocks[i].countChildren();
 			console.log(blocks[i],c);
 			if (c==0) {
 				blocks[i].setOn();
@@ -131,9 +114,9 @@ function carga(e) {
 				document.write('Sorry this ONLY works with Google Chrome or Chromium');
 				return false;
 			}
-			var ac = 0.5;
+			var ac = 0.3;
 			ac = parseFloat(prompt("Segment with which granularity: 0.0 - 1.0 \nGive a number\n small blocks 0.0 <--> 1.0 bigger blocks",ac));
-			startSegmentation(window,ac,50);
+			startSegmentation(window,ac,50,true);
 			blocks = []
 			updateBlockList(page);
 			showLayout();

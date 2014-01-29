@@ -49,6 +49,13 @@ if ($source=="VIPSdata") {
 	$bfilter =  " and browser='".$browser."'";
 	$extra = " on " . $browser;
 }
+if ($source=="BFdata") {
+	$table = "bf_blocks";
+	$logo="logo_bf.png";
+	$color="#C0C0C0";
+	$bfilter =  " and browser='".$browser."'";
+	$extra = " on " . $browser;
+}
 
 
 $filter=true;
@@ -64,7 +71,7 @@ $qfilter = trim($_GET['filter']);
 	$sql="select * from ".$table." where url='".$qfilter."'".$bfilter." and segmentation_id=(".$ms.")";
 	$results = mysql_query($sql); 
     while ($row = mysql_fetch_array($results)) {
-		$s = $row[1].",".$row[2].",".$row[3].",".$row[4].",".$row[5].",".$row[6].",".$row[7].",".$row[8].",".$row[9].",".$row[10];
+		$s = $row[1].",".$row[2].",".$row[3].",".$row[4].",".$row[5].",".$row[6].",".$row[7].",".$row[8].",".$row[9].",".$row[10].",".$row[13];
 		echo fmt($s);
     }
     echo "</table>";
