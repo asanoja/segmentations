@@ -1,9 +1,0 @@
-http://localhost/repository/page1.html
-http://localhost/repository/page2.html
-http://localhost/repository/page3.html
-http://localhost/repository/page4.html
-http://localhost/repository/page5.html
-http://localhost/repository/page6.html
-http://localhost/repository/page7.html
-http://localhost/repository/page8.html
-http://localhost/repository/page9.html
