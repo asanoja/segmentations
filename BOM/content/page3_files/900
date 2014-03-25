@@ -1,0 +1,417 @@
+/* -- PICKLE ADS COMMON JAVASCRIPT LIBRARY --------------------------------------------- */
+
+
+if (window.addEventListener){
+
+    window.addEventListener('load', function () {
+	if (typeof this.pickleAdsUC == 'undefined') {
+	    this.pickleAdsUC = '4918792afae72737922858e8d3096cff';
+	}
+    });
+
+} else if (window.attachEvent){
+
+    window.attachEvent('onload', function () {
+	if (typeof this.pickleAdsUC == 'undefined') {
+	    this.pickleAdsUC = '4918792afae72737922858e8d3096cff';
+	}
+    });
+
+}
+
+var pickleAds_Queue = (function(){
+    
+    "use strict";
+    
+    /* Array that contains the URLs to be loaded */
+    var _queue = [];
+    
+    /* Specifies whether to continue on error */
+    var _canContinueOnError = true;
+    
+    /* Specifies whether we are loading an URL at the moment */
+    var _running = false;
+    
+    function _process() {
+        if (_queue.length === 0) return;
+        
+        var _url = _queue.shift();
+        
+        var img = new Image();
+        _running = true;
+        img.src = _url;
+        
+        img.onload = function () {
+            _running = false;
+            _process();        
+        };
+        
+        img.onerror = function ( e ) {
+            _running = false;
+            if (_canContinueOnError) {
+                _process();                
+            }
+        };
+        
+    }
+    
+    return {
+        add: function (url) {
+            _queue.push(url);
+            if (!_running) {
+                _process();
+            }
+        }    
+    }
+})();
+
+if (typeof pickleAds_clickthru == 'undefined') {
+    function pickleAds_clickthru( keyword ) {
+      window.open(pickleAds_base_URL + 'activity/clickthru/' + pickleAds_creative_id + '/' + keyword + '/' + pickleAdsUC + '/' + Math.floor(Math.random()*10000), '_blank');
+    }
+}
+
+if (typeof pickleAds_clickthru_277 == 'undefined') {
+    function pickleAds_clickthru_277( keyword ) {
+      window.open(pickleAds_base_URL + 'activity/clickthru/' + '277' + '/' + keyword + '/' + pickleAdsUC + '/' + Math.floor(Math.random()*10000), '_blank');
+    }
+}
+
+if (typeof pickleAds_track == 'undefined') {
+    function pickleAds_track( keyword, comment ) {
+
+        /*
+        var img = document.createElement('img');
+        img.src = pickleAds_base_URL + 'activity/track/' + pickleAds_creative_id + '/' + keyword + '/' + comment + '/' + pickleAdsUC + '/' + Math.floor(Math.random()*10000);
+        */
+        
+        pickleAds_Queue.add(pickleAds_base_URL + 'activity/track/' + pickleAds_creative_id + '/' + keyword + '/' + comment + '/' + pickleAdsUC + '/' + Math.floor(Math.random()*10000));
+    }
+}
+
+if (typeof pickleAds_track_277 == 'undefined') {
+    function pickleAds_track_277( keyword, comment ) {
+    
+        /*
+        var img = document.createElement('img');
+        img.src = pickleAds_base_URL + 'activity/track/' + '277' + '/' + keyword + '/' + comment + '/' + pickleAdsUC + '/' + Math.floor(Math.random()*10000);
+        */
+        
+        pickleAds_Queue.add(pickleAds_base_URL + 'activity/track/' + '277' + '/' + keyword + '/' + comment + '/' + pickleAdsUC + '/' + Math.floor(Math.random()*10000));
+    
+    }
+}
+
+if (typeof pickleAds_openPanel == 'undefined') {
+    function pickleAds_openPanel( panel_name ) {
+    
+        var pickleAds_newPanel_html = "";
+        for(p = 0; p < pickleAds_panels.length; p++) {
+        	if (pickleAds_panels[p].name == panel_name) {
+        	
+        	    var panel_div=document.createElement('div');
+        	    panel_div.innerHTML=pickleAds_panels[p].html;
+        	    document.getElementById('pickle_adsystem_'+pickleAds_creative_id+'_container').appendChild(panel_div.firstChild); 
+        	    
+        	    // track the expanding
+        	    pickleAds_track('EXPAND_PANEL', pickleAds_panels[p].id );
+            
+        	    break;
+        	}
+        }
+    }
+}
+
+if (typeof pickleAds_openPanel_277 == 'undefined') {
+    function pickleAds_openPanel_277( panel_name ) {
+    
+        var pickleAds_newPanel_html = "";
+        for(p = 0; p < pickleAds_panels.length; p++) {
+        	if ((pickleAds_panels[p].name == panel_name) && (pickleAds_panels[p].creative_id==277)) {
+        	
+        	    var panel_div=document.createElement('div');
+        	    panel_div.innerHTML=pickleAds_panels[p].html;
+        	    document.getElementById('pickle_adsystem_'+'277'+'_container').appendChild(panel_div.firstChild); 
+        	    
+        	    // track the expanding
+        	    pickleAds_track_277('EXPAND_PANEL', pickleAds_panels[p].id );
+            
+        	    break;
+        	}
+        }
+    }
+}
+
+if (typeof pickleAds_closePanel == 'undefined') {
+    function pickleAds_closePanel( panel_name ) {
+    
+        for(p=0;p<pickleAds_panels.length;p++) {
+        	if (pickleAds_panels[p].name==panel_name) {
+        
+        	    var element = document.getElementById('pickle_adsystem_'+pickleAds_creative_id+'_panel_'+pickleAds_panels[p].id);
+        	    element.parentNode.removeChild(element);
+        
+        	    // track the expanding
+        	    pickleAds_track('CLOSE_PANEL', pickleAds_panels[p].id );
+            
+        	    break;
+        	}
+        }
+        
+    }
+}
+
+if (typeof pickleAds_closePanel_277 == 'undefined') {
+    function pickleAds_closePanel_277( panel_name ) {
+    
+        for(p=0;p<pickleAds_panels.length;p++) {
+        	if ((pickleAds_panels[p].name == panel_name) && (pickleAds_panels[p].creative_id==277)) {
+        
+        	    var element = document.getElementById('pickle_adsystem_'+'277'+'_panel_'+pickleAds_panels[p].id);
+        	    element.parentNode.removeChild(element);
+        
+        	    // track the expanding
+        	    pickleAds_track_277('CLOSE_PANEL', pickleAds_panels[p].id );
+            
+        	    break;
+        	}
+        }
+        
+    }
+}
+
+// ---------------------------------------------------
+
+function pickleAds_AnimateCss(sEleId, sCssProp, iTarget, uTotalTime) {
+
+    units = 'px'; // only supports integer pixel values for now
+    var ele = pickleAds_xGetElementById(sEleId);
+    var startValue = parseInt(pickleAds_xGetComputedStyle(ele, sCssProp)) || 0;
+    var disp = iTarget - startValue; // total displacement
+    var freq = Math.PI / (2 * uTotalTime); // frequency
+    var startTime = new Date().getTime();
+    var tmr = setInterval(
+	function() {
+	var elapsedTime = new Date().getTime() - startTime;
+	if (elapsedTime < uTotalTime) {
+	    var f = Math.abs(Math.sin(elapsedTime * freq));
+	    ele.style[pickleAds_xCamelize(sCssProp)] = Math.round(f * disp + startValue) + units;
+	}
+	else {
+	    clearInterval(tmr);
+	    ele.style[pickleAds_xCamelize(sCssProp)] = iTarget + units;
+	}
+	}, 10
+    );
+    
+}
+
+
+// Help functions for pickleAds_AnimateCSS function ----------------------------------
+function pickleAds_xGetElementById(a){if(typeof(a)=="string"){if(document.getElementById){a=document.getElementById(a)} else {if(document.all){a=document.all[a]}else{a=null}}}return a;}
+function pickleAds_xGetComputedStyle(e, p, i){if(!(e=pickleAds_xGetElementById(e))) return null;var s, v = 'undefined', dv = document.defaultView;if(dv && dv.getComputedStyle){s = dv.getComputedStyle(e,'');if (s) v = s.getPropertyValue(p);}else if(e.currentStyle) {v = e.currentStyle[pickleAds_xCamelize(p)];}else return null;return i ? (parseInt(v) || 0) : v;}
+function pickleAds_xCamelize(d){var e,g,b,f;b=d.split("-");f=b[0];for(e=1;e<b.length;++e){g=b[e].charAt(0);f+=b[e].replace(g,g.toUpperCase())}return f}
+
+
+// -- STORED VARIABLES -------------------------------------------------
+
+if (typeof pickleAds_storedVariables == 'undefined') {
+    var pickleAds_storedVariables = new Array();
+}
+
+if (typeof pickleAds_storeVariable == 'undefined') {
+    function pickleAds_storeVariable(_variableName, _variableValue) {
+	var existingFlag = -1;
+	for(var r=0; r<pickleAds_storedVariables.length;r++){
+		if (pickleAds_storedVariables[r].name == _variableName) {existingFlag = r;}
+	}
+	// update or add the variable ------------------------------------------
+
+
+	if (existingFlag>-1) {
+		pickleAds_storedVariables[existingFlag].value = _variableValue;
+	} else {
+		pickleAds_storedVariables.push({name:_variableName, value:_variableValue});
+	}
+
+    }
+}
+
+if (typeof pickleAds_getVariable == 'undefined') {
+    function pickleAds_getVariable(_variableName) {
+
+	    var variableValue = undefined;
+
+	    for(var r=0; r<pickleAds_storedVariables.length;r++){
+		if (pickleAds_storedVariables[r].name == _variableName) {variableValue = pickleAds_storedVariables[r].value; break;}
+	    }
+
+	return variableValue;
+    }
+}
+// -- END OF STORED VARIABLES -------------------------------------------------
+
+
+
+
+// -- VIDEO TRACKING ----------------------------------------------------------
+
+if (typeof video_tracking == 'undefined') {
+
+    var video_tracking = true;
+    
+    function pickleAds_videoStart( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_START', comment );
+    }
+    function pickleAds_videoEnd( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_END', comment );
+    }
+    function pickleAds_videoStop( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_STOP', comment );
+    }
+    function pickleAds_videoPause( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_PAUSE', comment );
+    }
+    function pickleAds_videoPlay( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_PLAY', comment );
+    }
+    function pickleAds_videoAudioUnmute( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_AUDIO_UNMUTE', comment );
+    }
+    function pickleAds_videoAudioMute( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_AUDIO_MUTE', comment );
+    }
+    function pickleAds_videoPercentage25( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_PERCENTAGE_25', comment );
+    }
+    function pickleAds_videoPercentage50( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_PERCENTAGE_50', comment );
+    }
+    function pickleAds_videoPercentage75( comment ) {
+        // tracking of the event
+        pickleAds_track('VIDEO_PERCENTAGE_75', comment );
+    }
+}
+
+if (typeof video_tracking_277 == 'undefined') {
+
+    var video_tracking_277 = true;
+    
+    function pickleAds_videoStart_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_START', comment );
+    }
+    function pickleAds_videoEnd_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_END', comment );
+    }
+    function pickleAds_videoStop_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_STOP', comment );
+    }
+    function pickleAds_videoPause_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_PAUSE', comment );
+    }
+    function pickleAds_videoPlay_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_PLAY', comment );
+    }
+    function pickleAds_videoAudioUnmute_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_AUDIO_UNMUTE', comment );
+    }
+    function pickleAds_videoAudioMute_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_AUDIO_MUTE', comment );
+    }
+    function pickleAds_videoPercentage25_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_PERCENTAGE_25', comment );
+    }
+    function pickleAds_videoPercentage50_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_PERCENTAGE_50', comment );
+    }
+    function pickleAds_videoPercentage75_277( comment ) {
+        // tracking of the event
+        pickleAds_track_277('VIDEO_PERCENTAGE_75', comment );
+    }
+}
+// -- END OF VIDEO TRACKING ---------------------------------------------------
+
+
+
+/* -- END OF PICKLE ADS COMMON JAVASCRIPT LIBRARY --------------------------------------------- */
+
+/* -- PICKLE ADS HTML5 JAVASCRIPT LIBRARY --------------------------------------------- */
+
+// -- BROADCAST MESSAGES ------------------------------------------------------
+
+var isMSIE = /*@cc_on!@*/0;
+
+function pickleAds_findIndex(array, string) {
+    var i = 0;
+    for(i = 0; i < array.length; i++) {
+        if(array[i] == string) break;
+    }
+    return array[i] == string ? i : -1;
+}
+
+if (typeof pickleAds_Listeners == 'undefined') {
+    var pickleAds_Listeners = [];
+}
+
+if (typeof pickleAds_registerBroadcastListener == 'undefined') {
+    function pickleAds_registerBroadcastListener(func) {
+        
+        if ((pickleAds_Listeners.indexOf && pickleAds_Listeners.indexOf(func)) === -1 || pickleAds_findIndex(pickleAds_Listeners, func) === -1) {
+            pickleAds_Listeners.push(func);
+        }    
+    }
+}
+
+if (typeof pickleAds_broadcastMessage == 'undefined') {
+    function pickleAds_broadcastMessage(broadcaster, msg) {
+        
+        for (var i = 0, l = pickleAds_Listeners.length; i < l; i++) {
+            pickleAds_Listeners[i] && pickleAds_Listeners[i](broadcaster, msg);      
+        }
+        
+    } 
+}
+
+// -- END OF BROADCAST MESSAGES -----------------------------------------------------------------
+
+
+
+/* -- END OF PICKLE ADS HTML5 JAVASCRIPT LIBRARY --------------------------------------------- */
+
+
+var pickleAds_targetVersion = 8;
+var pickleAds_targetMinor = 0;
+var pickleAds_base_URL = 'http://serve.adfootprints.com/';
+var pickleAds_creative_id = '277';    
+var pickleAds_atm_visits = '2';
+var pickleAds_atm_activity_ip = '10.104.37.185';
+var pickleAds_atm_activity_user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/28.0.1500.71 Chrome/28.0.1500.71 Safari/537.36';
+var pickleAds_atm_campaign_id = '245';
+var pickleAds_atm_browser_name = '';
+var pickleAds_atm_browser_version = '';
+var pickleAds_atm_browser_os = '';
+var pickleAds_atm_browser_mobile = '0';
+var pickleAds_atm_browser_inner_width = '1535';
+var pickleAds_atm_browser_inner_height = '281';
+var pickleAds_atm_browser_screen_width = '1600';
+var pickleAds_atm_browser_screen_height = '900';
+
+document.write('<div id=\"pickle_adsystem_277_container\" style=\"position:relative; width: 970px; height: 250px; z-index: 9999999;\">\n\n    <div id=\"pickle_adsystem_277_banner\" style=\"position:absolute; left:0; top:0; width: 970px;\">\n\t\n\t\n\t<style>\n@charset \"utf-8\";\n/* CSS Document */\n\n\n\n\n.pickleads_hidden {\n\topacity:0;\n\tfilter:alpha(opacity=0);\n\t-ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)\";\n}\n.pickleads_visible {\n\topacity:1;\n\tfilter:alpha(opacity=100);\n\t-ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)\";\n\t\n}\n\n\n#pickleads_wrapper {\n\twidth:970px;\n\theight:250px;\n\tposition: relative;\n\tfloat:right;\n\t/*margin:0 auto;*/\n\tborder:1px solid #999;\n\toverflow:hidden;\n\t\n\t-webkit-touch-callout:none;\n\t-webkit-user-select:none;\n\t-webkit-text-size-adjust:none;\n}\n\n#pickleads_bigPic {width:1360px;height:1028px;position:absolute;left:0px;top:0px;z-index:200;-webkit-transition: left 8s , top 8s, width 8s, height 8s, opacity 1s;-moz-transition: left 8s, top 8s, width 8s, height 8s, opacity 1s;-o-transition: left 8s, top 8s, width 8s, height 8s, opacity 1s;transition: left 8s,top 8s,width 8s,height 8s, opacity 1s;}\n\n#pickleads_bigPic.start {\n\tleft:0px;\n\ttop:0px;\n}\n\n#pickleads_bigPic.end {\n\tleft:-388px;\n\ttop:-407px;\n}\n\n\n\n#pickleads_bigPic_to_small {\n\tposition:absolute;\n\tleft:653px;\n\ttop:17px;\n\twidth:300px;\n\theight:216px;\n\t\n\t\n\t-webkit-transition-property:opacity;\n\t-webkit-transition-duration:2s;\n\t-webkit-transition-delay: 4s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 2s;\n\t-moz-transition-delay: 4s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 2s;\n\t-o-transition-delay: 4s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 2s;\n\ttransition-transition-delay: 4s;\n}\n\n\n\n\n\n#pickleads_black_rec {\n\twidth:970px;\n\theight:250px;\n\tbackground-color: #FFF;\n\tposition:absolute;\n\tleft:0px;\n\ttop:0px;\n\t\n\t\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 1.5s;\n\t-webkit-transition-delay: 3.6s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 1.5s;\n\t-moz-transition-delay: 3.6s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 1.5s;\n\t-o-transition-delay: 3.6s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 3.5s;\n\ttransition-transition-delay:2.6s;\n}\n\n\n#pickleads_left_pic {\n\tposition:absolute;\n\tleft:17px;\n\ttop:17px;\n\twidth:300px;\n\theight:216px;\n\t\n\t\n\t-webkit-transition-property:opacity;\n\t-webkit-transition-duration:2s;\n\t-webkit-transition-delay: 4s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 2s;\n\t-moz-transition-delay: 4s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 2s;\n\t-o-transition-delay: 4s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 2s;\n\ttransition-transition-delay: 4s;\n}\n\n\n\n\n#pickleads_bulgari{\n\twidth:302px;\n\theight:30px;\n\tposition:absolute;\n\tleft:334px;\n\ttop:61px;\n\tbackground-image:url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Bulgari.png);\n\t\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 1.5s;\n\t-webkit-transition-delay: 6s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 1.5s;\n\t-moz-transition-delay: 6s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 1.5s;\n\t-o-transition-delay: 6s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 1.5s;\n\ttransition-transition-delay:6s;\n}\n\n\n#pickleads_octo{\n\twidth:177px;\n\theight:40px;\n\tposition:absolute;\n\tleft:397px;\n\ttop:115px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Octo.png);\n\tbackground-repeat:no-repeat;\n\t\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 1.5s;\n\t-webkit-transition-delay: 6.5s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 1.5s;\n\t-moz-transition-delay: 6.5s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration:1.5s;\n\t-o-transition-delay: 6.5s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 1.5s;\n\ttransition-transition-delay:6s;\n}\n\n#pickleads_discover{\n\twidth: 329px;\n\theight: 248px;\n\tposition: absolute;\n\tleft: 320px;\n\ttop: 0px;\n\tbackground: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Discover_smallPics.png) no-repeat;\n\tbackground-position:90px 180px;\n\tcursor:pointer;\n\tz-index:101;\n\t\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 1.5s;\n\t-webkit-transition-delay: 7s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 1.5s;\n\t-moz-transition-delay: 7s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 1.5s;\n\t-o-transition-delay: 7s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 1.5s;\n\ttransition-transition-delay:7s;\n}\n\n#pickleads_discover:hover{\n\topacity:0.4;\n}\n\n#pickleads_left_plus{\n\twidth:285px;\n\theight:203px;\n\tposition:absolute;\n\tleft:24px;\n\ttop:21px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Plus.png);\n\tcursor:pointer;\n\tz-index:101;\n\tbackground-repeat:no-repeat;\n\tbackground-position:left bottom;\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 1.5s;\n\t-webkit-transition-delay: 5s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 1.5s;\n\t-moz-transition-delay: 5s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 1.5s;\n\t-o-transition-delay: 5s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 1.5s;\n\ttransition-transition-delay:5s;\n\n}\n\n\n#pickleads_right_plus{\n\twidth:285px;\n\theight:203px;\n\tposition:absolute;\n\tleft:660px;\n\ttop:21px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Plus.png);\n\tcursor:pointer;\n\tz-index:101;\n\tbackground-repeat:no-repeat;\n\tbackground-position:left bottom;\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 1.5s;\n\t-webkit-transition-delay: 5s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 1.5s;\n\t-moz-transition-delay: 5s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 1.5s;\n\t-o-transition-delay: 5s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 1.5s;\n\ttransition-transition-delay: 5s;\n\n}\n\n\n\n\n\n/* User Interaction -----------*/\n\n#pickleads_zoom{\n\tposition:relative;\n\twidth:970px;\n\theight:250px;\n\toverflow:hidden;\n\tz-index:100;\n\tbackground-color:#000;\n\t\n\t-webkit-transition-property: opacity;\n\t-webkit-transition-duration: 0.5s;\n\t \n\t-moz-transition-property: opacity;\n\t-moz-transition-duration: 0.5s;\n\t \n\t-o-transition-property: opacity;\n\t-o-transition-duration: 0.5s;\n\t\n\ttransition-property: opacity;\n\ttransition-duration: 0.5s;\n}\n\n\n#pickleads_zoom #pickleads_zoom_pic{\n\tposition:absolute;\n\twidth:1360px;\n\theight:1028px;\n\tleft:-276px;\n\ttop:-251px;\n\tbackground-image:url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/BigPic.jpg);\n\t\n\t-webkit-transition: -webkit-transform 4.5s;                  \n    -moz-transition: -moz-transform 4.5s;                 \n    -o-transition: -o-transform 4.5s;                 \n    -transition: -transform 4.5s;\n \n \t-webkit-transform: scale(0.8,0.8);\n    -moz-transform: scale(0.8,0.8);\n}\n\n#pickleads_zoom #pickleads_zoom_pic.pickleads_zoom_05{\n\t\n \t-webkit-transform: scale(0.5,0.5);\n    -moz-transform: scale(0.5,0.5);\n}\n\n#pickleads_zoom #pickleads_zoom_pic.pickleads_zoom_06{\n\t\n \t-webkit-transform: scale(0.6,0.6);\n    -moz-transform: scale(0.6,0.6);\n}\n\n#pickleads_zoom #pickleads_zoom_pic.pickleads_zoom_07{\n\t\n \t-webkit-transform: scale(0.7,0.7);\n    -moz-transform: scale(0.7,0.7);\n}\n\n#pickleads_zoom #pickleads_zoom_pic.pickleads_zoom_08{\n\t\n \t-webkit-transform: scale(0.8,0.8);\n    -moz-transform: scale(0.8,0.8);\n}\n\n#pickleads_zoom #pickleads_zoom_pic.pickleads_zoom_09{\n\t\n \t-webkit-transform: scale(0.9,0.9);\n    -moz-transform: scale(0.9,0.9);\n}\n\n#pickleads_zoom #pickleads_zoom_pic.pickleads_zoom_1{\n\t\n \t-webkit-transform: scale(1,1);\n    -moz-transform: scale(1,1);\n}\n\n#pickleads_zoom #pickleads_zoom_plus{\n\twidth:32px;\n\theight:23px;\n\tposition:absolute;\n\tleft:10px;\n\ttop:200px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Plus.png);\n\tcursor:pointer;\n}\n\n#pickleads_zoom #pickleads_zoom_minus{\n\twidth:32px;\n\theight:23px;\n\tposition:absolute;\n\tleft:10px;\n\ttop:220px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/Minus.png);\n\tcursor:pointer;\n}\n\n#pickleads_zoom #pickleads_zoom_arrow_right{\n\twidth:45px;\n\theight:49px;\n\tposition:absolute;\n\tleft:925px;\n\ttop:100px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/arrowRight.png);\n\tcursor:pointer;\n\topacity:0.6;\n}\n\n#pickleads_zoom #pickleads_zoom_arrow_left{\n\twidth:45px;\n\theight:49px;\n\tposition:absolute;\n\tleft:0px;\n\ttop:100px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/arrowLeft.png);\n\tcursor:pointer;\n\topacity:0.6;\n}\n\n#pickleads_zoom #pickleads_zoom_arrow_up{\n\twidth:45px;\n\theight:49px;\n\tposition:absolute;\n\tleft:460px;\n\ttop:-10px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/arrowUp.png);\n\tcursor:pointer;\n\topacity:0.6;\n}\n\n\n#pickleads_zoom #pickleads_zoom_arrow_down{\n\twidth:45px;\n\theight:49px;\n\tposition:absolute;\n\tleft:470px;\n\ttop:210px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/arrowDown.png);\n\tcursor:pointer;\n\topacity:0.6;\n}\n\n\n#pickleads_zoom #pickleads_zoom_back_btn{\n\twidth:31px;\n\theight:17px;\n\tposition:absolute;\n\tleft:930px;\n\ttop:12px;\n\tbackground-image: url(http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/back_btn.png);\n\tcursor:pointer;\n\tbackground-position:center center;\n\tbackground-repeat:no-repeat;\n}\n\n\n\n\n</style>\n\n\n <div id=\"pickleads_wrapper\">\n \n \t\t<!-- First Big Pic -->\n \t\t<div><img src=\"http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/BigPic.jpg\" width=\"1360\" height=\"1028\" id=\"pickleads_bigPic\" class=\"start\"></div>\n        \n     \t\n        <!-- Black rec-->\n   \t\t<div id=\"pickleads_black_rec\" class=\"pickleads_hidden\"></div>\n              \n        \n        <!-- Third Big Pic to small -->\n        <div><img src=\"http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/BigPic.jpg\" width=\"1360\" height=\"1028\" id=\"pickleads_bigPic_to_small\" class=\"pickleads_hidden\"></div>\n        \n        \n        <!--\n        <div><img src=\"BigPic.jpg\" width=\"1360\" height=\"1028\" id=\"pickleads_bigPic_to_small_right\" class=\"start\"></div>\n        -->\n \n     \t\n \t\t<div><img src=\"http://d3cxgjorprur2q.cloudfront.net/campaigns/campaign_245/creative_277/left_small_clock.jpg\" width=\"300\" height=\"216\" id=\"pickleads_left_pic\" class=\"pickleads_hidden\"></div>\n        \n        \n        \n        \n        <div id=\"pickleads_bulgari\" class=\"pickleads_hidden\"></div>\n        <div id=\"pickleads_octo\" class=\"pickleads_hidden\"></div>\n        <div id=\"pickleads_discover\" class=\"pickleads_hidden\"></div>\n        \n        <div id=\"pickleads_left_plus\" class=\"pickleads_hidden\"></div>\n        <div id=\"pickleads_right_plus\" class=\"pickleads_hidden\"></div>\n        \n        \n        \n        \n        \n        \n        <!--User Interaction-->\n   \t\t<div id=\"pickleads_zoom\" class=\"pickleads_hidden\">\n        \t\t<div id=\"pickleads_zoom_pic\" class=\"pickleads_zoom_05\"></div>\n                <div id=\"pickleads_zoom_back_btn\"></div>\n   \t\t</div>\n        \n        \n        \n </div>\n \n \n \n \n \n \n \n \n \n \n <script type=\"text/javascript\">\n \n \nvar pickle_scrolling_int; \n \n \n// -- Initializing -----------------------------------------------------------\nvar pickleads_wrapper = document.getElementById(\'pickleads_wrapper\'); \nvar pickleads_bigPic = document.getElementById(\'pickleads_bigPic\'); \nvar pickleads_bigPic_to_small = document.getElementById(\'pickleads_bigPic_to_small\'); \nvar pickleads_black_rec = document.getElementById(\'pickleads_black_rec\'); \nvar pickleads_left_pic = document.getElementById(\'pickleads_left_pic\'); \n\nvar pickleads_bulgari = document.getElementById(\'pickleads_bulgari\'); \nvar pickleads_octo = document.getElementById(\'pickleads_octo\'); \nvar pickleads_discover = document.getElementById(\'pickleads_discover\'); \nvar pickleads_left_plus = document.getElementById(\'pickleads_left_plus\'); \nvar pickleads_right_plus = document.getElementById(\'pickleads_right_plus\'); \n\nvar pickleads_zoom = document.getElementById(\'pickleads_zoom\');\nvar pickleads_zoom_pic = document.getElementById(\'pickleads_zoom_pic\');\nvar pickleads_zoom_back_btn = document.getElementById(\'pickleads_zoom_back_btn\');\n\nsetTimeout(function() {   pickleads_bigPic.className=\"end\";}, 1000);\npickleads_black_rec.className=\"pickleads_visible\";\npickleads_bigPic_to_small.className =\"pickleads_visible\";\npickleads_left_pic.className =\"pickleads_visible\";\n\n\npickleads_bulgari.className=\"pickleads_visible\";\npickleads_octo.className=\"pickleads_visible\";\npickleads_discover.className=\"pickleads_visible\";\n\npickleads_left_plus.className=\"pickleads_visible\";\npickleads_right_plus.className=\"pickleads_visible\";\n\n\n \n\nsetTimeout(function() {   pickleads_bigPic.className=\"pickleads_hidden\";    }, 9000); setTimeout(function() {   pickleads_bigPic.style.display=\"none\"    }, 10000); \n\t   \n\t   \n\t   \n\t  \n\t   \n\t   \n\t  \nfunction pickleads_cta() {\n\tpickleAds_clickthru_277(\'CTA\');\n\t/*window.open(\'http://www.bulgari.com\');*/\n}\n\t  \n\t  \n\t  \n\t  \n\t  \n\t  \n\t  var pickleads_zoomLevel=0.5;\n\t  var pickleads_min_zoomLevel=0.5;\n\t  var pickleads_max_zoomLevel=1;\n\t  \n\t  function pickleads_zoomIn() {\n\t\t  console.log(\"pickleads_zoomIn()\");\n\t\t  pickleads_zoomLevel=pickleads_zoomLevel+1;\n\t\t  pickleads_zoomLevel = Math.round(pickleads_zoomLevel * 10) / 10;\n\t\t  pickleads_zoomLevel = (pickleads_zoomLevel<=pickleads_max_zoomLevel)?pickleads_zoomLevel:pickleads_max_zoomLevel;\n\t\t  pickleads_setZoom();\n\t  }\n\t  \n\t  \n\t  function pickleads_zoomOut() {\n\t\t  console.log(\"pickleads_zoomOut()\");\n\t\t  pickleads_zoomLevel=pickleads_zoomLevel-1;\n\t\t  pickleads_zoomLevel = Math.round(pickleads_zoomLevel * 10) / 10;\n\t\t  pickleads_zoomLevel = (pickleads_zoomLevel>=pickleads_min_zoomLevel)?pickleads_zoomLevel:pickleads_min_zoomLevel;\n\t\t  pickleads_setZoom();\n\t  }\n\t  \n\t  function pickleads_setZoom() {\n\t\t  console.log(\"pickleads_setZoom()   pickleads_zoomLevel=\"+pickleads_zoomLevel);\n\t\t switch (pickleads_zoomLevel) {\n\t\t\tcase 0.5:\n\t\t\t\tpickleads_zoom_pic.className=\"pickleads_zoom_05\";\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.6:\n\t\t\t\tpickleads_zoom_pic.className=\"pickleads_zoom_06\";\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.7:\n\t\t\t\tpickleads_zoom_pic.className=\"pickleads_zoom_07\";\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.8:\n\t\t\t\tpickleads_zoom_pic.className=\"pickleads_zoom_08\";\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.9:\n\t\t\t\tpickleads_zoom_pic.className=\"pickleads_zoom_09\";\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 1:\n\t\t\t\tpickleads_zoom_pic.className=\"pickleads_zoom_1\";\n\t\t\tbreak;\n\t\t}\n\t  }\n\t  \n\t  \n\t  \n\t \n\t  \n\t  var pickleads_center={x:485, y:125};\n\t  var pickleads_original_center={x:485, y:125};\n\t  var pickleads_move_step=50;\n\t  \n\t  function pickleads_move_up() {\n\t\t  pickleads_center.y=pickleads_center.y-pickleads_move_step;\n\t\t  pickleads_move_image();\n\t  }\n\t  \n\t  function pickleads_move_down() {\n\t\t  pickleads_center.y=pickleads_center.y+pickleads_move_step;\n\t\t  pickleads_move_image();\n\t  }\n\t  \n\t  function pickleads_move_left() {\n\t\t  pickleads_center.x=pickleads_center.x-pickleads_move_step;\n\t\t  pickleads_move_image();\n\t  }\n\t  \n\t  function pickleads_move_right() {\n\t\t  pickleads_center.x=pickleads_center.x+pickleads_move_step;\n\t\t  pickleads_move_image();\n\t  }\n\t  \n\t  \n \n\tfunction pickleads_move_image() {\n\t\t//console.info(pickleads_center);\n\t\tvar ele = pickleAds_xGetElementById(\'pickleads_zoom_pic\');\n\t\tvar pic_width = parseInt(pickleAds_xGetComputedStyle(ele, \'width\')) || 0;\n\t\tvar pic_height = parseInt(pickleAds_xGetComputedStyle(ele, \'height\')) || 0;\n\t\t\n\t\t//console.log(\"pic_width:\"+pic_width);\n\t\t//console.log(\"pic_height:\"+pic_height);\n\t\t\n\t\t// filter if we are out of boundaries ----------------\n\t\tpickleads_filter_move();\n\t\t// ---------------------------------------------------\n\t\t\n\t\tpickleads_zoom_pic.style.left=(pickleads_center.x-pic_width/2)+\"px\";\n\t\tpickleads_zoom_pic.style.top=(pickleads_center.y-pic_height/2)+\"px\";\n\t\t\n\t\t//console.log(\"top:\"+pickleads_zoom_pic.style.top);\n\t\t//console.log(\"left:\"+pickleads_zoom_pic.style.left);\n\t\t\n\t}\n\t\n\n\t\t\n\n\t\n\t\n\t\n\tdocument.getElementById(\'pickleads_zoom\').onmousemove = pickleads_mouseMove;\n\t\n\t\n\tvar pickleads_move_limits={\n\t\tzoom_05:{minleft:-435, mintop:-419, maxleft:-15, maxtop:-299},\n\t\tzoom_06:{minleft:-465, mintop:-449, maxleft:15, maxtop:-269},\n\t\tzoom_07:{minleft:-405, mintop:-779, maxleft:-75, maxtop:-239},\n\t\tzoom_08:{minleft:-375, mintop:-479, maxleft:-75, maxtop:-209},\n\t\tzoom_09:{minleft:-315, mintop:-599, maxleft:-225, maxtop:-149},\n\t\tzoom_1:{minleft:-285, mintop:-599, maxleft:-215, maxtop:-119}\n\t};\n\t\n\t\n\t\n\t\n\tfunction pickleads_filter_move() {\n\t\t\n\t\tvar ele = pickleAds_xGetElementById(\'pickleads_zoom_pic\');\n\t\tvar pic_width = parseInt(pickleAds_xGetComputedStyle(ele, \'width\')) || 0;\n\t\tvar pic_height = parseInt(pickleAds_xGetComputedStyle(ele, \'height\')) || 0;\n\n\t\tswitch (pickleads_zoomLevel) {\n\t\t\tcase 0.5:\n\t\t\t\tminx = pickleads_move_limits.zoom_05.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_05.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_05.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_05.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.6:\n\t\t\t\tminx = pickleads_move_limits.zoom_06.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_06.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_06.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_06.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.7:\n\t\t\t\tminx = pickleads_move_limits.zoom_07.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_07.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_07.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_07.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.8:\n\t\t\t\tminx = pickleads_move_limits.zoom_08.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_08.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_08.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_08.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.9:\n\t\t\t\tminx = pickleads_move_limits.zoom_09.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_09.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_09.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_09.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 1:\n\t\t\t\tminx = pickleads_move_limits.zoom_1.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_1.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_1.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_1.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t}\n\t\t\n\t\tif (pickleads_center.x>maxx) { pickleads_center.x=maxx; }\n\t\tif (pickleads_center.x<minx) { pickleads_center.x=minx; }\n\t\t\n\t\tif (pickleads_center.y>maxy) { pickleads_center.y=maxy; }\n\t\tif (pickleads_center.y<miny) { pickleads_center.y=miny; }\n\t\t\n\t}\n\t\n\t\n\t\n\tfunction pickleads_getXYpos(elm) {\n\t \n\t  var x = elm.offsetLeft;        // set x to elm’s offsetLeft\n\t  var y = elm.offsetTop;         // set y to elm’s offsetTop\n\t  elm = elm.offsetParent;    // set elm to its offsetParent\n\t  while(elm != null) {\n\t    x = parseInt(x) + parseInt(elm.offsetLeft);\n\t    y = parseInt(y) + parseInt(elm.offsetTop);\n\t    elm = elm.offsetParent;\n\t  }\n\t  return {\'xp\':x, \'yp\':y};\n\t}\n\t\n\t\n\tfunction pickleads_mouseMove(e) {\n\n\t  var xy_pos = pickleads_getXYpos(this);\n\n\t  // if IE\n\t  if(navigator.appVersion.indexOf(\"MSIE\") != -1) {\n\t    var standardBody = (document.compatMode == \'CSS1Compat\') ? document.documentElement : document.body;\n\t    var x = event.clientX + standardBody.scrollLeft;\n\t    var y = event.clientY + standardBody.scrollTop;\n\t  }\n\t  else {\n\t    var x = e.pageX;\n\t    var y = e.pageY;\n\t  }\n\t  x = x - xy_pos[\'xp\'];\n\t  y = y - xy_pos[\'yp\'];\n\t\n\t  // Calculate the percentages -----------\n\t  var ele = pickleAds_xGetElementById(\'pickleads_zoom\');\n\t  var scene_width = parseInt(pickleAds_xGetComputedStyle(ele, \'width\')) || 0;\n\t  var scene_height = parseInt(pickleAds_xGetComputedStyle(ele, \'height\')) || 0;\n\t  var percentX = (x - scene_width/2) / scene_width*2;\n\t  var percentY = (y - scene_height/2) / scene_height*2;\n\t  //console.log(\'pickleads_mouseMove | percentX = \'+ percentX+\', percentY = \'+ percentY);\n\t  \n\t  // getting -------\n\t  var ele_pic = pickleAds_xGetElementById(\'pickleads_zoom_pic\');\n\t  var pic_width = parseInt(pickleAds_xGetComputedStyle(ele_pic, \'width\')) || 0;\n\t  var pic_height = parseInt(pickleAds_xGetComputedStyle(ele_pic, \'height\')) || 0;\n\t\t\n\t  switch (pickleads_zoomLevel) {\n\t\t\tcase 0.5:\n\t\t\t\tminx = pickleads_move_limits.zoom_05.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_05.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_05.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_05.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.6:\n\t\t\t\tminx = pickleads_move_limits.zoom_06.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_06.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_06.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_06.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.7:\n\t\t\t\tminx = pickleads_move_limits.zoom_07.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_07.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_07.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_07.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.8:\n\t\t\t\tminx = pickleads_move_limits.zoom_08.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_08.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_08.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_08.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.9:\n\t\t\t\tminx = pickleads_move_limits.zoom_09.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_09.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_09.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_09.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 1:\n\t\t\t\tminx = pickleads_move_limits.zoom_1.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_1.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_1.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_1.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t}\n\t  \n\t\t\n\t  \n\t\t// calculate ... pickleads_center.x \n\t\tvar upper_x = maxx - pickleads_original_center.x;\n\t\tvar lower_x = pickleads_original_center.x - minx;\n\t\tvar new_center_x = (percentX>0)?(pickleads_original_center.x - lower_x*percentX):(pickleads_original_center.x - upper_x*percentX);\n\t\tpickleads_center.x = new_center_x;\n\t\t\n\t\tvar upper_y = maxy - pickleads_original_center.y;\n\t\tvar lower_y = pickleads_original_center.y - miny;\n\t\tvar new_center_y = (percentY>0)?(pickleads_original_center.y - lower_y*percentY):(pickleads_original_center.y - upper_y*percentY);\n\t\tpickleads_center.y = new_center_y;\n\n\t\t//console.log(\'minx=\'+minx+\', maxx=\'+maxx+\' | percentX=\'+percentX + \' | new_center_x=\'+new_center_x);\n\t\n\t\tpickleads_move_image();\n\t\t//console.log(\'minx=\'+minx+\', maxx=\'+maxx+\' | >>>>>> new_center_x = \'+new_center_x);\n\t  \n\t}\n\n\t// ------------------------------------------------------------------------\n\t\n\tfunction pickleads_touchMove(e) {\n\t    //console.log(\'touchMove(e)\');\n\t    e.preventDefault();\n\t    \n\t    if (e.touches.length > 1) {\n\t\tcancelTouch();\n\t    } else {\n\t\tpos_x = e.touches[0].pageX;\n\t\tpos_y = e.touches[0].pageY;\n\n\t\t// where the real moving is happening\n\t\t//console.log(\'pos_x = \'+pos_x+\', pos_y = \'+pos_y);\n\n\t\t// Calculate the percentages -----------\n\t\tvar ele = pickleAds_xGetElementById(\'pickleads_zoom\');\n\t\tvar scene_width = parseInt(pickleAds_xGetComputedStyle(ele, \'width\')) || 0;\n\t\tvar scene_height = parseInt(pickleAds_xGetComputedStyle(ele, \'height\')) || 0;\n\t\tvar percentX = (pos_x - scene_width/2) / scene_width*2;\n\t\tvar percentY = (pos_y - scene_height/2) / scene_height*2;\n\t\t//console.log(\'pickleads_mouseMove | percentX = \'+ percentX+\', percentY = \'+ percentY);\n\t  \n\t\t// getting -------\n\t\tvar ele_pic = pickleAds_xGetElementById(\'pickleads_zoom_pic\');\n\t\tvar pic_width = parseInt(pickleAds_xGetComputedStyle(ele_pic, \'width\')) || 0;\n\t\tvar pic_height = parseInt(pickleAds_xGetComputedStyle(ele_pic, \'height\')) || 0;\n\t\t\n\t\tswitch (pickleads_zoomLevel) {\n\t\t\tcase 0.5:\n\t\t\t\tminx = pickleads_move_limits.zoom_05.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_05.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_05.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_05.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.6:\n\t\t\t\tminx = pickleads_move_limits.zoom_06.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_06.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_06.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_06.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.7:\n\t\t\t\tminx = pickleads_move_limits.zoom_07.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_07.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_07.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_07.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.8:\n\t\t\t\tminx = pickleads_move_limits.zoom_08.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_08.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_08.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_08.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 0.9:\n\t\t\t\tminx = pickleads_move_limits.zoom_09.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_09.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_09.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_09.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t\t\n\t\t\tcase 1:\n\t\t\t\tminx = pickleads_move_limits.zoom_1.minleft + pic_width/2;\n\t\t\t\tmaxx = pickleads_move_limits.zoom_1.maxleft + pic_width/2;\n\t\t\t\tminy = pickleads_move_limits.zoom_1.mintop + pic_height/2;\n\t\t\t\tmaxy = pickleads_move_limits.zoom_1.maxtop + pic_height/2;\n\t\t\tbreak;\n\t\t}\n\t  \n\t\t\n                \n\t\t// calculate ... pickleads_center.x \n\t\tvar upper_x = maxx - pickleads_original_center.x;\n\t\tvar lower_x = pickleads_original_center.x - minx;\n\t\tvar new_center_x = (percentX>0)?(pickleads_original_center.x + lower_x*percentX):(pickleads_original_center.x + upper_x*percentX);\n\t\tpickleads_center.x = new_center_x;\n\t\t\n\t\tvar upper_y = maxy - pickleads_original_center.y;\n\t\tvar lower_y = pickleads_original_center.y - miny;\n\t\tvar new_center_y = (percentY>0)?(pickleads_original_center.y + lower_y*percentY):(pickleads_original_center.y + upper_y*percentY);\n\t\tpickleads_center.y = new_center_y;\n\n\t\t//console.log(\'minx=\'+minx+\', maxx=\'+maxx+\' | percentX=\'+percentX + \' | new_center_x=\'+new_center_x);\n\t\n\t\tpickleads_move_image();\n\t\t//console.log(\'minx=\'+minx+\', maxx=\'+maxx+\' | >>>>>> new_center_x = \'+new_center_x);\n\n\n\t    } // end of the real moving if\n\t    \n\t}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t/*--mouse--*/\n     function pickle_scroll_mousehandle(delta) {\n\t//console.log(\'pickle_scroll_mousehandle | delta = \'+delta*pickle_mouseWheelAccl);\n\tif (delta>0) { \n\t\tpickleads_zoomIn()          \n\t} else { \n\t    pickleads_zoomOut()\n\t}\n      \n      \n      clearTimeout(pickle_scrolling_int);\n      pickle_scrolling_int = setTimeout(pickle_endscrolling, 400);\n      \n  }\n  \n  \n  function pickle_scroll_wheel(event){\n      var delta = 0;\n      if (!event)\n          event = window.event;\n      if (event.wheelDelta) {\n          delta = event.wheelDelta/1200; //IE\n      } else if (event.detail) {\n          delta = -event.detail/3;\n      }\n      if (delta) {pickle_scroll_mousehandle(delta);}\n      if (event.preventDefault)\n          event.preventDefault();\n    event.returnValue = false;\n  }\n  \n\nfunction pickle_endscrolling() {\n\n    console.log(\'pickle_endscrolling\');\n\n    // stopping the timeout\n    clearTimeout(pickle_scrolling_int);\n    pickle_scrolling = false;\n\n  }\t\n\n\n\n\n\n\n\t\n\tpickleads_move_image();\n\t\n\t\n\t\n\t// Help functions for pickleAds_AnimateCSS function ----------------------------------\nfunction pickleAds_xGetElementById(a){if(typeof(a)==\"string\"){if(document.getElementById){a=document.getElementById(a)} else {if(document.all){a=document.all[a]}else{a=null}}}return a;}\nfunction pickleAds_xGetComputedStyle(e, p, i){if(!(e=pickleAds_xGetElementById(e))) return null;var s, v = \'undefined\', dv = document.defaultView;if(dv && dv.getComputedStyle){s = dv.getComputedStyle(e,\'\');if (s) v = s.getPropertyValue(p);}else if(e.currentStyle) {v = e.currentStyle[pickleAds_xCamelize(p)];}else return null;return i ? (parseInt(envy) || 0) : v;}\nfunction pickleAds_xCamelize(d){var e,g,b,f;b=d.split(\"-\");f=b[0];for(e=1;e<b.length;++e){g=b[e].charAt(0);f+=b[e].replace(g,g.toUpperCase())}return f}\n\n\n\n\n\n\n\n\n\n\n\n\tel = document.getElementById(\'pickleads_wrapper\');\n\t\tif (el.addEventListener){\n\t\t\n\t\t\t\t// non-IE\n\t\t\t\t\n\t\t\t\t/*\n\t\t\t\t// scroll - IE9, Chrome, Safari, Opera\n                pickleads_zoom.addEventListener(\"mousewheel\", pickle_scroll_wheel, false);\n                // scroll - Firefox\n                pickleads_zoom.addEventListener(\"DOMMouseScroll\", pickle_scroll_wheel, false);\n                 */       \n\t\t\t\t         \n               \tpickleads_discover.addEventListener(\"click\", function(event) {\n\t\t\t\t\tpickleads_cta();\n\t\t\t\t}, false);            \n\t\t\t\t\n\t\t\t\tpickleads_zoom_back_btn.addEventListener(\"click\", function(event) {\n\t\t\t\t\tpickleAds_track_277(\'OTHER\',\'close big image\');\n\t\t\t\t\tpickleads_zoom.className=\"pickleads_hidden\";\n\t\t\t\t\tpickleads_zoom.style.zIndex=100;\n\t\t\t\t\t\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\tpickleads_right_plus.addEventListener(\"click\", function(event) {\n\t\t\t\t\tpickleAds_track_277(\'OTHER\',\'Go to big image\');\n\t\t\t\t\tpickleads_zoom.className=\"pickleads_visible\";\n\t\t\t\t\tpickleads_zoom.style.zIndex=1000;\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\tpickleads_left_plus.addEventListener(\"click\", function(event) {\n\t\t\t\t\tpickleAds_track_277(\'OTHER\',\'Go to big image\');\n\t\t\t\t\tpickleads_zoom.className=\"pickleads_visible\";\n\t\t\t\t\tpickleads_zoom.style.zIndex=1000;\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t\n                \n\t\t\t\t// Mousemove ------------------------------------------------------\n\t\t\t\tpickleads_zoom.addEventListener(\"mousemove\", function(event) {\n\t\t\t\t\t\tpickleads_mouseMove(event);\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t// Mouseover ------------------------------------------------------\n\t\t\t\tpickleads_zoom.addEventListener(\"mouseover\", function(event) {\n\t\t\t\t\t\tpickleads_zoomIn(event);\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t// Tocuhmove ------------------------------------------------------\n\t\t\t\tpickleads_zoom.addEventListener(\"touchmove\", function(event) {\n\t\t\t\t\t\t\tpickleads_touchMove(event);\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t// Tocuhstart ------------------------------------------------------\n\t\t\t\tpickleads_zoom.addEventListener(\"touchstart\", function(event) {\n\t\t\t\t\t\tpickleads_zoomIn(event);\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t// Tocuhend ------------------------------------------------------\n\t\t\t\tpickleads_zoom.addEventListener(\"touchend\", function(event) {\n\t\t\t\t\t\tpickleads_zoomOut(event);\n\t\t\t\t}, false);\n\t\t\t\t// ----------------------------------------------------------------\n\n\t\t} else if (el.attachEvent){\n\t\t\t\t// IE\n\t\t\t\t\n\t\t\t\tpickleads_zoom.onmousewheel = pickle_scroll_wheel;\n\t\t\t\t\n\t\t\t\t        \n               \tpickleads_discover.attachEvent(\"onclick\", function(event) {\n\t\t\t\t\tpickleads_cta();\n\t\t\t\t}, false);            \n\t\t\t\t\n\t\t\t\tpickleads_zoom_back_btn.attachEvent(\"onclick\", function(event) {\n\t\t\t\t\tpickleAds_track_277(\'OTHER\',\'close big image\');\n\t\t\t\t\tpickleads_zoom.className=\"pickleads_hidden\";\n\t\t\t\t\tpickleads_zoom.style.zIndex=100;\n\t\t\t\t\t\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\tpickleads_right_plus.attachEvent(\"onclick\", function(event) {\n\t\t\t\t\tpickleAds_track_277(\'OTHER\',\'Go to big image\');\n\t\t\t\t\tpickleads_zoom.className=\"pickleads_visible\";\n\t\t\t\t\tpickleads_zoom.style.zIndex=1000;\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\tpickleads_left_plus.attachEvent(\"onclick\", function(event) {\n\t\t\t\t\tpickleAds_track_277(\'OTHER\',\'Go to big image\');\n\t\t\t\t\tpickleads_zoom.className=\"pickleads_visible\";\n\t\t\t\t\tpickleads_zoom.style.zIndex=1000;\n\t\t\t\t}, false);\n                \n\t\t\t\t// Mousemove ------------------------------------------------------\n\t\t\t\tpickleads_zoom.attachEvent(\"onmousemove\", function(event) {\n\t\t\t\t\t\tpickleads_mouseMove(event);\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t// Mouseover ------------------------------------------------------\n\t\t\t\tpickleads_zoom.attachEvent(\"onmouseover\", function(event) {\n\t\t\t\t\t\tpickleads_zoomIn(event);\n\t\t\t\t}, false);\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t// ----------------------------------------------------------------\n\t\t\t\t\n\t\t} \n\n    // End of EVENT HANDLERS ------------------------------------\n    \n \n </script>\n\t\n    </div>\n    \n</div>\n\n\n\n');

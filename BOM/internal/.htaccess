@@ -1,0 +1,5 @@
+AuthName "acces restreint"
+AuthType Basic
+AuthUserFile /web/sanojaa/.htpasswd
+Require valid-user 
+#Options +Indexes
