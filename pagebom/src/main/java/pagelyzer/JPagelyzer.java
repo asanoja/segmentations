@@ -80,6 +80,7 @@ public class JPagelyzer {
      String outputfile;
      boolean screenshot;
      boolean segmentation;
+     CaptureResult result;
 //     boolean isTrain;
 //     ScapeTrain sc ;
 //     MarcAlizer marcalizer;
@@ -120,13 +121,16 @@ public class JPagelyzer {
         return(this.config);
     }
 
+    public JPagelyzer(String url, String config) {
+        this(new String[]{"-url",url,"-config",config},false);
+    }
   
     public JPagelyzer(String[] args, boolean isTrain)
     {
 //    	this.isTrain = isTrain;
         // no need any more cpath browser etc. they are all in config file
     	// not to change the usage of options I am adding display options to send to usage.
-        displayoptions.addOption("get",true,"The functionality to run: "+SCREENSHOT+", "+SOURCE+" or "+SEGMENTATION);
+//        displayoptions.addOption("get",true,"The functionality to run: "+SCREENSHOT+", "+SOURCE+" or "+SEGMENTATION);
     	displayoptions.addOption("url",true,"The URL to process");
 //    	displayoptions.addOption("url2",true,"Second URL to compare");
     	displayoptions.addOption("config",true,"Global configuration file for an example of file: https://github.com/openplanets/pagelyzer/blob/master/config.xml");
@@ -374,6 +378,13 @@ public class JPagelyzer {
 //        return result;
 //    }
     
+    
+    public CaptureResult getWithResult(String target, String url) {
+         get(target,url);
+         return(result);
+        
+    }
+    
     /**
      * Method to call functionalities
      * @param target extra functionality. It can be: screenshot, segmentation, source
@@ -387,7 +398,7 @@ public class JPagelyzer {
             case SEGMENTATION : capture.run(url,false,true);break;
             case SOURCE       : capture.run(url,false,false);break;
         }
-        CaptureResult result = capture.result;
+        result = capture.result;
 
         OutputStream out=null;
         try {
@@ -398,8 +409,8 @@ public class JPagelyzer {
                 case SEGMENTATION :ext="xml";break;
                 case SOURCE       : ext="html";break;
             }
-             out = new BufferedOutputStream(new FileOutputStream(outputfile.replace("#{ext}", ext)));
-             switch(target) {
+            out = new BufferedOutputStream(new FileOutputStream(outputfile.replace("#{ext}", ext)));
+            switch(target) {
                 case SCREENSHOT   : out.write(result.image);break;
                 case SEGMENTATION : out.write(result.viXML.getBytes("UTF-8"));break;
                 case SOURCE       : out.write(result.srcHTML.getBytes("UTF-8"));break;
@@ -432,7 +443,8 @@ public class JPagelyzer {
     public static void main(String[] args) throws URISyntaxException {
 
         
-        JPagelyzer pagelyzer = new JPagelyzer(args,false);
+//        JPagelyzer pagelyzer = new JPagelyzer(args,false);
+        JPagelyzer pagelyzer = new JPagelyzer("http://www.lip6.fr","config.xml");
        
         /*
          * All is validated and fine, we can proceed to call functionalities

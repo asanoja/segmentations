@@ -44,6 +44,10 @@ public abstract class SeleniumWrapper {
         System.out.println(host);
     }
     
+    public BrowserRep getBrowserRep()   {
+        return(this.driver);
+    }
+    
     public void open(String br) throws MalformedURLException, Exception {
         this.driver = new BrowserRep();
         setup(br);

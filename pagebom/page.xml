@@ -1,7 +1,7 @@
 <XML>
-<Document url='http://www.lip6.fr/' Title='Accueil LIP6' Version='1.1' Pos='WindowWidth||PageRectLeft:1325 WindowHeight||PageRectTop:1024 ObjectRectWith:0 ObjectRectHeight:0'>
-<Block Ref='Block1' internal_id='LEFT' ID='' Pos='WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:1247 ObjectRectHeight:1021' Doc=''>
- <Block Ref='Block1.0' leafblock='1' internal_id='TOP' ID='7b99d82be8d33cc96c79a8f4bfa709e3' Pos='WindowWidth||PageRectLeft:111.5 WindowHeight||PageRectTop:0 ObjectRectWidth:1024 ObjectRectHeight:167' Doc='' importance='40'>
+<Document url='http://www.lip6.fr/' Title='Accueil LIP6' Version='1.1' Pos='WindowWidth||PageRectLeft:1555 WindowHeight||PageRectTop:1024 ObjectRectWith:0 ObjectRectHeight:0'>
+<Block Ref='Block1' internal_id='LEFT' ID='' Pos='WindowWidth||PageRectLeft:0 WindowHeight||PageRectTop:0 ObjectRectWidth:1267 ObjectRectHeight:1021' Doc=''>
+ <Block Ref='Block1.0' leafblock='1' internal_id='TOP' ID='7b99d82be8d33cc96c79a8f4bfa709e3' Pos='WindowWidth||PageRectLeft:121.5 WindowHeight||PageRectTop:0 ObjectRectWidth:1024 ObjectRectHeight:167' Doc='' importance='60'>
 <Links ID='ba31786b8ffcc159f75d892aa906fdb7' IDList='d0a877951fcba20105fe09ac3d209831,22ed528a260915f678351c29ab863843,0b109bf3bf342dd269079fbe6a29d938,a2fa79a1b55e6b0202350770c57274cd,0a826dde53e5493c2eda8d8cea82ed32,a05eee791d3e82d7dc495c161382c712,70a85c99850f523b974adbbd27dc319f,1506f6f13bd590577e1c97394e442a28,b23f7302f7d9dec3aa9da79afe8249c0,40c6eb196ed2294e3aff7d2442e16189,87038c7c2b8475abb8d9b9d4a7355810,576c2b163b0143c52226b3b7145cbf73'>
 <link ID='d0a877951fcba20105fe09ac3d209831' Name="" Adr='http://www.upmc.fr'/>
 <link ID='22ed528a260915f678351c29ab863843' Name="" Adr='http://www.cnrs.fr'/>
@@ -20,8 +20,8 @@
 <img ID='5372de8b945eb965b5b36e363aefe8bc' Name="" Src='images/Haut.jpg'/>
 </Imgs>
  <Txts ID="6458ce79adad1021e70276cc2eb5d6a4" Txt=" Présentation Informations pratiques Recherche Production Partenariat Actualité Emplois Liens Carte du site "/> </Block>
- <Block Ref='Block1.1' internal_id='STANDARD' ID='' Pos='WindowWidth||PageRectLeft:111.5 WindowHeight||PageRectTop:167 ObjectRectWidth:1024 ObjectRectHeight:802' Doc=''>
-  <Block Ref='Block1.1.0' leafblock='1' internal_id='STANDARD' ID='1cde34245f1a19cc8e7acbf2da78c192' Pos='WindowWidth||PageRectLeft:111.5 WindowHeight||PageRectTop:167 ObjectRectWidth:1024 ObjectRectHeight:23' Doc='' importance='18'>
+ <Block Ref='Block1.1' internal_id='STANDARD' ID='' Pos='WindowWidth||PageRectLeft:121.5 WindowHeight||PageRectTop:167 ObjectRectWidth:1024 ObjectRectHeight:802' Doc=''>
+  <Block Ref='Block1.1.0' leafblock='1' internal_id='STANDARD' ID='1cde34245f1a19cc8e7acbf2da78c192' Pos='WindowWidth||PageRectLeft:121.5 WindowHeight||PageRectTop:167 ObjectRectWidth:1024 ObjectRectHeight:23' Doc='' importance='20'>
 <Links ID='fa1766e17f788a689a3a34b852250dbb' IDList='858c3f960db1af112fc6e1ffb75b99ee,6a4bdfbefff4752eac0e2332c74d5d62,3976660af81706489fc8c6cfcc6a0bec,f6c3d514e4525039550a817cf8a95b4b,3efbaee39f1902cf42720e7733c5da00,776a64fb1e4282f99f22310d29bff0a5,97e6674d27c390094c05ed7721743dc5,aa30bad1ea4b6dfd160f3fe4c398f77a,1f0ffe1037d4a46f4336ef2dbbf3719a,b6e493e9a0f058f99d17eab2e34527d6,dffcdb17c4b68094e63a68c4e67205e0,9be28267bbc39d16178cd9cf7379b478,7fd83f078898d657db666922b457ff51,b16892a1cd67f0deabcfe4d894246f7d,3717638315342785e020c0c5cffb1ea8,70b400f3e91bd2cd288ec86558976180,21d469b814d52ef85a8e014ffb79273a'>
 <link ID='858c3f960db1af112fc6e1ffb75b99ee' Name="" Adr='/?LANG=fr'/>
 <link ID='6a4bdfbefff4752eac0e2332c74d5d62' Name="" Adr='/?LANG=en'/>
@@ -54,7 +54,7 @@
 <img ID='82abeb5859f143a88b1f38a640f4fe57' Name="Access Chinese version" Src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFqSURBVHjaYrzOwPAPjJgYQEDAleHVbhADIvgHLPgHiQ0QQCxAlkR9NW8sw+cV/1gV/7Gb/hV4+vfzhj8Mv/78//Pn/+/f/8AkhH1t0yaAAAJp4I37zyz2lDfu79uqv/++/WYz+cuq/vvLxt8gdb+A5K9/v34B2SyyskBLAAII5JAva/7/+/z367a/f3/8ZuT9+//Pr78vQUrB6n4CSSj6/RuoASCAWEDO/fD3ddEfhv9/OE3/sKj8/n7k9/fDQNUIs/+DVf8HawAIIJCT/v38C3Hr95N/GDh/f94AVvT7N8RUBpjxQAVADQABBNLw/y/Ifwy/f/399ufTOpDBEPf8g5sN0QBEDAwAAQTWABEChgOSA9BVA00E2wAQQCANQBbEif/AzoCqgLkbbBYwWP/+//sXqBYggFhAkfL7D7OkJFCOCSj65zfUeFjwg8z++/ffX5AGoGKAAGI8jhSRyIw/SJH9D4aAYQoQYAA6rnMw1jU2vQAAAABJRU5ErkJggg=='/>
 </Imgs>
   <Txts ID="5e61a9b72ac79afb9570723d7e99b53d" Txt=" Intranet À propos de ce site Annuaire Colloquium InfosLIP6 WebMail Rapport dactivité "/>  </Block>
-  <Block Ref='Block1.1.1' leafblock='1' internal_id='STANDARD' ID='0527496ee02e8614ad09795964a472d2' Pos='WindowWidth||PageRectLeft:111.5 WindowHeight||PageRectTop:190 ObjectRectWidth:1024 ObjectRectHeight:22' Doc='' importance='38'>
+  <Block Ref='Block1.1.1' leafblock='1' internal_id='STANDARD' ID='0527496ee02e8614ad09795964a472d2' Pos='WindowWidth||PageRectLeft:121.5 WindowHeight||PageRectTop:190 ObjectRectWidth:1024 ObjectRectHeight:22' Doc='' importance='40'>
 <Links ID='e9b8791d7ef29f653f89540925e777d7' IDList='7efbbc234fb47474f0297a638133f8f0,f036d2012b0d6594ae3e09158fbbeea7,952bcb9836efa4c4af8eccd00109826b,72c9226bc1239ce803244f36c9f8bce4,9242f8ec323ac4119bbfe6c5bc6f19d1,0b109bf3bf342dd269079fbe6a29d938,22517a1d9999e9aa14a10e5ab664c9da'>
 <link ID='7efbbc234fb47474f0297a638133f8f0' Name="" Adr='mailto:wadm[@]lip6.fr'/>
 <link ID='f036d2012b0d6594ae3e09158fbbeea7' Name="" Adr='./apropos.php'/>
@@ -68,9 +68,15 @@
 <img ID='f8c6c38e0c7951989bbbdae4820f696d' Name="Direct Link" Src='./images/Glyphes.svg'/>
 </Imgs>
   <Txts ID="4388fe225890e3b2ff90ae417006a516" Txt=" LIP6 "/>  </Block>
-  <Block Ref='Block1.1.2' internal_id='STANDARD' ID='' Pos='WindowWidth||PageRectLeft:111.5 WindowHeight||PageRectTop:213 ObjectRectWidth:964 ObjectRectHeight:736' Doc=''>
-   <Block Ref='Block1.1.2.0' leafblock='1' internal_id='STANDARD' ID='b0161e14482b81121ccd78cbb87b1a11' Pos='WindowWidth||PageRectLeft:880.5 WindowHeight||PageRectTop:228 ObjectRectWidth:440 ObjectRectHeight:449' Doc='' importance='60'>
-<Links ID='b7907f07b5dd310224bac99635599c36' IDList='af566f084434befe5b37a244f5999f16,1657fe0ad48d6e78727ca2486b2ec1b7'>
+  <Block Ref='Block1.1.2' internal_id='STANDARD' ID='' Pos='WindowWidth||PageRectLeft:121.5 WindowHeight||PageRectTop:213 ObjectRectWidth:964 ObjectRectHeight:736' Doc=''>
+   <Block Ref='Block1.1.2.0' leafblock='1' internal_id='STANDARD' ID='3e0701047212a3b31df36cf2af3d7bad' Pos='WindowWidth||PageRectLeft:890.5 WindowHeight||PageRectTop:228 ObjectRectWidth:660 ObjectRectHeight:449' Doc='' importance='80'>
+<Links ID='04d027e0cb13469efe3d2789ba82197c' IDList='1d02905c2d7abd11fc5c7de9c54c2794,5ca9fce3f26f3722460b7e09a1394c78,b7bd0bedea747d17df9c5417c569922e,af566f084434befe5b37a244f5999f16,1657fe0ad48d6e78727ca2486b2ec1b7'>
+<link ID='1d02905c2d7abd11fc5c7de9c54c2794' Name="Une percée en mathématique rend caduques des procédures de chiffrement
+" Adr='actualite/information-fiche.php?ident=OL86'/>
+<link ID='5ca9fce3f26f3722460b7e09a1394c78' Name="
+Antoine Joux (prix Gödel 2013), chercheur au LIP6 à l&#39;honneur dans un article du Monde.
+" Adr='actualite/information-fiche.php?ident=OL86'/>
+<link ID='b7bd0bedea747d17df9c5417c569922e' Name="Le Monde Sciences" Adr='http://www.lemonde.fr/sciences/article/2014/05/13/une-percee-en-mathematique-rend-caduques-des-procedures-de-chiffrement_4415604_1650684.html?fb_action_ids=10152396986129921&amp;fb_action_types=og.recommends'/>
 <link ID='af566f084434befe5b37a244f5999f16' Name="Colloquium d&#39;Informatique
 Toward a Theory of Trust in Networks of Humans and Computers
 
@@ -80,18 +86,19 @@ Le 20 Mai 2014 à 18h00, Amphi 25" Adr='actualite/information-fiche.php?ident=OL
 Bonne nouvelle ! Le site Web du LIP6 a été classé sixième parmi 649 sites des labo­ratoires du CNRS et se situe en troisième place des labo­ratoires d&#39;informatique.
 " Adr='actualite/information-fiche.php?ident=OL84'/>
 </Links>
-   <Imgs ID='52b427f7d48a6913985cb09a24e30030' IDList='c323bf5c22493f25b3c02fca7ae60ef1,c3e95d49eb4aa16c9d0fc0f866bae022'>
+   <Imgs ID='27498feed03ddcb4c2275935e6b2072c' IDList='1716c9c5966a6ddf00f606a5c64a1a2f,c323bf5c22493f25b3c02fca7ae60ef1,c3e95d49eb4aa16c9d0fc0f866bae022'>
+<img ID='1716c9c5966a6ddf00f606a5c64a1a2f' Name="Une percée en mathématique rend caduques des procédures de chiffrement" Src='actualite/images/OL86.jpg'/>
 <img ID='c323bf5c22493f25b3c02fca7ae60ef1' Name="Colloquium d&#39;Informatique" Src='actualite/images/OL85.jpg'/>
 <img ID='c3e95d49eb4aa16c9d0fc0f866bae022' Name="Le site web du LIP6 dans les premiers du classement du CNRS" Src='actualite/images/OL84.jpg'/>
 </Imgs>
-   <Txts ID="4e5b8f528b41149a61e7917d075ba31c" Txt=" Colloquium dInformatique Toward a Theory of Trust in Networks of Humans and Computers Jeannette Wing, Corporate Vice President, Microsoft Research Le 20 Mai 2014 à 18h00, Amphi 25 Le site web du LIP6 dans les premiers du classement du CNRS Bonne nouvelle ! Le site Web du LIP6 a été classé sixième parmi 649 sites des labo­ratoires du CNRS et se situe en troisième place des labo­ratoires dinformatique. "/>   </Block>
-   <Block Ref='Block1.1.2.1' leafblock='1' internal_id='STANDARD' ID='5995b0403922bf7e6ab6d18507b96ab8' Pos='WindowWidth||PageRectLeft:141.5 WindowHeight||PageRectTop:223 ObjectRectWidth:964 ObjectRectHeight:73' Doc='' importance='40'>
+   <Txts ID="4aee75c0d8c1e111066916c907f081e9" Txt=" Une percée en mathématique rend caduques des procédures de chiffrement Antoine Joux (prix Gödel 2013), chercheur au LIP6 à lhonneur dans un article du Monde. Le Monde Sciences Colloquium dInformatique Toward a Theory of Trust in Networks of Humans and Computers Jeannette Wing, Corporate Vice President, Microsoft Research Le 20 Mai 2014 à 18h00, Amphi 25 Le site web du LIP6 dans les premiers du classement du CNRS Bonne nouvelle ! Le site Web du LIP6 a été classé sixième parmi 649 sites des labo­ratoires du CNRS et se situe en troisième place des labo­ratoires dinformatique. "/>   </Block>
+   <Block Ref='Block1.1.2.1' leafblock='1' internal_id='STANDARD' ID='5995b0403922bf7e6ab6d18507b96ab8' Pos='WindowWidth||PageRectLeft:151.5 WindowHeight||PageRectTop:223 ObjectRectWidth:964 ObjectRectHeight:73' Doc='' importance='40'>
 <Links ID='7fc4aed89bfd2b52927ab5aa8163adbd' IDList=''>
 </Links>
    <Imgs ID='6706740c33a3290ea418d8dae0c540a2' IDList=''>
 </Imgs>
    <Txts ID="87bbd074cc2ce487a7771cbfabef2fe0" Txt="Le LIP6 est un laboratoire de recherche en informatique sous tutelle de lUniversité Pierre &amp;amp; Marie Curie, et du CNRS (UMR 7606). Avec 190 chercheurs permanents et 217 doctorants, il est l&#39;un des principaux laboratoires de recherche en informatique en France. Le laboratoire couvre un large spectre dactivités regroupées au sein de 6 départements :"/>   </Block>
-   <Block Ref='Block1.1.2.2' leafblock='1' internal_id='STANDARD' ID='738958b2245435091825d01164ef8e07' Pos='WindowWidth||PageRectLeft:141.5 WindowHeight||PageRectTop:304.3999938964844 ObjectRectWidth:964 ObjectRectHeight:135' Doc='' importance='80'>
+   <Block Ref='Block1.1.2.2' leafblock='1' internal_id='STANDARD' ID='738958b2245435091825d01164ef8e07' Pos='WindowWidth||PageRectLeft:151.5 WindowHeight||PageRectTop:304.3999938964844 ObjectRectWidth:964 ObjectRectHeight:135' Doc='' importance='80'>
 <Links ID='1dd2351829e41354b2c4755e223e5e59' IDList='51cd99d7986f3e5268308ea3d47365e5,f3edfa1a8bafd3d84b9ca7d2255af4bf,feaff40d4cefe8015272c0945b849080,46775e8049077685bc108ced2ee1857b,0357e50f6e3ba6b5192ef9747b727afe,b8329e3b38203a4079114357a30f66bc'>
 <link ID='51cd99d7986f3e5268308ea3d47365e5' Name="Calcul Scientifique" Adr='recherche/team.php?id=100'/>
 <link ID='f3edfa1a8bafd3d84b9ca7d2255af4bf' Name="DEcision, Systèmes Intelligents Recherche opérationnelle" Adr='recherche/team.php?id=300'/>
@@ -103,19 +110,19 @@ Bonne nouvelle ! Le site Web du LIP6 a été classé sixième parmi 649 sites d
    <Imgs ID='6706740c33a3290ea418d8dae0c540a2' IDList=''>
 </Imgs>
    <Txts ID="b114651dfee5a73d5ffaefc45853e78e" Txt=" Calcul Scientifique Département « » DEcision, Systèmes Intelligents Recherche opérationnelle Département « » Données et Apprentissage Artificiel Département « » Réseaux et Systèmes Département « » Systèmes Complexes Département « » Systèmes Embarqués sur Puce Département « » "/>   </Block>
-   <Block Ref='Block1.1.2.3' leafblock='1' internal_id='STANDARD' ID='7410779ced14caf1783999185e0d0304' Pos='WindowWidth||PageRectLeft:161.5 WindowHeight||PageRectTop:446.16668701171875 ObjectRectWidth:97 ObjectRectHeight:15' Doc='' importance='2'>
+   <Block Ref='Block1.1.2.3' leafblock='1' internal_id='STANDARD' ID='7410779ced14caf1783999185e0d0304' Pos='WindowWidth||PageRectLeft:171.5 WindowHeight||PageRectTop:446.16668701171875 ObjectRectWidth:97 ObjectRectHeight:15' Doc='' importance='4'>
 <Links ID='7fc4aed89bfd2b52927ab5aa8163adbd' IDList=''>
 </Links>
    <Imgs ID='6706740c33a3290ea418d8dae0c540a2' IDList=''>
 </Imgs>
    <Txts ID="f7a2315d1283c4501a83714528ef87dd" Txt="En savoir plus..."/>   </Block>
-   <Block Ref='Block1.1.2.4' leafblock='1' internal_id='STANDARD' ID='479fe3352e0fb6251dfefcf238f24f1a' Pos='WindowWidth||PageRectLeft:141.5 WindowHeight||PageRectTop:470.8500061035156 ObjectRectWidth:732 ObjectRectHeight:447' Doc='' importance='145'>
-<Links ID='3412de621155672aca6486a524b3a5c1' IDList='02782d11df3790a3909a7ca4ab54d3f6,93529e0d8d974e93893200761554b72a,86b27caf3bc06a9d471e6b34e55e7b2d,6cfc9aed82861fb811714457b7f37fe3,70befcb02ba13ba6331692ca169c58e6,80291cb9a1d721765bbada5739620d43,1a67b295fbcc31c9aa5ec56f654fca2f,3c3d63153e7a4d00dddac65d7a984703,6245a2ff355f8fba2871d0f5aef0e15f'>
+   <Block Ref='Block1.1.2.4' leafblock='1' internal_id='STANDARD' ID='517f2bca868c0d73dcb2ebb3298ac0be' Pos='WindowWidth||PageRectLeft:151.5 WindowHeight||PageRectTop:470.8500061035156 ObjectRectWidth:732 ObjectRectHeight:447' Doc='' importance='112'>
+<Links ID='f8c38bd2bf3149b938d23b5f9ee71416' IDList='02782d11df3790a3909a7ca4ab54d3f6,86b27caf3bc06a9d471e6b34e55e7b2d,6cfc9aed82861fb811714457b7f37fe3,70befcb02ba13ba6331692ca169c58e6,f0d1dade1d8dcca4ef45e749badad548,80291cb9a1d721765bbada5739620d43,1a67b295fbcc31c9aa5ec56f654fca2f,3c3d63153e7a4d00dddac65d7a984703,6245a2ff355f8fba2871d0f5aef0e15f'>
 <link ID='02782d11df3790a3909a7ca4ab54d3f6' Name="" Adr='http://www.lip6.fr/actualite/rss_news.php'/>
-<link ID='93529e0d8d974e93893200761554b72a' Name="On the minimal support codewords of linear codes over GF(q) and a note about IP equivalence classes " Adr='liens/organise-fiche.php?ident=O638'/>
 <link ID='86b27caf3bc06a9d471e6b34e55e7b2d' Name="Elastic and Fault-Tolerant Stream Processing in the Cloud" Adr='liens/organise-fiche.php?ident=O632'/>
 <link ID='6cfc9aed82861fb811714457b7f37fe3' Name="Collaborative activity in learning situations: forms and processes" Adr='liens/organise-fiche.php?ident=O625'/>
 <link ID='70befcb02ba13ba6331692ca169c58e6' Name="Coala : Co-evolution Assessment by a Likelihood-free Approach" Adr='liens/organise-fiche.php?ident=O637'/>
+<link ID='f0d1dade1d8dcca4ef45e749badad548' Name="In-Core Computation of Geometric Centralities with HyperBall: A Hundred Billion Nodes and Beyond" Adr='liens/organise-fiche.php?ident=O639'/>
 <link ID='80291cb9a1d721765bbada5739620d43' Name="Deepening Our Understanding of Social Media via Data Mining" Adr='liens/organise-fiche.php?ident=O634'/>
 <link ID='1a67b295fbcc31c9aa5ec56f654fca2f' Name="Classification non-supervisée recouvrante par k-moyennes revisité" Adr='liens/organise-fiche.php?ident=O631'/>
 <link ID='3c3d63153e7a4d00dddac65d7a984703' Name="Journées annuelles du GT VERIF, du GT RORWAL et workshop de clôture du projet ANR ImpRo" Adr='liens/organise-fiche.php?ident=O635'/>
@@ -124,8 +131,8 @@ Bonne nouvelle ! Le site Web du LIP6 a été classé sixième parmi 649 sites d
    <Imgs ID='07b05909242ec1b57fa4b08a9b288014' IDList='f0703af91d8ab29351c9bb079d507298'>
 <img ID='f0703af91d8ab29351c9bb079d507298' Name="RSS" Src='images/rss.svg'/>
 </Imgs>
-   <Txts ID="fc02448261b761b7a77b809665bb84c7" Txt=" Le LIP6 organise 15/05/2014 On the minimal support codewords of linear codes over GF(q) and a note about IP equivalence classes Marta Conde (Spanish National Research Council) 11h30 - Intervenant(s) : Horaire : 21/05/2014 Elastic and Fault-Tolerant Stream Processing in the Cloud Peter Pietzuch, Dept. of Computing, Imperial College London 14h30 - Intervenant(s) : Horaire : 22/05/2014 Collaborative activity in learning situations: forms and processes Michael Baker (CNRS) 10h - Intervenant(s) : Horaire : 22/05/2014 Coala : Co-evolution Assessment by a Likelihood-free Approach Catherine Matias (Laboratoire Stat &amp;amp; Génome, CNRS, Université dÉvry-Val d&#39;Essonne) 11h - Intervenant(s) : Horaire : 30/05/2014 Deepening Our Understanding of Social Media via Data Mining Huan Liu (Arizona State University) 11h - Intervenant(s) : Horaire : 05/06/2014 Classification non-supervisée recouvrante par k-moyennes revisité Guillaume Cleuziou (LIFO) 14h - Intervenant(s) : Horaire : 16/06/2014 Journées annuelles du GT VERIF, du GT RORWAL et workshop de clôture du projet ANR ImpRo - Toutes les actualités..."/>   </Block>
-   <Block Ref='Block1.1.2.5' leafblock='1' internal_id='STANDARD' ID='99fffc96cc6166ecbe8cefe96a2fce39' Pos='WindowWidth||PageRectLeft:1001.5 WindowHeight||PageRectTop:934.2166748046875 ObjectRectWidth:104 ObjectRectHeight:15' Doc='' importance='2'>
+   <Txts ID="4cb51369ad47605917ba84ce4e3b8c54" Txt=" Le LIP6 organise 21/05/2014 Elastic and Fault-Tolerant Stream Processing in the Cloud Peter Pietzuch, Dept. of Computing, Imperial College London 14h30 - Intervenant(s) : Horaire : 22/05/2014 Collaborative activity in learning situations: forms and processes Michael Baker (CNRS) 10h - Intervenant(s) : Horaire : 22/05/2014 Coala : Co-evolution Assessment by a Likelihood-free Approach Catherine Matias (Laboratoire Stat &amp;amp; Génome, CNRS, Université dÉvry-Val d&#39;Essonne) 11h - Intervenant(s) : Horaire : 28/05/2014 In-Core Computation of Geometric Centralities with HyperBall: A Hundred Billion Nodes and Beyond Sebastiano VIGNA (Università degli Studi di Milano) 11h - Intervenant(s) : Horaire : 30/05/2014 Deepening Our Understanding of Social Media via Data Mining Huan Liu (Arizona State University) 11h - Intervenant(s) : Horaire : 05/06/2014 Classification non-supervisée recouvrante par k-moyennes revisité Guillaume Cleuziou (LIFO) 14h - Intervenant(s) : Horaire : 16/06/2014 Journées annuelles du GT VERIF, du GT RORWAL et workshop de clôture du projet ANR ImpRo - Toutes les actualités..."/>   </Block>
+   <Block Ref='Block1.1.2.5' leafblock='1' internal_id='STANDARD' ID='99fffc96cc6166ecbe8cefe96a2fce39' Pos='WindowWidth||PageRectLeft:1011.5 WindowHeight||PageRectTop:934.2166748046875 ObjectRectWidth:104 ObjectRectHeight:15' Doc='' importance='2'>
 <Links ID='7fc4aed89bfd2b52927ab5aa8163adbd' IDList=''>
 </Links>
    <Imgs ID='6706740c33a3290ea418d8dae0c540a2' IDList=''>
@@ -133,7 +140,7 @@ Bonne nouvelle ! Le site Web du LIP6 a été classé sixième parmi 649 sites d
    <Txts ID="1919742e96ba2ac3eece178b9d246565" Txt="null wadm (at) lip6.fr"/>   </Block>
   </Block>
  </Block>
- <Block Ref='Block1.2' leafblock='1' internal_id='STANDARD' ID='9bf6e7bac0e2b2e905a259bf73fefa9d' Pos='WindowWidth||PageRectLeft:111.5 WindowHeight||PageRectTop:968.9000244140625 ObjectRectWidth:1024 ObjectRectHeight:51' Doc='' importance='8'>
+ <Block Ref='Block1.2' leafblock='1' internal_id='STANDARD' ID='9bf6e7bac0e2b2e905a259bf73fefa9d' Pos='WindowWidth||PageRectLeft:121.5 WindowHeight||PageRectTop:968.9000244140625 ObjectRectWidth:1024 ObjectRectHeight:51' Doc='' importance='16'>
 <Links ID='897961f630731e62905087293fc746e2' IDList='3e1b9c8a66f3ed7d29a1d2194069cc70'>
 <link ID='3e1b9c8a66f3ed7d29a1d2194069cc70' Name="Mentions légales" Adr='http://www.lip6.fr/legal'/>
 </Links>

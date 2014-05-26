@@ -25,17 +25,49 @@ var page; //page logical object
 
 var verbose = true; //for debugging. Write DIVS representing blocks  in live web page.
 var showGrid = false; //if true and verbose=true it allows to show the grid to compute importances
-/* ViXML generation functions */
+
+/*
+ * main function call to perform segmentation
+ * win: the browser window object, frame, etc.
+ * pac: parameter of granularity
+ * pdc: distance parameter of separation between blocks (used for merging)
+ * proclog: process logic structure. True for automatic segmentation
+ */ 
+function startSegmentation(win,pac,pdc,returnType) {	
+    contentWindow = win;
+    contentDocument = contentWindow.document;
+    ac = pac;
+    dc = pdc;
+    debug("Starting with AC:"+ac+", DC:"+dc+"px, return:"+returnType);
+    var root = contentDocument.getElementsByTagName('BODY')[0];
+    debug("Processing Content Structure");
+    processContentStructure(root,0);
+    debug("Processing Geometric Structure");
+    var georoot = processGeometricStructure(root,undefined);
+    debug("Pre-processing Logic Structure");
+    page = prepareLogicStructure(georoot);
+    debug("Processing Logic Structure");
+    //console.log(root,page)
+    processLogicStructure(page,0,1,undefined);
+    buildGrid();
+    processImportance(page);
+    //clearGrid();
+    if (returnType=="vixml")
+        return(getViXML());
+    else
+        return(getWPrima(page));
+}
+
 
 /* escape special characters from link title */
 function code(s) {
     var res="";
     if (!s) return "";
-    res = s.replace("&","&amp;");
-    res = res.replace("'","&#39;");
-    res = res.replace('"',"&quot;");
-    res = res.replace(">","&gt;");
-    res = res.replace("<","&lt;");
+    res = s.replace(/&/g,"&amp;");
+    res = res.replace(/'/g,"&#39;");
+    res = res.replace(/"/g,"&quot;");
+    res = res.replace(/>/g,"&gt;");
+    res = res.replace(/</g,"&lt;");
     return res;
 }
 
@@ -280,34 +312,7 @@ function debug(s) {
     console.log(s);
 } 
 
-/*
- * main function call to perform segmentation
- * win: the browser window object, frame, etc.
- * pac: parameter of granularity
- * pdc: distance parameter of separation between blocks (used for merging)
- * proclog: process logic structure. True for automatic segmentation
- */ 
-function startSegmentation(win,pac,pdc,proclog) {	
-		contentWindow = win;
-		contentDocument = contentWindow.document;
-		ac = pac;
-		dc = pdc;
-		debug("Starting with AC:"+ac+", DC:"+dc+"px, proclog:"+proclog);
-		var root = contentDocument.getElementsByTagName('BODY')[0];
-		debug("Processing Content Structure");
-		processContentStructure(root,0);
-		debug("Processing Geometric Structure");
-		var georoot = processGeometricStructure(root,undefined);
-		debug("Pre-processing Logic Structure");
-		page = prepareLogicStructure(georoot);
-		debug("Processing Logic Structure");
-		//console.log(root,page)
-		processLogicStructure(page,0,1,undefined);
-                buildGrid();
-                processImportance(page);
-                //clearGrid();
-                return(getViXML());
-}
+
 
 /*
  * used to send segmentation results to a remote server
@@ -570,6 +575,9 @@ function processContentStructure(element,level) {
 	if (isWS(element)) return(false);
 	if (isComment(element)) return(false);
 	if (isText(element)) {
+                if (element.parentElement.childElementCount==0) 
+                    return;
+                else {
 		var span = contentDocument.createElement("span");
 		span.setAttribute("class","bomwrapper");
 		var par = element.parentNode;
@@ -578,6 +586,7 @@ function processContentStructure(element,level) {
 		element = span;
 		element.setAttribute("bomtype","CONTENT");
 		return;
+                }
 	}
 
 	if (element.getAttribute("bomtype")) return(false);
@@ -644,7 +653,10 @@ function processGeometricStructure(element,parent) {
 		//SKIP IT DO NOT CREATE GEOMETRIC OBJECT
 		return;
 	}
-	var geo = createNewGeometricObject(element,parent);
+        var geo;
+        if (!isIgnored(element)) {
+            geo = createNewGeometricObject(element,parent);
+        }
 	
 	var k = 0;
 	for (var i=0; i<element.childNodes.length; i++) {
@@ -1140,33 +1152,38 @@ function logicalObject(obj) {
 		
 		if (verbose && !this.block) {
                     this.block = this.insertBlock();
-                    var g = this.dim.x+" "+this.dim.y+" "+this.dim.w+" "+this.dim.h;
-                    this.block.setAttribute("bomgeometry",g);
-                    this.block.setAttribute("bomtype",this.type);
-                    color=colors[this.type]; 
-                    this.block.setAttribute("style","border : 2px solid black;z-index: 10000;position:absolute;background-color:transparent;border-color:"+color+";color:black;font-weight:bold;opacity:1"); 
-                    this.block.style.left = this.dim.x+"px";
-                    this.block.style.top = this.dim.y+"px";
-                    this.block.style.width = this.dim.w+"px";
-                    this.block.style.height = this.dim.h+"px";
+//                    var g = this.dim.x+" "+this.dim.y+" "+this.dim.w+" "+this.dim.h;
+//                    this.block.setAttribute("bomgeometry",g);
+//                    this.block.setAttribute("bomtype",this.type);
+//                    color=colors[this.type]; 
+//                    this.block.setAttribute("style","border : 2px solid black;z-index: 10000;position:absolute;background-color:transparent;border-color:"+color+";color:black;font-weight:bold;opacity:1"); 
+//                    this.block.style.left = this.dim.x+"px";
+//                    this.block.style.top = this.dim.y+"px";
+//                    this.block.style.width = this.dim.w+"px";
+//                    this.block.style.height = this.dim.h+"px";
+                    this.updateBlock()
                 }
 		geo.visited = true;
-		var sfc;
+		var fc;
 		var bgc;
 		bgc = contentWindow.getComputedStyle(geo.element,null).getPropertyValue("background-color");
 		fc = parseInt(contentWindow.getComputedStyle(geo.element,null).getPropertyValue("font-size"));
-		if (bgc!="rgba(0, 0, 0, 0)") {
+		if (bgc!="rgba(0, 0, 0, 0)") { 
 			this.visualCuesPresent = true;
 		}
 
 		if (geo.element.parentNode) {
 			t=0
-			for (var k=0;k<geo.element.parentNode.children.length;k++) {
-				if ( (geo.element.parentNode.children[k]!=geo) ) {
-					var sfc = parseInt(contentWindow.getComputedStyle(geo.element.parentNode.children[k],null).getPropertyValue("font-size")); 
-					if (2*sfc < fc) 
+                        var pre=$(geo.element).prev()[0];
+                        var nxt=$(geo.element).next()[0];
+                        if (nxt) {
+//			for (var k=0;k<geo.element.parentNode.children.length;k++) {
+//                               var gchild=geo.element.parentNode.children[k];
+//				if ( (gchild!=geo) ) {
+					var sfc = parseInt(contentWindow.getComputedStyle(nxt,null).getPropertyValue("font-size")); 
+					if ((sfc / fc) < 0.8) 
 						t++;
-				}
+//				}
 			}
 			if (t>0) 
 				this.visualCuesPresent = true;
@@ -1196,6 +1213,15 @@ function logicalObject(obj) {
                     this.hide();
                 }
 		this.block.innerHTML = "<span visited='true' class='bomauxtext' style='opacity:1;color:black;font-size:12pt'>"+this.id+" - "+aaa + imp+"</span>";
+                var g = this.dim.x+" "+this.dim.y+" "+this.dim.w+" "+this.dim.h;
+                this.block.setAttribute("bomgeometry",g);
+                this.block.setAttribute("bomtype",this.type);
+                color=colors[this.type]; 
+                this.block.setAttribute("style","border : 2px solid black;z-index: 10000;position:absolute;background-color:transparent;border-color:"+color+";color:black;font-weight:bold;opacity:1"); 
+                this.block.style.left = this.dim.x+"px";
+                this.block.style.top = this.dim.y+"px";
+                this.block.style.width = this.dim.w+"px";
+                this.block.style.height = this.dim.h+"px";
 	}
 	
 	this.setOn = function() {
@@ -1308,8 +1334,13 @@ function processImportance(block) {
 
 function buildGrid() {
     grid = new Grid(gridRows,gridCols);
-    grid.init(0);
-    grid.spiral(0,0,gridRows,gridCols,0);
+    grid.init(1);
+    var wheight=window.innerHeight || $(window).height();
+    var wwidth=window.innerWidth || $(window).width();
+    var visibleRow = grid.getRowFromGeometry(wheight);
+    var visibleCol = grid.getColFromGeometry(wwidth);
+    grid.fillVisiblePart(0,0,visibleRow,visibleCol,1);
+    //grid.fillRestOfPage(visibleRow,1);//gridRows-visibleRow
     if (verbose && showGrid) grid.draw();
 }
 
@@ -1325,30 +1356,44 @@ function Grid(rows,cols) {
     this.rows = rows;
     this.cols = cols;
     this.data = [];
-    this.width = documentDim().w;
-    this.height = documentDim().h;
+    this.width = $(document).width();//documentDim().w;
+    this.height = $(document).height(); //documentDim().h;
     this.gapRows = this.height / this.rows;
     this.gapCols = this.width / this.cols;
     
+    this.getRowFromGeometry = function(value) {
+       return parseInt(value / this.gapRows);
+    }
+    
+    this.getColFromGeometry = function(value) {
+        return parseInt(value / this.gapCols);
+    }
     
     this.init = function(initvalue) {
         for (var i=0;i<this.rows;i++) {
             var row = [];
             for (var j=0;j<this.cols;j++) {
                 row.push(initvalue);
-//                initvalue++;
             }
             this.data.push(row);
         }
     }
     
-    this.spiral = function(row,col,n,m,value) {
+    this.fillRestOfPage = function(startRow,startValue) {
+        for(var i=startRow;i<this.rows;i++) {
+            for (var j=0;j<this.cols;j++) {
+                this.set(i,j,startValue)
+            }
+            //startValue--;
+        }
+    }
+    
+    this.fillVisiblePart = function(row,col,n,m,value) {
         
         if ( row>=n || col>=m) {
             return;
         }
         
-        //ojo pongo cero pero es para probar, luego en la recursion actualizar los indices y limites.
         var rf = row;
         var rl = n;
         var cf = col;
@@ -1363,7 +1408,7 @@ function Grid(rows,cols) {
             this.set(rl-1,c,value);
         }
         
-        this.spiral(row+1,col+1,n-1,m-1,value+1);
+        this.fillVisiblePart(row+1,col+1,n-1,m-1,value+1);
     }
     
     this.get = function(i,j) {
@@ -1373,6 +1418,7 @@ function Grid(rows,cols) {
     this.set = function(i,j,value) {
         this.data[i][j] = value;
     }
+    
     this.drawHorizontalLine = function(x1,y1,width, color) {
           var id ='c_'+new Date().getTime() + (Math.floor((Math.random() * 1000) + 1));
           var line = "<div id='"+id+"'class='bomgrid_element'>&nbsp;</div>";
@@ -1460,4 +1506,46 @@ function Grid(rows,cols) {
        }
        return(acum);
     }
+}
+
+
+/****** building Wprima functions *******/
+function getWPrima(log) {
+    if (!log) return;
+    var prima = "";
+    var type;
+    if (log.terminal()) {type="BLOCK";} else {type="LAYOUTBLOCK";}
+    if (log.type == "PAGE") {
+        prima+="<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html><head></head><body>";
+        type="PAGE";
+    }
+    var css="";
+    for (var j=0;j<log.geometricObjects.length;j++) {
+            var geo = log.geometricObjects[j];
+            if (geo) {
+//                prima += "<!--"
+                var cs = getComputedStyle(geo.element);
+                for(var k=0;k<cs.length;k++) {
+                    var at = cs.item(k);
+                       css+=at+":"+cs.getPropertyValue(at)+";";
+                }
+//                prima+=" -->\n"
+                prima+=geo.element.outerHTML;
+            }
+        }
+    
+    prima += "<"+type+" style=\""+css+"\">\n";
+    if (!log.terminal()) {
+        for (var i=0;i<log.children.length;i++) {
+            var child = log.children[i];
+            if (child) {
+                prima+=getWPrima(child)
+            }
+        }
+    } 
+        
+    prima += "</"+type+">\n"
+    if (log.type == "PAGE") {prima+="</body><html>";}
+    
+    return(prima);
 }

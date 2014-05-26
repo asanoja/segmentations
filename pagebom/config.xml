@@ -46,7 +46,7 @@ All these values can be overriden by command line arguments. These are the defau
             <verbose>true</verbose>
             <default>
                 <parameter>
-                    <get>score</get>
+                    <get>segmentation</get>
                     <browser>firefox</browser>
                     <browser1>firefox</browser1>
                     <browser2>firefox</browser2>
@@ -94,7 +94,7 @@ All these values can be overriden by command line arguments. These are the defau
     </pagelyzer>
     <selenium>
         <run>
-            <mode>local</mode>     
+            <mode>remote</mode>     
         </run>
         <server>
             <url>http://localhost:8015/wd/hub</url>

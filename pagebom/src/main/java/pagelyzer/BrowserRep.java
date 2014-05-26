@@ -42,6 +42,7 @@ import com.opera.core.systems.OperaDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -127,6 +128,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
                 setJSDriver();
                 this.driver.manage().timeouts().pageLoadTimeout(MAX_WAIT_S, TimeUnit.SECONDS);
                 this.driver.manage().timeouts().implicitlyWait(MAX_WAIT_S, TimeUnit.SECONDS);
+                this.driver.manage().window().setSize(new Dimension(1280,960));
             }
             
             /**
@@ -140,6 +142,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
                 this.driver = new Augmenter().augment(this.driver);
                 this.driver.manage().timeouts().pageLoadTimeout(MAX_WAIT_S, TimeUnit.SECONDS);
                 this.driver.manage().timeouts().implicitlyWait(MAX_WAIT_S, TimeUnit.SECONDS);
+                this.driver.manage().window().setSize(new Dimension(1280,960));
             }
             
             /**

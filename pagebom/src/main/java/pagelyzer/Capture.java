@@ -159,35 +159,7 @@ public class Capture {
         }
         
         
-//        private static String getStringFromInputStream(InputStream is) {
-//
-//		BufferedReader br = null;
-//		StringBuilder sb = new StringBuilder();
-// 
-//		String line;
-//		try {
-// 
-//			br = new BufferedReader(new InputStreamReader(is));
-//			while ((line = br.readLine()) != null) {
-//				sb.append(line);
-//			}
-// 
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (br != null) {
-//				try {
-//					br.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-// 
-//		return sb.toString();
-// 
-//	}
-        
+      
         /**
          * Execute a capture from a current browser instance.
         * This function is a adaptation from the getScreenShotWithTimeout() method from BrowserShot_mapred proyect
@@ -248,7 +220,7 @@ public class Capture {
                     String bomversion = (String) this.browser.js.executeScript("return bomversion");
                    
                     System.out.println("Using BoM algorithm v"+bomversion + " pAC=" + config.getString("bom.granularity"));
-                    result.viXML = (String) this.browser.js.executeScript("return startSegmentation(window," + config.getString("bom.granularity") + "," + config.getString("bom.separation")+ ",false)");
+                    result.viXML = (String) this.browser.js.executeScript("return startSegmentation(window," + config.getString("bom.granularity") + "," + config.getString("bom.separation")+ ","+ config.getString("bom.returns")+")");
 
 
                     //result.viXML = (String) this.browser.js.executeScript("return startSegmentation(window," + Capture.granularity + ",50,false);");
