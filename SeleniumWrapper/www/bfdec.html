@@ -1,0 +1,1232 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="desktop-view not-mobile-device  js no-touch discourse-no-touch"><head><script src="http://community.sitepoint.com/javascripts/highlight.pack.js"></script><script src="http://community.sitepoint.com/javascripts/jquery.magnific-popup-min.js"></script>
+    <meta charset="utf-8" />
+    <title>Accessing and collecting post[] data from an array in PHP - The SitePoint Forums</title>
+    <meta name="description" content="I have a form like the one below which is posted to processForm.php, and the user can dynamically add more with jQuery. 
+
+&amp;lt;input type=&amp;quot;text&amp;quot; name=&amp;quot;subject[ ]&amp;quot; /&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot; name=&amp;quot;grade[ ]&amp;quot; /&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot; n&amp;hellip;" />
+    
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="" />
+    <meta name="generator" content="Discourse 1.1.0.beta2 - https://github.com/discourse/discourse version c9cf3003eb076c604ee1276ff03a8a83ea559899" />
+
+    <link rel="icon" type="image/png" href="http://www.sitepoint.com/favicon.ico" />
+    <link rel="apple-touch-icon" type="image/png" href="http://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/apple-touch-icon-144x144-precomposed.png" />
+
+    <link href="http://community.sitepoint.com/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" rel="canonical" />
+
+    
+
+
+<style>
+  @font-face {
+    font-family: 'FontAwesome';
+    src: url('http://sitepoint-discourse.global.ssl.fastly.net/assets/fontawesome-webfont-8b36645d1f4140ee7b1372d000f0cf45.eot?http://community.sitepoint.com&amp;amp;1&amp;v=4.0.4');
+    src: url('http://sitepoint-discourse.global.ssl.fastly.net/assets/fontawesome-webfont-8b36645d1f4140ee7b1372d000f0cf45.eot?http://community.sitepoint.com&amp;amp;1&amp;v=4.0.4#iefix') format('embedded-opentype'),
+      url('http://sitepoint-discourse.global.ssl.fastly.net/assets/fontawesome-webfont-d070152e08af8f018c788909bbcbafc0.woff?http://community.sitepoint.com&amp;amp;1&amp;v=4.0.4') format('woff'),
+      url('http://sitepoint-discourse.global.ssl.fastly.net/assets/fontawesome-webfont-837cb6609172c8e3f4240219b93dcdc7.ttf?http://community.sitepoint.com&amp;amp;1&amp;v=4.0.4') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+        font-family: 'zocial';
+        src: url('http://sitepoint-discourse.global.ssl.fastly.net/assets/zocial-regular-webfont-b21460bf44daf98b04c5339edbd9f462.woff?http://community.sitepoint.com&amp;amp;1') format('woff'),
+            url('http://sitepoint-discourse.global.ssl.fastly.net/assets/zocial-regular-webfont-2aac6a4951f536aa302b3bcdc3424499.ttf?http://community.sitepoint.com&amp;amp;1') format('truetype'),
+            url('http://sitepoint-discourse.global.ssl.fastly.net/assets/zocial-regular-webfont-fa3fc124d7d87fba0c66eebefb8495ba.svg?http://community.sitepoint.com&amp;amp;1#zocialregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+
+  }
+</style>
+
+      <link href="/uploads/stylesheet-cache/desktop_e562e85731e327842e823e1e142dde623237954b.css" media="all" rel="stylesheet" />
+
+
+  
+
+
+    
+
+
+    <meta name="fragment" content="!" />
+
+    <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="http://sitepoint-discourse.global.ssl.fastly.net/assets/preload_store-48dc8094f8aedcfa1c243aae5eff1400.js"></script>
+    <script src="http://sitepoint-discourse.global.ssl.fastly.net/assets/locales/en-8a3c5c22ca340566068ec88134a0735d.js"></script>
+    <script src="http://sitepoint-discourse.global.ssl.fastly.net/assets/vendor-e79862c12dae96912e251ccc2db43881.js"></script>
+    <script src="http://sitepoint-discourse.global.ssl.fastly.net/assets/application-bc1cdab985443c439f2f5360f67bea54.js"></script>
+
+    
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-30131-16', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+      <link href="http://community.sitepoint.com/t/accessing-and-collecting-post-data-from-an-array-in-php/96459.rss" rel="alternate" title="RSS feed of 'Accessing and collecting post[] data from an array in PHP'" type="application/rss+xml" />
+  <meta content="The SitePoint Forums" property="og:site_name" />
+<meta content="summary" name="twitter:card" /><meta content="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/45/2.png" property="og:image" />
+<meta content="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/45/2.png" name="twitter:image" />
+<meta content="http://community.sitepoint.com/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" property="og:url" />
+<meta content="http://community.sitepoint.com/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" name="twitter:url" />
+<meta content="Accessing and collecting post[] data from an array in PHP" property="og:title" />
+<meta content="Accessing and collecting post[] data from an array in PHP" name="twitter:title" />
+<meta content="I have a form like the one below which is posted to processForm.php, and the user can dynamically add more with jQuery.    &amp;lt;input type=&quot;text&quot; name=&quot;subject[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;grade[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;year[ ]&quot; /&amp;gt;    &amp;lt;input type=&quot;text&quot; name=&quot;subject[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;grade[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;year[ ]&quot; /&amp;gt;    &amp;lt;input type=&quot;text&quot; name=&quot;subject[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;grade[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;..." property="og:description" />
+<meta content="I have a form like the one below which is posted to processForm.php, and the user can dynamically add more with jQuery.    &amp;lt;input type=&quot;text&quot; name=&quot;subject[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;grade[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;year[ ]&quot; /&amp;gt;    &amp;lt;input type=&quot;text&quot; name=&quot;subject[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;grade[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;year[ ]&quot; /&amp;gt;    &amp;lt;input type=&quot;text&quot; name=&quot;subject[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;text&quot; name=&quot;grade[ ]&quot; /&amp;gt; &amp;lt;input type=&quot;..." name="twitter:description" />
+
+
+  <style>#wmd-preview img:not(.thumbnail), .cooked img:not(.thumbnail) {max-width:690px;max-height:500px;}</style><script type="text/javascript" id="bfinject1" src="http://localhost:8030/jquery-min.js"></script><script type="text/javascript" id="bfinject2" src="http://localhost:8030/bfdecorator.js"></script></head>
+
+  <body class="category-31 docked">
+    
+
+    <!--[if IE 9]><script type="text/javascript">ie = "new";</script><![endif]-->
+
+      <div class="top-crawler-links" geometry="0,0,146,19,3,5">
+  <a href="http://www.sitepoint.com" geometry="0,0,0,0,0,1">Articles</a>
+  <a href="https://learnable.com/topics/all/book" geometry="0,0,0,0,0,1">Books</a>
+  <a href="https://learnable.com/topics/all/course" geometry="0,0,0,0,0,1">Courses</a>
+  </div>
+
+    <section id="main" class="ember-application" geometry="0,0,999,2908,764,632">
+    <div id="ember1019" class="ember-view" geometry="0,0,999,2908,763,632"><header id="ember1127" class="ember-view d-header clearfix" geometry="0,0,999,60,98,61">
+
+<div class="container" geometry="10,3,979,60,97,61">
+  <div class="contents clearfix" geometry="10,13,979,40,96,61">
+
+    
+    <a class="logomark" href="/" tabindex="" geometry="10,24,151,25,21,28">
+      <!--<img src="http://www.sitepoint.com/wp-content/themes/sitepoint/assets/svg/sitepoint-forums.svg" alt="SitePoint Forums">-->
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150.518px" height="20px" viewBox="0 0 150.518 20" enable-background="new 0 0 150.518 20" xml:space="preserve" geometry="10,24,151,20,20,28">
+        <style geometry="0,0,0,0,0,28">
+          /* let's do the hover in SVG, so that we can still inline it and save HTTP requests */
+          svg &gt; * { /* path, rect, ellipse */
+            fill: #AEAEAE;
+          }
+
+          svg:hover &gt; * {
+            fill: #fff;
+          }
+        </style>
+        <path d="M23.191,12.352c0.147,0.23,0.341,0.416,0.579,0.553c0.239,0.137,0.51,0.232,0.812,0.293
+        c0.3,0.06,0.609,0.09,0.929,0.09c0.246,0,0.503-0.018,0.773-0.055c0.27-0.035,0.519-0.101,0.745-0.194
+        c0.229-0.095,0.414-0.233,0.562-0.419c0.146-0.184,0.221-0.419,0.221-0.705c0-0.391-0.152-0.688-0.46-0.891
+        c-0.307-0.201-0.689-0.364-1.15-0.49c-0.46-0.124-0.961-0.237-1.5-0.338C24.16,10.093,23.66,9.951,23.2,9.767
+        c-0.46-0.185-0.844-0.443-1.151-0.776c-0.307-0.332-0.46-0.794-0.46-1.389c0-0.463,0.106-0.861,0.321-1.193
+        c0.216-0.333,0.49-0.603,0.83-0.812c0.337-0.208,0.718-0.362,1.141-0.462c0.424-0.102,0.845-0.152,1.261-0.152
+        c0.541,0,1.038,0.044,1.492,0.134C27.088,5.205,27.49,5.36,27.84,5.58c0.351,0.219,0.629,0.516,0.838,0.89
+        c0.208,0.375,0.331,0.841,0.367,1.399h-1.564c-0.024-0.297-0.104-0.543-0.238-0.74c-0.136-0.197-0.308-0.353-0.517-0.473
+        c-0.208-0.118-0.438-0.204-0.689-0.257c-0.251-0.055-0.505-0.08-0.764-0.08c-0.232,0-0.471,0.017-0.709,0.053
+        C24.324,6.408,24.105,6.47,23.91,6.56c-0.197,0.088-0.356,0.208-0.479,0.355c-0.123,0.149-0.184,0.342-0.184,0.579
+        c0,0.262,0.095,0.479,0.285,0.651c0.189,0.173,0.433,0.315,0.727,0.428c0.295,0.113,0.626,0.208,0.995,0.285
+        c0.368,0.077,0.737,0.158,1.104,0.241c0.394,0.083,0.776,0.184,1.151,0.303c0.374,0.119,0.706,0.275,0.994,0.473
+        c0.289,0.196,0.521,0.443,0.699,0.74c0.179,0.297,0.268,0.664,0.268,1.105c0,0.559-0.12,1.021-0.36,1.389
+        c-0.238,0.369-0.552,0.666-0.938,0.892s-0.823,0.383-1.307,0.474c-0.484,0.088-0.968,0.133-1.445,0.133
+        c-0.528,0-1.031-0.053-1.509-0.159c-0.479-0.107-0.903-0.283-1.271-0.526c-0.369-0.244-0.664-0.562-0.885-0.963
+        c-0.221-0.396-0.344-0.883-0.368-1.452h1.565C22.963,11.838,23.043,12.12,23.191,12.352z" geometry="31.386659622192383,28.98307991027832,0,0,0,0"/>
+        <rect x="31.292" y="5.196" width="1.563" height="9.213" geometry="41.29150390625,29.196075439453125,0,0,0,0"/>
+        <path d="M39.357,5.196v1.336h-1.897v5.721c0,0.179,0.017,0.321,0.046,0.427c0.03,0.108,0.089,0.19,0.175,0.25
+        c0.086,0.062,0.206,0.098,0.359,0.116c0.152,0.017,0.354,0.026,0.599,0.026h0.718v1.337H38.16c-0.405,0-0.752-0.027-1.041-0.08
+        c-0.289-0.054-0.522-0.152-0.7-0.295c-0.178-0.144-0.312-0.345-0.396-0.604c-0.086-0.262-0.13-0.605-0.13-1.033V6.532h-1.619V5.196
+        h1.619V2.434h1.565v2.762H39.357z" geometry="44.27345657348633,26.434120178222656,0,0,0,0"/>
+        <path d="M47.825,13.82c-0.713,0.522-1.609,0.783-2.688,0.783c-0.761,0-1.42-0.117-1.978-0.355
+        c-0.56-0.237-1.029-0.568-1.409-0.997c-0.381-0.428-0.666-0.938-0.857-1.532c-0.189-0.595-0.297-1.242-0.322-1.944
+        c0-0.7,0.111-1.341,0.332-1.924c0.222-0.582,0.531-1.086,0.931-1.514c0.397-0.428,0.871-0.76,1.417-0.998
+        c0.546-0.237,1.145-0.356,1.795-0.356c0.847,0,1.549,0.169,2.107,0.508c0.559,0.338,1.007,0.769,1.345,1.292
+        c0.338,0.523,0.571,1.095,0.699,1.711c0.129,0.619,0.182,1.207,0.156,1.765h-7.125c-0.012,0.403,0.038,0.787,0.147,1.149
+        c0.109,0.361,0.288,0.684,0.533,0.962c0.245,0.28,0.559,0.502,0.938,0.669s0.829,0.249,1.344,0.249c0.663,0,1.207-0.149,1.63-0.445
+        c0.424-0.297,0.703-0.747,0.839-1.354h1.546C48.998,12.52,48.537,13.299,47.825,13.82z M47.447,7.904
+        c-0.14-0.32-0.33-0.596-0.569-0.828c-0.239-0.231-0.522-0.416-0.848-0.552c-0.324-0.137-0.684-0.205-1.077-0.205
+        c-0.405,0-0.771,0.068-1.095,0.205c-0.325,0.137-0.604,0.323-0.838,0.562c-0.232,0.237-0.417,0.513-0.552,0.829
+        c-0.136,0.314-0.216,0.65-0.24,1.006h5.468C47.671,8.564,47.588,8.226,47.447,7.904z" geometry="50.57036209106445,28.983078002929688,0,0,0,0"/>
+        <path d="M52.594,5.196v1.248h0.036c0.258-0.512,0.664-0.883,1.216-1.115c0.553-0.232,1.16-0.348,1.823-0.348
+        c0.735,0,1.378,0.131,1.924,0.392c0.545,0.261,1,0.615,1.361,1.06c0.361,0.446,0.636,0.959,0.818,1.542
+        c0.187,0.583,0.277,1.2,0.277,1.854c0,0.653-0.09,1.271-0.269,1.853s-0.447,1.09-0.81,1.523c-0.361,0.434-0.817,0.775-1.363,1.023
+        c-0.545,0.25-1.181,0.375-1.904,0.375c-0.233,0-0.494-0.023-0.783-0.07c-0.287-0.049-0.573-0.125-0.855-0.231
+        c-0.281-0.106-0.55-0.252-0.801-0.438c-0.251-0.185-0.463-0.412-0.636-0.687h-0.036v4.739h-1.564V5.196H52.594z M58.219,8.466
+        c-0.117-0.41-0.296-0.775-0.534-1.096c-0.24-0.321-0.546-0.576-0.921-0.767c-0.375-0.189-0.812-0.284-1.315-0.284
+        c-0.527,0-0.977,0.101-1.345,0.303c-0.369,0.202-0.669,0.466-0.901,0.792c-0.233,0.327-0.402,0.699-0.507,1.114
+        c-0.104,0.416-0.156,0.837-0.156,1.266c0,0.452,0.056,0.888,0.167,1.31c0.108,0.422,0.284,0.793,0.523,1.113s0.548,0.579,0.93,0.775
+        c0.381,0.195,0.841,0.294,1.381,0.294c0.539,0,0.99-0.103,1.354-0.304c0.363-0.2,0.654-0.469,0.874-0.801
+        c0.223-0.334,0.381-0.714,0.479-1.142c0.099-0.427,0.146-0.867,0.146-1.319C58.393,9.294,58.336,8.875,58.219,8.466z" geometry="61.027191162109375,28.9810791015625,0,0,0,0"/>
+        <path d="M61.67,7.914c0.197-0.588,0.491-1.099,0.884-1.533c0.393-0.433,0.876-0.774,1.456-1.025
+        c0.576-0.249,1.238-0.374,1.987-0.374c0.761,0,1.426,0.125,1.997,0.374c0.571,0.251,1.053,0.592,1.445,1.025
+        c0.393,0.435,0.688,0.945,0.884,1.533s0.295,1.22,0.295,1.896c0,0.678-0.099,1.308-0.295,1.89s-0.491,1.091-0.884,1.524
+        c-0.394,0.434-0.874,0.771-1.445,1.015c-0.571,0.243-1.236,0.364-1.997,0.364c-0.749,0-1.411-0.121-1.987-0.364
+        c-0.58-0.243-1.063-0.581-1.456-1.015c-0.393-0.435-0.687-0.942-0.884-1.524s-0.294-1.212-0.294-1.89
+        C61.376,9.134,61.473,8.502,61.67,7.914z M63.263,11.3c0.153,0.433,0.365,0.796,0.635,1.087c0.271,0.29,0.586,0.514,0.948,0.67
+        c0.362,0.151,0.747,0.229,1.151,0.229c0.403,0,0.788-0.078,1.149-0.229c0.363-0.156,0.68-0.38,0.947-0.67
+        c0.271-0.291,0.482-0.654,0.637-1.087c0.152-0.434,0.23-0.93,0.23-1.489c0-0.558-0.078-1.054-0.23-1.487
+        c-0.153-0.434-0.365-0.799-0.637-1.096c-0.269-0.296-0.584-0.523-0.947-0.678c-0.361-0.153-0.746-0.23-1.149-0.23
+        c-0.404,0-0.789,0.077-1.151,0.23c-0.362,0.155-0.678,0.381-0.948,0.678c-0.27,0.297-0.48,0.662-0.635,1.096
+        c-0.152,0.434-0.23,0.93-0.23,1.487C63.031,10.37,63.11,10.866,63.263,11.3z" geometry="71.37503051757812,28.982078552246094,0,0,0,0"/>
+        <rect x="72.551" y="5.196" width="1.566" height="9.213" geometry="82.54985809326172,29.196075439453125,0,0,0,0"/>
+        <path d="M78.02,5.196v1.46h0.036c0.651-1.116,1.682-1.675,3.094-1.675c0.626,0,1.148,0.084,1.563,0.25
+        c0.418,0.167,0.757,0.397,1.014,0.694c0.258,0.298,0.44,0.652,0.544,1.061c0.104,0.41,0.156,0.864,0.156,1.363v6.059h-1.564V8.172
+        c0-0.57-0.173-1.022-0.517-1.354S81.531,6.32,80.929,6.32c-0.479,0-0.893,0.07-1.243,0.213c-0.35,0.144-0.642,0.345-0.874,0.606
+        c-0.232,0.262-0.409,0.567-0.524,0.917c-0.115,0.351-0.176,0.733-0.176,1.15v5.203h-1.564V5.196H78.02z" geometry="86.54678344726562,28.9810791015625,0,0,0,0"/>
+        <path d="M90.852,5.196v1.336h-1.896v5.721c0,0.179,0.015,0.321,0.046,0.427c0.03,0.108,0.088,0.19,0.174,0.25
+        c0.086,0.062,0.208,0.098,0.36,0.116c0.151,0.017,0.353,0.026,0.598,0.026h0.718v1.337h-1.197c-0.403,0-0.751-0.027-1.039-0.08
+        c-0.288-0.054-0.521-0.152-0.699-0.295c-0.179-0.144-0.311-0.345-0.396-0.604c-0.086-0.262-0.129-0.605-0.129-1.033V6.532H85.77
+        V5.196h1.621V2.434h1.565v2.762H90.852z" geometry="95.76863861083984,26.434120178222656,0,0,0,0"/>
+        <path d="M0.406,8.728l1.442,1.401l4.565,4.26L8.38,12.49c0.18-0.247,0.168-0.583-0.038-0.817l-1.796-1.575
+        l0.006-0.001L4.616,8.219c-0.228-0.257-0.222-0.64,0.019-0.89l5.21-5.032L7.478,0L1.855,5.43L0.408,6.826
+        C-0.135,7.352-0.135,8.203,0.406,8.728z" geometry="9.865001678466797,24.000158309936523,0,0,0,0"/>
+        <path d="M15.947,11.162l-1.443-1.4L9.939,5.5L7.973,7.4c-0.18,0.246-0.168,0.582,0.038,0.816l1.796,1.576
+        L9.801,9.793l1.936,1.878c0.228,0.257,0.222,0.64-0.02,0.89l-5.21,5.031l2.368,2.299l5.622-5.432l1.446-1.396
+        C16.488,12.539,16.49,11.688,15.947,11.162z" geometry="16.50689697265625,29.500070571899414,0,0,0,0"/>
+        <ellipse cx="32.074" cy="3.316" rx="0.911" ry="0.882" geometry="41.16250991821289,26.434120178222656,0,0,0,0"/>
+        <ellipse cx="73.334" cy="3.316" rx="0.912" ry="0.882" geometry="82.42085266113281,26.434120178222656,0,0,0,0"/>
+        <path d="M97.351,14.396V7.208h-1.27V5.936h1.27V5.499c0-1.292,0.303-2.47,1.08-3.211
+        c0.625-0.608,1.459-0.854,2.218-0.854c0.606,0,1.099,0.133,1.421,0.266l-0.208,1.292c-0.266-0.114-0.588-0.209-1.081-0.209
+        c-1.402,0-1.781,1.254-1.781,2.66v0.494h2.218v1.273h-2.198v7.188H97.351z" geometry="106.07948303222656,25.43413543701172,0,0,0,0"/>
+        <path d="M112.528,8.071c0-1.083-0.019-2.014-0.076-2.869h1.46l0.075,1.805h0.058
+        c0.417-1.234,1.439-2.014,2.558-2.014c0.171,0,0.304,0.019,0.455,0.057v1.558c-0.189-0.019-0.36-0.038-0.587-0.038
+        c-1.176,0-2.009,0.893-2.236,2.127c-0.038,0.247-0.058,0.513-0.058,0.798v4.901h-1.667L112.528,8.071z" geometry="122.45022583007812,28.993080139160156,0,0,0,0"/>
+        <path d="M127.546,7.691c0-0.969-0.038-1.729-0.076-2.489h1.459l0.076,1.482h0.057
+        c0.512-0.874,1.364-1.691,2.899-1.691c1.232,0,2.18,0.76,2.578,1.843h0.037c0.284-0.532,0.664-0.912,1.043-1.197
+        c0.55-0.418,1.137-0.646,2.009-0.646c1.231,0,3.032,0.798,3.032,3.99v5.414h-1.63V9.192c0-1.786-0.663-2.831-1.99-2.831
+        c-0.967,0-1.687,0.703-1.989,1.5c-0.076,0.247-0.133,0.551-0.133,0.836v5.699h-1.63V8.888c0-1.482-0.645-2.526-1.914-2.526
+        c-1.023,0-1.801,0.836-2.066,1.671c-0.095,0.247-0.132,0.532-0.132,0.817v5.547h-1.63V7.691z" geometry="137.46798706054688,28.993078231811523,0,0,0,0"/>
+        <path d="M144.239,12.252c0.147,0.23,0.341,0.416,0.579,0.553c0.239,0.137,0.51,0.232,0.812,0.293
+        c0.3,0.06,0.609,0.09,0.929,0.09c0.246,0,0.503-0.018,0.773-0.055c0.27-0.035,0.519-0.101,0.745-0.194
+        c0.229-0.095,0.414-0.233,0.562-0.419c0.146-0.184,0.221-0.419,0.221-0.705c0-0.391-0.152-0.688-0.46-0.891
+        c-0.307-0.201-0.689-0.364-1.15-0.49c-0.46-0.124-0.961-0.237-1.5-0.339c-0.541-0.102-1.041-0.243-1.501-0.428
+        s-0.844-0.442-1.151-0.775c-0.307-0.332-0.46-0.794-0.46-1.389c0-0.463,0.106-0.861,0.321-1.193c0.216-0.333,0.49-0.603,0.83-0.812
+        c0.337-0.208,0.718-0.362,1.141-0.462c0.424-0.102,0.845-0.152,1.261-0.152c0.541,0,1.038,0.044,1.492,0.134
+        c0.454,0.088,0.856,0.243,1.206,0.463c0.351,0.219,0.629,0.516,0.838,0.89c0.208,0.375,0.331,0.841,0.367,1.399h-1.564
+        c-0.024-0.297-0.104-0.543-0.238-0.74c-0.136-0.197-0.308-0.353-0.517-0.473c-0.208-0.118-0.438-0.204-0.689-0.257
+        c-0.251-0.055-0.505-0.08-0.764-0.08c-0.232,0-0.471,0.017-0.709,0.053c-0.239,0.036-0.459,0.098-0.653,0.188
+        c-0.197,0.088-0.356,0.208-0.479,0.355c-0.123,0.149-0.184,0.342-0.184,0.579c0,0.262,0.095,0.479,0.285,0.651
+        c0.189,0.173,0.433,0.315,0.727,0.428c0.295,0.113,0.626,0.208,0.995,0.285c0.368,0.077,0.737,0.158,1.104,0.241
+        c0.394,0.083,0.776,0.184,1.151,0.302c0.374,0.119,0.706,0.275,0.994,0.474c0.289,0.196,0.521,0.442,0.699,0.74
+        c0.179,0.297,0.268,0.664,0.268,1.105c0,0.559-0.12,1.021-0.36,1.389c-0.238,0.369-0.552,0.666-0.938,0.892
+        s-0.823,0.383-1.307,0.474c-0.484,0.088-0.968,0.133-1.445,0.133c-0.528,0-1.031-0.053-1.509-0.159
+        c-0.479-0.107-0.903-0.283-1.271-0.526c-0.369-0.244-0.664-0.562-0.885-0.963c-0.221-0.396-0.344-0.883-0.368-1.452h1.565
+        C144.011,11.738,144.091,12.021,144.239,12.252z" geometry="152.43470764160156,28.884082794189453,0,0,0,0"/>
+        <path d="M102.364,7.816c0.197-0.588,0.491-1.099,0.884-1.533c0.393-0.433,0.876-0.774,1.456-1.025
+        c0.576-0.249,1.238-0.374,1.987-0.374c0.761,0,1.426,0.125,1.997,0.374c0.571,0.251,1.053,0.592,1.445,1.025
+        c0.393,0.435,0.688,0.945,0.884,1.533s0.295,1.22,0.295,1.896c0,0.678-0.099,1.308-0.295,1.89s-0.491,1.091-0.884,1.524
+        c-0.394,0.434-0.874,0.771-1.445,1.015c-0.571,0.243-1.236,0.364-1.997,0.364c-0.749,0-1.411-0.121-1.987-0.364
+        c-0.58-0.243-1.063-0.581-1.456-1.015c-0.393-0.435-0.687-0.942-0.884-1.524s-0.294-1.212-0.294-1.89
+        C102.07,9.036,102.166,8.404,102.364,7.816z M103.956,11.202c0.153,0.433,0.365,0.796,0.635,1.087
+        c0.271,0.29,0.586,0.514,0.948,0.67c0.362,0.151,0.747,0.229,1.151,0.229c0.403,0,0.788-0.078,1.149-0.229
+        c0.363-0.156,0.68-0.38,0.947-0.67c0.271-0.291,0.482-0.654,0.637-1.087c0.152-0.434,0.23-0.93,0.23-1.489
+        c0-0.558-0.078-1.054-0.23-1.487c-0.153-0.434-0.365-0.799-0.637-1.096c-0.269-0.296-0.584-0.523-0.947-0.678
+        c-0.361-0.153-0.746-0.23-1.149-0.23c-0.404,0-0.789,0.077-1.151,0.23c-0.362,0.155-0.678,0.381-0.948,0.678
+        c-0.27,0.297-0.48,0.662-0.635,1.096c-0.152,0.434-0.23,0.93-0.23,1.487C103.725,10.272,103.803,10.769,103.956,11.202z" geometry="112.0683822631836,28.88408088684082,0,0,0,0"/>
+        <path d="M124.467,14.303v-1.461h-0.036c-0.651,1.115-1.682,1.676-3.094,1.676c-0.626,0-1.148-0.084-1.563-0.25
+        c-0.418-0.168-0.757-0.398-1.014-0.695c-0.258-0.297-0.44-0.652-0.544-1.061c-0.104-0.41-0.156-0.863-0.156-1.363V5.089h1.564v6.237
+        c0,0.57,0.173,1.021,0.517,1.354s0.814,0.498,1.417,0.498c0.479,0,0.893-0.07,1.243-0.213c0.35-0.145,0.642-0.346,0.874-0.605
+        c0.232-0.262,0.409-0.568,0.524-0.918c0.115-0.352,0.176-0.732,0.176-1.15V5.088h1.564v9.214H124.467z" geometry="128.05813598632812,29.088077545166016,0,0,0,0"/>
+      </svg>
+    </a>
+
+    <div class="panel clearfix" geometry="828,13,161,40,65,32">
+      <script id="metamorph-0-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+        <button data-ember-action="1" class="btn btn-primary btn-small login-button" geometry="835,20,49,16,1,4">
+          <i class="fa fa-user" geometry="845,28,9,12,0,0"></i> Log In
+        </button>
+      <script id="metamorph-0-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+      <ul class="icons clearfix" role="navigation" geometry="909,13,80,40,18,15">
+        <script id="metamorph-1-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-1-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+        <li geometry="909,13,40,40,5,8">
+          <script id="metamorph-2-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+            <a id="search-button" class="icon expand" href="#" data-dropdown="search-dropdown" title="search topics, posts, users, or categories" geometry="909,13,32,32,2,8">
+               <i class="fa fa-search" aria-hidden="true" geometry="913,17,32,32,0,0"></i><span class="sr-only" geometry="944,16,1,1,0,6">search topics, posts, users, or categories</span>
+            </a>
+          <script id="metamorph-2-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+        </li>
+        <li class="categories dropdown" geometry="949,13,40,40,7,9">
+          <script id="metamorph-3-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+            <a class="icon" data-dropdown="site-map-dropdown" data-render="renderSiteMap" href="#" title="go to another topic list or category" id="site-map" geometry="949,13,32,32,2,9">
+               <i class="fa fa-bars" aria-hidden="true" geometry="953,17,32,32,0,0"></i><span class="sr-only" geometry="984,16,1,1,0,7">go to another topic list or category</span>
+            </a>
+          <script id="metamorph-3-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          <script id="metamorph-4-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-4-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+        </li>
+        <script id="metamorph-5-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-5-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+      </ul>
+
+      <div id="search-dropdown" class="ember-view d-dropdown" style="display: none;" geometry="0,0,540,69,14,5"><input id="search-term" class="ember-view ember-text-field" placeholder="search topics, posts, users, or categories" type="text" geometry="0,0,93,22,0,0" />
+<script id="metamorph-6-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<div class="search-context" geometry="0,0,0,0,4,5">
+  <label geometry="0,0,0,0,3,5">
+  <input id="ember1168" class="ember-view ember-checkbox" type="checkbox" name="searchContext" geometry="0,0,13,13,0,0" /> <script id="metamorph-7-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>Search this topic<script id="metamorph-7-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  </label>
+</div>
+<script id="metamorph-6-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<script id="metamorph-8-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <script id="metamorph-9-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+    <script id="metamorph-10-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-10-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <script id="metamorph-9-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<script id="metamorph-8-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div>
+
+      <script id="metamorph-11-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><section class="d-dropdown" id="notifications-dropdown" style="display: none;" geometry="0,0,320,29,5,8">
+  <script id="metamorph-12-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+    <script id="metamorph-13-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+      <div class="none" geometry="0,0,0,0,0,6">You have no notifications right now.</div>
+    <script id="metamorph-13-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <script id="metamorph-12-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</section>
+<script id="metamorph-11-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+      <script id="metamorph-14-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-14-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+      <script id="metamorph-15-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><section class="d-dropdown" id="user-dropdown" style="display: none;" geometry="0,0,118,128,14,8">
+  <ul class="user-dropdown-links" geometry="0,0,0,0,13,8">
+    <li geometry="0,0,0,0,1,1"><a id="ember1209" class="ember-view user-activity-link loading" href="#" geometry="0,0,0,0,0,1">Profile</a></li>
+    <li geometry="0,0,0,0,3,3">
+    <a id="ember1210" class="ember-view user-messages-link loading" href="#" geometry="0,0,0,0,2,3">
+      <script id="metamorph-16-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-16-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>Messages
+    </a>
+    </li>
+    <li geometry="0,0,0,0,1,1"><a id="ember1212" class="ember-view loading" href="#" geometry="0,0,0,0,0,1">Bookmarks</a></li>
+    <li geometry="0,0,0,0,1,1"><a id="ember1213" class="ember-view loading" href="#" geometry="0,0,0,0,0,1">Preferences</a></li>
+    <li geometry="0,0,0,0,2,2"><button data-ember-action="2" class="btn btn-danger right logout" geometry="0,0,0,0,1,2"><i class="fa fa-sign-out" geometry="0,0,0,0,0,0"></i>Log Out</button></li>
+  </ul>
+</section>
+<script id="metamorph-15-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+    </div>
+
+    <script id="metamorph-17-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+      <div class="header-links-wrapper clearfix" geometry="565,13,213,31,3,5">
+        <a class="header-link" href="http://www.sitepoint.com" tabindex="" geometry="565,24,48,19,0,1">Articles</a>
+        <a class="header-link" target="_blank" href="https://learnable.com/topics/all/book?utm_source=sitepoint&amp;utm_medium=link&amp;utm_content=top-nav" tabindex="" geometry="637,24,41,19,0,1">Books</a>
+        <a class="header-link" target="_blank" href="https://learnable.com/topics/all/course?utm_source=sitepoint&amp;utm_medium=link&amp;utm_content=top-nav" tabindex="" geometry="702,24,56,19,0,1">Courses</a>
+      </div>
+    <script id="metamorph-17-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+    <script id="metamorph-18-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-18-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+  </div>
+</div>
+</header>
+
+<div id="main-outlet" class="" data-bindattr-3="3" geometry="0,0,999,2826,621,548">
+  <script id="metamorph-19-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><div id="ember1064" class="ember-view regular category-php" geometry="0,82,999,2826,615,548"><div class="container" geometry="2,82,995,256,33,99">
+  
+  <div id="ember1230" class="ember-view" geometry="2,82,995,0,0,0"></div>
+  <div id="ember1237" class="ember-view" geometry="2,82,995,256,31,99"><script id="metamorph-20-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <div class="row" geometry="2,82,995,256,28,99">
+    <div id="banner" geometry="2,82,973,224,27,99">
+      <div id="banner-content" geometry="13,93,973,210,26,99">
+        <div class="close" data-ember-action="4" geometry="966,83,20,25,1,0"><i class="fa fa-times" title="Dismiss this banner." geometry="966,83,20,25,0,0"></i></div>
+        <script id="metamorph-21-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><h2 geometry="13,93,973,19,0,6">Welcome to The New SitePoint Forums.</h2>
+
+<hr geometry="13,126,973,1,0,0" />
+
+<h3 geometry="13,142,973,19,0,5">Some helpful posts to read.</h3>
+
+<ol geometry="38,161,948,76,12,53">
+<li geometry="38,161,948,19,2,16">
+<strong geometry="38,162,190,16,0,6">Where can I find the rules?</strong> Click the <a href="http://community.sitepoint.com/faq" geometry="290,162,29,16,0,1">FAQ</a> link in the top navigation bar. </li>
+<li geometry="38,180,948,19,2,15">
+<strong geometry="38,181,150,16,0,4">Where should I post?</strong> You'll find a document explaining all the categories and tags <a href="http://community.sitepoint.com/t/help-where-should-i-post-my-topic/794" geometry="573,181,29,16,0,1">here</a>.</li>
+<li geometry="38,199,948,19,2,14">
+<strong geometry="38,200,271,16,0,7">How do I [do something] in Discourse?</strong> Here is a handy <a href="http://community.sitepoint.com/t/discourse-cheat-sheet/733" geometry="416,200,146,16,0,3">Discourse Cheat Sheet</a>.</li>
+<li geometry="38,218,948,19,2,11">
+<strong geometry="38,219,162,16,0,4">What are Trust Levels?</strong> Here is <a href="http://community.sitepoint.com/t/documentation-an-explanation-of-trust-levels/724" geometry="252,219,190,16,0,5">an explanation of Trust Levels</a>.</li>
+</ol>
+
+<h3 geometry="13,246,973,19,0,4">More help and feedback</h3>
+
+<p geometry="13,265,973,38,4,33">If you have feedback, questions or concerns, please <a href="http://community.sitepoint.com/t/feedback-about-sitepoint-on-discourse/742" geometry="346,266,210,16,0,6">post them in this feedback thread</a>.<br geometry="0,0,0,0,0,0" />If you would like to contact our Community Manager personally, feel free to <a href="http://community.sitepoint.com/users/hawk/activity" geometry="486,285,151,16,0,4">send a private message</a> or <a href="mailto:hawk@sitepoint.com" geometry="658,285,53,16,0,2">an email</a>.</p><script id="metamorph-21-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+      </div>
+    </div>
+  </div>
+<script id="metamorph-20-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div>
+</div>
+
+<script id="metamorph-22-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+  <script id="metamorph-23-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+    <div id="topic-title" geometry="0,338,999,28,33,13">
+      <div class="container" geometry="2,352,995,28,32,13">
+        <div class="inner" geometry="2,352,995,28,31,13">
+
+          <script id="metamorph-24-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-24-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+          <script id="metamorph-25-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+            <h1 geometry="2,352,995,23,21,13">
+              <script id="metamorph-26-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                <span class="private-message-glyph" geometry="0,0,20,23,1,0"><i class="fa fa-envelope" geometry="0,0,0,0,0,0"></i></span>
+              <script id="metamorph-26-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+              <script id="metamorph-27-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                <script id="metamorph-28-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-28-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                <script id="metamorph-29-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="2,354,80,12,0,1">PHP</a><script id="metamorph-29-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+              <script id="metamorph-27-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+              <script id="metamorph-30-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                <div id="ember1253" class="ember-view topic-statuses" geometry="99,355,0,0,0,0"></div>
+                <a href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" data-ember-action="5" geometry="99,356,570,24,4,12">
+                  <script id="metamorph-31-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                    <script id="metamorph-32-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>Accessing and collecting post[] data from an array in PHP<script id="metamorph-32-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                  <script id="metamorph-31-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+                </a>
+              <script id="metamorph-30-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+
+              <script id="metamorph-33-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-33-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+            </h1>
+          <script id="metamorph-25-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          <div id="ember1264" class="ember-view" geometry="2,380,995,0,4,0"><script id="metamorph-34-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+    <script id="metamorph-35-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-35-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<script id="metamorph-34-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div>
+        </div>
+      </div>
+    </div>
+  <script id="metamorph-23-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+  <div class="container posts" geometry="2,408,995,2500,505,434">
+
+    <div id="selected-posts" class="ember-view hidden" geometry="0,0,200,77,19,8"><p geometry="0,0,0,0,2,5"><span id="ember1278" class="ember-view" geometry="0,0,0,0,1,5">You have selected <b geometry="0,0,0,0,0,1">0</b> posts.</span></p>
+
+<script id="metamorph-36-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <p geometry="0,0,0,0,1,2"><a href="#" data-ember-action="6" geometry="0,0,0,0,0,2">select all</a></p>
+<script id="metamorph-36-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<script id="metamorph-37-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-37-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<script id="metamorph-38-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-38-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<script id="metamorph-39-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-39-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<script id="metamorph-40-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-40-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<script id="metamorph-41-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-41-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<p class="cancel" geometry="0,0,0,0,1,2"><a href="#" data-ember-action="7" geometry="0,0,0,0,0,2">cancel selecting</a></p>
+</div>
+
+    <div class="row" geometry="2,408,995,2500,484,426">
+      <section class="topic-area" id="topic" data-topic-id="96459" geometry="2,408,995,2500,483,426">
+        <div class="posts-wrapper" geometry="2,408,995,2049,375,354">
+
+          <div id="topic-progress-wrapper" class="ember-view" geometry="499.5,616,0,34,14,4"><script id="metamorph-42-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-42-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<nav id="topic-progress" title="topic progress" class="" data-bindattr-8="8" geometry="844.5,616,145,34,11,4">
+  <div class="nums" geometry="844.5,625,145,19,8,4">
+    <h4 geometry="901.6799926757812,625,10,18,2,1"><script id="metamorph-43-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>1<script id="metamorph-43-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script></h4><span class="" data-bindattr-9="9" geometry="911,625,22,18,4,2"> <span geometry="915,625,5,18,0,1">/</span> <h4 geometry="923,625,10,18,2,1"><script id="metamorph-44-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>6<script id="metamorph-44-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script></h4></span>
+  </div>
+  <i class="fa fa-sort" data-bindattr-10="10" geometry="965.5,625,9,16,0,0"></i>
+  <div class="bg" style="border-right-width: 1px; width: 24.166666666666664px;" geometry="844.5,616,24,34,0,0"> </div>
+</nav>
+</div>
+
+          <script id="metamorph-45-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-45-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+          <script id="metamorph-46-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+            <div id="ember1300" class="ember-view" geometry="2,408,995,2049,353,352"><div id="post-cloak-1" class="ember-view post-cloak" geometry="2,408,995,484,87,89"><div id="ember1317" class="ember-view topic-post clearfix regular" geometry="2,408,994,484,86,89"><div id="ember1334" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+<div class="row" geometry="3,408,994,0,1,0">
+  <section id="ember1341" class="ember-view embedded-posts top topic-body offset2 hidden" geometry="0,0,701,0,0,0"></section>
+</div>
+
+<article class="boxed" id="post_1" data-bindattr-11="11" data-post-id="752506" data-bindattr-12="12" data-user-id="214748" geometry="3,408,994,484,81,89">
+  <div class="row" geometry="3,408,994,484,80,89">
+    
+    <div class="topic-avatar" geometry="3,408,45,45,3,0">
+      
+        <div class="contents topic-creator" data-bindattr-13="13" geometry="3,425,45,45,2,0">
+          <a id="ember1348" class="ember-view trigger-expansion main-avatar" href="/users/erabxes" geometry="3,438,45,16,1,0"><img width="45" height="45" src="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/45/2.png" class="avatar" title="erabxes" geometry="3,425,45,45,0,0" /></a>
+        </div>
+      
+      
+    </div>
+
+    <div class="topic-body" geometry="-7,408,915,442,74,89">
+      <div class="topic-meta-data" geometry="61,422,915,24,9,5">
+        <div id="ember1355" class="ember-view names trigger-expansion" geometry="61,422,184,24,3,2"><span class="username" geometry="61,422,57,19,1,1"><a href="/users/erabxes" data-auto-route="true" geometry="61,423,57,16,0,1">erabxes</a></span><span class="user-title" geometry="126,422,111,19,0,2">SitePoint Member</span></div>
+        <div class="post-info" geometry="928,423,48,19,2,3">
+          
+
+            <a class="post-date" href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" data-share-url="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" data-post-number="1" data-bindattr-14="14" geometry="928,424,48,16,1,3">
+              <span class="relative-date" title="September 8, 2014 2:51pm" data-time="1410180670000" data-format="tiny" geometry="928,424,24,16,0,1">15d</span>  #1
+            </a>
+
+          
+        </div>
+        
+        <div class="read-state read" data-bindattr-15="15" title="Post is unread" geometry="982,422,7,11,1,0"><i class="fa fa-circle" geometry="982,423,7,8,0,0"></i></div>
+      </div>
+
+      <div class="select-posts hidden" data-bindattr-16="16" geometry="0,0,152,22,2,5">
+        <button data-ember-action="17" class="" data-bindattr-18="18" geometry="0,0,0,0,0,2">select +replies</button>
+        <button data-ember-action="19" class="select-post" geometry="0,0,0,0,0,1">select</button>
+      </div>
+
+      <div class="bottom-round contents regular" data-bindattr-20="20" geometry="61,460,915,319,18,67">
+        <div class="cooked" geometry="61,460,915,265,11,66">
+          <p geometry="61,460,915,19,0,22">I have a form like the one below which is posted to processForm.php, and the user can dynamically add more with jQuery.</p>
+
+<p geometry="61,493,915,57,2,10">&lt;input type="text" name="subject[ ]" /&gt;<br geometry="0,0,0,0,0,0" />&lt;input type="text" name="grade[ ]" /&gt;<br geometry="0,0,0,0,0,0" />&lt;input type="text" name="year[ ]" /&gt;</p>
+
+<p geometry="61,564,915,57,2,10">&lt;input type="text" name="subject[ ]" /&gt;<br geometry="0,0,0,0,0,0" />&lt;input type="text" name="grade[ ]" /&gt;<br geometry="0,0,0,0,0,0" />&lt;input type="text" name="year[ ]" /&gt;</p>
+
+<p geometry="61,635,915,57,2,10">&lt;input type="text" name="subject[ ]" /&gt;<br geometry="0,0,0,0,0,0" />&lt;input type="text" name="grade[ ]" /&gt;<br geometry="0,0,0,0,0,0" />&lt;input type="text" name="year[ ]" /&gt;</p>
+
+<p geometry="61,706,915,19,0,16">Please How can i access those arrays from subject[], grade[] and year[] inputs by the user?</p>
+        </div>
+        
+        
+        <section id="ember1363" class="ember-view post-menu-area clearfix" geometry="61,745,915,34,5,1"><nav class="post-controls" geometry="61,745,915,34,4,1"><button class="show-replies btn" data-action="replies" geometry="61,745,74,18,2,1"><span class="badge-posts" geometry="76,753,9,18,0,1">1</span>Reply<i class="fa fa-caret-down" geometry="134,755,9,16,0,0"></i></button><div class="actions" geometry="976,745,0,0,0,0"></div></nav></section>
+      </div>
+      <section id="ember1381" class="ember-view embedded-posts bottom" geometry="61,778,915,0,0,0"></section>
+      <section id="ember1388" class="ember-view post-actions hidden" geometry="0,0,0,0,0,0"></section>
+      <div id="ember1397" class="ember-view topic-map" geometry="61,788,915,76,39,18"><div id="ember1400" class="ember-view" geometry="61,788,915,76,38,18"><nav class="buttons" geometry="931,810,30,33,2,0">
+  <button class="btn" data-ember-action="21" title="toggle topic details" geometry="931,810,10,32,1,0">
+    <i class="fa fa fa-chevron-down" data-bindattr-22="22" geometry="941,810,10,32,0,0"></i>
+  </button>
+</nav>
+
+<section class="map map-collapsed" data-bindattr-23="23" geometry="61,788,915,76,34,18">
+  <ul class="clearfix" geometry="61,788,915,76,33,18">
+    <li geometry="61,788,61,46,4,5">
+      <a href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459" geometry="76,803,0,0,3,5">
+      <h4 geometry="76,804,61,15,0,1">created</h4>
+      <img width="20" height="20" src="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/20/2.png" class="avatar" title="erabxes" geometry="76,829,20,20,0,0" />
+      <span class="relative-date date" title="September 8, 2014 2:51pm" data-time="1410180670000" data-format="medium" geometry="100,831,37,16,0,2">Sep 8</span>
+      </a>
+    </li>
+    <li geometry="152,788,69,46,4,6">
+      <a href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/6" data-bindattr-24="24" geometry="167,803,0,0,3,6">
+      <h4 geometry="167,804,69,15,0,2">last post</h4>
+      <img width="20" height="20" src="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/20/2.png" class="avatar" title="erabxes" geometry="167,829,20,20,0,0" />
+      <span class="relative-date date" title="September 12, 2014 4:31pm" data-time="1410532287259" data-format="medium" geometry="191,831,45,16,0,2">Sep 12</span>
+      </a>
+    </li>
+    <li geometry="251,788,35,46,3,4">
+      <span id="ember1407" class="ember-view posts heatmap-" title="This topic has 6 posts" geometry="279.5,805,9,16,1,1"><a href="" class="badge-posts heatmap-" geometry="279.5,805,9,16,0,1">6</a></span>
+      <h4 geometry="266,824,35,15,0,1">posts</h4>
+    </li>
+    <li class="secondary" geometry="316.40625,788,36,46,2,4">
+      <span class="number null" title="203" geometry="336.90625,805,25,16,0,1">203</span>
+      <h4 geometry="331.40625,824,35,15,0,1">views</h4>
+    </li>
+    <li class="secondary" geometry="381.8125,788,36,46,2,4">
+      <span class="number" title="3" geometry="410.8125,805,8,16,0,1">3</span>
+      <h4 geometry="396.8125,824,36,15,0,1">users</h4>
+    </li>
+    
+    
+    
+      <li class="avatars" data-bindattr-25="25" geometry="448.21875,788,126,30,12,5">
+        <div id="ember1414" class="ember-view" geometry="463.21875,810,42,32,3,3"><a href="#" class="poster" data-bindattr-26="26" data-ember-action="27" title="tpunt" geometry="499.21875,812,0,16,2,3">
+  
+    <span class="post-count" geometry="478.21875,813,6,14,0,1">2</span>
+  
+  <img width="32" height="32" src="http://sitepoint-discourse.global.ssl.fastly.net/user_avatar/community.sitepoint.com/tpunt/32/17685.png" class="avatar" title="tpunt" geometry="463.21875,810,32,32,0,0" />
+</a>
+</div><div id="ember1415" class="ember-view" geometry="505.21875,810,42,32,3,3"><a href="#" class="poster" data-bindattr-28="28" data-ember-action="29" title="erabxes" geometry="541.21875,812,0,16,2,3">
+  
+    <span class="post-count" geometry="520.21875,813,6,14,0,1">2</span>
+  
+  <img width="32" height="32" src="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/32/2.png" class="avatar" title="erabxes" geometry="505.21875,810,32,32,0,0" />
+</a>
+</div><div id="ember1416" class="ember-view" geometry="547.21875,810,42,32,3,3"><a href="#" class="poster" data-bindattr-30="30" data-ember-action="31" title="BlackScorp" geometry="583.21875,812,0,16,2,3">
+  
+    <span class="post-count" geometry="562.21875,813,6,14,0,1">2</span>
+  
+  <img width="32" height="32" src="http://sitepoint-discourse.global.ssl.fastly.net/user_avatar/community.sitepoint.com/blackscorp/32/17866.png" class="avatar" title="BlackScorp" geometry="547.21875,810,32,32,0,0" />
+</a>
+</div>
+      </li>
+    
+  </ul>
+</section>
+
+
+</div></div>
+    </div>
+
+    <div id="ember1423" class="ember-view gutter" geometry="3,892,237,0,0,0"></div>
+  </div>
+
+</article>
+
+<div id="ember1424" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+</div></div><div id="post-cloak-2" class="ember-view post-cloak" geometry="2,892,995,698,86,88"><div id="ember1319" class="ember-view topic-post clearfix regular" geometry="2,892,994,698,85,88"><div id="ember1425" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+<div class="row" geometry="3,892,994,0,1,0">
+  <section id="ember1426" class="ember-view embedded-posts top topic-body offset2 hidden" geometry="0,0,701,0,0,0"></section>
+</div>
+
+<article class="boxed" id="post_2" data-bindattr-32="32" data-post-id="753468" data-bindattr-33="33" data-user-id="161922" geometry="3,892,994,698,80,88">
+  <div class="row" geometry="3,892,994,698,79,88">
+    
+    <div class="topic-avatar" geometry="3,892,45,45,3,0">
+      
+        <div class="contents" data-bindattr-34="34" geometry="3,909,45,45,2,0">
+          <a id="ember1427" class="ember-view trigger-expansion main-avatar" href="/users/tpunt" geometry="3,922,45,16,1,0"><img width="45" height="45" src="http://sitepoint-discourse.global.ssl.fastly.net/user_avatar/community.sitepoint.com/tpunt/45/17685.png" class="avatar" title="tpunt" geometry="3,909,45,45,0,0" /></a>
+        </div>
+      
+      
+    </div>
+
+    <div class="topic-body" geometry="-7,892,915,656,73,88">
+      <div class="topic-meta-data" geometry="61,906,915,24,9,5">
+        <div id="ember1428" class="ember-view names trigger-expansion" geometry="61,906,179,24,3,2"><span class="username" geometry="61,906,37,19,1,1"><a href="/users/tpunt" data-auto-route="true" geometry="61,907,37,16,0,1">tpunt</a></span><span class="user-title" geometry="106,906,126,19,0,2">SitePoint Enthusiast</span></div>
+        <div class="post-info" geometry="928,907,48,19,2,3">
+          
+
+            <a class="post-date" href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/2" data-share-url="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/2" data-post-number="2" data-bindattr-35="35" geometry="928,908,48,16,1,3">
+              <span class="relative-date" title="September 8, 2014 4:50pm" data-time="1410187848000" data-format="tiny" geometry="928,908,24,16,0,1">15d</span>  #2
+            </a>
+
+          
+        </div>
+        
+        <div class="read-state read" data-bindattr-36="36" title="Post is unread" geometry="982,906,7,11,1,0"><i class="fa fa-circle" geometry="982,907,7,8,0,0"></i></div>
+      </div>
+
+      <div class="select-posts hidden" data-bindattr-37="37" geometry="0,0,49,22,2,5">
+        <button data-ember-action="38" class="hidden" data-bindattr-39="39" geometry="0,0,0,0,0,2">select +replies</button>
+        <button data-ember-action="40" class="select-post" geometry="0,0,0,0,0,1">select</button>
+      </div>
+
+      <div class="bottom-round contents regular" data-bindattr-41="41" geometry="61,944,915,619,56,82">
+        <div class="cooked" geometry="61,944,915,599,52,82">
+          <p geometry="61,944,915,38,0,28">The square brackets in PHP denote an array, and so when you perform a var_dump() upon the $_POST array, you'll get something like the following (with dummy data):</p>
+
+<p geometry="61,996,915,0,0,0"></p><pre geometry="61,996,915,514,42,37"><code class="lang-auto hljs php" geometry="63,996,897,500,41,37"><span class="hljs-keyword" geometry="70,1004,40,16,0,1">array</span>(<span class="hljs-number" geometry="118,1004,8,16,0,1">4</span>) {
+  [<span class="hljs-string" geometry="94,1023,72,16,0,1">"subject"</span>]=&gt;
+  <span class="hljs-keyword" geometry="86,1042,40,16,0,1">array</span>(<span class="hljs-number" geometry="134,1042,8,16,0,1">3</span>) {
+    [<span class="hljs-number" geometry="110,1061,8,16,0,1">0</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1080,8,16,0,1">1</span>) <span class="hljs-string" geometry="182,1080,24,16,0,1">"a"</span>
+    [<span class="hljs-number" geometry="110,1099,8,16,0,1">1</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1118,8,16,0,1">2</span>) <span class="hljs-string" geometry="182,1118,32,16,0,1">"aa"</span>
+    [<span class="hljs-number" geometry="110,1137,8,16,0,1">2</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1156,8,16,0,1">3</span>) <span class="hljs-string" geometry="182,1156,40,16,0,1">"aaa"</span>
+  }
+  [<span class="hljs-string" geometry="94,1194,56,16,0,1">"grade"</span>]=&gt;
+  <span class="hljs-keyword" geometry="86,1213,40,16,0,1">array</span>(<span class="hljs-number" geometry="134,1213,8,16,0,1">3</span>) {
+    [<span class="hljs-number" geometry="110,1232,8,16,0,1">0</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1251,8,16,0,1">1</span>) <span class="hljs-string" geometry="182,1251,24,16,0,1">"b"</span>
+    [<span class="hljs-number" geometry="110,1270,8,16,0,1">1</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1289,8,16,0,1">2</span>) <span class="hljs-string" geometry="182,1289,32,16,0,1">"bb"</span>
+    [<span class="hljs-number" geometry="110,1308,8,16,0,1">2</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1327,8,16,0,1">3</span>) <span class="hljs-string" geometry="182,1327,40,16,0,1">"bbb"</span>
+  }
+  [<span class="hljs-string" geometry="94,1365,48,16,0,1">"year"</span>]=&gt;
+  <span class="hljs-keyword" geometry="86,1384,40,16,0,1">array</span>(<span class="hljs-number" geometry="134,1384,8,16,0,1">3</span>) {
+    [<span class="hljs-number" geometry="110,1403,8,16,0,1">0</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1422,8,16,0,1">1</span>) <span class="hljs-string" geometry="182,1422,24,16,0,1">"c"</span>
+    [<span class="hljs-number" geometry="110,1441,8,16,0,1">1</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1460,8,16,0,1">2</span>) <span class="hljs-string" geometry="182,1460,32,16,0,1">"cc"</span>
+    [<span class="hljs-number" geometry="110,1479,8,16,0,1">2</span>]=&gt;
+    string(<span class="hljs-number" geometry="158,1498,8,16,0,1">3</span>) <span class="hljs-string" geometry="182,1498,40,16,0,1">"ccc"</span>
+  }
+  [<span class="hljs-string" geometry="94,1536,64,16,0,1">"submit"</span>]=&gt;
+  string(<span class="hljs-number" geometry="142,1555,8,16,0,1">6</span>) <span class="hljs-string" geometry="166,1555,64,16,0,1">"Submit"</span>
+}
+
+</code></pre>
+
+<p geometry="61,1524,915,19,6,17">This means you can access the <span class="bbcode-i" geometry="264,1525,45,16,0,1">subject</span>, <span class="bbcode-i" geometry="317,1525,37,16,0,1">grade</span>, and <span class="bbcode-i" geometry="390,1525,28,16,0,1">year</span> arrays via <span class="bbcode-b" geometry="488,1525,121,16,0,1">$_POST['subject']</span>, <span class="bbcode-b" geometry="617,1525,105,16,0,1">$_POST['grade'</span>], and <span class="bbcode-b" geometry="762,1525,99,16,0,1">$_POST['year']</span> respectively.</p>
+        </div>
+        
+        
+        <section id="ember1429" class="ember-view post-menu-area clearfix" geometry="61,1563,915,0,2,0"><nav class="post-controls" geometry="61,1563,915,0,1,0"><div class="actions" geometry="976,1563,0,0,0,0"></div></nav></section>
+      </div>
+      <section id="ember1437" class="ember-view embedded-posts bottom" geometry="61,1562,915,0,0,0"></section>
+      <section id="ember1438" class="ember-view post-actions hidden" geometry="0,0,0,0,0,0"></section>
+      <div id="ember1439" class="ember-view hidden topic-map" geometry="0,0,0,0,0,0"></div>
+    </div>
+
+    <div id="ember1440" class="ember-view gutter" geometry="3,1590,237,0,0,0"></div>
+  </div>
+
+</article>
+
+<div id="ember1441" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+</div></div><div id="post-cloak-3" class="ember-view post-cloak" geometry="2,1590,995,357,58,52"><div id="ember1321" class="ember-view topic-post clearfix regular" geometry="2,1590,994,357,57,52"><div id="ember1442" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+<div class="row" geometry="3,1590,994,0,1,0">
+  <section id="ember1443" class="ember-view embedded-posts top topic-body offset2 hidden" geometry="0,0,701,0,0,0"></section>
+</div>
+
+<article class="boxed" id="post_3" data-bindattr-42="42" data-post-id="755139" data-bindattr-43="43" data-user-id="215049" geometry="3,1590,994,357,52,52">
+  <div class="row" geometry="3,1590,994,357,51,52">
+    
+    <div class="topic-avatar" geometry="3,1590,45,45,3,0">
+      
+        <div class="contents" data-bindattr-44="44" geometry="3,1607,45,45,2,0">
+          <a id="ember1444" class="ember-view trigger-expansion main-avatar" href="/users/BlackScorp" geometry="3,1620,45,16,1,0"><img width="45" height="45" src="http://sitepoint-discourse.global.ssl.fastly.net/user_avatar/community.sitepoint.com/blackscorp/45/17866.png" class="avatar" title="BlackScorp" geometry="3,1607,45,45,0,0" /></a>
+        </div>
+      
+      
+    </div>
+
+    <div class="topic-body" geometry="-7,1590,915,315,45,52">
+      <div class="topic-meta-data" geometry="61,1604,915,24,8,4">
+        <div id="ember1445" class="ember-view names trigger-expansion" geometry="61,1604,87,24,2,1"><span class="username" geometry="61,1604,79,19,1,1"><a href="/users/BlackScorp" data-auto-route="true" geometry="61,1605,79,16,0,1">BlackScorp</a></span></div>
+        <div class="post-info" geometry="928,1605,48,19,2,3">
+          
+
+            <a class="post-date" href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/3" data-share-url="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/3" data-post-number="3" data-bindattr-45="45" geometry="928,1606,48,16,1,3">
+              <span class="relative-date" title="September 10, 2014 5:45pm" data-time="1410363922652" data-format="tiny" geometry="928,1606,24,16,0,1">13d</span>  #3
+            </a>
+
+          
+        </div>
+        
+        <div class="read-state read" data-bindattr-46="46" title="Post is unread" geometry="982,1604,7,11,1,0"><i class="fa fa-circle" geometry="982,1605,7,8,0,0"></i></div>
+      </div>
+
+      <div class="select-posts hidden" data-bindattr-47="47" geometry="0,0,152,22,2,5">
+        <button data-ember-action="48" class="" data-bindattr-49="49" geometry="0,0,0,0,0,2">select +replies</button>
+        <button data-ember-action="50" class="select-post" geometry="0,0,0,0,0,1">select</button>
+      </div>
+
+      <div class="bottom-round contents regular" data-bindattr-51="51" geometry="61,1642,915,278,29,47">
+        <div class="cooked" geometry="61,1642,915,258,25,47">
+          <aside class="quote" data-post="1" data-topic="96459" style="cursor: pointer;" geometry="61,1642,915,140,9,29"><div class="title" geometry="61,1642,886,19,4,2">
+<div class="quote-controls" geometry="935,1654,29,19,2,0"><i class="fa fa-chevron-down" title="expand/collapse" geometry="935,1656,8,14,0,0"></i><a href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/1" title="go to the quoted post" class="back" geometry="943,1655,21,16,0,0"></a></div>
+<img width="20" height="20" src="/letter_avatar/erabxes/40/2.png" class="avatar" geometry="78,1652,20,20,0,0" />erabxes said:</div>
+<blockquote geometry="61,1673,888,85,3,28">
+<p geometry="76,1685,888,19,0,10">&lt;input type="text" name="subject[ ]" /&gt;&lt;input type="text" name="grade[ ]" /&gt;&lt;input type="text" name="year[ ]" /&gt;</p>
+<p geometry="76,1718,888,19,0,10">&lt;input type="text" name="subject[ ]" /&gt;&lt;input type="text" name="grade[ ]" /&gt;&lt;input type="text" name="year[ ]" /&gt;</p>
+<p geometry="76,1751,888,19,0,10">&lt;input type="text" name="subject[ ]" /&gt;&lt;input type="text" name="grade[ ]" /&gt;&lt;input type="text" name="year[ ]" /&gt;</p>
+</blockquote></aside>
+
+<p geometry="61,1796,915,19,0,5">try to do something like</p>
+
+<pre geometry="61,1829,915,71,13,13"><code class=" hljs bash" geometry="63,1829,897,57,12,13">&lt;input <span class="hljs-built_in" geometry="126,1837,32,16,0,1">type</span>=<span class="hljs-string" geometry="166,1837,48,16,0,1">"text"</span> name=<span class="hljs-string" geometry="262,1837,232,16,1,3">"input[&lt;?= <span class="hljs-variable" geometry="350,1837,16,16,0,1">$i</span> ?&gt;]['subject']"</span>&gt;
+&lt;input <span class="hljs-built_in" geometry="126,1856,32,16,0,1">type</span>=<span class="hljs-string" geometry="166,1856,48,16,0,1">"text"</span> name=<span class="hljs-string" geometry="262,1856,216,16,1,3">"input[&lt;?= <span class="hljs-variable" geometry="350,1856,16,16,0,1">$i</span> ?&gt;]['grade']"</span>&gt;
+&lt;input <span class="hljs-built_in" geometry="126,1875,32,16,0,1">type</span>=<span class="hljs-string" geometry="166,1875,48,16,0,1">"text"</span> name=<span class="hljs-string" geometry="262,1875,208,16,1,3">"input[&lt;?= <span class="hljs-variable" geometry="350,1875,16,16,0,1">$i</span> ?&gt;]['year']"</span>&gt;</code></pre>
+        </div>
+        
+        
+        <section id="ember1446" class="ember-view post-menu-area clearfix" geometry="61,1920,915,0,2,0"><nav class="post-controls" geometry="61,1920,915,0,1,0"><div class="actions" geometry="976,1920,0,0,0,0"></div></nav></section>
+      </div>
+      <section id="ember1454" class="ember-view embedded-posts bottom" geometry="61,1919,915,0,0,0"></section>
+      <section id="ember1455" class="ember-view post-actions hidden" geometry="0,0,0,0,0,0"></section>
+      <div id="ember1456" class="ember-view hidden topic-map" geometry="0,0,0,0,0,0"></div>
+    </div>
+
+    <div id="ember1457" class="ember-view gutter" geometry="3,1947,237,0,0,0"></div>
+  </div>
+
+</article>
+
+<div id="ember1458" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+</div></div><div id="post-cloak-4" class="ember-view post-cloak" geometry="2,1947,995,274,46,92"><div id="ember1323" class="ember-view topic-post clearfix regular" geometry="2,1947,994,274,45,92"><div id="ember1459" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+<div class="row" geometry="3,1947,994,0,1,0">
+  <section id="ember1460" class="ember-view embedded-posts top topic-body offset2 hidden" geometry="0,0,701,0,0,0"></section>
+</div>
+
+<article class="boxed" id="post_4" data-bindattr-52="52" data-post-id="755209" data-bindattr-53="53" data-user-id="161922" geometry="3,1947,994,274,40,92">
+  <div class="row" geometry="3,1947,994,274,39,92">
+    
+    <div class="topic-avatar" geometry="3,1947,45,45,3,0">
+      
+        <div class="contents" data-bindattr-54="54" geometry="3,1964,45,45,2,0">
+          <a id="ember1461" class="ember-view trigger-expansion main-avatar" href="/users/tpunt" geometry="3,1977,45,16,1,0"><img width="45" height="45" src="http://sitepoint-discourse.global.ssl.fastly.net/user_avatar/community.sitepoint.com/tpunt/45/17685.png" class="avatar" title="tpunt" geometry="3,1964,45,45,0,0" /></a>
+        </div>
+      
+      
+    </div>
+
+    <div class="topic-body" geometry="-7,1947,915,232,33,92">
+      <div class="topic-meta-data" geometry="61,1961,915,24,9,5">
+        <div id="ember1462" class="ember-view names trigger-expansion" geometry="61,1961,179,24,3,2"><span class="username" geometry="61,1961,37,19,1,1"><a href="/users/tpunt" data-auto-route="true" geometry="61,1962,37,16,0,1">tpunt</a></span><span class="user-title" geometry="106,1961,126,19,0,2">SitePoint Enthusiast</span></div>
+        <div class="post-info" geometry="928,1962,48,19,2,3">
+          
+
+            <a class="post-date" href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/4" data-share-url="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/4" data-post-number="4" data-bindattr-55="55" geometry="928,1963,48,16,1,3">
+              <span class="relative-date" title="September 10, 2014 7:51pm" data-time="1410371464012" data-format="tiny" geometry="928,1963,24,16,0,1">13d</span>  #4
+            </a>
+
+          
+        </div>
+        
+        <div class="read-state read" data-bindattr-56="56" title="Post is unread" geometry="982,1961,7,11,1,0"><i class="fa fa-circle" geometry="982,1962,7,8,0,0"></i></div>
+      </div>
+
+      <div class="select-posts hidden" data-bindattr-57="57" geometry="0,0,152,22,2,5">
+        <button data-ember-action="58" class="" data-bindattr-59="59" geometry="0,0,0,0,0,2">select +replies</button>
+        <button data-ember-action="60" class="select-post" geometry="0,0,0,0,0,1">select</button>
+      </div>
+
+      <div class="bottom-round contents regular" data-bindattr-61="61" geometry="61,1999,915,195,16,86">
+        <div class="cooked" geometry="61,1999,915,175,12,86">
+          <p geometry="61,1999,915,57,2,71">Using iteration to output the required input boxes would reduce OP's repetition. Though you need to switch your two square brackets around in order to get the same POST data format as in the original post. I'd also advise <strong geometry="555,2019,51,16,0,1">against</strong> quoting keys in HTML, because when dealing with this data in the $_POST array, you must also remember to put quotes onto the array keys (since it's part of their name):<br geometry="0,0,0,0,0,0" /></p>
+
+<p geometry="61,2070,915,0,0,0"></p><pre geometry="61,2070,915,71,6,2"><code class="lang-auto hljs bash" geometry="63,2070,897,57,5,2"><span class="hljs-variable" geometry="70,2078,48,16,0,1">$_POST</span>[<span class="hljs-string" geometry="126,2078,24,16,0,1">'\'</span>subject\<span class="hljs-string" geometry="214,2078,16,16,0,1">''</span>]
+// or
+<span class="hljs-variable" geometry="70,2116,48,16,0,1">$_POST</span>[<span class="hljs-string" geometry="126,2116,88,16,0,1">"'subject'"</span>]</code></pre>
+
+<p geometry="61,2155,915,19,0,13">That also reduces legibility and is just a pain in general to handle.</p>
+        </div>
+        
+        
+        <section id="ember1463" class="ember-view post-menu-area clearfix" geometry="61,2194,915,0,2,0"><nav class="post-controls" geometry="61,2194,915,0,1,0"><div class="actions" geometry="976,2194,0,0,0,0"></div></nav></section>
+      </div>
+      <section id="ember1471" class="ember-view embedded-posts bottom" geometry="61,2193,915,0,0,0"></section>
+      <section id="ember1472" class="ember-view post-actions hidden" geometry="0,0,0,0,0,0"></section>
+      <div id="ember1473" class="ember-view hidden topic-map" geometry="0,0,0,0,0,0"></div>
+    </div>
+
+    <div id="ember1474" class="ember-view gutter" geometry="3,2221,237,0,0,0"></div>
+  </div>
+
+</article>
+
+<div id="ember1475" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+</div></div><div id="post-cloak-5" class="ember-view post-cloak" geometry="2,2221,995,118,35,20"><div id="ember1325" class="ember-view topic-post clearfix regular" geometry="2,2221,994,118,34,20"><div id="ember1476" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+<div class="row" geometry="3,2221,994,0,1,0">
+  <section id="ember1477" class="ember-view embedded-posts top topic-body offset2 hidden" geometry="0,0,701,0,0,0"></section>
+</div>
+
+<article class="boxed" id="post_5" data-bindattr-62="62" data-post-id="755251" data-bindattr-63="63" data-user-id="215049" geometry="3,2221,994,118,29,20">
+  <div class="row" geometry="3,2221,994,118,28,20">
+    
+    <div class="topic-avatar" geometry="3,2221,45,45,3,0">
+      
+        <div class="contents" data-bindattr-64="64" geometry="3,2238,45,45,2,0">
+          <a id="ember1478" class="ember-view trigger-expansion main-avatar" href="/users/BlackScorp" geometry="3,2251,45,16,1,0"><img width="45" height="45" src="http://sitepoint-discourse.global.ssl.fastly.net/user_avatar/community.sitepoint.com/blackscorp/45/17866.png" class="avatar" title="BlackScorp" geometry="3,2238,45,45,0,0" /></a>
+        </div>
+      
+      
+    </div>
+
+    <div class="topic-body" geometry="-7,2221,915,76,22,20">
+      <div class="topic-meta-data" geometry="61,2235,915,24,8,4">
+        <div id="ember1479" class="ember-view names trigger-expansion" geometry="61,2235,87,24,2,1"><span class="username" geometry="61,2235,79,19,1,1"><a href="/users/BlackScorp" data-auto-route="true" geometry="61,2236,79,16,0,1">BlackScorp</a></span></div>
+        <div class="post-info" geometry="928,2236,48,19,2,3">
+          
+
+            <a class="post-date" href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/5" data-share-url="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/5" data-post-number="5" data-bindattr-65="65" geometry="928,2237,48,16,1,3">
+              <span class="relative-date" title="September 10, 2014 8:54pm" data-time="1410375294057" data-format="tiny" geometry="928,2237,24,16,0,1">13d</span>  #5
+            </a>
+
+          
+        </div>
+        
+        <div class="read-state read" data-bindattr-66="66" title="Post is unread" geometry="982,2235,7,11,1,0"><i class="fa fa-circle" geometry="982,2236,7,8,0,0"></i></div>
+      </div>
+
+      <div class="select-posts hidden" data-bindattr-67="67" geometry="0,0,49,22,2,5">
+        <button data-ember-action="68" class="hidden" data-bindattr-69="69" geometry="0,0,0,0,0,2">select +replies</button>
+        <button data-ember-action="70" class="select-post" geometry="0,0,0,0,0,1">select</button>
+      </div>
+
+      <div class="bottom-round contents regular" data-bindattr-71="71" geometry="61,2273,915,39,6,15">
+        <div class="cooked" geometry="61,2273,915,19,2,15">
+          <p geometry="61,2273,915,19,1,13">agree with <a class="mention" href="/users/tpunt" geometry="130,2272,46,16,0,1">@tpunt</a> but at least i would create a two dimensional array</p>
+        </div>
+        
+        
+        <section id="ember1480" class="ember-view post-menu-area clearfix" geometry="61,2312,915,0,2,0"><nav class="post-controls" geometry="61,2312,915,0,1,0"><div class="actions" geometry="976,2312,0,0,0,0"></div></nav></section>
+      </div>
+      <section id="ember1488" class="ember-view embedded-posts bottom" geometry="61,2311,915,0,0,0"></section>
+      <section id="ember1489" class="ember-view post-actions hidden" geometry="0,0,0,0,0,0"></section>
+      <div id="ember1490" class="ember-view hidden topic-map" geometry="0,0,0,0,0,0"></div>
+    </div>
+
+    <div id="ember1491" class="ember-view gutter" geometry="3,2339,237,0,0,0"></div>
+  </div>
+
+</article>
+
+<div id="ember1492" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+</div></div><div id="post-cloak-6" class="ember-view post-cloak" geometry="2,2339,995,118,35,21"><div id="ember1327" class="ember-view topic-post clearfix regular" geometry="2,2339,994,118,34,21"><div id="ember1493" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+<div class="row" geometry="3,2339,994,0,1,0">
+  <section id="ember1494" class="ember-view embedded-posts top topic-body offset2 hidden" geometry="0,0,701,0,0,0"></section>
+</div>
+
+<article class="boxed" id="post_6" data-bindattr-72="72" data-post-id="756592" data-bindattr-73="73" data-user-id="214748" geometry="3,2339,994,118,29,21">
+  <div class="row" geometry="3,2339,994,118,28,21">
+    
+    <div class="topic-avatar" geometry="3,2339,45,45,3,0">
+      
+        <div class="contents topic-creator" data-bindattr-74="74" geometry="3,2356,45,45,2,0">
+          <a id="ember1495" class="ember-view trigger-expansion main-avatar" href="/users/erabxes" geometry="3,2369,45,16,1,0"><img width="45" height="45" src="http://sitepoint-discourse.global.ssl.fastly.net/letter_avatar/erabxes/45/2.png" class="avatar" title="erabxes" geometry="3,2356,45,45,0,0" /></a>
+        </div>
+      
+      
+    </div>
+
+    <div class="topic-body" geometry="-7,2339,915,76,22,21">
+      <div class="topic-meta-data" geometry="61,2353,915,24,9,5">
+        <div id="ember1496" class="ember-view names trigger-expansion" geometry="61,2353,184,24,3,2"><span class="username" geometry="61,2353,57,19,1,1"><a href="/users/erabxes" data-auto-route="true" geometry="61,2354,57,16,0,1">erabxes</a></span><span class="user-title" geometry="126,2353,111,19,0,2">SitePoint Member</span></div>
+        <div class="post-info" geometry="928,2354,48,19,2,3">
+          
+
+            <a class="post-date" href="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/6" data-share-url="/t/accessing-and-collecting-post-data-from-an-array-in-php/96459/6" data-post-number="6" data-bindattr-75="75" geometry="928,2355,48,16,1,3">
+              <span class="relative-date" title="September 12, 2014 4:31pm" data-time="1410532287259" data-format="tiny" geometry="928,2355,24,16,0,1">11d</span>  #6
+            </a>
+
+          
+        </div>
+        
+        <div class="read-state read" data-bindattr-76="76" title="Post is unread" geometry="982,2353,7,11,1,0"><i class="fa fa-circle" geometry="982,2354,7,8,0,0"></i></div>
+      </div>
+
+      <div class="select-posts hidden" data-bindattr-77="77" geometry="0,0,49,22,2,5">
+        <button data-ember-action="78" class="hidden" data-bindattr-79="79" geometry="0,0,0,0,0,2">select +replies</button>
+        <button data-ember-action="80" class="select-post" geometry="0,0,0,0,0,1">select</button>
+      </div>
+
+      <div class="bottom-round contents regular" data-bindattr-81="81" geometry="61,2391,915,39,5,15">
+        <div class="cooked" geometry="61,2391,915,19,1,15">
+          <p geometry="61,2391,915,19,0,13">Thanks to you guys , I got all i need! That's what I think!</p>
+        </div>
+        
+        
+        <section id="ember1497" class="ember-view post-menu-area clearfix" geometry="61,2430,915,0,2,0"><nav class="post-controls" geometry="61,2430,915,0,1,0"><div class="actions" geometry="976,2430,0,0,0,0"></div></nav></section>
+      </div>
+      <section id="ember1505" class="ember-view embedded-posts bottom" geometry="61,2429,915,0,0,0"></section>
+      <section id="ember1506" class="ember-view post-actions hidden" geometry="0,0,0,0,0,0"></section>
+      <div id="ember1507" class="ember-view hidden topic-map" geometry="0,0,0,0,0,0"></div>
+    </div>
+
+    <div id="ember1508" class="ember-view gutter" geometry="3,2457,237,0,0,0"></div>
+  </div>
+
+</article>
+
+<div id="ember1509" class="ember-view gap hidden" geometry="0,0,757,0,0,0"></div>
+
+</div></div></div>
+          <script id="metamorph-46-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+          <script id="metamorph-47-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-47-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+        </div>
+        <div id="topic-bottom" geometry="2,2457,995,0,0,0"></div>
+
+        <script id="metamorph-48-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          <script id="metamorph-49-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+            <div id="topic-closing-info" class="ember-view" geometry="2,2457,995,20,0,0"></div>
+            <div id="topic-footer-buttons" class="ember-view" geometry="2,2488,985,35,2,4"><button id="ember1537" class="ember-view btn btn-primary create standard" title="Log In to Reply" geometry="2,2498,113,18,1,4"><i class="fa fa-user" geometry="14,2506,11,14,0,0"></i>Log In to Reply</button></div>
+
+            <script id="metamorph-50-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+              <div id="suggested-topics" geometry="2,2533,995,340,95,70">
+                <h3 geometry="2,2553,995,19,0,2">Suggested Topics</h3>
+                <div class="topics" geometry="2,2582,995,272,88,55">
+                  <div id="ember1546" class="ember-view" geometry="2,2582,995,262,87,55"><script id="metamorph-51-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <script id="metamorph-52-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+    <table class="topic-list" geometry="2,2582,995,261,82,55">
+      <thead geometry="2,2583,995,41,10,7">
+        <tr geometry="2,2583,995,41,9,7">
+          <th class="default" geometry="2,2583,539,17,0,1">Topic</th>
+          <script id="metamorph-53-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+            <th class="category" geometry="556,2583,156,41,0,1">Category</th>
+          <script id="metamorph-53-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          <th class="num posts" geometry="752,2583,71,17,0,1">Posts</th>
+          <script id="metamorph-54-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-54-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          <th class="num views" geometry="833,2583,72,17,0,1">Views</th>
+          <th class="num activity" geometry="915,2583,67,17,0,1">Activity</th>
+        </tr>
+      </thead>
+
+      <tbody geometry="2,2624,995,220,70,50">
+        
+          <tr class="" data-bindattr-82="82" geometry="2,2624,995,44,13,14">
+            <td class="main-link" geometry="2,2624,539,20,3,9">
+              <div id="ember1551" class="ember-view topic-statuses" geometry="0,0,0,0,0,0"></div>
+              <a class="title" href="/t/php-time-zone-problem-is-killing-me/15534" geometry="12,2639,227,16,0,7">PHP Time zone problem is killing me</a>
+              <span id="ember1558" class="ember-view topic-post-badges" geometry="243,2637,0,18,0,0"></span>
+            </td>
+
+            
+              <td class="category" geometry="556,2624,156,44,1,3">
+                <a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="576,2634,120,12,0,1">PHP</a>
+              </td>
+            
+
+            <td id="ember1559" class="ember-view num posts heatmap-" title="This topic has 6 posts" geometry="752,2624,71,20,1,1"><a href="" class="badge-posts heatmap-" geometry="788.5,2637,9,16,0,1">6</a></td>
+
+            
+
+            <td class="num views" data-bindattr-83="83" geometry="833,2624,72,20,1,3">
+              <span class="number" title="this topic has been viewed 17 times" geometry="866,2637,16,16,0,1">17</span>
+            </td>
+
+            <td id="ember1566" class="ember-view num activity" title="First post: May 4, 2012 3:53pm
+Last post: May 4, 2012 7:20pm" geometry="915,2624,67,20,2,2"><a href="/t/php-time-zone-problem-is-killing-me/15534/6" geometry="929,2637,49,16,1,2"><span class="relative-date with-year" data-time="1336152008000" data-format="tiny" geometry="929,2637,49,16,0,2">May '12</span></a></td>
+          </tr>
+        
+          <tr class="" data-bindattr-84="84" geometry="2,2668,995,44,13,11">
+            <td class="main-link" geometry="2,2668,539,20,3,6">
+              <div id="ember1567" class="ember-view topic-statuses" geometry="0,0,0,0,0,0"></div>
+              <a class="title" href="/t/php4-to-php5-errors/37013" geometry="12,2683,132,16,0,4">PHP4 to PHP5 errors</a>
+              <span id="ember1568" class="ember-view topic-post-badges" geometry="148,2681,0,18,0,0"></span>
+            </td>
+
+            
+              <td class="category" geometry="556,2668,156,44,1,3">
+                <a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="576,2678,120,12,0,1">PHP</a>
+              </td>
+            
+
+            <td id="ember1569" class="ember-view num posts heatmap-" title="This topic has 6 posts" geometry="752,2668,71,20,1,1"><a href="" class="badge-posts heatmap-" geometry="788.5,2681,9,16,0,1">6</a></td>
+
+            
+
+            <td class="num views" data-bindattr-85="85" geometry="833,2668,72,20,1,3">
+              <span class="number" title="this topic has been viewed 6 times" geometry="870,2681,8,16,0,1">6</span>
+            </td>
+
+            <td id="ember1570" class="ember-view num activity" title="First post: November 22, 2013 6:05pm
+Last post: November 22, 2013 9:02pm" geometry="915,2668,67,20,2,2"><a href="/t/php4-to-php5-errors/37013/6" geometry="930,2681,47,16,1,2"><span class="relative-date with-year" data-time="1385150551000" data-format="tiny" geometry="930,2681,47,16,0,2">Nov '13</span></a></td>
+          </tr>
+        
+          <tr class="" data-bindattr-86="86" geometry="2,2712,995,44,13,13">
+            <td class="main-link" geometry="2,2712,539,20,3,8">
+              <div id="ember1571" class="ember-view topic-statuses" geometry="0,0,0,0,0,0"></div>
+              <a class="title" href="/t/how-to-remove-space-between-words/4049" geometry="12,2727,241,16,0,6">How to remove space between words?</a>
+              <span id="ember1572" class="ember-view topic-post-badges" geometry="257,2725,0,18,0,0"></span>
+            </td>
+
+            
+              <td class="category" geometry="556,2712,156,44,1,3">
+                <a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="576,2722,120,12,0,1">PHP</a>
+              </td>
+            
+
+            <td id="ember1573" class="ember-view num posts heatmap-" title="This topic has 6 posts" geometry="752,2712,71,20,1,1"><a href="" class="badge-posts heatmap-" geometry="788.5,2725,9,16,0,1">6</a></td>
+
+            
+
+            <td class="num views" data-bindattr-87="87" geometry="833,2712,72,20,1,3">
+              <span class="number" title="this topic has been viewed 34 times" geometry="866,2725,16,16,0,1">34</span>
+            </td>
+
+            <td id="ember1574" class="ember-view num activity" title="First post: July 18, 2008 12:45pm
+Last post: July 18, 2008 1:06pm" geometry="915,2712,67,20,2,2"><a href="/t/how-to-remove-space-between-words/4049/6" geometry="933.5,2725,41,16,1,2"><span class="relative-date with-year" data-time="1216379209000" data-format="tiny" geometry="933.5,2725,41,16,0,2">Jul '08</span></a></td>
+          </tr>
+        
+          <tr class="" data-bindattr-88="88" geometry="2,2756,995,44,13,9">
+            <td class="main-link" geometry="2,2756,539,20,3,4">
+              <div id="ember1575" class="ember-view topic-statuses" geometry="0,0,0,0,0,0"></div>
+              <a class="title" href="/t/ui-frameworks/27279" geometry="12,2771,93,16,0,2">UI Frameworks</a>
+              <span id="ember1576" class="ember-view topic-post-badges" geometry="109,2769,0,18,0,0"></span>
+            </td>
+
+            
+              <td class="category" geometry="556,2756,156,44,1,3">
+                <a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="576,2766,120,12,0,1">PHP</a>
+              </td>
+            
+
+            <td id="ember1577" class="ember-view num posts heatmap-" title="This topic has 1 post" geometry="752,2756,71,20,1,1"><a href="" class="badge-posts heatmap-" geometry="788.5,2769,9,16,0,1">1</a></td>
+
+            
+
+            <td class="num views" data-bindattr-89="89" geometry="833,2756,72,20,1,3">
+              <span class="number" title="this topic has been viewed 7 times" geometry="870,2769,8,16,0,1">7</span>
+            </td>
+
+            <td id="ember1578" class="ember-view num activity" title="First post: February 20, 2013 2:51pm
+Last post: February 20, 2013 2:51pm" geometry="915,2756,67,20,2,2"><a href="/t/ui-frameworks/27279/1" geometry="929.5,2769,49,16,1,2"><span class="relative-date with-year" data-time="1361368285000" data-format="tiny" geometry="929.5,2769,49,16,0,2">Feb '13</span></a></td>
+          </tr>
+        
+          <tr class="" data-bindattr-90="90" geometry="2,2800,995,44,13,11">
+            <td class="main-link" geometry="2,2800,539,20,3,6">
+              <div id="ember1579" class="ember-view topic-statuses" geometry="0,0,0,0,0,0"></div>
+              <a class="title" href="/t/help-with-cache-archive/29021" geometry="12,2815,160,16,0,4">Help with Cache / Archive</a>
+              <span id="ember1580" class="ember-view topic-post-badges" geometry="176,2813,0,18,0,0"></span>
+            </td>
+
+            
+              <td class="category" geometry="556,2800,156,44,1,3">
+                <a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="576,2810,120,12,0,1">PHP</a>
+              </td>
+            
+
+            <td id="ember1581" class="ember-view num posts heatmap-" title="This topic has 2 posts" geometry="752,2800,71,20,1,1"><a href="" class="badge-posts heatmap-" geometry="788.5,2813,9,16,0,1">2</a></td>
+
+            
+
+            <td class="num views" data-bindattr-91="91" geometry="833,2800,72,20,1,3">
+              <span class="number" title="this topic has been viewed 10 times" geometry="866,2813,16,16,0,1">10</span>
+            </td>
+
+            <td id="ember1582" class="ember-view num activity" title="First post: April 3, 2013 9:21pm
+Last post: April 3, 2013 11:18pm" geometry="915,2800,67,20,2,2"><a href="/t/help-with-cache-archive/29021/2" geometry="931,2813,45,16,1,2"><span class="relative-date with-year" data-time="1365023908000" data-format="tiny" geometry="931,2813,45,16,0,2">Apr '13</span></a></td>
+          </tr>
+        
+      </tbody>
+
+    </table>
+  <script id="metamorph-52-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+<script id="metamorph-51-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div>
+                </div>
+                <h3 geometry="2,2869,995,24,4,13"><script id="metamorph-55-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>Want to read more? Browse other topics in <a href="/category/php" data-drop-close="true" class="badge-category" title="PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?" style="background-color: #595986; color: #FFFFFF; " geometry="344.75,2869,80,12,0,1">PHP</a> or <a href="/latest" geometry="462.0695495605469,2870,137,19,0,3">view latest topics</a>.<script id="metamorph-55-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script></h3>
+              </div>
+            <script id="metamorph-50-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          <script id="metamorph-49-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+        <script id="metamorph-48-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+
+      </section>
+    </div>
+
+  </div>
+
+<script id="metamorph-22-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<div id="share-link" class="ember-view" geometry="0,0,365,89,32,7"><h3 geometry="0,0,0,0,2,6"><script id="metamorph-56-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>share a link to this topic<script id="metamorph-56-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script></h3>
+
+<script id="metamorph-57-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-57-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<div geometry="0,0,0,0,1,0"><input type="text" geometry="0,0,96,18,0,0" /></div>
+
+<script id="metamorph-58-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><div id="ember1611" class="ember-view social-link" geometry="0,0,0,0,4,0"><script id="metamorph-59-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <a href="#" data-ember-action="92" title="share this link on Twitter" data-bindattr-93="93" geometry="0,0,0,0,1,0"><i class="fa fa-twitter" data-bindattr-94="94" geometry="0,0,0,0,0,0"></i></a>
+<script id="metamorph-59-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div><div id="ember1612" class="ember-view social-link" geometry="0,0,0,0,4,0"><script id="metamorph-60-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <a href="#" data-ember-action="95" title="share this link on Facebook" data-bindattr-96="96" geometry="0,0,0,0,1,0"><i class="fa fa-facebook-square" data-bindattr-97="97" geometry="0,0,0,0,0,0"></i></a>
+<script id="metamorph-60-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div><div id="ember1613" class="ember-view social-link" geometry="0,0,0,0,4,0"><script id="metamorph-61-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <a href="#" data-ember-action="98" title="share this link on Google+" data-bindattr-99="99" geometry="0,0,0,0,1,0"><i class="fa fa-google-plus" data-bindattr-100="100" geometry="0,0,0,0,0,0"></i></a>
+<script id="metamorph-61-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div><div id="ember1614" class="ember-view social-link" geometry="0,0,0,0,4,0"><script id="metamorph-62-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <a href="mailto:?to=&amp;subject=%5BThe%20SitePoint%20Forums%5D%20Accessing%20and%20collecting%20post%5B%5D%20data%20from%20an%20array%20in%20PHP&amp;body=undefined" data-bindattr-101="101" title="send this link in an email" data-bindattr-102="102" target="_blank" geometry="0,0,0,0,1,0"><i class="fa fa-envelope" data-bindattr-103="103" geometry="0,0,0,0,0,0"></i></a>
+<script id="metamorph-62-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div><script id="metamorph-58-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<div class="link" geometry="0,0,0,0,2,0">
+  <a href="#" data-ember-action="104" title="close" geometry="0,0,0,0,1,0"><i class="fa fa-times-circle" geometry="0,0,0,0,0,0"></i></a>
+</div>
+</div>
+
+<script id="metamorph-63-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-63-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+<script id="metamorph-64-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-64-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div><script id="metamorph-19-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+  <div id="user-expansion" class="ember-view hidden show-badges" geometry="0,0,560,0,2,0"><script id="metamorph-65-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-65-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</div>
+</div>
+
+<div id="discourse-modal" class="ember-view modal hidden" geometry="0,0,999,2908,15,0"><div class="modal-outer-container" geometry="0,0,100,100,14,0">
+  <div class="modal-middle-container" geometry="0,0,0,0,13,0">
+    <div class="modal-inner-container" geometry="0,0,0,0,12,0">
+
+      <div class="modal-header" geometry="0,0,0,0,6,0">
+        <a class="close" data-ember-action="105" geometry="0,0,0,0,1,0"><i class="fa fa-times" geometry="0,0,0,0,0,0"></i></a>
+        <h3 geometry="0,0,0,0,2,0"><script id="metamorph-66-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-66-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script></h3>
+        <div class="clearfix" geometry="0,0,0,0,0,0"></div>
+      </div>
+      <div id="modal-alert" geometry="0,0,0,0,0,0"></div>
+
+      <script id="metamorph-67-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-67-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+      <script id="metamorph-68-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script><script id="metamorph-68-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+    </div>
+  </div>
+</div>
+</div>
+<div id="topic-entrance" class="ember-view hidden" geometry="0,0,133,134,10,12"><button data-ember-action="106" class="btn full no-text jump-top" geometry="0,0,100,0,4,6">
+  <i class="fa fa-caret-up" geometry="0,0,0,0,0,0"></i> <script id="metamorph-69-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>Jan 1, '70 <br geometry="0,0,0,0,0,0" />1:00 AM<script id="metamorph-69-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+</button>
+<button data-ember-action="107" class="btn full no-text jump-bottom" geometry="0,0,100,0,4,7">
+  <script id="metamorph-70-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>Jan 1, '70 <br geometry="0,0,0,0,0,0" />1:00 AM<script id="metamorph-70-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script> <i class="fa fa-caret-down" geometry="0,0,0,0,0,0"></i>
+</button>
+</div>
+<div id="reply-control" class="ember-view closed processed" geometry="0,650,999,0,14,16"><div class="grippie" geometry="0,0,999,11,0,0"></div><div class="spinner" geometry="250,755,70,70,0,1">Uploading...</div>
+
+<div class="contents" geometry="0,650,1280,0,11,16">
+
+  <div id="ember1679" class="ember-view composer-popup-container hidden" geometry="0,0,0,0,0,0"></div>
+
+  <div class="control" geometry="10,660,1280,0,9,16">
+    <a href="#" class="toggler" data-ember-action="108" title="hide or show the composer panel" geometry="973,660,13,13,0,0"></a>
+
+    <script id="metamorph-71-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+      <div class="row" geometry="10,660,1280,0,5,16">
+        <div class="span24" geometry="10,660,1236,0,4,16">
+          <div class="saving-text" geometry="0,0,55,19,2,3">
+            <script id="metamorph-72-start" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+              Saving...
+            <script id="metamorph-72-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+          </div>
+          <div class="draft-text" geometry="0,0,426,19,0,15">
+            You have a post draft in progress. Select this bar to resume editing.
+          </div>
+        </div>
+      </div>
+    <script id="metamorph-71-end" type="text/x-placeholder" geometry="0,0,0,0,0,0"></script>
+
+  </div>
+</div>
+
+</div></div></section>
+
+      <form id="hidden-login-form" method="post" action="/login" style="display: none;" geometry="0,0,499,37,4,0">
+        <input name="username" type="text" id="signin_username" geometry="0,0,210,18,0,0" />
+        <input name="password" type="password" id="signin_password" geometry="0,0,210,18,0,0" />
+        <input name="redirect" type="hidden" geometry="0,0,210,0,0,0" />
+        <input type="submit" id="signin-button" value="Log In" geometry="0,0,0,0,0,0" />
+      </form>
+
+      <script geometry="0,0,14009,342,0,1314">
+        PreloadStore.store("site",{"default_archetype":"regular","notification_types":{"mentioned":1,"replied":2,"quoted":3,"edited":4,"liked":5,"private_message":6,"invited_to_private_message":7,"invitee_accepted":8,"posted":9,"moved_post":10,"linked":11,"granted_badge":12},"post_types":{"regular":1,"moderator_action":2},"group_names":["Administrators","admins","Advisors","everyone","Mentors","moderators","SitePointEditor","staff","Team_Leader","TeamLeaders","TeamSitePoint","trust_level_0","trust_level_1","trust_level_2","trust_level_3","trust_level_4"],"filters":["latest","unread","new","starred","read","posted"],"periods":["yearly","monthly","weekly","daily"],"top_menu_items":["latest","unread","new","starred","read","posted","category","categories","top"],"anonymous_top_menu_items":["latest","top","categories","category","categories","top"],"uncategorized_category_id":1,"is_readonly":false,"tag_list":["analytics","angular.js","backbone","book","bootstrap","code-review","coldfusion","css3","documentation","ecommerce","ember.js","general-dev","git","graphics","gwt","html5","jquery","jquery-ui","learnable","linux","mono","news","pdo","photography","project","regex","scripts","security","seo","site-review","software","support","svg","team-community","team-content","team-design","team-hosting","team-manage","team-program","tutorial","xml"],"categories":[{"id":24,"name":"Get Started","color":"1b815c","text_color":"FFFFFF","slug":"get-started","topic_count":9131,"post_count":59007,"description":"A place for those new to web design to ask questions about where to begin, what's involved, and where to turn next. No question is too simple!","topic_url":"/t/about-the-get-started-category/170","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":3,"name":"Community","color":"005687","text_color":"FFFFFF","slug":"community","topic_count":6016,"post_count":130683,"description":"Tell us about your weekends, hobbies, travel and pets. Discuss computer hardware and software issues, industry news, careers and education … pretty much anything goes—except politics or religion, of course!","topic_url":"/t/category-definition-for-community/36","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":31,"name":"PHP","color":"595986","text_color":"FFFFFF","slug":"php","topic_count":19281,"post_count":127947,"description":"PHP has established itself as the Open Source programming language of choice for many developers. Need help with your program? Trying to fix a tricky parse error?","topic_url":"/t/about-the-php-category/177","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":26,"name":"CSS","color":"125d67","text_color":"FFFFFF","slug":"css","topic_count":11939,"post_count":89040,"description":"A place to discuss issues relating to cascading style sheets and general page layout, including browser support and browser bugs.","topic_url":"/t/about-the-css-category/172","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":33,"name":"JavaScript","color":"d3a604","text_color":"FFFFFF","slug":"javascript","topic_count":12567,"post_count":64836,"description":"The world's most ubiquitous computing runtime, used for everything from client-side scripting to multi-threaded, server-based apps. Learn how to use the language plus the numerous libraries and frameworks that are based upon it.","topic_url":"/t/about-the-javascript-category/179","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":25,"name":"HTML","color":"ba5401","text_color":"FFFFFF","slug":"html","topic_count":2475,"post_count":20497,"description":"A forum for discussing HTML—including issues such as compatibility, tags, elements and their proper usage, semantics, and the structure of (X)HTML in all its flavours.","topic_url":"/t/about-the-html-category/171","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":34,"name":"Ruby","color":"dc2e17","text_color":"FFFFFF","slug":"ruby","topic_count":340,"post_count":1619,"description":"Get up to speed with this Object Oriented scripting language, find out which gem does what and learn about the full-stack framework that's provided by Rails.","topic_url":"/t/about-the-ruby-category/180","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":38,"name":"Databases","color":"00709d","text_color":"FFFFFF","slug":"databases","topic_count":5268,"post_count":31785,"description":"Using a database such as MySQL, Oracle or SQLite to store your website's data? Learn about common issues and pitfalls, the correct use of indexes, normalisation and much more.","topic_url":"/t/about-the-databases-category/184","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":18,"name":"Content","color":"2B8546","text_color":"FFFFFF","slug":"content","topic_count":3792,"post_count":35117,"description":"Whether it be photography, audio, video, copy or something else altogether, this category is for all the content that makes your website interesting.","topic_url":"/t/about-the-content-category/164","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":40,"name":"Server Config","color":"890808","text_color":"FFFFFF","slug":"server-config","topic_count":3509,"post_count":21029,"description":"Discuss how to configure your servers, sites, security and rewriting URLs for your sites.","topic_url":"/t/about-the-server-config-category/186","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":39,"name":"Domains","color":"1e7493","text_color":"FFFFFF","slug":"domains","topic_count":25,"post_count":175,"description":" Talk about domain registrars and how to secure the perfect name for you or your company.","topic_url":"/t/about-the-domains-category/185","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":17,"name":"Social Media","color":"401a55","text_color":"FFFFFF","slug":"social-media","topic_count":1205,"post_count":14712,"description":"Trying to build an online community or marketing avenue? Find the tools, tips and advice you need to create a successful social media presence.","topic_url":"/t/about-the-social-media-category/163","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":42,"name":"Business","color":"456900","text_color":"FFFFFF","slug":"business","topic_count":2960,"post_count":22337,"description":"Learn how to build and manage a Business. Discuss your problems, solutions, successes and failures.","topic_url":"/t/about-the-business-category/188","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":29,"name":"Mobile","color":"205392","text_color":"FFFFFF","slug":"mobile","topic_count":534,"post_count":2713,"description":"Development for mobile devices. Post here in relation to iDevices (iPhone / iPod / iPad), Android, Blackberry, WinMo, Nokia, or any other related platforms.","topic_url":"/t/about-the-mobile-category/175","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":30,"name":"CMS","color":"083a5b","text_color":"FFFFFF","slug":"cms","topic_count":3497,"post_count":16348,"description":"Content management system-related questions, customizations, SEO, plug-ins and user-submitted tips/tricks for Wordpress, Joomla, Drupal and many others.","topic_url":"/t/about-the-cms-category/176","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":32,"name":".NET","color":"238700","text_color":"FFFFFF","slug":"net","topic_count":1680,"post_count":9674,"description":"Discuss how to use the .NET languages and components effectively and efficiently whilst developing in Visual Studio, Mono, or the next big thing for .NET development.","topic_url":"/t/about-the-net-category/178","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":36,"name":"Perl","color":"b77501","text_color":"FFFFFF","slug":"perl","topic_count":85,"post_count":469,"description":"Discussion about the flexible interpreted language known as \"the Swiss Army Chainsaw of the web\", based on the \"There Is More Than One Way To Do It\" philosophy. Both Perl5 and Perl6 welcome.","topic_url":"/t/about-the-perl-category/182","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":35,"name":"Python","color":"1a69ca","text_color":"FFFFFF","slug":"python","topic_count":192,"post_count":1135,"description":"Discussion about the popular interpreted language for web, scientific and mathematical programming, based on the \"One Obvious Way To Do It\" philosophy.","topic_url":"/t/about-the-python-category/181","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":37,"name":"Golang","color":"a42209","text_color":"FFFFFF","slug":"golang","topic_count":5,"post_count":67,"description":"Golang (or Go) is an expressive, concurrent, garbage-collected programming language.","topic_url":"/t/about-the-golang-category/183","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":16,"name":"Reviews","color":"257e7a","text_color":"FFFFFF","slug":"reviews","topic_count":1322,"post_count":20834,"description":"Get your website, content or design elements reviewed here. Please read these guidelines before posting. ","topic_url":"/t/about-the-reviews-category/162","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":43,"name":"Hosting","color":"0379aa","text_color":"FFFFFF","slug":"hosting","topic_count":1811,"post_count":16719,"description":"Find out what you need to know about the different types of hosts and how to pick a reputable and suitable hosting provider to suit your needs.","topic_url":"/t/about-the-hosting-category/190","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":28,"name":"Accessibility","color":"011a74","text_color":"FFFFFF","slug":"accessibility","topic_count":315,"post_count":3785,"description":"Ask questions about helping users to access sites and use the web regardless of circumstances—be they blind, or unable to use a mouse, or just unfamiliar with a website and its contents.","topic_url":"/t/about-the-accessibility-category/174","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":41,"name":"Marketing","color":"757575","text_color":"FFFFFF","slug":"marketing","topic_count":7734,"post_count":63301,"description":"Discuss everything from viral marketing to offline branding and promotion. Learn how to target your efforts to get the best return on your investment, whether it be through SEO, affiliate marketing etc.","topic_url":"/t/about-the-marketing-category/187","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":46,"name":"Jobs","color":"1c63e7","text_color":"FFFFFF","slug":"jobs","topic_count":2,"post_count":4,"description":"&lt;strong&gt;Jobs&lt;\/strong&gt; is filling the gap that the old SitePoint Market used to take up. If you are looking for someone to do paid work for you, whether it's a site redesign or a script that you need written, you can post it in the Jobs category. ","topic_url":"/t/about-the-jobs-category/706","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":44,"name":"Showcase","color":"323232","text_color":"FFFFFF","slug":"showcase","topic_count":0,"post_count":1,"description":"If you've been contributing to this community for a while, we'd like to give you something back. This category is our response to your feedback about finding our stringent self-promotional rules frustrating. Use this forum to show off your work. Self-promote to your heart's content! ","topic_url":"/t/about-the-showcase-category/194","read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null},{"id":1,"name":"uncategorized","color":"AB9364","text_color":"FFFFFF","slug":"uncategorized","topic_count":6,"post_count":15,"description":"Topics that don't need a category, or don't fit into any other existing category.","topic_url":null,"read_restricted":false,"permission":null,"notification_level":null,"logo_url":null,"background_url":null}],"post_action_types":[{"name_key":"bookmark","name":"Bookmark","description":"Bookmark this post","long_form":"bookmarked this post","is_flag":false,"icon":null,"id":1,"is_custom_flag":false},{"name_key":"like","name":"Like","description":"Like this post","long_form":"liked this","is_flag":false,"icon":"heart","id":2,"is_custom_flag":false},{"name_key":"off_topic","name":"Off-Topic","description":"This post is radically off-topic in the current topic, and should probably be moved. If this is a topic, perhaps it does not belong here.","long_form":"flagged this as off-topic","is_flag":true,"icon":null,"id":3,"is_custom_flag":false},{"name_key":"inappropriate","name":"Inappropriate","description":"This post contains content that a reasonable person would consider offensive, abusive, or a violation of &lt;a href=\"/guidelines\"&gt;our community guidelines&lt;\/a&gt;.","long_form":"flagged this as inappropriate","is_flag":true,"icon":null,"id":4,"is_custom_flag":false},{"name_key":"vote","name":"Vote","description":"Vote for this post","long_form":"voted for this post","is_flag":false,"icon":null,"id":5,"is_custom_flag":false},{"name_key":"spam","name":"Spam","description":"This post is an advertisement. It is not useful or relevant to the current topic, but promotional in nature.","long_form":"flagged this as spam","is_flag":true,"icon":null,"id":8,"is_custom_flag":false},{"name_key":"notify_user","name":"Notify {{username}}","description":"This post contains something I want to talk to this person directly and privately about. Does not cast a flag.","long_form":"notified user","is_flag":true,"icon":null,"id":6,"is_custom_flag":true},{"name_key":"notify_moderators","name":"Notify moderators","description":"This post requires general moderator attention based on the &lt;a href=\"/guidelines\"&gt;guidelines&lt;\/a&gt;, &lt;a href=\"/tos\"&gt;TOS&lt;\/a&gt;, or for another reason not listed above.","long_form":"notified moderators","is_flag":true,"icon":null,"id":7,"is_custom_flag":true}],"topic_flag_types":[{"name_key":"inappropriate","name":"Inappropriate","description":"This topic contains content that a reasonable person would consider offensive, abusive, or a violation of &lt;a href=\"/guidelines\"&gt;our community guidelines&lt;\/a&gt;.","long_form":"flagged this as inappropriate","is_flag":true,"icon":null,"id":4,"is_custom_flag":false},{"name_key":"spam","name":"Spam","description":"This topic is an advertisement. It is not useful or relevant to this site, but promotional in nature.","long_form":"flagged this as spam","is_flag":true,"icon":null,"id":8,"is_custom_flag":false},{"name_key":"notify_moderators","name":"Notify moderators","description":"This topic requires general moderator attention based on the &lt;a href=\"/guidelines\"&gt;guidelines&lt;\/a&gt;, &lt;a href=\"/tos\"&gt;TOS&lt;\/a&gt;, or for another reason not listed above.","long_form":"notified moderators","is_flag":true,"icon":null,"id":7,"is_custom_flag":true}],"trust_levels":[{"id":0,"name":"new user"},{"id":1,"name":"basic user"},{"id":2,"name":"member"},{"id":3,"name":"regular"},{"id":4,"name":"leader"}],"archetypes":[{"id":"regular","name":"Regular Topic","options":[]},{"id":"banner","name":"translation missing: en.archetypes.banner.title","options":[]}]});
+        PreloadStore.store("siteSettings",{"title":"The SitePoint Forums","logo_url":"http://www.sitepoint.com/wp-content/themes/sitepoint/assets/svg/sitepoint.svg","logo_small_url":"http://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/apple-touch-icon-57x57-precomposed.png","mobile_logo_url":"http://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/apple-touch-icon-57x57-precomposed.png","favicon_url":"http://www.sitepoint.com/favicon.ico","allow_user_locale":false,"suggested_topics":5,"track_external_right_clicks":false,"ga_universal_tracking_code":"UA-30131-16","ga_universal_domain_name":"auto","ga_tracking_code":"","ga_domain_name":"community.sitepoint.com","top_menu":"categories|latest|new|top|unread|starred|tag|faq","post_menu":"like|share|flag|edit|bookmark|delete|admin|reply","post_menu_hidden_items":"edit|delete|admin","share_links":"twitter|facebook|google+|email","category_colors":"af90de|A45bc7|8b4da9|744290|5bbf37|3978ea|2fb2ce|f7836c|0379a9|fbd800|f9c450|ec5645|248ab0|66669a|50c9c2|1a68ca|00a8e9|005687|323232|69d6ea|774290|b2cd0c|3cbd63|DBC65D|FCCB47|FDAA33|FB7E2A|F7836C|EB5745|7575C2|444492|8991AC|0482B6|00A8EA|6CD0E9|50C9C2|11B491|31A479|1CEBBEE|C0DC0E|7F984D|283890|6D6D6D|323232|66669A|FC8B3F|BF1E2E|F1592A|F7941D|9EB83B|25AAE2|0E76BD|652D90|ED207B|8C6238|231F20|808281|B3B5B4","enable_mobile_theme":true,"relative_date_duration":30,"category_featured_topics":3,"fixed_category_positions":true,"topics_per_page":30,"show_subcategory_list":false,"posts_per_page":20,"enable_badges":true,"invite_only":false,"login_required":false,"must_approve_users":false,"enable_local_logins":true,"allow_new_registrations":true,"enable_google_logins":true,"enable_google_oauth2_logins":false,"enable_yahoo_logins":true,"enable_twitter_logins":true,"enable_facebook_logins":true,"enable_github_logins":true,"enable_sso":false,"sso_overrides_avatar":false,"min_username_length":3,"max_username_length":20,"min_password_length":8,"logout_redirect":"","enable_names":false,"invites_per_page":40,"delete_user_max_post_age":60,"delete_all_posts_max":15,"min_post_length":2,"min_private_message_post_length":2,"max_post_length":32000,"min_topic_title_length":10,"max_topic_title_length":255,"min_private_message_title_length":2,"allow_uncategorized_topics":false,"min_title_similar_length":10,"min_body_similar_length":15,"edit_history_visible_to_public":false,"delete_removed_posts_after":24,"traditional_markdown_linebreaks":false,"suppress_reply_directly_below":true,"suppress_reply_directly_above":true,"newuser_max_images":0,"newuser_max_attachments":0,"display_name_on_posts":false,"short_progress_text_threshold":10000,"default_code_lang":"lang-auto","autohighlight_all_code":true,"email_in":false,"max_image_size_kb":3072,"max_attachment_size_kb":1024,"authorized_extensions":".jpg|.jpeg|.png|.gif|.txt|.csv|.xls|.css|.js|.php|.html|.zip|.bmp|.doc|.pdf","max_image_width":690,"max_image_height":500,"prevent_anons_from_downloading_files":false,"allow_profile_backgrounds":false,"allow_uploaded_avatars":true,"allow_animated_avatars":false,"tl1_requires_read_posts":20,"enable_long_polling":true,"polling_interval":3000,"anon_polling_interval":30000,"flush_timings_secs":5,"verbose_localization":false,"tos_url":"","privacy_policy_url":"","tos_accept_required":false,"faq_url":"","maximum_backups":7,"version_checks":true,"suppress_uncategorized_badge":false,"min_search_term_length":3,"topic_views_heat_low":1000,"topic_views_heat_medium":2000,"topic_views_heat_high":5000,"topic_post_like_heat_low":0.5,"topic_post_like_heat_medium":1.0,"topic_post_like_heat_high":2.0,"history_hours_low":12,"history_hours_medium":24,"history_hours_high":48,"cold_age_days_low":14,"cold_age_days_medium":60,"cold_age_days_high":120,"global_notice":"","show_create_topics_notice":true,"available_locales":"cs|da|de|en|es|fi|fr|he|id|it|ja|ko|nb_NO|nl|pl_PL|pt|pt_BR|ro|ru|sv|uk|zh_CN|zh_TW"});
+        PreloadStore.store("customHTML",{"top":"","bottom":"","extraNavItem":"&lt;li id='faq-menu-item'&gt;&lt;a href='/faq'&gt;FAQ&lt;\/a&gt;&lt;\/li&gt;"});
+        PreloadStore.store("banner",{"html":"&lt;h2&gt;Welcome to The New SitePoint Forums.&lt;\/h2&gt;\n\n&lt;hr&gt;\n\n&lt;h3&gt;Some helpful posts to read.&lt;\/h3&gt;\n\n&lt;ol&gt;\n&lt;li&gt;\n&lt;strong&gt;Where can I find the rules?&lt;\/strong&gt; Click the &lt;a href=\"http://community.sitepoint.com/faq\"&gt;FAQ&lt;\/a&gt; link in the top navigation bar. &lt;\/li&gt;\n&lt;li&gt;\n&lt;strong&gt;Where should I post?&lt;\/strong&gt; You'll find a document explaining all the categories and tags &lt;a href=\"http://community.sitepoint.com/t/help-where-should-i-post-my-topic/794\"&gt;here&lt;\/a&gt;.&lt;\/li&gt;\n&lt;li&gt;\n&lt;strong&gt;How do I [do something] in Discourse?&lt;\/strong&gt; Here is a handy &lt;a href=\"http://community.sitepoint.com/t/discourse-cheat-sheet/733\"&gt;Discourse Cheat Sheet&lt;\/a&gt;.&lt;\/li&gt;\n&lt;li&gt;\n&lt;strong&gt;What are Trust Levels?&lt;\/strong&gt; Here is &lt;a href=\"http://community.sitepoint.com/t/documentation-an-explanation-of-trust-levels/724\"&gt;an explanation of Trust Levels&lt;\/a&gt;.&lt;\/li&gt;\n&lt;\/ol&gt;\n\n&lt;h3&gt;More help and feedback&lt;\/h3&gt;\n\n&lt;p&gt;If you have feedback, questions or concerns, please &lt;a href=\"http://community.sitepoint.com/t/feedback-about-sitepoint-on-discourse/742\"&gt;post them in this feedback thread&lt;\/a&gt;.&lt;br&gt;If you would like to contact our Community Manager personally, feel free to &lt;a href=\"http://community.sitepoint.com/users/hawk/activity\"&gt;send a private message&lt;\/a&gt; or &lt;a href=\"mailto:hawk@sitepoint.com\"&gt;an email&lt;\/a&gt;.&lt;\/p&gt;","key":741});
+        PreloadStore.store("topic_96459",{"post_stream":{"posts":[{"id":752506,"username":"erabxes","avatar_template":"/letter_avatar/erabxes/{size}/2.png","uploaded_avatar_id":null,"created_at":"2014-09-08T08:51:10.000-04:00","cooked":"&lt;p&gt;I have a form like the one below which is posted to processForm.php, and the user can dynamically add more with jQuery.&lt;\/p&gt;\n\n&lt;p&gt;&amp;lt;input type=\"text\" name=\"subject[ ]\" /&amp;gt;&lt;br&gt;&amp;lt;input type=\"text\" name=\"grade[ ]\" /&amp;gt;&lt;br&gt;&amp;lt;input type=\"text\" name=\"year[ ]\" /&amp;gt;&lt;\/p&gt;\n\n&lt;p&gt;&amp;lt;input type=\"text\" name=\"subject[ ]\" /&amp;gt;&lt;br&gt;&amp;lt;input type=\"text\" name=\"grade[ ]\" /&amp;gt;&lt;br&gt;&amp;lt;input type=\"text\" name=\"year[ ]\" /&amp;gt;&lt;\/p&gt;\n\n&lt;p&gt;&amp;lt;input type=\"text\" name=\"subject[ ]\" /&amp;gt;&lt;br&gt;&amp;lt;input type=\"text\" name=\"grade[ ]\" /&amp;gt;&lt;br&gt;&amp;lt;input type=\"text\" name=\"year[ ]\" /&amp;gt;&lt;\/p&gt;\n\n&lt;p&gt;Please How can i access those arrays from subject[], grade[] and year[] inputs by the user?&lt;\/p&gt;","post_number":1,"post_type":1,"updated_at":"2014-09-08T18:07:12.920-04:00","reply_count":1,"reply_to_post_number":null,"quote_count":0,"avg_time":32,"incoming_link_count":8,"reads":23,"score":51.2,"yours":false,"topic_slug":"accessing-and-collecting-post-data-from-an-array-in-php","topic_id":96459,"primary_group_name":null,"version":1,"can_edit":false,"can_delete":false,"can_recover":false,"read":true,"user_title":"SitePoint Member","actions_summary":[{"id":2,"count":0,"hidden":false,"can_act":null},{"id":3,"count":0,"hidden":false,"can_act":null},{"id":4,"count":0,"hidden":false,"can_act":null},{"id":5,"count":0,"hidden":true,"can_act":null},{"id":6,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"moderator":false,"admin":false,"staff":false,"user_id":214748,"hidden":false,"hidden_reason_id":null,"trust_level":1,"deleted_at":null,"user_deleted":false,"edit_reason":null,"can_view_edit_history":false,"wiki":false},{"id":753468,"username":"tpunt","avatar_template":"/user_avatar/community.sitepoint.com/tpunt/{size}/17685.png","uploaded_avatar_id":17685,"created_at":"2014-09-08T10:50:48.000-04:00","cooked":"&lt;p&gt;The square brackets in PHP denote an array, and so when you perform a var_dump() upon the $_POST array, you'll get something like the following (with dummy data):&lt;\/p&gt;\n\n&lt;p&gt;&lt;\/p&gt;&lt;pre&gt;&lt;code class=\"lang-auto\"&gt;array(4) {\n  [\"subject\"]=&amp;gt;\n  array(3) {\n    [0]=&amp;gt;\n    string(1) \"a\"\n    [1]=&amp;gt;\n    string(2) \"aa\"\n    [2]=&amp;gt;\n    string(3) \"aaa\"\n  }\n  [\"grade\"]=&amp;gt;\n  array(3) {\n    [0]=&amp;gt;\n    string(1) \"b\"\n    [1]=&amp;gt;\n    string(2) \"bb\"\n    [2]=&amp;gt;\n    string(3) \"bbb\"\n  }\n  [\"year\"]=&amp;gt;\n  array(3) {\n    [0]=&amp;gt;\n    string(1) \"c\"\n    [1]=&amp;gt;\n    string(2) \"cc\"\n    [2]=&amp;gt;\n    string(3) \"ccc\"\n  }\n  [\"submit\"]=&amp;gt;\n  string(6) \"Submit\"\n}\n\n&lt;\/code&gt;&lt;\/pre&gt;\n\n&lt;p&gt;This means you can access the &lt;span class=\"bbcode-i\"&gt;subject&lt;\/span&gt;, &lt;span class=\"bbcode-i\"&gt;grade&lt;\/span&gt;, and &lt;span class=\"bbcode-i\"&gt;year&lt;\/span&gt; arrays via &lt;span class=\"bbcode-b\"&gt;$_POST['subject']&lt;\/span&gt;, &lt;span class=\"bbcode-b\"&gt;$_POST['grade'&lt;\/span&gt;], and &lt;span class=\"bbcode-b\"&gt;$_POST['year']&lt;\/span&gt; respectively.&lt;\/p&gt;","post_number":2,"post_type":1,"updated_at":"2014-09-08T18:10:58.748-04:00","reply_count":0,"reply_to_post_number":null,"quote_count":0,"avg_time":40,"incoming_link_count":1,"reads":22,"score":11.4,"yours":false,"topic_slug":"accessing-and-collecting-post-data-from-an-array-in-php","topic_id":96459,"primary_group_name":null,"version":1,"can_edit":false,"can_delete":false,"can_recover":false,"read":true,"user_title":"SitePoint Enthusiast","actions_summary":[{"id":2,"count":0,"hidden":false,"can_act":null},{"id":3,"count":0,"hidden":false,"can_act":null},{"id":4,"count":0,"hidden":false,"can_act":null},{"id":5,"count":0,"hidden":true,"can_act":null},{"id":6,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"moderator":false,"admin":false,"staff":false,"user_id":161922,"hidden":false,"hidden_reason_id":null,"trust_level":2,"deleted_at":null,"user_deleted":false,"edit_reason":null,"can_view_edit_history":false,"wiki":false},{"id":755139,"username":"BlackScorp","avatar_template":"/user_avatar/community.sitepoint.com/blackscorp/{size}/17866.png","uploaded_avatar_id":17866,"created_at":"2014-09-10T11:45:22.652-04:00","cooked":"&lt;aside class=\"quote\" data-post=\"1\" data-topic=\"96459\"&gt;&lt;div class=\"title\"&gt;\n&lt;div class=\"quote-controls\"&gt;&lt;\/div&gt;\n&lt;img width=\"20\" height=\"20\" src=\"/letter_avatar/erabxes/40/2.png\" class=\"avatar\"&gt;erabxes said:&lt;\/div&gt;\n&lt;blockquote&gt;\n&lt;p&gt;&amp;lt;input type=\"text\" name=\"subject[ ]\" /&amp;gt;&amp;lt;input type=\"text\" name=\"grade[ ]\" /&amp;gt;&amp;lt;input type=\"text\" name=\"year[ ]\" /&amp;gt;&lt;\/p&gt;\n&lt;p&gt;&amp;lt;input type=\"text\" name=\"subject[ ]\" /&amp;gt;&amp;lt;input type=\"text\" name=\"grade[ ]\" /&amp;gt;&amp;lt;input type=\"text\" name=\"year[ ]\" /&amp;gt;&lt;\/p&gt;\n&lt;p&gt;&amp;lt;input type=\"text\" name=\"subject[ ]\" /&amp;gt;&amp;lt;input type=\"text\" name=\"grade[ ]\" /&amp;gt;&amp;lt;input type=\"text\" name=\"year[ ]\" /&amp;gt;&lt;\/p&gt;\n&lt;\/blockquote&gt;&lt;\/aside&gt;\n\n&lt;p&gt;try to do something like&lt;\/p&gt;\n\n&lt;pre&gt;&lt;code&gt;&amp;lt;input type=\"text\" name=\"input[&amp;lt;?= $i ?&amp;gt;]['subject']\"&amp;gt;\n&amp;lt;input type=\"text\" name=\"input[&amp;lt;?= $i ?&amp;gt;]['grade']\"&amp;gt;\n&amp;lt;input type=\"text\" name=\"input[&amp;lt;?= $i ?&amp;gt;]['year']\"&amp;gt;&lt;\/code&gt;&lt;\/pre&gt;","post_number":3,"post_type":1,"updated_at":"2014-09-10T11:45:22.652-04:00","reply_count":1,"reply_to_post_number":null,"quote_count":1,"avg_time":36,"incoming_link_count":0,"reads":16,"score":10.0,"yours":false,"topic_slug":"accessing-and-collecting-post-data-from-an-array-in-php","topic_id":96459,"primary_group_name":null,"version":1,"can_edit":false,"can_delete":false,"can_recover":false,"read":true,"user_title":null,"actions_summary":[{"id":2,"count":0,"hidden":false,"can_act":null},{"id":3,"count":0,"hidden":false,"can_act":null},{"id":4,"count":0,"hidden":false,"can_act":null},{"id":5,"count":0,"hidden":true,"can_act":null},{"id":6,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"moderator":false,"admin":false,"staff":false,"user_id":215049,"hidden":false,"hidden_reason_id":null,"trust_level":1,"deleted_at":null,"user_deleted":false,"edit_reason":null,"can_view_edit_history":false,"wiki":false},{"id":755209,"username":"tpunt","avatar_template":"/user_avatar/community.sitepoint.com/tpunt/{size}/17685.png","uploaded_avatar_id":17685,"created_at":"2014-09-10T13:51:04.012-04:00","cooked":"&lt;p&gt;Using iteration to output the required input boxes would reduce OP's repetition. Though you need to switch your two square brackets around in order to get the same POST data format as in the original post. I'd also advise &lt;strong&gt;against&lt;\/strong&gt; quoting keys in HTML, because when dealing with this data in the $_POST array, you must also remember to put quotes onto the array keys (since it's part of their name):&lt;br&gt;&lt;\/p&gt;\n\n&lt;p&gt;&lt;\/p&gt;&lt;pre&gt;&lt;code class=\"lang-auto\"&gt;$_POST['\\'subject\\'']\n// or\n$_POST[\"'subject'\"]&lt;\/code&gt;&lt;\/pre&gt;\n\n&lt;p&gt;That also reduces legibility and is just a pain in general to handle.&lt;\/p&gt;","post_number":4,"post_type":1,"updated_at":"2014-09-10T13:51:04.012-04:00","reply_count":1,"reply_to_post_number":3,"quote_count":0,"avg_time":31,"incoming_link_count":0,"reads":15,"score":9.550000000000001,"yours":false,"topic_slug":"accessing-and-collecting-post-data-from-an-array-in-php","topic_id":96459,"primary_group_name":null,"version":1,"can_edit":false,"can_delete":false,"can_recover":false,"read":true,"user_title":"SitePoint Enthusiast","reply_to_user":{"username":"BlackScorp","avatar_template":"/user_avatar/community.sitepoint.com/blackscorp/{size}/17866.png","uploaded_avatar_id":17866},"actions_summary":[{"id":2,"count":0,"hidden":false,"can_act":null},{"id":3,"count":0,"hidden":false,"can_act":null},{"id":4,"count":0,"hidden":false,"can_act":null},{"id":5,"count":0,"hidden":true,"can_act":null},{"id":6,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"moderator":false,"admin":false,"staff":false,"user_id":161922,"hidden":false,"hidden_reason_id":null,"trust_level":2,"deleted_at":null,"user_deleted":false,"edit_reason":null,"can_view_edit_history":false,"wiki":false},{"id":755251,"username":"BlackScorp","avatar_template":"/user_avatar/community.sitepoint.com/blackscorp/{size}/17866.png","uploaded_avatar_id":17866,"created_at":"2014-09-10T14:54:54.057-04:00","cooked":"&lt;p&gt;agree with &lt;a class=\"mention\" href=\"/users/tpunt\"&gt;@tpunt&lt;\/a&gt; but at least i would create a two dimensional array&lt;\/p&gt;","post_number":5,"post_type":1,"updated_at":"2014-09-10T14:54:54.057-04:00","reply_count":0,"reply_to_post_number":4,"quote_count":0,"avg_time":20,"incoming_link_count":0,"reads":12,"score":3.4,"yours":false,"topic_slug":"accessing-and-collecting-post-data-from-an-array-in-php","topic_id":96459,"primary_group_name":null,"version":1,"can_edit":false,"can_delete":false,"can_recover":false,"read":true,"user_title":null,"reply_to_user":{"username":"tpunt","avatar_template":"/user_avatar/community.sitepoint.com/tpunt/{size}/17685.png","uploaded_avatar_id":17685},"actions_summary":[{"id":2,"count":0,"hidden":false,"can_act":null},{"id":3,"count":0,"hidden":false,"can_act":null},{"id":4,"count":0,"hidden":false,"can_act":null},{"id":5,"count":0,"hidden":true,"can_act":null},{"id":6,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"moderator":false,"admin":false,"staff":false,"user_id":215049,"hidden":false,"hidden_reason_id":null,"trust_level":1,"deleted_at":null,"user_deleted":false,"edit_reason":null,"can_view_edit_history":false,"wiki":false},{"id":756592,"username":"erabxes","avatar_template":"/letter_avatar/erabxes/{size}/2.png","uploaded_avatar_id":null,"created_at":"2014-09-12T10:31:27.259-04:00","cooked":"&lt;p&gt;Thanks to you guys , I got all i need! That's what I think!&lt;\/p&gt;","post_number":6,"post_type":1,"updated_at":"2014-09-12T10:31:27.259-04:00","reply_count":0,"reply_to_post_number":null,"quote_count":0,"avg_time":7,"incoming_link_count":0,"reads":9,"score":2.15,"yours":false,"topic_slug":"accessing-and-collecting-post-data-from-an-array-in-php","topic_id":96459,"primary_group_name":null,"version":1,"can_edit":false,"can_delete":false,"can_recover":false,"read":true,"user_title":"SitePoint Member","actions_summary":[{"id":2,"count":0,"hidden":false,"can_act":null},{"id":3,"count":0,"hidden":false,"can_act":null},{"id":4,"count":0,"hidden":false,"can_act":null},{"id":5,"count":0,"hidden":true,"can_act":null},{"id":6,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"moderator":false,"admin":false,"staff":false,"user_id":214748,"hidden":false,"hidden_reason_id":null,"trust_level":1,"deleted_at":null,"user_deleted":false,"edit_reason":null,"can_view_edit_history":false,"wiki":false}],"stream":[752506,753468,755139,755209,755251,756592]},"draft":null,"draft_key":"topic_96459","draft_sequence":null,"unpinned":null,"pinned_globally":false,"pinned":false,"pinned_at":null,"details":{"auto_close_at":null,"created_by":{"id":214748,"username":"erabxes","uploaded_avatar_id":null,"avatar_template":"/letter_avatar/erabxes/{size}/2.png"},"last_poster":{"id":214748,"username":"erabxes","uploaded_avatar_id":null,"avatar_template":"/letter_avatar/erabxes/{size}/2.png"},"participants":[{"id":161922,"username":"tpunt","uploaded_avatar_id":17685,"avatar_template":"/user_avatar/community.sitepoint.com/tpunt/{size}/17685.png","post_count":2},{"id":214748,"username":"erabxes","uploaded_avatar_id":null,"avatar_template":"/letter_avatar/erabxes/{size}/2.png","post_count":2},{"id":215049,"username":"BlackScorp","uploaded_avatar_id":17866,"avatar_template":"/user_avatar/community.sitepoint.com/blackscorp/{size}/17866.png","post_count":2}],"suggested_topics":[{"id":15534,"title":"PHP Time zone problem is killing me","fancy_title":"PHP Time zone problem is killing me","slug":"php-time-zone-problem-is-killing-me","posts_count":6,"reply_count":3,"highest_post_number":6,"image_url":null,"created_at":"2012-05-04T09:53:59.000-04:00","last_posted_at":"2012-05-04T13:20:08.000-04:00","bumped":true,"bumped_at":"2012-05-04T13:20:08.000-04:00","unseen":false,"pinned":false,"unpinned":null,"visible":true,"closed":false,"archived":false,"archetype":"regular","like_count":0,"views":17,"category_id":31},{"id":37013,"title":"PHP4 to PHP5 errors","fancy_title":"PHP4 to PHP5 errors","slug":"php4-to-php5-errors","posts_count":6,"reply_count":2,"highest_post_number":6,"image_url":null,"created_at":"2013-11-22T12:05:32.000-05:00","last_posted_at":"2013-11-22T15:02:31.000-05:00","bumped":true,"bumped_at":"2013-11-22T15:02:31.000-05:00","unseen":false,"pinned":false,"unpinned":null,"visible":true,"closed":false,"archived":false,"archetype":"regular","like_count":0,"views":6,"category_id":31},{"id":4049,"title":"How to remove space between words?","fancy_title":"How to remove space between words?","slug":"how-to-remove-space-between-words","posts_count":6,"reply_count":2,"highest_post_number":6,"image_url":null,"created_at":"2008-07-18T06:45:54.000-04:00","last_posted_at":"2008-07-18T07:06:49.000-04:00","bumped":true,"bumped_at":"2008-07-18T07:06:49.000-04:00","unseen":false,"pinned":false,"unpinned":null,"visible":true,"closed":false,"archived":false,"archetype":"regular","like_count":0,"views":34,"category_id":31},{"id":27279,"title":"UI Frameworks","fancy_title":"UI Frameworks","slug":"ui-frameworks","posts_count":1,"reply_count":0,"highest_post_number":1,"image_url":null,"created_at":"2013-02-20T08:51:25.000-05:00","last_posted_at":"2013-02-20T08:51:25.000-05:00","bumped":false,"bumped_at":"2013-02-20T08:51:25.000-05:00","unseen":false,"pinned":false,"unpinned":null,"visible":true,"closed":false,"archived":false,"archetype":"regular","like_count":0,"views":7,"category_id":31},{"id":29021,"title":"Help with Cache / Archive","fancy_title":"Help with Cache / Archive","slug":"help-with-cache-archive","posts_count":2,"reply_count":0,"highest_post_number":2,"image_url":null,"created_at":"2013-04-03T15:21:10.000-04:00","last_posted_at":"2013-04-03T17:18:28.000-04:00","bumped":true,"bumped_at":"2013-04-03T17:18:28.000-04:00","unseen":false,"pinned":false,"unpinned":null,"visible":true,"closed":false,"archived":false,"archetype":"regular","like_count":0,"views":10,"category_id":31}],"notification_level":1,"can_flag_topic":false},"highest_post_number":6,"deleted_by":null,"actions_summary":[{"id":4,"count":0,"hidden":false,"can_act":null},{"id":7,"count":0,"hidden":false,"can_act":null},{"id":8,"count":0,"hidden":false,"can_act":null}],"id":96459,"title":"Accessing and collecting post[] data from an array in PHP","fancy_title":"Accessing and collecting post[] data from an array in PHP","posts_count":6,"created_at":"2014-09-08T08:51:10.000-04:00","views":203,"reply_count":2,"participant_count":3,"like_count":0,"last_posted_at":"2014-09-12T10:31:27.259-04:00","visible":true,"closed":false,"archived":false,"has_summary":false,"archetype":"regular","slug":"accessing-and-collecting-post-data-from-an-array-in-php","category_id":31,"word_count":442,"deleted_at":null,"tags":[],"tag_list":["analytics","angular.js","backbone","book","bootstrap","code-review","coldfusion","css3","documentation","ecommerce","ember.js","general-dev","git","graphics","gwt","html5","jquery","jquery-ui","learnable","linux","mono","news","pdo","photography","project","regex","scripts","security","seo","site-review","software","support","svg","team-community","team-content","team-design","team-hosting","team-manage","team-program","tutorial","xml"]});
+      </script>
+
+    
+
+    <footer id="bottom" geometry="0,2908,999,0,0,0"></footer>
+
+    <script geometry="0,0,999,38,0,11">
+  window.assetPath = (function(){
+
+    var map = {"defer/html-sanitizer-bundle":"http://sitepoint-discourse.global.ssl.fastly.net/assets/defer/html-sanitizer-bundle-525868a80be0a39a7e96d3716efdd84c.js"};
+
+    return function(asset){ return map[asset]; };
+  })();
+</script>
+
+<script geometry="0,0,999,38,0,18">
+  Ember.RSVP.configure('onerror', function(e) {
+
+    // Ignore TransitionAborted exceptions that bubble up
+    if (e &amp;&amp; e.message === "TransitionAborted") { return; }
+
+    window.onerror(e &amp;&amp; e.message, null,null,null,e);
+  });
+</script>
+
+<script geometry="0,0,999,76,0,19">
+  Discourse.CDN = 'http://sitepoint-discourse.global.ssl.fastly.net';
+  Discourse.BaseUrl = 'community.sitepoint.com'.replace(/:[\d]*$/,"");
+  Discourse.BaseUri = '/';
+  Discourse.Environment = 'production';
+  Discourse.SiteSettings = PreloadStore.get('siteSettings');
+  Discourse.LetterAvatarVersion = 2;
+  Discourse.Router = Ember.Router.extend({ location: 'discourse-location' });
+  Discourse.Route.mapRoutes();
+  Discourse.start();
+  Discourse.set('assetVersion','299e04d8a6c099f05a23df318ca3539a');
+</script>
+
+<script src="http://sitepoint-discourse.global.ssl.fastly.net/assets/browser-update-aeee0fa1bca718483f9fa2d334fdf15a.js" geometry="0,0,0,0,0,0"></script>
+
+
+    
+  
+
+</body></html>
