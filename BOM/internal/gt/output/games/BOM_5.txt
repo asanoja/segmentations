@@ -1,7 +1,0 @@
-http://www.jeuxvideo.com/,games,0,0,0,0,0,6,6,5,6,6,
-http://www.roleplaygateway.com/,games,2,21,0,1,0,3,2,5,5,27,
-http://topg.org/MMORPG,games,5,0,0,0,0,2,0,5,5,7,
-http://www.rpg.net/,games,0,0,0,0,0,6,5,5,5,6,
-http://www.logatroth.com/,games,1,0,0,0,0,1,0,5,1,2,
-http://www.freeworldgroup.com/game2.htm,games,0,128,12,6,5,0,0,5,6,123,
-http://www.angryjuegos.com/,games,4,7,0,1,0,2,0,5,5,14,

@@ -1,1 +1,0 @@
-../../BatchSegReg/www/bfdecorator.js

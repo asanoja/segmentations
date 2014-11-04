@@ -1,4 +1,0 @@
-http://www.ikea.com/fr/fr/,shopping,0,3,6,2,4,4,5,25,14,10,
-http://www.dauphin.com/,shopping,2,0,0,0,0,1,0,25,2,3,
-http://www.ikea.com/fr/fr/,shopping,5,8,7,6,5,2,2,25,14,15,
-http://www.dgindustries.com/,shopping,0,1,0,1,0,2,9,25,10,4,

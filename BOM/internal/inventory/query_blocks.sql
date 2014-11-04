@@ -1,5 +1,0 @@
-(select id,doc_w,doc_h,bid,x,y,w,h,ts,segmentation_id,ecount,tcount,tdcount,nx,ny,nw,nh from gt_blocks) 
-union (select id,doc_w,doc_h,bid,x,y,w,h,ts,segmentation_id,ecount,tcount,tdcount,nx,ny,nw,nh from bom_blocks) 
-union (select id,doc_w,doc_h,bid,x,y,w,h,ts,segmentation_id,ecount,tcount,tdcount,nx,ny,nw,nh from bf_blocks) 
-union (select id,doc_w,doc_h,bid,x,y,w,h,ts,segmentation_id,ecount,tcount,tdcount,nx,ny,nw,nh from jvips_blocks) 
-union (select id,doc_w,doc_h,bid,x,y,w,h,ts,segmentation_id,ecount,tcount,tdcount,nx,ny,nw,nh from vips_blocks) 

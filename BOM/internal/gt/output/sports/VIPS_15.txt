@@ -1,6 +1,0 @@
-http://www.fansfc.com/teams/PlymouthArgyle,sports,0,6,0,6,0,8,1,15,7,20,
-http://www.bantamspast.co.uk/,sports,4,0,0,0,0,2,1,15,5,6,
-http://www.communigate.co.uk/brad/trinity/,sports,3,5,0,1,0,8,1,15,5,17,
-http://www.fansfc.com/teams/PlymouthArgyle,sports,0,0,0,0,0,7,7,15,7,7,
-http://www.bantamspast.co.uk/,sports,3,1,0,1,0,1,1,15,5,6,
-http://www.communigate.co.uk/brad/trinity/,sports,0,0,0,0,0,5,5,15,5,5,

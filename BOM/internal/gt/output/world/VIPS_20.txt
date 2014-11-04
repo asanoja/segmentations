@@ -1,4 +1,0 @@
-http://www.koeln.de/,world,4,3,4,3,2,0,0,20,7,6,
-http://www.aktivraum.de/,world,0,0,1,0,1,0,2,20,4,1,
-http://www.koeln.de/,world,3,3,4,3,2,20,1,20,7,25,
-http://www.aktivraum.de/,world,0,0,1,0,1,2,2,20,4,3,
