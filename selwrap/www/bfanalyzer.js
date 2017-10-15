@@ -1,0 +1,1 @@
+../../BatchSegReg/www/bfanalyzer.js
