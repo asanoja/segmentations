@@ -4,5 +4,5 @@ segmentations
  
 # Online information 
  
- [http://bom.ciens.ucv.ve](http://bom.ciens.ucv.ve)
- [http://mob.ciens.ucv.ve](http://mob.ciens.ucv.ve)
+* [http://bom.ciens.ucv.ve](http://bom.ciens.ucv.ve)
+* [http://mob.ciens.ucv.ve](http://mob.ciens.ucv.ve)
